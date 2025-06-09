@@ -1,0 +1,331 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "purchase_code": "4f352074-ff39-402a-89a0-6fe98cb36b8c",
+    "favicon": "shopify://shop_images/Favicon.png",
+    "logo": "shopify://shop_images/logo.svg",
+    "desktop_logo_width": 82,
+    "page_width": 1410,
+    "fluid_container_width": 1410,
+    "rounded_corner": 10,
+    "spacing_desktop": 90,
+    "body_font_size": 15,
+    "font_type_heading": "default_font",
+    "font_heading_system": "prata_n4",
+    "heading_font_weight": 600,
+    "subheading_font_weight": 500,
+    "heading_text_transform": "unset",
+    "heading_letter_spacing": "unset",
+    "menu_font": "heading_font",
+    "button_font": "heading_font",
+    "btn_text_transform": "unset",
+    "button_radius": 30,
+    "show_sale": true,
+    "show_new": false,
+    "new_background": "#14854e",
+    "show_pre_order": true,
+    "pre_order_background": "#6a33d8",
+    "show_sold_out": true,
+    "custom_badge_background": "#14854e",
+    "product_style": "standard",
+    "show_quick_view": false,
+    "show_compare": false,
+    "product_alignment": "start",
+    "product_size": 15,
+    "price_size": 15,
+    "show_vendor": false,
+    "show_secondary_image": true,
+    "product_image_ratio": "adapt",
+    "product_hover_effect": "hover_zoom",
+    "show_action_on_mobile": true,
+    "swatch_item_type": "variant_images",
+    "search_type": "default",
+    "enable_search_suggestion": true,
+    "popular_key_word": "Purple, Dress , Costume",
+    "collection_suggestion": "best-sellers-1",
+    "show_search_price": true,
+    "show_message_when_remove": true,
+    "free_shipping_minimum": "300",
+    "choose_gift_wrap_product": "digital-gift-card",
+    "product_recommendations_heading": "You may also like...",
+    "show_on_cart_page": true,
+    "select_product_recommendations": [
+      "black-floral-print-ethnic-costume",
+      "blue-shirt-with-floral-leaf-print",
+      "blue-traditional-ethnic-costume",
+      "blue-traditional-patterned-dress",
+      "dark-red-traditional-patterned-shirt"
+    ],
+    "facebook": "#",
+    "instagram": "#",
+    "twitter": "",
+    "youtube": "#",
+    "tiktok": "#",
+    "pinterest": "#",
+    "vimeo": "",
+    "linkedin": "",
+    "whatsapp": "",
+    "enable_preload": false,
+    "zoom_image": false,
+    "scroll_animation": "slide_in",
+    "store_phone": "+1 (973) 435-3638",
+    "store_email": "info@fashionwomen.com",
+    "store_page": "our-store",
+    "label_refuse": "",
+    "page_terms_conditions": "term-and-conditions",
+    "rate_color": "#ea0606",
+    "sections": {
+      "custom-colors": {
+        "type": "custom-colors",
+        "blocks": {
+          "color_aQceXa": {
+            "type": "color",
+            "settings": {
+              "heading": "azure",
+              "color_code": ""
+            }
+          }
+        },
+        "block_order": [
+          "color_aQceXa"
+        ],
+        "settings": {}
+      },
+      "product-quickview": {
+        "type": "product-quickview",
+        "blocks": {
+          "badges_cbHbxW": {
+            "type": "badges",
+            "settings": {}
+          },
+          "title_txJBrx": {
+            "type": "title",
+            "settings": {
+              "show_vendor": false
+            }
+          },
+          "rate_QwRHyp": {
+            "type": "rate",
+            "settings": {}
+          },
+          "price_NNg9B8": {
+            "type": "price",
+            "settings": {}
+          },
+          "description_pKXRJa": {
+            "type": "description",
+            "settings": {}
+          },
+          "variant_picker_MQYkTJ": {
+            "type": "variant_picker",
+            "settings": {}
+          },
+          "buy_buttons_pDYNX9": {
+            "type": "buy_buttons",
+            "settings": {
+              "show_dynamic_checkout": true
+            }
+          }
+        },
+        "block_order": [
+          "badges_cbHbxW",
+          "title_txJBrx",
+          "rate_QwRHyp",
+          "price_NNg9B8",
+          "description_pKXRJa",
+          "variant_picker_MQYkTJ",
+          "buy_buttons_pDYNX9"
+        ],
+        "settings": {}
+      },
+      "mobile-navigation-bar": {
+        "type": "mobile-navigation-bar",
+        "settings": {}
+      },
+      "fake-order": {
+        "type": "fake-order",
+        "settings": {
+          "show_fake_order": false,
+          "disable_mobile": false,
+          "fake_product": [],
+          "fake_user": "Jonson (California) | Tony (Texas) | Bruno (New York) | Eren (Ohio) | Lauren (Washington) | Flortino (California) | Blue (Ohio)",
+          "text_verify": "Verify",
+          "delay_time": "5000",
+          "display_time": "6000"
+        }
+      },
+      "top-search": {
+        "type": "top-search",
+        "settings": {}
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
+      }
+    },
+    "color_schemes": {
+      "default": {
+        "settings": {
+          "background": "#ffffff",
+          "background_gradient": "",
+          "primary_color": "#d0473e",
+          "text_color": "#444444",
+          "heading_color": "#111111",
+          "border_color": "#ebebeb",
+          "btn_primary_color": "#ffffff",
+          "btn_primary_background": "#111111",
+          "btn_primary_gradient": "",
+          "btn_primary_hover_color": "#ffffff",
+          "btn_primary_hover_background": "#111111",
+          "btn_primary_hover_background_gradient": "",
+          "btn_outline_color": "#111111",
+          "btn_outline_border_color": "#ebebeb",
+          "button_link_color": "#111111",
+          "button_link_hover_color": "#111111"
+        }
+      },
+      "scheme-4faf0e4d-27f4-4d02-bc51-617383bab1a9": {
+        "settings": {
+          "background": "#111111",
+          "background_gradient": "",
+          "primary_color": "#d0473e",
+          "text_color": "#ffffff",
+          "heading_color": "#ffffff",
+          "border_color": "#ebebeb",
+          "btn_primary_color": "#ffffff",
+          "btn_primary_background": "#111111",
+          "btn_primary_gradient": "",
+          "btn_primary_hover_color": "#111111",
+          "btn_primary_hover_background": "#ffffff",
+          "btn_primary_hover_background_gradient": "",
+          "btn_outline_color": "#111111",
+          "btn_outline_border_color": "#111111",
+          "button_link_color": "#111111",
+          "button_link_hover_color": "#111111"
+        }
+      },
+      "scheme-bb1431b0-be4a-4b03-a450-f572c07e3904": {
+        "settings": {
+          "background": "#253230",
+          "background_gradient": "",
+          "primary_color": "#d0473e",
+          "text_color": "#f3fc81",
+          "heading_color": "#f3fc81",
+          "border_color": "#ebebeb",
+          "btn_primary_color": "#ffffff",
+          "btn_primary_background": "#111111",
+          "btn_primary_gradient": "",
+          "btn_primary_hover_color": "#ffffff",
+          "btn_primary_hover_background": "#111111",
+          "btn_primary_hover_background_gradient": "",
+          "btn_outline_color": "#111111",
+          "btn_outline_border_color": "#111111",
+          "button_link_color": "#111111",
+          "button_link_hover_color": "#111111"
+        }
+      },
+      "scheme-36517af9-283f-4bf1-be7d-5eaf120ebeb6": {
+        "settings": {
+          "background": "rgba(0,0,0,0)",
+          "background_gradient": "",
+          "primary_color": "#d0473e",
+          "text_color": "#ffffff",
+          "heading_color": "#ffffff",
+          "border_color": "#ebebeb",
+          "btn_primary_color": "#111111",
+          "btn_primary_background": "#ffffff",
+          "btn_primary_gradient": "",
+          "btn_primary_hover_color": "#ffffff",
+          "btn_primary_hover_background": "#111111",
+          "btn_primary_hover_background_gradient": "",
+          "btn_outline_color": "#111111",
+          "btn_outline_border_color": "#ffffff",
+          "button_link_color": "#111111",
+          "button_link_hover_color": "#111111"
+        }
+      },
+      "scheme-61ec96af-9c2c-47e0-86e4-67e09e03b5af": {
+        "settings": {
+          "background": "#fae9e1",
+          "background_gradient": "",
+          "primary_color": "#d0473e",
+          "text_color": "#111111",
+          "heading_color": "#111111",
+          "border_color": "#ebebeb",
+          "btn_primary_color": "#ffffff",
+          "btn_primary_background": "#d0473e",
+          "btn_primary_gradient": "",
+          "btn_primary_hover_color": "#111111",
+          "btn_primary_hover_background": "#ffffff",
+          "btn_primary_hover_background_gradient": "",
+          "btn_outline_color": "#111111",
+          "btn_outline_border_color": "#ffffff",
+          "button_link_color": "#111111",
+          "button_link_hover_color": "#111111"
+        }
+      },
+      "scheme-3dcafa25-94c8-4464-83df-4132c6dca730": {
+        "settings": {
+          "background": "#111111",
+          "background_gradient": "",
+          "primary_color": "#d0473e",
+          "text_color": "#888888",
+          "heading_color": "#ffffff",
+          "border_color": "#252525",
+          "btn_primary_color": "#111111",
+          "btn_primary_background": "#ffffff",
+          "btn_primary_gradient": "",
+          "btn_primary_hover_color": "#111111",
+          "btn_primary_hover_background": "#ffffff",
+          "btn_primary_hover_background_gradient": "",
+          "btn_outline_color": "#111111",
+          "btn_outline_border_color": "#ebebeb",
+          "button_link_color": "#111111",
+          "button_link_hover_color": "#111111"
+        }
+      },
+      "scheme-7336b942-8170-4f48-b3e2-6c7643ae0a9a": {
+        "settings": {
+          "background": "#f5f5f5",
+          "background_gradient": "",
+          "primary_color": "#d0473e",
+          "text_color": "#444444",
+          "heading_color": "#111111",
+          "border_color": "#ebebeb",
+          "btn_primary_color": "#ffffff",
+          "btn_primary_background": "#111111",
+          "btn_primary_gradient": "",
+          "btn_primary_hover_color": "#ffffff",
+          "btn_primary_hover_background": "#111111",
+          "btn_primary_hover_background_gradient": "",
+          "btn_outline_color": "#111111",
+          "btn_outline_border_color": "#ebebeb",
+          "button_link_color": "#111111",
+          "button_link_hover_color": "#111111"
+        }
+      }
+    }
+  },
+  "presets": {
+    "Default": {}
+  },
+  "platform_customizations": {
+    "custom_css": [
+      "@media (min-width: 992px) {.p-lg-content-btn {padding: 1.5rem 4rem; min-width: 180px; text-align: center; justify-content: center; }}",
+      "@media (min-width: 768px) {:root {--btn-padding-x: 4.3rem; }}",
+      "@media (max-width: 768px) {.default.fs-medium .countdown--container {font-size: calc(2rem + 0.1vw); }}"
+    ]
+  }
+}

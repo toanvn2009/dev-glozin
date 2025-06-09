@@ -1,0 +1,38 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.overlay_group.name",
+  "type": "custom.overlay",
+  "sections": {
+    "before_you_leave_xTQDb4": {
+      "type": "before-you-leave",
+      "settings": {
+        "show_time": 75,
+        "banner": "shopify://shop_images/sari-before-you-leave.jpg",
+        "sub_heading": "",
+        "content_heading": "Big Save <br>\n10% Coupon!",
+        "description": "<p>Enter the code below at checkout to get <br/>10% off your first order.</p>",
+        "code": "Topsale10STBL",
+        "color_scheme": "scheme-36517af9-283f-4bf1-be7d-5eaf120ebeb6",
+        "recommended_heading": "You may also like...",
+        "collection": "best-sellers-1",
+        "recommended_button_label": "Continue Shopping"
+      }
+    },
+    "mobile_navigation_bar_GG8UWc": {
+      "type": "mobile-navigation-bar",
+      "settings": {}
+    }
+  },
+  "order": [
+    "before_you_leave_xTQDb4",
+    "mobile_navigation_bar_GG8UWc"
+  ]
+}
