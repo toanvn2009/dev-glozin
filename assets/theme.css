@@ -79,40 +79,12 @@ input[type='checkbox']:checked + .checkmark:before {
   background-color: var(--color-link);
   border-color: var(--color-link);
 }
-.overflow-auto {
-  overflow: auto;
-}
-.overflow-scroll {
-  overflow: scroll;
-}
-.overflow-x-scroll {
-  overflow-x: scroll;
-}
-.overflow-y-scroll {
-  overflow-y: scroll;
-}
-.overflow-y-auto {
-  overflow-y: auto;
-}
-.overflow-x-hidden {
-  overflow-x: hidden;
-}
-.overflow-y-hidden {
-  overflow-y: hidden;
-}
+
 .flex-100 {
   flex: 100%;
   width: 100%;
 }
-.grow-0 {
-  flex-grow: 0;
-}
-.shrink {
-  flex-shrink: 1;
-}
-.shrink-0 {
-  flex-shrink: 0;
-}
+
 .align-start {
   align-items: flex-start;
 }
@@ -122,80 +94,9 @@ input[type='checkbox']:checked + .checkmark:before {
 .align-stretch {
   align-items: stretch;
 }
-.py-4 {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
 .py-60 {
   padding-top: clamp(30px, calc(30px + 30 * var(--responsive-rate)), 60px);
   padding-bottom: clamp(30px, calc(30px + 30 * var(--responsive-rate)), 60px);
-}
-.w-0 {
-  width: 0;
-}
-.w-15 {
-  width: 15px;
-}
-.w-20 {
-  width: 20px;
-}
-.w-55 {
-  width: 5.5rem;
-}
-.w-100 {
-  width: 10rem;
-}
-.min-w-10 {
-  min-width: 10px;
-}
-.min-w-20 {
-  min-width: 20px;
-}
-.min-w-30 {
-  min-width: 30px;
-}
-.min-w-full {
-  min-width: 100%;
-}
-.max-w-15 {
-  max-width: 15px;
-}
-.max-w-30 {
-  max-width: 30px;
-}
-.max-w-full {
-  max-width: 100%;
-}
-.h-0 {
-  height: 0;
-}
-.h-15 {
-  height: 15px;
-}
-.h-20 {
-  height: 2rem;
-}
-.h-30 {
-  height: 30px;
-}
-.h-55 {
-  height: 5.5rem;
-}
-.min-h-30 {
-  min-height: 30px;
-}
-.min-h-50 {
-  min-height: 50px;
-}
-.min-h-full {
-  min-height: 100%;
-}
-.max-h-full {
-  max-height: 100%;
-}
-.my-auto {
-  margin-top: auto;
-  margin-bottom: auto;
 }
 .user-select-none,
 .swiper-slide {
@@ -414,10 +315,10 @@ input[type='checkbox']:checked + .checkmark:before {
   transition: var(--duration-short);
   -webkit-transition: var(--duration-short);
 }
-.transition {
+/* .transition {
   transition: var(--transition);
   -webkit-transition: var(--transition);
-}
+} */
 .transition-popup {
   transition: var(--transition-popup);
   -webkit-transition: var(--transition-popup);
@@ -426,25 +327,10 @@ input[type='checkbox']:checked + .checkmark:before {
 .rounded-custom {
   border-radius: var(--rounded-custom);
 }
-.bottom-25 {
-  bottom: 2.5rem;
-}
-.top-20 {
-  top: 2rem;
-}
-.top-30 {
-  top: 3rem;
-}
 .top-100 {
   top: 100%;
 }
 
-.right-45 {
-  right: 4.5rem;
-}
-.right-50 {
-  right: 5rem;
-}
 .icon-load {
   position: absolute;
   top: 50%;
