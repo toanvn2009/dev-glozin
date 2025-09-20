@@ -132,8 +132,8 @@
               {{ menu_level_0 }}
               {%- if link.links.size > 0 or has_content -%}
                 <div
-                  class="submenu submenu-horizontal invisible-1025 absolute{% if section_st.logo_position == 'left' %} left-0{% endif %} gradient p-0 py-1025-40{% if full_width %} full-width inset-x-0{% else %} mega-menu-custom-width{% if block_st.center_submenu %} inset-x-0 mx-auto{% endif %}{% endif %} overflow-x-hidden"
-                  style="--mega_custom_width: {{ mega_custom_width }}px"
+                  class="custom-scrollbar submenu submenu-horizontal invisible-1025 absolute{% if section_st.logo_position == 'left' %} left-0{% endif %} gradient p-0 py-1025-40{% if full_width %} full-width inset-x-0{% else %} mega-menu-custom-width{% if block_st.center_submenu %} inset-x-0 mx-auto{% endif %}{% endif %} overflow-x-hidden"
+                  style="--mega_custom_width: {{ mega_custom_width }}px;{% if section_st.submenu_background %}--gradient-background: {{ section_st.submenu_background }};{% endif %}{% if section_st.submenu_color %}--color-link: {{ section_st.submenu_color }};--color-heading: {{ section_st.submenu_color }};{% endif %}"
                 >
                   <div class="hidden-1025 grey-bg px-30 border-bottom flex gap-15 align-center justify-between{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}">
                     <back-menu
@@ -545,6 +545,7 @@
       --new-cl: {{ section_st.label_color_new }};--new-bg-cl: {{ section_st.label_background_new }};
       --sale-cl: {{ section_st.label_color_sale }};;--sale-bg-cl: {{ section_st.label_background_sale }};
       --popular-cl: {{ section_st.label_color_popular }};;--popular-bg-cl: {{ section_st.label_background_popular }};
+      {% if section_st.submenu_background %}--gradient-background: {{ section_st.submenu_background }};--color-background: {{ section_st.submenu_background }};{% endif %}{% if section_st.submenu_color %}--color-link: {{ section_st.submenu_color }};--color-heading: {{ section_st.submenu_color }};{% endif %}
     "
   >
     <close-menu class="close-menu pointer no-underline absolute top-0 w-55 h-55 inline-flex hidden-1025 content-center{% if enable_rtl %} left-7{% else %} right-7{% endif %}">
@@ -683,7 +684,7 @@
               {{ menu_level_0 }}
               {%- if link.links.size > 0 or has_content -%}
                 <div
-                  class="submenu submenu-horizontal invisible-1025 absolute{% if section_st.logo_position == 'left' %} left-0{% endif %} gradient p-0 py-1025-40{% if full_width %} full-width inset-x-0{% else %} mega-menu-custom-width{% if block_st.center_submenu %} inset-x-0 mx-auto{% endif %}{% endif %} overflow-x-hidden"
+                  class="custom-scrollbar submenu submenu-horizontal invisible-1025 absolute{% if section_st.logo_position == 'left' %} left-0{% endif %} gradient p-0 py-1025-40{% if full_width %} full-width inset-x-0{% else %} mega-menu-custom-width{% if block_st.center_submenu %} inset-x-0 mx-auto{% endif %}{% endif %} overflow-x-hidden"
                   style="--mega_custom_width: {{ mega_custom_width }}px"
                 >
                   <div class="hidden-1025 grey-bg px-30 border-bottom flex gap-15 align-center justify-between{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}">

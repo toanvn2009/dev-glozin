@@ -1,24 +1,28 @@
 {%- liquid
-    assign section_st = section.settings
-    assign categories_menu = section_st.categories_menu
-  -%}
+  assign section_st = section.settings
+  assign categories_menu = section_st.categories_menu
+-%}
 
 {% if categories_menu != blank %}
   {{ 'menu-vertical.css' | asset_url | stylesheet_tag: preload: 'high' }}
   {% render 'vertical-menu' %}
-    <script>
-      (function() {
-        document.body.classList.add('enable-vertical-menu');
-        document.documentElement.style.setProperty('--vertical-menu-ready', '1');
-        document.body.classList.remove('no-vertical-menu');
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', function() {
+  <script>
+    (function () {
+      document.body.classList.add('enable-vertical-menu');
+      document.documentElement.style.setProperty('--vertical-menu-ready', '1');
+      document.body.classList.remove('no-vertical-menu');
+      if (document.readyState === 'loading') {
+        document.addEventListener(
+          'DOMContentLoaded',
+          function () {
             document.body.classList.add('enable-vertical-menu');
             document.documentElement.style.setProperty('--vertical-menu-ready', '1');
-          }, {once: true});
-        }
-      })();
-    </script>
+          },
+          { once: true }
+        );
+      }
+    })();
+  </script>
 {% endif %}
 
 {% schema %}
@@ -280,7 +284,8 @@
   ],
   "presets": [
     {
-      "name": "t:sections.header.header_vertical"
+      "name": "t:sections.header.header_vertical",
+      "category": "t:categories.layout"
     }
   ]
 }

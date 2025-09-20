@@ -54,6 +54,9 @@
     announcement-bar countdown-timer{
       {% if section_st.font_weight == 'subheading_weight' %}--countdown-text-weight: var(--subheading-weight, 600);--heading-weight: var(--subheading-weight, 600);{% elsif section_st.font_weight == 'heading_weight' %}--countdown-text-weight: var(--heading-weight, 600);--heading-weight: var(--heading-weight, 600);{% else %}--countdown-text-weight: var(--body-weight, 600);--heading-weight: var(--body-weight, 600){% endif %}
     }
+    announcement-bar .swiper-slide {
+      display: flex;
+    }
   {%- endstyle -%}
   <announcement-bar
     class="section section{% if section_st.padding_top < 30 %} pt-min{% endif %}{% if section_st.padding_bottom < 30 %} pb-min{% endif %} remove_spacing color-{{ color_scheme }} gradient text-center relative{% if section_st.uppercase %} uppercase{% endif %} fs-custom {{ section_st.font_weight }}{% if section_st.show_mobile == blank %} hidden block-xl{% else %} block{% endif %}{% if section_st.show_separator_line %} border-bottom{% endif %}"
@@ -74,6 +77,8 @@
               data-mobile="1"
               data-tablet="1"
               data-desktop="1"
+              data-direction="vertical"
+              data-spacing="0"
             >
               <div class="swiper-wrapper">
                 {% # theme-check-disable UnclosedHTMLElement %}
@@ -132,7 +137,7 @@
               assign block_st = block.settings
             -%}
             {%- if block_st.text != blank -%}
-              <div class="swiper-slide">
+              <div class="swiper-slide align-center justify-center">
                 <div class="announcement__bar-message mx-auto flex-wrap px-20 flex justify-content-center">
                   <span class="grow">{{ block_st.text }}</span>
                   {% if block_st.countdown_deadline != blank %}
@@ -225,6 +230,10 @@
     if (sessionStorage.getItem('announcement_bar') == 'false') {
       document.getElementById('shopify-section-{{ section.id }}').classList.add('hidden');
     }
+    let announcement_bar = document.querySelector('.section-announcement-bar')?.clientHeight || 0;
+    document
+      .querySelector('body')
+      .style.setProperty('--height-bar', `${announcement_bar}px`);
   </script>
 {% endif %}
 
@@ -349,7 +358,8 @@
     {
       "type": "header",
       "content": "t:sections.announcement-bar.settings.marquee.label",
-      "info": "t:sections.announcement-bar.settings.marquee.info"
+      "info": "t:sections.announcement-bar.settings.marquee.info",
+      "visible_if": "{{ section.settings.announcement_actions == 'marquee' }}"
     },
     {
       "type": "range",
@@ -359,7 +369,8 @@
       "min": 3,
       "max": 30,
       "step": 1,
-      "unit": "s"
+      "unit": "s",
+      "visible_if": "{{ section.settings.announcement_actions == 'marquee' }}"
     },
     {
       "type": "range",
@@ -369,7 +380,8 @@
       "step": 1,
       "label": "t:sections.announcement-bar.settings.marquee.space_between.label",
       "unit": "px",
-      "default": 50
+      "default": 50,
+      "visible_if": "{{ section.settings.announcement_actions == 'marquee' }}"
     },
     {
       "type": "select",
@@ -389,12 +401,14 @@
         }
       ],
       "default": "none",
-      "label": "t:sections.announcement-bar.settings.marquee.icon_between.label"
+      "label": "t:sections.announcement-bar.settings.marquee.icon_between.label",
+      "visible_if": "{{ section.settings.announcement_actions == 'marquee' }}"
     },
     {
       "type": "header",
       "content": "t:sections.announcement-bar.settings.slide.label",
-      "info": "t:sections.announcement-bar.settings.slide.info"
+      "info": "t:sections.announcement-bar.settings.slide.info",
+      "visible_if": "{{ section.settings.announcement_actions == 'slide' }}"
     },
     {
       "type": "range",
@@ -404,7 +418,8 @@
       "step": 1,
       "label": "t:sections.announcement-bar.settings.slide.change_every.label",
       "unit": "s",
-      "default": 3
+      "default": 3,
+      "visible_if": "{{ section.settings.announcement_actions == 'slide' }}"
     },
     {
       "type": "header",
@@ -455,6 +470,7 @@
   "presets": [
     {
       "name": "t:sections.announcement-bar.name",
+      "category": "t:categories.marketing",
       "blocks": [
         {
           "type": "announcement",

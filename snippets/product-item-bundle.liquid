@@ -65,22 +65,10 @@
   {% comment %} Case card product has data, handle data {% endcomment %}
   {% if card_product and card_product != empty %}
     <product-bunle-item
-      class="product-item product__item-js {{ class }} style-as-{{ product_style }}"
+      class="product-item product__item-js {{ class }} style-as-{{ product_style }}" data-update-url="false"
     >
-      <motion-element
-        class="product-item__wrapper block {% if direction == 'horizontal' %} flex-column  {% endif %} {{settings.product_hover_effect }} product-grid {% if scroll_animation != 'none' and scroll_animation != null %} scroll-trigger {{ scroll_animation }} {% endif %}"
-        {% if indexFor and scroll_animation %}
-          data-cascade
-        {% endif %}
-        data-motion="fade-up-lg"
-        {% if scroll_animation != 'slide_in' or collection_product == true %}
-          hold
-        {% endif %}
-        {% if collection_product == true %}
-          data-margin="0px 0px 5 0px"
-        {% endif %}
-        data-motion-delay="{{ indexFor | minus: 1 | times: 40 }}"
-        style="{% if indexFor and scroll_animation %}--animation-order: {{ indexFor }};  {% endif %}"
+      <div
+        class="product-item__wrapper block {% if direction == 'horizontal' %} flex-column  {% endif %} {{settings.product_hover_effect }} product-grid "
       >
         {% comment %} Product inner media {% endcomment %}
         <div class="product-item__inner hover-effect overflow-hidden relative">
@@ -184,15 +172,6 @@
                     sizes: sizes
                   %}
               {% else %}
-                {% if scroll_animation == 'slide_in' and settings.zoom_image ==true %}
-                  <motion-element
-                    data-motion="zoom-out-sm"
-                    data-motion-delay="{{ indexFor | times:  75  }}"
-                    class="block absolute"
-                    data-image
-                    style="--aspect-ratio: {{ ratio }};"
-                  >
-                {% endif %}
                 {% render 'responsive-image',
                   type: 'product',
                   class: 'product-image first-image',
@@ -205,9 +184,6 @@
                   custom_widths: custom_widths,
                   sizes: sizes
                 %}
-                {% if scroll_animation == 'slide_in' and settings.zoom_image ==true %}
-                  </motion-element>
-                {% endif %}
                 {%- liquid
                   if card_product.media[1] != blank and show_secondary_image
                     assign alt_features = card_product.media[1].alt | default: card_product.title | escape
@@ -369,8 +345,9 @@
           {% comment %} Product item title {% endcomment %}
             <a
               aria-label="{{ card_product.title }}"
-              class="{% if product_truncation_title != 'none' %}product-title__truncate {% endif %}product-item__name {{ settings.product_name_text_transform }} heading-style no-underline fs-custom block lh-normal"
-              style="--font-size: {{ settings.product_size }};{% if product_truncation_title != 'none' %} --line-clamp: {{ product_truncation_title }};{% endif %}"            {% if template_disable_product_url == true %}
+              class="{% if product_truncation_title != 'none' %}product-title__truncate {% endif %}product-item__name {{ settings.product_name_text_transform }} heading-style no-underline fs-custom fw-custom block lh-normal"
+              style="--font-weight: {{ settings.product_font_weight }};--font-size: {{ settings.product_size }};{% if product_truncation_title != 'none' %} --line-clamp: {{ product_truncation_title }};{% endif %}"            
+              {% if template_disable_product_url == true %}
                 role="link" aria-disabled="true"
               {% else %}
                 href="{{ card_product.url }}"
@@ -414,8 +391,8 @@
                 >
                   {% if hidden_price != true %}
                     <div
-                      class="product-item__price justify-content-{{ settings.product_alignment }} fs-custom flex gap-custom lh-normal {{ priceclass }}"
-                      style="--font-size: {{ settings.price_size }}; --gap: 3px;"
+                      class="product-item__price justify-content-{{ settings.product_alignment }} fs-custom fw-custom flex gap-custom lh-normal {{ priceclass }}"
+                      style="--font-size: {{ settings.price_size }}; --gap: 3px;--heading-weight: {{ settings.price_font_weight }}"
                     >
                       {%- render 'price', scope: 'item', product: card_product, show_badges: false, class: priceclass -%}
                     </div>
@@ -462,25 +439,13 @@
               {%- endform -%}
             </product-form-bundle>
         </div>
-      </motion-element>
+      </div>
     </product-bunle-item>
   {% else %}
     {% comment %} Case card product has no data, handle default data with shopify placeholder {% endcomment %}
     <div class="product-item{{ class }} {{ product_style }}">
-      <motion-element
-        {% if indexFor and scroll_animation %}
-          data-cascade
-        {% endif %}
-        data-motion="fade-up-lg"
-        {% if scroll_animation != 'slide_in' or collection_product == true %}
-          hold
-        {% endif %}
-        {% if collection_product == true %}
-          data-margin="0px 0px 5 0px"
-        {% endif %}
-        data-motion-delay="{{ indexFor | minus: 1 | times: 50  }}"
-        style="{% if indexFor and scroll_animation %}--animation-order: {{ indexFor }};  {% endif %}"
-        class="product-item__wrapper product-grid block {% if scroll_animation != 'none' and scroll_animation != null %} scroll-trigger {{ scroll_animation }}  {% endif %} {%if direction == 'horizontal' %} flex-column {% endif %}"
+      <div
+        class="product-item__wrapper product-grid block {%if direction == 'horizontal' %} flex-column {% endif %}"
       >
         <div class="product-item__inner relative">
           <div class="product-item__media">
@@ -532,13 +497,13 @@
             {{ 'onboarding.product_title_example' | t }}
           </a>
           <div
-            class="product-item__price mt-5 justify-content-{{ settings.product_alignment }} fs-custom flex"
-            style="--font-size: {{ settings.price_size }}"
+            class="product-item__price mt-5 justify-content-{{ settings.product_alignment }} fs-custom fw-custom flex"
+            style="--font-size: {{ settings.price_size }};--heading-weight: {{ settings.price_font_weight }}"
           >
             {%- render 'price' | scope: 'item', show_badges: false, class: priceclass -%}
           </div>
         </div>
-      </motion-element>
+      </div>
     </div>
   {% endif %}
   

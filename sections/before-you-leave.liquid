@@ -1,21 +1,4 @@
 {{ 'before-you-leave.css' | asset_url | stylesheet_tag }}
-{% # theme-check-disable ContentForHeaderModification %}
-{%- capture content_for_query_string -%}
-  {{ content_for_header }}
-{%- endcapture -%}
-{% # theme-check-enable ContentForHeaderModification %}
-{%- assign page_url = content_for_query_string
-  | split: '"pageurl":"'
-  | last
-  | split: '"'
-  | first
-  | split: request.host
-  | last
-  | replace: '\/', '/'
-  | replace: '%20', ' '
-  | replace: '\u0026', '&'
--%}
-{%- assign page_query_string = page_url | split: '?' | last -%}
 {%- liquid
   assign section_st = section.settings
   assign th_st = settings
@@ -134,7 +117,8 @@
               template_enable_rate: true,
               template_enable_product_short_description: false,
               template_enable_color_swatches: true,
-              type: 'list'
+              type: 'list',
+              lazy_product: false
             %}
           </div>
         {% endfor %}
@@ -239,7 +223,8 @@
   ],
   "presets": [
     {
-      "name": "t:sections.before-you-leave.name"
+      "name": "t:sections.before-you-leave.name",
+      "category": "t:categories.popup"
     }
   ]
 }

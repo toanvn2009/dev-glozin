@@ -8,7 +8,8 @@
     },
     "error": "Error",
     "close": "Close",
-    "complementary_products": "Complementary products"
+    "complementary_products": "Complementary products",
+    "promotion_banner": "Promotion banner",
   },
   "page_sale": {
     "use_code": "Use code:"
@@ -31,6 +32,12 @@
     }
   },
   "general": {
+    "content": {
+      "discount_code_error": "Discount code cannot be applied to your cart",
+      "discount_code_remove": "Discount code has been removed.",
+      "discount_code_applied": "Discount code has been applied.",
+      "discount_code_already": "Discount code already applied"
+    },
     "outfit-idea": {
          "view_products" : "View Products",
          "shop_the_look" : "Shop the Look"
@@ -43,7 +50,8 @@
       "login_form_error": "Wrong password!",
       "login_form_submit": "Enter",
       "admin_link_html": "Are you the store owner? <a href=\"\/admin\" class=\"link underlined-link\">Log in here<\/a>",
-      "powered_by_shopify_html": "This shop will be powered by {{ shopify }}"
+      "powered_by_shopify_html": "This shop will be powered by {{ shopify }}",
+      "coming_soon": "Coming soon"
     },
     "contact": {
       "success": "Thank you for reaching out! Your message was successfully submitted. We'll respond shortly."
@@ -183,6 +191,7 @@
       "dot": "Dots",
       "plus": "Plus"
     },
+    "image_alt_default": "Image",
     "banner": "Banner",
     "view_all": "View All",
     "policies_html": "I agree to the <a href=\"\/policies\/privacy-policy\" target=\"_blank\" title=\"Privacy Policy\"><strong>Privacy Policy<\/strong><\/a> of the website."
@@ -503,7 +512,7 @@
       "label_set": "Style #{{ index }}",
       "review_app": "Customer Reviews",
       "shop_now": "Shop now",
-      "addSuccess": "Update cart successfully",
+      "addSuccess": "Product added to cart successfully",
       "addGiftCard": "Add gift card successfully",
       "removeCartItem": "Remove item successfully",
       "loading": "loading",

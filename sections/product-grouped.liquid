@@ -217,8 +217,8 @@
                       </div>
                       {% if hidden_price == false %}
                         <div
-                          class="product-item__price flex gap-custom lh-normal fs-custom"
-                          style="--font-size: {{ settings.price_size }}; --gap: 3px;--product-item__price-top: 14px;"
+                          class="product-item__price flex gap-custom lh-normal fs-custom fw-custom"
+                          style="--font-size: {{ settings.price_size }}; --gap: 3px;--product-item__price-top: 14px;--heading-weight: {{ settings.price_font_weight }}"
                         >
                           {%- render 'price', scope: 'item', product: product, show_badges: false -%}
                         </div>

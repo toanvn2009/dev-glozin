@@ -51,12 +51,12 @@
           {%- case block.type -%}
             {%- when 'heading' -%}
               <motion-element
-                data-motion="fade-up-lg"
-                {% if scroll_animation != 'slide_in' %}
+                data-motion="{{ scroll_animation }}"
+                {% if scroll_animation == 'none' %}
                   hold
                 {% endif %}
                 data-motion-delay="{{ forloop.index0 | times: 50 }}"
-                class=" {% if scroll_animation == 'slide_in' %} opacity-0 {% endif %} block"
+                class="block"
               >
               <h1 class="heading-title heading-letter-spacing h2 mt-8 mb-0 {{ header_size }}">
                 {%- if block_st.page_title != blank -%}
@@ -69,23 +69,23 @@
             {%- when 'description' -%}
               {% if collection.description != blank %}
                 <motion-element
-                  data-motion="fade-up-lg"
-                  {% if scroll_animation != 'slide_in' %}
+                  data-motion="{{ scroll_animation }}"
+                  {% if scroll_animation == 'none' %}
                     hold
                   {% endif %}
-                  data-motion-delay="{{ forloop.index0 | times: 50   }}"                             
-                  class="heading-description mt-10 block {% if scroll_animation == 'slide_in' %} opacity-0 {% endif %} rich__text-m0">
+                  data-motion-delay="{{ forloop.index0 | times: 50 }}"                             
+                  class="heading-description mt-10 block rich__text-m0">
                   {{ collection.description }}
                 </motion-element>
               {% endif %}
             {%- when 'breadcrumb' -%}
               <motion-element
-                data-motion="fade-up-lg"
-                {% if scroll_animation != 'slide_in' %}
+                data-motion="{{ scroll_animation }}"
+                {% if scroll_animation == 'none' %}
                   hold
                 {% endif %}
-                data-motion-delay="{{ forloop.index0 | times: 50   }}"
-                class="{% if scroll_animation == 'slide_in' %} opacity-0 {% endif %} block"
+                data-motion-delay="{{ forloop.index0 | times: 50 }}"
+                class="block"
                >
               <div class="page-title-breadcrumb">
                 {%- render 'breadcrumbs' -%}

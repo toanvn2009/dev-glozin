@@ -15,6 +15,7 @@
     assign reset_spacing = ' remove_spacing'
   endif
   assign scroll_animation = settings.scroll_animation
+  assign animate_delay = 0
 -%}
 {%- capture style -%}
   --section-pt: {{ section_st.padding_top }}; --section-pb: {{ section_st.padding_bottom }};}
@@ -28,38 +29,29 @@
       <div class="section__header mb-33 mb-sm-20 text-{{ section_st.header_alignment }}{% if section_st.section_width == 'full_width' %} px-20{% endif %}">
         {%- if section_st.heading != blank -%}
           <motion-element
-                data-motion="fade-up-lg"
-                data-motion-delay="50"
-                {% if scroll_animation != 'slide_in' %}
-                  hold
-                {% endif %}
-            class="block  {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %}"
-            style="
-              {%- if scroll_animation != 'none' -%}
-                --animation-order: 0;
-              {% endif %}
-            "
+            data-motion="{{ scroll_animation }}"
+            data-motion-delay="{{ animate_delay }}"
+            {% if scroll_animation == 'none' %}
+              hold
+            {% endif %}
+            class="block"
           >
             <h2
               class="section__header-heading  heading-letter-spacing {{ header_size  }} mt-0{% if section_st.description != blank %} mb-10{% else %} mb-0{% endif %}"
             >
-              {{ section_st.heading }}
+              {{ section.settings.heading }}
             </h2>
           </motion-element>
         {% endif %}
         {%- if section_st.description != blank -%}
+          {% assign animate_delay = animate_delay | plus: 50 %}
           <motion-element
-            data-motion="fade-up-lg"
-            data-motion-delay="150"
-            {% if scroll_animation != 'slide_in' %}
+            data-motion="{{ scroll_animation }}"
+            data-motion-delay="{{ animate_delay }}"
+            {% if scroll_animation == 'none' %}
               hold
             {% endif %}
-            class="section__header-des block {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %} rich__text-m0"
-            style="
-              {%- if scroll_animation != 'none' -%}
-                --animation-order: 1
-              {% endif %}
-            "
+            class="section__header-des block rich__text-m0"
           >
             {{ section_st.description }}
           </motion-element>
@@ -67,18 +59,16 @@
       </div>
     {% endif %}
     <div class="sec__content">
+      {% if scroll_animation %}
+        <motion-items-effect data-motion="{{ scroll_animation }}">
+      {% endif %}
       <faq-item>
         {%- for block in section.blocks -%}
           {%- liquid
             assign block_st = block.settings
           -%}
-          <motion-element
-            data-motion="fade-up-lg"
-            data-motion-delay="{{ forloop.index0 | times: 50 }}"
-            {% if scroll_animation != 'slide_in' %}
-              hold
-            {% endif %}
-            class="block {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %}"
+          <div
+            class="motion-item"
           >
             <collapsible-block
               tabindex="0"
@@ -95,9 +85,12 @@
                 <div class="faq_content-inner py-20">{{ block_st.faq_content }}</div>
               </div>
             </collapsible-block>
-          </motion-element>
+          </div>
         {%- endfor -%}
       </faq-item>
+      {% if scroll_animation %}
+        </motion-items-effect>
+      {% endif %}
     </div>
   </div>
 </div>
@@ -249,6 +242,7 @@
   "presets": [
     {
       "name": "t:sections.faq.presets.name",
+      "category": "t:categories.support",
       "blocks": [
         {
           "type": "faq-items"

@@ -49,11 +49,9 @@
       default_filter: default_filter
     -%}
   {% endif %}
-  <grid-list
-    {% if scroll_animation != 'slide_in' %}
-      hold
-    {% endif %}
-  >
+  {% if scroll_animation %}
+    <motion-items-effect data-motion="{{ scroll_animation }}" class="motion-collection">
+  {% endif %}
   <div class="{{ section_width }}">
     <div class="title-wrapper-with-link text-center page-title section-spacing-top mb-60">
       <div class="breadcrumbs">
@@ -205,15 +203,13 @@
                           template_enable_color_swatches: true,
                           type: 'grid',
                           template_enable_product_badges: true,
-                          collection_product: true
+                          collection_product: true,
+                          class: 'motion-item'
                         %}
                       </div>
                     {%- when 'article' -%}
                       {% if search_result == 'all' %}
-                        <motion-element
-                          data-motion="fade-up-lg"
-                          hold
-                          class="block"
+                        <div class="motion-item product-item {% if pagination == 'load_more_button' or pagination == 'infinit_scrolling' %} loadmore-item{% endif %}"
                         >
                           {%- render 'article-card',
                             scroll_animation: scroll_animation,
@@ -228,14 +224,12 @@
                             pagination: pagination,
                             search_card: true
                           -%}
-                        </motion-element>
+                        </div>
                       {% endif %}
                     {%- when 'page' -%}
                       {% if search_result == 'all' %}
-                        <motion-element
-                          data-motion="fade-up-lg"
-                          hold
-                          class="block {% if scroll_animation == 'slide_in' and scroll_animation != null %} scroll-trigger slide_in {% endif %} {% if pagination == 'load_more_button' or pagination == 'infinit_scrolling' %} loadmore-item{% endif %}"
+                        <div
+                          class="motion-item product-item {% if pagination == 'load_more_button' or pagination == 'infinit_scrolling' %} loadmore-item{% endif %}"
                         >
                           <div class="article-card-wrapper  card-wrapper underline-links-hover">
                             <div
@@ -256,7 +250,7 @@
                               </div>
                             </div>
                           </div>
-                        </motion-element>
+                        </div>
                       {% endif %}
                   {%- endcase -%}
                 {%- endfor -%}
@@ -282,7 +276,9 @@
       {% # theme-check-disable UnclosedHTMLElement %}
     </div>
   </div>
-</grid-list>
+  {% if scroll_animation %}
+    </motion-items-effect>
+  {% endif %}
 </section>
 
 {% schema %}

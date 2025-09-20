@@ -31,7 +31,6 @@
 %}
 {% if template != 'cart' and action_after_add_cart != 'go_to_cart_page' %}
   <cart-notification id="minicart_wrapper" class="minicart {{ action_after_add_cart }} bls-image-js">
-     
     <div class="minicart__wrapper flex flex-column color-default {% if action_after_add_cart == 'open_drawer' %} bls__drawer fixed z-15 inset-y-0 h-full transition-popup{% if enable_rtl %} right left-0{% else %} left right-0{% endif %}{% endif %}{% if action_after_add_cart == 'show_popup' %} popup_cart invisible absolute z-10 transition-popup right-0 rounded shadow{% endif %}{% if settings.option_show_minicart == 'beside' %} minicart-beside{% endif %}">
       {% if action_after_add_cart == 'show_popup' %}
         <icon-close
@@ -136,7 +135,7 @@
                       <path fill="#888" d="M25.402 47.478a1.695 1.695 0 1 0-.002-3.389 1.695 1.695 0 0 0 .003 3.39ZM44.596 47.478c.936 0 1.693-.759 1.693-1.695a1.694 1.694 0 1 0-3.387 0c0 .936.758 1.695 1.694 1.695Z"/>
                     </svg>
                   {%- endif -%}
-                  <h6 class="fs-18 mt-15 mb-20">{{ 'general.cart.subtitle' | t }}</h6>
+                  <div class="fs-18 h6 mt-15 mb-20">{{ 'general.cart.subtitle' | t }}</div>
                   <p class="empty description mt-0 mb-20 max-w-custom mx-auto" style="--max-width: 85%;">
                     {{ 'general.cart.description' | t }}
                   </p>
@@ -152,7 +151,7 @@
               {%- if product_recommendations_type == 'auto' -%}
                 <minicart-recommendations
                   data-url="{{ routes.product_recommendations_url }}?product_id={{ cart.items.first.product_id }}&limit=6&section_id=cart-upsell"
-                  class="block cart-recommend pt-30 pb-30 px-30 border-top block{% if product_recommendations_type == 'auto' %} no-js-hidden{% endif %}"
+                  class="bls-image-js block cart-recommend pt-30 pb-30 px-30 border-top block{% if product_recommendations_type == 'auto' %} no-js-hidden{% endif %}"
                 >
               {%- else -%}
                 <div
@@ -197,7 +196,8 @@
                             template_enable_rate: false,
                             template_enable_product_short_description: false,
                             template_enable_color_swatches: false,
-                            type: 'list'
+                            type: 'list',
+                            lazy_product: false
                           %}
                         </div>
                       {% endif %}
@@ -216,7 +216,7 @@
               {%- if product_recommendations_type == 'auto' -%}
                 <minicart-recommendations-beside
                   data-url="{{ routes.product_recommendations_url }}?product_id={{ cart.items.first.product_id }}&limit=6&section_id=cart-upsell"
-                  class="cart-recommend pb-30 px-30 block fixed-1025 gradient inset-y-0 z-2 beside invisible-1025 pointer-none-1025 cart-recommend-beside-mobile color-default{% if product_recommendations_type == 'auto' %} no-js-hidden{% endif %}"
+                  class="bls-image-js cart-recommend pb-30 px-30 block fixed-1025 gradient inset-y-0 z-2 beside invisible-1025 pointer-none-1025 cart-recommend-beside-mobile color-default{% if product_recommendations_type == 'auto' %} no-js-hidden{% endif %}"
                 >
               {%- else -%}
                 <div
@@ -261,7 +261,8 @@
                           template_enable_rate: false,
                           template_enable_product_short_description: false,
                           template_enable_color_swatches: false,
-                          type: 'list'
+                          type: 'list',
+                          lazy_product: false
                         %}
                       </div>
                     {% endif %}
@@ -285,17 +286,22 @@
               {% if hidden_price == false %}
                 <div class="cart-summary {% if enable_rtl %}text-left{% else %}text-right{% endif %}" data-cart-summary>
                   <div data-discounts>
-                    <ul class="cart-discounts list-unstyled fs-small primary-color" data-discounts-list>
+                    <ul class="cart-discounts list-unstyled heading-color medium-weight flex gap-5 flex-column mb-10" data-discounts-list>
                       {% unless cart.cart_level_discount_applications.size == 0 %}
                         {% for discount in cart.cart_level_discount_applications %}
-                          <li>
-                            <span>
+                          <li class="flex justify-between align-center">
+                            <span class="discount-code flex align-center gap-5 fs-small-1">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none">
+                                <use href="#icon-discount"/>
+                              </svg>
+                              {{ discount.title }}
+                            </span>
+                            <span class="discount-price fs-small background-custom color-white px-15" style="--content_bg_color: var(--color-primary);">
                               {% if show_currency_code %}
-                                {{- discount.title | upcase }}&nbsp;(-
+                                -
                                 {{- discount.total_allocated_amount | money_with_currency -}}
-                                )
                               {% else %}
-                                {{- discount.title | upcase }}&nbsp;(-{{ discount.total_allocated_amount | money }})
+                                -{{ discount.total_allocated_amount | money }}
                               {% endif %}
                             </span>
                           </li>
@@ -360,7 +366,5 @@
       </div>
     </div>
   </cart-notification>
-  <div class="overlayminicart">
-
-  </div>
+  <div class="overlayminicart"></div>
 {% endif %}

@@ -6,11 +6,8 @@
   assign hmac = shop.email | hmac_sha256: _s
   assign encoded_ = _b | append: ":" | append: hmac | base64_encode
 -%}
-{% if settings.scroll_animation != 'none' %}
-  <script src="{{ 'animation.js' | asset_url }}" defer="defer"></script>
-{%- endif %}
-<script src="{{ 'tingle.min.js' | asset_url }}" defer="defer"></script>
-<script src="{{ 'theme.js' | asset_url }}"  defer="defer"></script>
+<script src="{{ 'tingle.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'theme.js' | asset_url }}"  defer="defer" type="module"></script>
 {%- case t -%}
   {%- when 'collection' and collection.handle -%}
     <script src="{{ 'collection.js' | asset_url }}" defer="defer"></script>

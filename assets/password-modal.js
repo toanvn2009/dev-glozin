@@ -22,7 +22,7 @@ var BlsPasswordPopup = (function () {
           footer: false,
           stickyFooter: false,
           closeMethods: ["overlay", "button", "escape"],
-          cssClass: [this.customClass],
+          cssClass: ['password-modal'],
           onOpen: function () {},
           onClose: function () {},
           beforeClose: function () {

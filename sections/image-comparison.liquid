@@ -19,6 +19,7 @@
   assign after_image = section_st.after_image
   assign position = section_st.position
   assign scroll_animation = settings.scroll_animation
+  assign animate_delay = 0
 -%}
 {%- capture style -%}
   --section-pt: {{ section_st.padding_top }}; --section-pb: {{ section_st.padding_bottom }}; --col-width: {{ section_st.width }};
@@ -95,163 +96,42 @@
       <div class="section__header mb-33 mb-sm-20  text-{{ section_st.header_alignment }}{% if section_st.section_width == 'full_width' %} px-20{% endif %}">
         {%- if section_st.heading != blank -%}
           <motion-element
-                data-motion="fade-up-lg"
-                data-motion-delay="50"
-                {% if scroll_animation != 'slide_in' %}
-                  hold
-                {% endif %}
-            class="block  {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %}"
-            style="
-              {%- if scroll_animation != 'none' -%}
-                --animation-order: 0;
-              {% endif %}
-            "
-          >
-          <h2
-            class="section__header-heading heading-letter-spacing {{ header_size  }} mt-0{% if section_st.description != blank %} mb-10{% else %} mb-0{% endif %}"
-            {%- if scroll_animation != 'none' -%}
-              style="--animation-order: 0"
-            {% endif %}
-          >
-            {{ section_st.heading }}
-          </h2>
-        </motion-element>
-        {% endif %}
-        {%- if section_st.description != blank -%}
-           <motion-element
-            data-motion="fade-up-lg"
-            data-motion-delay="150"
-            {% if scroll_animation != 'slide_in' %}
+            data-motion="{{ scroll_animation }}"
+            data-motion-delay="{{ animate_delay }}"
+            {% if scroll_animation == 'none' %}
               hold
             {% endif %}
-            class="section__header-des block {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %} rich__text-m0"
-            {%- if scroll_animation != 'none' -%}
-              style="--animation-order: 1"
-            {% endif %}
+            class="block"
           >
-            {{ section_st.description }}
+            <h2
+              class="section__header-heading heading-letter-spacing {{ header_size  }} mt-0{% if section_st.description != blank %} mb-10{% else %} mb-0{% endif %}"
+            >
+              {{ section.settings.heading }}
+            </h2>
+          </motion-element>
+        {% endif %}
+        {%- if section_st.description != blank -%}
+          {% assign animate_delay = animate_delay | plus: 50 %}
+          <motion-element
+            data-motion="{{ scroll_animation }}"
+            data-motion-delay="{{ animate_delay }}"
+            {% if scroll_animation == 'none' %}
+              hold
+            {% endif %}
+            class="section__header-des block rich__text-m0"
+          >
+            {{ section.settings.description }}
           </motion-element>
         {% endif %}
       </div>
     {% endif %}
-    <motion-element
-      data-motion="fade-up-lg"
-      data-motion-delay="150"
-      {% if scroll_animation != 'slide_in' %}
-        hold
-      {% endif %}
-      class="img-container {% if section.blocks.size > 0 %} flex flex-wrap gap-20{% endif %}{% if position == 'left'%} flex-row-reverse{% endif %} {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %}"
-      {%- if scroll_animation != 'none' -%}
-        style="--animation-order: 1"
-      {% endif %}
+    <div
+      class="img-container {% if section.blocks.size > 0 %} flex flex-wrap gap-20{% endif %}{% if position == 'left'%} flex-row-reverse{% endif %}"
     >
       {%- if section.blocks.size > 0 -%}
         <div class="sec__content-inner flex-1 align-self-{{ section_st.vertical_align }}">
       {% endif %}
-      {%- for block in section.blocks -%}
-        {%- liquid
-          assign block_st = block.settings
-          assign mb_custom = ''
-          if block_st.spacing_bottom > 41
-            assign mb_custom = 'mb-big'
-          elsif block_st.spacing_bottom > 30
-            assign mb_custom = 'mb-medium'
-          else
-            assign mb_custom = 'mb-custom'
-          endif
-          assign uppercase = ''
-          if block_st.uppercase
-            assign uppercase = 'uppercase'
-          endif
-          assign fs_custom = ''
-          if block_st.font_size > 41
-            assign fs_custom = 'fs-big'
-          elsif block_st.font_size > 24
-            assign fs_custom = 'fs-medium'
-          else
-            assign fs_custom = 'fs-custom'
-          endif
-          assign font_weight = block_st.font_weight
-        -%}
-        {%- case block.type -%}
-          {%- when 'heading' -%}
-            <h2
-              class="mt-0 sec__content-heading heading-letter-spacing {{ mb_custom }} {{ uppercase }} {{ fs_custom }} {{ font_weight }}"
-              style="--font-size: {{ block_st.font_size }};--space-bottom: {{ block_st.spacing_bottom }}"
-              {{ block.shopify_attributes }}
-            >
-              {{ block_st.heading }}
-            </h2>
-          {%- when 'subheading' -%}
-            <div
-              class="sec__content-subheading heading-color {{ mb_custom }} {{ uppercase }} {{ fs_custom }} {{ font_weight }}"
-              style="--font-size: {{ block_st.font_size }};--space-bottom: {{ block_st.spacing_bottom }}"
-            >
-              {{ block_st.subheading | escape }}
-            </div>
-          {%- when 'description' -%}
-            <div
-              class="sec__content-des rich__text-m0 {{ mb_custom }} {{ uppercase }} {{ fs_custom }} {{ font_weight }}"
-              style="--font-size: {{ block_st.font_size }};--space-bottom: {{ block_st.spacing_bottom }}"
-              {{ block.shopify_attributes }}
-            >
-              {{ block_st.description }}
-            </div>
-          {%- when 'button' -%}
-            {% if block_st.first_button_label != blank or block_st.second_button_label != blank %}
-              <div
-                class="sec__content-btn align-center flex flex-wrap gap-15 justify-content-{{ section_st.content_alignment }} {{ mb_custom }}"
-                style="--space-bottom: {{ block_st.spacing_bottom }}"
-              >
-                {% if block_st.first_button_label != blank %}
-                  <a
-                    {% if block_st.first_button_link == blank %}
-                      role="link" aria-disabled="true"
-                    {% else %}
-                      href="{{ block_st.first_button_link | default: "#" }}"
-                    {% endif %}
-                    aria-label="{{ block_st.first_button_label }}"
-                    class="inline-flex no-underline btn-{{ block_st.first_button_type }}"
-                  >
-                    {{ block_st.first_button_label }}
-                  </a>
-                {% endif %}
-                {% if block_st.second_button_label != blank %}
-                  <a
-                    {% if block_st.second_button_link == blank %}
-                      role="link" aria-disabled="true"
-                    {% else %}
-                      href="{{ block_st.second_button_link | default: "#" }}"
-                    {% endif %}
-                    aria-label="{{ block_st.second_button_label }}"
-                    class="inline-flex no-underline btn-{{ block_st.second_button_type }}"
-                  >
-                    {{ block_st.second_button_label }}
-                  </a>
-                {% endif %}
-              </div>
-            {% endif %}
-          {%- when 'custom_html' -%}
-            <div
-              class="{{ mb_custom }}"
-              style="--space-bottom: {{ block_st.spacing_bottom }}"
-              {{ block.shopify_attributes }}
-            >
-              {{ block_st.html_custom }}
-            </div>
-          {%- when 'product' -%}
-            <div class="testimonial-product_comparison">
-              {% render 'product-item',
-                card_product: block_st.select_product,
-                template_enable_price: true,
-                template_enable_rate: true,
-                custom_widths: '240, 120, 80',
-                type: 'list',
-                sizes: '80px'
-              %}
-            </div>
-        {%- endcase -%}
-      {%- endfor -%}
+      {% content_for 'blocks' %}
       {%- if section.blocks.size > 0 -%}
         </div>
       {% endif %}
@@ -322,18 +202,7 @@
           </div>
         </div>
       </div>
-    </motion-element>
-    {%- if section.blocks.size > 0 -%}
-      <div class="block">
-    {% endif %}
-    {%- for block in section.blocks -%}
-      {%- liquid
-        assign block_st = block.settings
-      -%}
-    {%- endfor -%}
-    {%- if section.blocks.size > 0 -%}
-      </div>
-    {% endif %}
+    </div>
   </div>
 </div>
 {% schema %}
@@ -578,280 +447,25 @@
   ],
   "blocks": [
     {
-      "type": "heading",
-      "name": "t:sections.all.contents.heading.label",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "textarea",
-          "id": "heading",
-          "label": "t:sections.all.contents.heading.label",
-          "default": "Talk about your brand"
-        },
-        {
-          "type": "range",
-          "id": "font_size",
-          "label": "t:sections.all.content_settings.font_size.label",
-          "default": 36,
-          "min": 24,
-          "max": 100,
-          "step": 1,
-          "unit": "px"
-        },
-        {
-          "type": "select",
-          "id": "font_weight",
-          "label": "t:sections.all.content_settings.font_weight.label",
-          "default": "heading_weight",
-          "options": [
-            {
-              "value": "body_weight",
-              "label": "t:sections.all.content_settings.font_weight.body_weight.label"
-            },
-            {
-              "value": "subheading_weight",
-              "label": "t:sections.all.content_settings.font_weight.subheading_weight.label"
-            },
-            {
-              "value": "heading_weight",
-              "label": "t:sections.all.content_settings.font_weight.heading_weight.label"
-            }
-          ]
-        },
-        {
-          "type": "checkbox",
-          "id": "uppercase",
-          "label": "t:sections.all.text_transform.uppercase.label"
-        },
-        {
-          "type": "range",
-          "id": "spacing_bottom",
-          "label": "t:sections.all.content_settings.spacing.spacing_bottom.label",
-          "default": 24,
-          "min": 0,
-          "max": 30,
-          "step": 1,
-          "unit": "px"
-        }
-      ]
+      "type": "heading"
     },
     {
-      "type": "subheading",
-      "name": "t:sections.all.contents.subheading.label",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "textarea",
-          "id": "subheading",
-          "label": "t:sections.all.contents.subheading.label",
-          "default": "Subheading"
-        },
-        {
-          "type": "range",
-          "id": "font_size",
-          "label": "t:sections.all.content_settings.font_size.label",
-          "default": 14,
-          "min": 12,
-          "max": 24,
-          "step": 1,
-          "unit": "px"
-        },
-        {
-          "type": "select",
-          "id": "font_weight",
-          "label": "t:sections.all.content_settings.font_weight.label",
-          "default": "subheading_weight",
-          "options": [
-            {
-              "value": "body_weight",
-              "label": "t:sections.all.content_settings.font_weight.body_weight.label"
-            },
-            {
-              "value": "subheading_weight",
-              "label": "t:sections.all.content_settings.font_weight.subheading_weight.label"
-            },
-            {
-              "value": "heading_weight",
-              "label": "t:sections.all.content_settings.font_weight.heading_weight.label"
-            }
-          ]
-        },
-        {
-          "type": "checkbox",
-          "id": "uppercase",
-          "label": "t:sections.all.text_transform.uppercase.label"
-        },
-        {
-          "type": "range",
-          "id": "spacing_bottom",
-          "label": "t:sections.all.content_settings.spacing.spacing_bottom.label",
-          "default": 15,
-          "min": 0,
-          "max": 30,
-          "step": 1,
-          "unit": "px"
-        }
-      ]
+      "type": "subheading"
     },
     {
-      "type": "description",
-      "name": "t:sections.all.contents.description.label",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "richtext",
-          "id": "description",
-          "default": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
-          "label": "t:sections.all.contents.description.label"
-        },
-        {
-          "type": "range",
-          "id": "font_size",
-          "label": "t:sections.all.content_settings.font_size.label",
-          "default": 14,
-          "min": 10,
-          "max": 30,
-          "step": 1,
-          "unit": "px"
-        },
-        {
-          "type": "select",
-          "id": "font_weight",
-          "label": "t:sections.all.content_settings.font_weight.label",
-          "default": "body_weight",
-          "options": [
-            {
-              "value": "body_weight",
-              "label": "t:sections.all.content_settings.font_weight.body_weight.label"
-            },
-            {
-              "value": "subheading_weight",
-              "label": "t:sections.all.content_settings.font_weight.subheading_weight.label"
-            },
-            {
-              "value": "heading_weight",
-              "label": "t:sections.all.content_settings.font_weight.heading_weight.label"
-            }
-          ]
-        },
-        {
-          "type": "range",
-          "id": "spacing_bottom",
-          "label": "t:sections.all.content_settings.spacing.spacing_bottom.label",
-          "default": 30,
-          "min": 0,
-          "max": 30,
-          "step": 1,
-          "unit": "px"
-        }
-      ]
+      "type": "description"
     },
     {
-      "type": "button",
-      "name": "t:sections.all.contents.button.label",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "first_button_label",
-          "default": "Button label",
-          "label": "t:sections.all.contents.button.first_button_label.label",
-          "info": "t:sections.all.contents.button.first_button_label.info"
-        },
-        {
-          "type": "url",
-          "id": "first_button_link",
-          "label": "t:sections.all.contents.button.first_button_link.label"
-        },
-        {
-          "type": "select",
-          "id": "first_button_type",
-          "label": "t:sections.all.contents.button.button_type.label",
-          "default": "primary",
-          "options": [
-            {
-              "value": "primary",
-              "label": "t:sections.all.contents.button.button_type.primary.label"
-            },
-            {
-              "value": "outline",
-              "label": "t:sections.all.contents.button.button_type.outline.label"
-            },
-            {
-              "value": "link",
-              "label": "t:sections.all.contents.button.button_type.link.label"
-            }
-          ]
-        },
-        {
-          "type": "text",
-          "id": "second_button_label",
-          "label": "t:sections.all.contents.button.secondary_button_label.label",
-          "info": "t:sections.all.contents.button.secondary_button_label.info"
-        },
-        {
-          "type": "url",
-          "id": "second_button_link",
-          "label": "t:sections.all.contents.button.secondary_button_link.label"
-        },
-        {
-          "type": "select",
-          "id": "second_button_type",
-          "label": "t:sections.all.contents.button.button_type.label",
-          "default": "primary",
-          "options": [
-            {
-              "value": "primary",
-              "label": "t:sections.all.contents.button.button_type.primary.label"
-            },
-            {
-              "value": "outline",
-              "label": "t:sections.all.contents.button.button_type.outline.label"
-            },
-            {
-              "value": "link",
-              "label": "t:sections.all.contents.button.button_type.link.label"
-            }
-          ]
-        },
-        {
-          "type": "range",
-          "id": "spacing_bottom",
-          "label": "t:sections.all.content_settings.spacing.spacing_bottom.label",
-          "default": 10,
-          "min": 0,
-          "max": 30,
-          "step": 1,
-          "unit": "px"
-        }
-      ]
+      "type": "button"
     },
     {
-      "type": "product",
-      "limit": 1,
-      "name": "t:sections.image-comparison-slider.blocks.product.name",
-      "settings": [
-        {
-          "type": "product",
-          "id": "select_product",
-          "label": "t:sections.testimonials_product.settings.select_product"
-        },
-        {
-          "type": "range",
-          "id": "spacing_bottom",
-          "label": "t:sections.all.content_settings.spacing.spacing_bottom.label",
-          "default": 10,
-          "min": 0,
-          "max": 30,
-          "step": 1,
-          "unit": "px"
-        }
-      ]
+      "type": "_product-comparison"
     }
   ],
   "presets": [
     {
       "name": "t:sections.image-comparison-slider.name",
+      "category": "t:categories.banners",
       "blocks": [
         {
           "type": "heading"

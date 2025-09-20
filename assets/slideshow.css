@@ -255,7 +255,6 @@
     transform: scale(1);
   }
 }
-
-
-
-
+.swiper-pagination-duplicate{
+  display: none;
+}

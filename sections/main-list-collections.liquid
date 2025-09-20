@@ -25,6 +25,9 @@
   style="{{ style | strip | strip_newlines }}"
 >
   <div class="{{ section_width }}">
+    {% if scroll_animation %}
+      <motion-items-effect data-motion="{{ scroll_animation }}" class="motion-collection">
+    {% endif %}
     <div
       class="collection-list grid col-{{ items_per_row }} {{ settings.hover_effect }}"
     >
@@ -41,37 +44,25 @@
           endif
         -%}
         {%- paginate collections by items_to_show -%}
-          <grid-list
-            {% if scroll_animation != 'slide_in' %}
-              hold
-            {% endif %}
+          <div
+            class="collection-list-grid grid grid-cols gap{% if pagination == 'load_more_button' or pagination == 'infinit_scrolling' %} loadmore-lists{% endif %}"
+            style="{{ col_style | strip | strip_newlines }}"
           >
-            <div
-              class="collection-list-grid grid grid-cols gap{% if pagination == 'load_more_button' or pagination == 'infinit_scrolling' %} loadmore-lists{% endif %}"
-              style="{{ col_style | strip | strip_newlines }}"
-            >
-              {% for collection in collections %}
-                <div class="collection-items relative align-self-start{% if pagination == 'load_more_button' or pagination == 'infinit_scrolling' %} loadmore-item{% endif %}">
-                  <motion-element
-                    data-motion="fade-up-lg"
-                    hold
-                    data-motion-delay="{{ forloop.index0 | times: 50 }}"
-                    class="collection-item grid-custom-item {% if scroll_animation != 'none' and scroll_animation != null %} scroll-trigger {{ scroll_animation }} {% endif %} {{ settings.hover_effect }}"
-                    {%- if scroll_animation != 'none' -%}
-                      style="--animation-order: {{  forloop.index }};"
-                    {%- endif -%}
-                  >
-                    {% render 'collection-item',
-                      card_collection: collection,
-                      section: section,
-                      design: design,
-                      collection_information_position: collection_information_position
-                    %}
-                  </motion-element>
+            {% for collection in collections %}
+              <div class="collection-items relative motion-item product-item align-self-start{% if pagination == 'load_more_button' or pagination == 'infinit_scrolling' %} loadmore-item{% endif %}">
+                <div
+                  class="collection-item grid-custom-item {{ settings.hover_effect }}"
+                >
+                  {% render 'collection-item',
+                    card_collection: collection,
+                    section: section,
+                    design: design,
+                    collection_information_position: collection_information_position
+                  %}
                 </div>
-              {% endfor %}
-            </div>
-          </grid-list>
+              </div>
+            {% endfor %}
+          </div>
           {% render 'pagination',
             section_st: section_st,
             pagination: pagination,
@@ -80,59 +71,58 @@
           %}
         {%- endpaginate -%}
       {%- else -%}
-        <grid-list
-          {% if scroll_animation != 'slide_in' %}
-            hold
-          {% endif %}
+        <div
+          class="collection-list-grid grid grid-cols gap"
+          style="{{ col_style | strip | strip_newlines }}"
         >
-          <div
-            class="collection-list-grid grid grid-cols gap"
-            style="{{ col_style | strip | strip_newlines }}"
-          >
-            {%- assign load = false -%}
-            {% for block in section.blocks %}
-              {%- liquid
-                assign block_st = block.settings
-                assign class = ' grid-custom-item'
-                if forloop.index > items_to_show
-                  assign class = ' grid-custom-item hidden trigger_slidein'
-                  assign load = true
-                endif
-              -%}
-              <motion-element
-                data-motion="fade-up-lg"
-                hold
-                data-motion-delay="{{ forloop.index0 | times: 50 }}"
-                class="collection-item {{ class }} {% if scroll_animation != 'none' and scroll_animation != null %} scroll-trigger {{ scroll_animation }}  {% endif %} {{ settings.hover_effect }}"
-                {%- if scroll_animation != 'none' -%}
-                  style="--animation-order: {{  forloop.index }};"
-                {%- endif -%}
-              >
-                {% render 'collection-item',
-                  card_collection: block_st.collection,
-                  section: section,
-                  block: block,
-                  design: design,
-                  collection_information_position: collection_information_position
-                %}
-              </motion-element>
-            {% endfor %}
-          </div>
-        </grid-list>
+          {%- assign load = false -%}
+          {% for block in section.blocks %}
+            {%- liquid
+              assign block_st = block.settings
+              assign class = ' grid-custom-item motion-item'
+              if forloop.index > items_to_show
+                assign class = ' grid-custom-item hidden product-item'
+                assign load = true
+              endif
+            -%}
+            <div
+              class="collection-item {{ class }} {{ settings.hover_effect }}"
+            >
+              {% render 'collection-item',
+                card_collection: block_st.collection,
+                section: section,
+                block: block,
+                design: design,
+                collection_information_position: collection_information_position
+              %}
+            </div>
+          {% endfor %}
+        </div>
         {%- if load -%}
           {%- if pagination == 'load_more_button' or pagination == 'infinit_scrolling' -%}
-            <loadmore-button {% if scroll_animation != 'slide_in' %}hold{% endif %} class="block collection-infinite-scroll text-center mt-60">
+            <loadmore-button
+              class="block collection-list__page text-center mt-60"
+            >
+              {% if scroll_animation %}
+                <motion-element data-motion="{{ scroll_animation }}" class="block">
+              {% endif %}
               <a class="button inline-block btn-primary" aria-label="{{ section_st.button_show_more }}" role="link">
                 <span class="hidden-on-load">{{ section_st.button_show_more }}</span>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="spin opacity-0 icon-load">
                   <use href="#icon-load"></use>
                 </svg>
               </a>
+              {% if scroll_animation %}
+                </motion-element>
+              {% endif %}
             </loadmore-button>
           {%- endif -%}
         {%- endif -%}
       {% endif %}
     </div>
+    {% if scroll_animation %}
+      </motion-items-effect>
+    {% endif %}
   </div>
 </div>
 {% schema %}

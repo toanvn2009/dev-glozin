@@ -399,3 +399,7 @@ body .dmp_discount-form input {
   background-color: #fff;
   pointer-events: none; 
 }
+.discount-price {
+  border-radius: 30px;
+  padding-block: 6.5px;
+}

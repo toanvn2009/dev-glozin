@@ -21,6 +21,7 @@
   endif
   assign local_video = st.local_video
   assign scroll_animation = settings.scroll_animation
+  assign animate_delay = 0
 %}
 
 {%- capture style -%}
@@ -60,17 +61,12 @@
       <div class="bls__section-header text-{{ text_alignment }} mb-60" style="--text-color: {{ text_color }}">
         {%- if heading != blank -%}
           <motion-element
-                data-motion="fade-up-lg"
-                data-motion-delay="50"
-                {% if scroll_animation != 'slide_in' %}
-                  hold
-                {% endif %}
-            class="block  {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %}"
-            style="
-              {%- if scroll_animation != 'none' -%}
-                --animation-order: 0;
-              {% endif %}
-            "
+            data-motion="{{ scroll_animation }}"
+            {% if scroll_animation == 'none' %}
+              hold
+            {% endif %}
+            data-motion-delay="{{ animate_delay }}"
+            class="block"
           >
             <h2
               class="section__header-heading heading-letter-spacing fs-big mt-0{% if description != blank %} mb-10{% else %} mb-0{% endif %} {{ text_transform }} "
@@ -81,24 +77,23 @@
           </motion-element>
         {%- endif -%}
         {%- if description != blank -%}
+          {%- assign animate_delay = animate_delay | plus: 50 -%}
           <motion-element
-            data-motion="fade-up-lg"
-            data-motion-delay="150"
-            {% if scroll_animation != 'slide_in' %}
+            data-motion="{{ scroll_animation }}"
+            {% if scroll_animation == 'none' %}
               hold
             {% endif %}
-            class="section__header-des {% if scroll_animation != 'none' -%} scroll-trigger {{ scroll_animation }}{% endif %}  block rich__text-m0"
-            style="
-              {%- if scroll_animation != 'none' -%}
-                --animation-order: 1;
-              {% endif %}
-            "
+            data-motion-delay="{{ animate_delay }}"
+            class="section__header-des block rich__text-m0"
           >
             {{ description }}
           </motion-element>
         {%- endif -%}
       </div>
     {%- endif -%}
+    {% if scroll_animation %}
+      <motion-items-effect data-motion="{{ scroll_animation }}">
+    {% endif %}
     <div
       class="grid grid-cols gap"
       style="
@@ -111,16 +106,8 @@
       "
     >
       {% for block in section.blocks %}
-        <motion-element
-          data-motion="fade-up-lg"
-          {% if scroll_animation != 'slide_in' %}
-            hold
-          {% endif %}
-          data-motion-delay="{{ forloop.index0 | times: 50 }}"
-          class="banner-sale-items mb-10 text-center {% if scroll_animation != 'none' and scroll_animation != null %} scroll-trigger {{ scroll_animation }} {% endif %} {{ settings.hover_effect }}"
-          {%- if scroll_animation != 'none' -%}
-            style="--animation-order: {{  forloop.index }};"
-          {%- endif -%}
+        <div
+          class="banner-sale-items mb-10 text-center motion-item {{ settings.hover_effect }}"
           {{ block.shopify_attributes }}
           style="--col-width: {{ block.settings.content_width }};"
         >
@@ -158,9 +145,12 @@
               </div>
             </div>
           {% endif %}
-        </motion-element>
+        </div>
       {% endfor %}
     </div>
+    {% if scroll_animation %}
+      </motion-items-effect>
+    {% endif %}
   </div>
 </div>
 

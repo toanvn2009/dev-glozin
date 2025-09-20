@@ -7,7 +7,7 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
-{
+ {
   "sections": {
     "breadcrumb": {
       "type": "breadcrumb",
@@ -21,17 +21,17 @@
       "type": "main-product",
       "blocks": {
         "badges_RwfTMp": {
-          "type": "badges",
+          "type": "_product-badges",
           "settings": {}
         },
         "title_G6tU8U": {
-          "type": "title",
+          "type": "_product-title",
           "settings": {
             "show_vendor": true
           }
         },
         "review_and_sold_AAbJC9": {
-          "type": "review_and_sold",
+          "type": "_product-review-sold",
           "settings": {
             "show_review": true,
             "show_sold_products": true,
@@ -40,17 +40,17 @@
           }
         },
         "price_VJ4N8m": {
-          "type": "price",
+          "type": "_product-price",
           "settings": {}
         },
         "short_description_9BGxVm": {
-          "type": "short_description",
+          "type": "_product-short-description",
           "settings": {
             "excerpt_length": 200
           }
         },
         "delivery_return_iJHeMD": {
-          "type": "delivery_return",
+          "type": "_product-delivery-return",
           "settings": {
             "delivery_design": "vertical",
             "delivery_content_icon": "truck",
@@ -62,7 +62,7 @@
           }
         },
         "live_view_rzDP6G": {
-          "type": "live_view",
+          "type": "_product-live-view",
           "settings": {
             "min_number": 10,
             "max_number": 40,
@@ -71,14 +71,14 @@
           }
         },
         "countdown_timer_QB4Ydn": {
-          "type": "countdown_timer",
+          "type": "_product-countdown-timer",
           "settings": {
             "timer_style": "default",
             "content": "🔥 Hurry Up! Sale ends in:"
           }
         },
         "variant_picker_tcCihG": {
-          "type": "variant_picker",
+          "type": "_product-variant-picker",
           "settings": {
             "variant_type": "swatches",
             "show_size_guide": true,
@@ -87,7 +87,7 @@
           }
         },
         "product_addons_YRaprz": {
-          "type": "product_addons",
+          "type": "_product-addons",
           "settings": {
             "show_compare_color": true,
             "show_ask_question": true,
@@ -95,14 +95,14 @@
           }
         },
         "stock_countdown_JNK9zi": {
-          "type": "stock_countdown",
+          "type": "_product-stock-countdown",
           "settings": {
             "message": "Hurry up! Only [count] items left in stock",
             "stock_items": 30
           }
         },
         "buy_buttons_LcQGtR": {
-          "type": "buy_buttons",
+          "type": "_product-buy-buttons",
           "settings": {
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true,
@@ -111,35 +111,28 @@
           }
         },
         "model_size_XM7z6E": {
-          "type": "model_size",
+          "type": "_product-modal-size",
           "settings": {}
         },
-        "pickup_avaiability_cyVydQ": {
-          "type": "pickup_avaiability",
+        "pickup_availability_cyVydQ": {
+          "type": "_product-pickup-availability",
           "settings": {}
         },
         "product_grouped_6epkNf": {
-          "type": "product_grouped",
+          "type": "_product-grouped",
           "settings": {
             "heading": ""
           }
         },
         "more_colors_3zmxGq": {
-          "type": "more_colors",
+          "type": "_product-more-colors",
           "settings": {
             "heading": "",
             "image_width": 40
           }
         },
-        "text_CzxwUn": {
-          "type": "text",
-          "settings": {
-            "heading": "",
-            "content": ""
-          }
-        },
         "product_meta_kiKPhW": {
-          "type": "product_meta",
+          "type": "_product-meta",
           "settings": {
             "show_barcode": false,
             "show_sku": true,
@@ -150,7 +143,7 @@
           }
         },
         "trust_badge_qKXhpg": {
-          "type": "trust_badge",
+          "type": "_product-trust-badge",
           "settings": {
             "message": "Guarantee Safe Checkout:",
             "trust_badge_image": "shopify://shop_images/payment.png",
@@ -158,7 +151,7 @@
           }
         },
         "collapsible_row_m3g6f8": {
-          "type": "collapsible_row",
+          "type": "_product-collapsible-row",
           "settings": {
             "heading": "Description",
             "content": "",
@@ -167,7 +160,7 @@
           }
         },
         "collapsible_row_eLaQpR": {
-          "type": "collapsible_row",
+          "type": "_product-collapsible-row",
           "settings": {
             "heading": "Shipping and Returns",
             "content": "<p>We offer fast and reliable shipping for all our clothing items. Orders are processed within <strong>1-2 business days</strong> and shipped via standard delivery, which typically takes 3-5 business days.</p><p>Express shipping options are also available at checkout for an additional fee, ensuring your fashion essentials arrive even sooner. Enjoy <strong>free shipping</strong> on orders<strong> over $150</strong>. For any questions regarding your order, please contact our customer service team for assistance.</p>",
@@ -176,7 +169,7 @@
           }
         },
         "collapsible_row_DA4FUC": {
-          "type": "collapsible_row",
+          "type": "_product-collapsible-row",
           "settings": {
             "heading": "Return Policies",
             "content": "<p>Provided the conditions in our refund policy have been met, refunds will be processed using the original form of payment. You can return an item purchased online by posting it to us. Please contact customer service for return address. Please note that delivery costs will be excluded from the refund unless goods are returned in accordance with your statutory rights (e.g. they are faulty or not as ordered).</p><ul><li>The items with the original receipt are returned within 30 days of purchase. </li><li>Items must be in the original condition as purchased with all labels/tickets attached.</li></ul><p>Provided the conditions in our refund policy have been met, refunds will be processed using the original form of payment. You can return an item purchased online by posting it to us. Please contact customer service for return address. Please note that delivery costs will be excluded from the refund unless goods are returned in accordance with your statutory rights (e.g. they are faulty or not as ordered).</p>",
@@ -185,7 +178,7 @@
           }
         },
         "complementary_products_Wip9YG": {
-          "type": "complementary_products",
+          "type": "_product-complementary-products",
           "settings": {
             "heading": "Pairs well with",
             "product_list_limit": 10,
@@ -210,10 +203,9 @@
         "stock_countdown_JNK9zi",
         "buy_buttons_LcQGtR",
         "model_size_XM7z6E",
-        "pickup_avaiability_cyVydQ",
+        "pickup_availability_cyVydQ",
         "product_grouped_6epkNf",
         "more_colors_3zmxGq",
-        "text_CzxwUn",
         "product_meta_kiKPhW",
         "trust_badge_qKXhpg",
         "collapsible_row_m3g6f8",
@@ -227,7 +219,7 @@
         "enable_sticky_content_on_desktop": true,
         "enable_skeleton_loading": false,
         "desktop_media_width": 50,
-        "desktop_layout": "stack",
+        "desktop_layout": "thumbnail_left",
         "image_zoom": "open_lightbox",
         "enable_video_looping": true,
         "enable_video_autoplay": true,

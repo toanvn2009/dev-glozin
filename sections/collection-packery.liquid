@@ -24,6 +24,7 @@
     assign data_free_scroll = 'true'
   endif
   assign scroll_animation = settings.scroll_animation
+  assign animate_delay = 0
 -%}
 {%- capture style -%}
   --section-pt: {{ section_st.padding_top }}; --section-pb: {{ section_st.padding_bottom }};
@@ -49,45 +50,31 @@
       <div class="section__header mb-33 mb-sm-20 text-{{ section_st.header_alignment }}{% if section_st.section_width == 'full_width' %} px-20{% endif %}{% if section_st.show_view_all != blank and section_st.header_alignment != 'center' %} flex gap-15 gap-md-30 flex-wrap justify-content-{{ section_st.header_alignment }}{% if section_st.header_alignment == 'right' %} flex-row-reverse{% endif %}{% endif %}">
         {%- if section_st.heading != blank -%}
           <motion-element
-             data-motion="fade-up-lg"
-                data-motion-delay="50"
-                {% if scroll_animation != 'slide_in' %}
-                  hold
-                {% endif %}
-            class="block  {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %}"
-            style="
-            {%- if scroll_animation != 'none' -%}
-              --animation-order: 0;
+            data-motion="{{ scroll_animation }}"
+            {% if scroll_animation == 'none' %}
+              hold
             {% endif %}
-          "
+            data-motion-delay="{{ animate_delay }}"
+            class="block"
           >
-          <h2
-            class="section__header-heading  heading-letter-spacing {{ header_size  }} mt-0{% if section_st.description != blank %} mb-10{% else %} mb-0{% endif %}"
-            style="
-              {%- if scroll_animation != 'none' -%}
-                --animation-order: 0
-              {% endif %}
-            "
-          >
-            {{ section_st.heading }}
-          </h2>
-        </motion-element>
+            <h2
+              class="section__header-heading  heading-letter-spacing {{ header_size  }} mt-0{% if section_st.description != blank %} mb-10{% else %} mb-0{% endif %}"
+            >
+              {{ section.settings.heading }}
+            </h2>
+          </motion-element>
         {% endif %}
         {%- if section_st.description != blank -%}
+          {%- assign animate_delay = animate_delay | plus: 50 -%}
           <motion-element
-            data-motion="fade-up-lg"
-                data-motion-delay="150"
-                {% if scroll_animation != 'slide_in' %}
-                  hold
-                {% endif %}
+            data-motion="{{ scroll_animation }}"
+            data-motion-delay="{{ animate_delay }}"
+            {% if scroll_animation == 'none' %}
+              hold
+            {% endif %}
             class="section__header-des block  rich__text-m0"
-            style="
-              {%- if scroll_animation != 'none' -%}
-                --animation-order: 1
-              {% endif %}
-            "
           >
-            {{ section_st.description }}
+            {{ section.settings.description }}
           </motion-element>
         {% endif %}
       </div>
@@ -107,30 +94,20 @@
       >
         {% for block in section.blocks %}
           {% assign block_st = block.settings %}
-          <motion-element
-                data-motion="fade-up-lg"
-                data-motion-delay="50"
-                {% if scroll_animation != 'slide_in' %}
-                  hold
-                {% endif %}
-            data-motion-delay="{{ forloop.index0 | times: 50 }}"
-            class="collection-item grid-custom-item {% if scroll_animation != 'none' and scroll_animation != null %} scroll-trigger {{ scroll_animation }} {% endif %} {{ settings.hover_effect }}"
+          <div
+            class="collection-item grid-custom-item {{ settings.hover_effect }}"
             {{ block.shopify_attributes }}
-            {%- if scroll_animation != 'none' -%}
-              style="--animation-order: {{  forloop.index }};"
-            {%- endif -%}
           >
-          {% render 'collection-item',
-            card_collection: block_st.collection,
-            section: section,
-            block: block,
-            collection_information_position: collection_information_position,
-            design: design
-          %}
-        </motion-element>
+            {% render 'collection-item',
+              card_collection: block_st.collection,
+              section: section,
+              block: block,
+              collection_information_position: collection_information_position,
+              design: design
+            %}
+          </div>
         {% endfor %}
       </grid-custom>
-
       {% if section_st.items_per_row_mobile > 1 and section_st.items_per_row_mobile < 2 and carousel_on_mobile %}
         </div>
       {% endif %}
@@ -436,6 +413,7 @@
   "presets": [
     {
       "name": "t:sections.collection-packery.name",
+      "category": "t:categories.collection",
       "blocks": [
         {
           "type": "collection"

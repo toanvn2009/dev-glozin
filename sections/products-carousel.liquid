@@ -175,16 +175,11 @@
           or carousel_pagination == 'show_dots_on_mobile'
           or carousel_pagination == 'show_progress_bar'
         -%}
-      <motion-element
-        data-motion="fade-up-sm"
-        {% if scroll_animation != 'slide_in' %}
-          hold
-        {% endif %}
-        data-motion-delay="150"
-        class="swiper-pagination  flex flex-wrap  {% if scroll_animation == 'slide_in' %} slide_in scroll-trigger {% endif %}   px-15 lh-1 bottom-30 {% if carousel_pagination == 'show_dots_on_mobile' %} hidden-md{% endif %} justify-content-center{% if section_st.content_below_image %} absolute-md-impo{% endif %}"
+      <div
+        class="swiper-pagination  flex flex-wrap px-15 lh-1 bottom-30 {% if carousel_pagination == 'show_dots_on_mobile' %} hidden-md{% endif %} justify-content-center{% if section_st.content_below_image %} absolute-md-impo{% endif %}"
         style="--swiper-pagination-bottom: 3rem;--swiper-pagination-position: static;z-index: 2"
       >   
-      </motion-element>
+      </div>
         {% endif %}
       </slide-section>
       {% if show_view_all_button and section_st.header_alignment == 'center' %}
@@ -243,16 +238,11 @@
           or carousel_pagination == 'show_dots_on_mobile'
           or carousel_pagination == 'show_progress_bar'
         -%}
-      <motion-element
-        data-motion="fade-up-sm"
-        {% if scroll_animation != 'slide_in' %}
-          hold
-        {% endif %}
-        data-motion-delay="150"
-        class="swiper-pagination  flex flex-wrap  {% if scroll_animation == 'slide_in' %} slide_in scroll-trigger {% endif %}   px-15 lh-1 bottom-30 {% if carousel_pagination == 'show_dots_on_mobile' %} hidden-md{% endif %} justify-content-center{% if section_st.content_below_image %} absolute-md-impo{% endif %}"
+      <div
+        class="swiper-pagination  flex flex-wrap px-15 lh-1 bottom-30 {% if carousel_pagination == 'show_dots_on_mobile' %} hidden-md{% endif %} justify-content-center{% if section_st.content_below_image %} absolute-md-impo{% endif %}"
         style="--swiper-pagination-bottom: 3rem;--swiper-pagination-position: static;z-index: 2"
       >   
-      </motion-element>
+      </div>
         {% endif %}
       </slide-section>
     {% endif %}
@@ -676,7 +666,8 @@
   ],
   "presets": [
     {
-      "name": "t:sections.products-carousel.name"
+      "name": "t:sections.products-carousel.name",
+      "category": "t:categories.product"
     }
   ]
 }

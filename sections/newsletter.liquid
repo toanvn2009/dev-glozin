@@ -17,6 +17,7 @@
   assign header_alignment = section_st.header_alignment
   assign form_layout = section_st.form_layout
   assign scroll_animation = settings.scroll_animation
+  assign animate_delay = 0
 -%}
 {%- capture style -%}
   --section-pt: {{ section_st.padding_top }}; --section-pb: {{ section_st.padding_bottom }};--max-width: 60rem;
@@ -57,56 +58,43 @@
           <div class="section__header text-{{ section_st.header_alignment }}{% if form_layout != 'horizontal' %} mb-30{% if section_st.section_width == 'full_width' %} px-20{% endif %}{% endif %}">
             {%- if section_st.heading != blank -%}
               <motion-element
-                data-motion="fade-up-lg"
-                data-motion-delay="50"         
-                {% if scroll_animation != 'slide_in' %}
+                data-motion="{{ scroll_animation }}"
+                data-motion-delay="{{ animate_delay }}"
+                {% if scroll_animation == 'none' %}
                   hold
                 {% endif %}
-                class="block  {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %}"
-                style="
-                {%- if scroll_animation != 'none' -%}
-                  --animation-order: 0;
-                {% endif %}
-              "
+                class="block"
               >
-              <h2
-                class="section__header-heading heading-letter-spacing  {{ header_size  }} mt-0{% if section_st.description != blank %} mb-10{% else %} mb-0{% endif %}"
-              >
-                {{ section_st.heading }}
-              </h2>
-            </motion-element>
+                <h2
+                  class="section__header-heading heading-letter-spacing  {{ header_size  }} mt-0{% if section_st.description != blank %} mb-10{% else %} mb-0{% endif %}"
+                >
+                  {{ section.settings.heading }}
+                </h2>
+              </motion-element>
             {% endif %}
             {%- if section_st.description != blank -%}
+              {%- assign animate_delay = animate_delay | plus: 50 -%}
               <motion-element
-                data-motion="fade-up-lg"
-                data-motion-delay="150"
-                {% if scroll_animation != 'slide_in' %}
+                data-motion="{{ scroll_animation }}"
+                data-motion-delay="{{ animate_delay }}"
+                {% if scroll_animation == 'none' %}
                   hold
                 {% endif %}
-                class="section__header-des block {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %} rich__text-m0"
-                style="
-                  {%- if scroll_animation != 'none' -%}
-                    --animation-order: 1
-                  {% endif %}
-                "
+                class="section__header-des block rich__text-m0"
               >
-                {{ section_st.description }}
+                {{ section.settings.description }}
               </motion-element>
             {% endif %}
           </div>
         {% endif %}
-        <motion-element 
-          data-motion="fade-up-lg"
-          data-motion-delay="150"
-          {% if scroll_animation != 'slide_in' %}
+        {%- assign animate_delay = animate_delay | plus: 50 -%}
+        <motion-element
+          data-motion="{{ scroll_animation }}"
+          data-motion-delay="{{ animate_delay }}"
+          {% if scroll_animation == 'none' %}
             hold
           {% endif %}
-          class="subcribe-submit {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %}  {% if form_layout == 'horizontal' %} flex-grow{% else %} max-w-custom mx-auto{% endif %} flex flex-column text-{{ header_alignment }} justify-content-{{ header_alignment }}"
-          style="
-            {%- if scroll_animation != 'none' -%}
-              --animation-order: 1
-            {% endif %}
-          "
+          class="subcribe-submit {% if form_layout == 'horizontal' %} flex-grow{% else %} max-w-custom mx-auto{% endif %} flex flex-column text-{{ header_alignment }} justify-content-{{ header_alignment }}"
         >
           {%- form 'customer', class: 'subscribe-form flex justify-content-inherit' -%}
             <input type="hidden" name="contact[tags]" value="newsletter">
@@ -134,7 +122,7 @@
             </div>
           {%- endform -%}
           {%- if section_st.note != blank -%}
-            <div class="sec_newsletter_note newsletter-note mt-12 mx-auto fs-12">{{ section_st.note }}</div>
+            <div class="sec_newsletter_note newsletter-note mt-12 mx-auto fs-12">{{ section.settings.note }}</div>
           {% endif %}
         </motion-element>
       </div>
@@ -336,7 +324,8 @@
   ],
   "presets": [
     {
-      "name": "t:sections.newsletters.name"
+      "name": "t:sections.newsletters.name",
+      "category": "t:categories.form"
     }
   ]
 }

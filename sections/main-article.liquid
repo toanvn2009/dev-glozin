@@ -277,16 +277,11 @@
                         </div>
                       {%- endfor -%}
                     </div>
-                    <motion-element
-                      data-motion="fade-up-sm"
-                      {% if scroll_animation != 'slide_in' %}
-                        hold
-                      {% endif %}
-                      data-motion-delay="150"
-                      class="swiper-pagination  flex flex-wrap  {% if scroll_animation == 'slide_in' %} slide_in scroll-trigger {% endif %}   px-15 lh-1 bottom-30 {% if carousel_pagination == 'show_dots_on_mobile' %} hidden-md{% endif %} justify-content-center{% if section_st.content_below_image %} absolute-md-impo{% endif %}"
+                    <div
+                      class="swiper-pagination  flex flex-wrap px-15 lh-1 bottom-30 justify-content-center{% if section_st.content_below_image %} absolute-md-impo{% endif %}"
                       style="--swiper-pagination-bottom: 3rem;--swiper-pagination-position: static;z-index: 2"
                     >   
-                    </motion-element>
+                    </div>
                   </slide-section>
                 </div>
               </div>
@@ -364,9 +359,7 @@
                       {{ 'blogs.article.comment_form_title' | t }}
                     </h2>
                     <div
-                      class="section__header-des rich__text-m0 scroll-trigger fade_in"
-                      style="--animation-order: 1;"
-                      animation-end=""
+                      class="section__header-des rich__text-m0"
                     >
                       <p>{{ 'blogs.article.info' | t }}</p>
                     </div>

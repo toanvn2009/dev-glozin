@@ -26,6 +26,7 @@
   assign show_arrow = section_st.show_arrow
   assign carousel_pagination = section_st.carousel_pagination
   assign infinite = section_st.infinite
+  assign show_view_all_button = section_st.show_view_all_button
   assign autoplay = section_st.autoplay
   assign autorotate_speed = section_st.autorotate_speed
   assign reveal = section_st.reveal
@@ -34,6 +35,7 @@
   assign button_label = section_st.button_label
   assign items_per_row_mobile = section_st.items_per_row_mobile
   assign scroll_animation = settings.scroll_animation
+  assign animate_delay = 0
 -%}
 {% liquid
   assign enable_rtl = settings.rtl
@@ -55,17 +57,6 @@
 {% if column_gap < 15 %}--col-gap: {{ column_gap }}px;{% else %}--col-gap: 15px;--col-gap-desktop: {{  column_gap }}px;{% endif %}--repeat: {{ items_to_show }}; --col-mobile: {{ items_per_row_mobile }}
 {%- endcapture -%}
 {%- style -%}
-  .collection-tab__tab-content {
-    transform: translateY(30px);
-    -webkit-transform: translateY(30px);
-  }
-  .collection-tab__tab-content.active {
-    opacity: 1;
-    visibility: visible;
-    position: relative;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
   .select-collection-tab {
     border-bottom: 2px solid var(--color-heading);
   }
@@ -80,37 +71,31 @@
         <div class="section__header mb-30 mb-sm-20 text-{{ section_st.header_alignment }}{% if section_st.section_width == 'full_width' %} px-20{% endif %}{% if button_label != blank %} flex gap-15 flex-wrap justify-content-{{ section_st.header_alignment }}{% if section_st.header_alignment == 'right' %} flex-row-reverse{% endif %}{% endif %}">
           {%- if section_st.heading != blank -%}
             <motion-element
-              data-motion="fade-up-lg"
-              data-motion-delay="50"
-              {% if scroll_animation != 'slide_in' %}
+              data-motion="{{ scroll_animation }}"
+              data-motion-delay="{{ animate_delay }}"
+              {% if scroll_animation == 'none' %}
                 hold
               {% endif %}
-              class="block  {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %}"
-              style="
-                {%- if scroll_animation != 'none' -%}
-                  --animation-order: 0;
-                {% endif %}
-              "
+              class="block"
             >
-            <h2
-              class="section__header-heading heading-letter-spacing   {{ header_size  }} mt-0{% if section_st.description != blank %} mb-10{% else %} mb-0{% endif %}"
-              style="{%- if scroll_animation != 'none' -%}--animation-order: 0{% endif %}"
-            >
-              {{ section_st.heading }}
-            </h2>
-          </motion-element>
+              <h2
+                class="section__header-heading heading-letter-spacing   {{ header_size  }} mt-0{% if section_st.description != blank %} mb-10{% else %} mb-0{% endif %}"
+              >
+                {{ section.settings.heading }}
+              </h2>
+            </motion-element>
           {% endif %}
           {%- if section_st.description != blank -%}
+            {% assign animate_delay = animate_delay | plus: 50 %}
             <motion-element
-              data-motion="fade-up-lg"
-              data-motion-delay="150"
-              {% if scroll_animation != 'slide_in' %}
+              data-motion="{{ scroll_animation }}"
+              data-motion-delay="{{ animate_delay }}"
+              {% if scroll_animation == 'none' %}
                 hold
               {% endif %}
-              class="section__header-des block  rich__text-m0"
-              style="{%- if scroll_animation != 'none' -%}--animation-order: 1{% endif %}"
+              class="section__header-des block rich__text-m0"
             >
-              {{ section_st.description }}
+              {{ section.settings.description }}
             </motion-element>
           {% endif %}
         </div>
@@ -118,86 +103,148 @@
     {% endif %}
     {% if section.blocks.size > 0 %}
       <tab-items data-type="{{ tab_header_style }}">
-        <motion-element
-          data-motion="fade-up-lg"
-          {% if scroll_animation != 'slide_in' %}
-            hold
-          {% endif %}
-           data-motion-delay="150"
-          class="text-{{ section_st.header_alignment }} block {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %} section__header mb-40 mb-sm-30{% if section_st.section_width == 'full_width' %} px-20{% endif %}"
-          style="{%- if scroll_animation != 'none' -%}--animation-order: 2{% endif %}"
+        <div
+          class="{% if section_st.tab_header_postion == 'horizontal_header' %}flex align-center flex-wrap tab-inner justify-between{% endif %} text-{{ section_st.header_alignment }} block section__header mb-40 mb-sm-30{% if section_st.section_width == 'full_width' %} px-20{% endif %}{% if section_st.header_alignment == 'center' and section_st.tab_header_postion == "horizontal_header" %} flex-column{% endif %} {% if section_st.header_alignment == 'left' and section_st.tab_header_postion == "horizontal_header" %} flex-row-reverse{% endif %}{% if section_st.show_view_all_button and section_st.tab_header_postion == 'default' and section_st.header_alignment != 'center' %} flex justify-between{% endif %}{% if section_st.header_alignment == 'left' and section_st.tab_header_postion == "default" %} flex-row-reverse{% endif %}"
         >
+          {% if section_st.show_view_all_button
+            and section_st.tab_header_postion == 'default'
+            and section_st.header_alignment != 'center'
+          %}
+            <div>
+          {% endif %}
           {%- if heading != blank or description != blank -%}
             <div class="text-{{ section_st.header_alignment }}">
               {%- if section_st.heading != blank -%}
-                <h2 class="section__header-heading heading-letter-spacing {{ header_size  }} mt-0{% if section_st.description != blank %} mb-10{% else %} mb-0{% endif %}">
-                  {{ section_st.heading }}
-                </h2>
+                <motion-element
+                  data-motion="{{ scroll_animation }}"
+                  data-motion-delay="{{ animate_delay }}"
+                  {% if scroll_animation == 'none' %}
+                    hold
+                  {% endif %}
+                  class="block"
+                >
+                  <h2 class="section__header-heading heading-letter-spacing {{ header_size  }} mt-0{% if section_st.description != blank %} mb-10{% else %} mb-0{% endif %}{% if show_view_all_button and section_st.header_alignment == "left" and section_st.tab_header_postion == 'default'%} text-right{% endif %}{% if show_view_all_button and section_st.header_alignment == "right" and section_st.tab_header_postion == 'default'%} text-left{% endif %}">
+                    {{ section.settings.heading }}
+                  </h2>
+                </motion-element>
               {% endif %}
               {%- if section_st.description != blank -%}
-                <div class="section__header-des rich__text-m0">
-                  {{ section_st.description }}
-                </div>
+                <motion-element
+                  data-motion="{{ scroll_animation }}"
+                  data-motion-delay="{{ animate_delay }}"
+                  {% if scroll_animation == 'none' %}
+                    hold
+                  {% endif %}
+                  class="section__header-des rich__text-m0{% if show_view_all_button and section_st.header_alignment == "right" %} flex justify-left{% endif %}{% if show_view_all_button and section_st.header_alignment == "left" %} flex justify-right{% endif %}"
+                >
+                  {{ section.settings.description }}
+                </motion-element>
               {% endif %}
             </div>
           {% endif %}
-          <div class="mt-30 inline-flex align-center max-w-100 {% if tab_header_style == 'horizontal' %} collection-tab__ta overflow-auto{% else %} collection-tab__select align-center gap-10{% endif %}{% if tab_header_style != 'horizontal' %} h4 my-0{% endif %}{% if tab_header_style == 'horizontal' and horizontal_tab_style == 'underline' %} border-bottom{% endif %}{% if tab_header_style == 'horizontal' and horizontal_tab_style != 'underline' %} gap-15{% endif %}">
-            {% if tab_header_style != 'horizontal' %}
-              <span>{{ 'sections.collection_tab.tab_header_select' | t }} </span>
-              <div class="select-collection-tab relative select-custom">
-                {% for block in section.blocks %}
-                  {% liquid
-                    assign block_st = block.settings
-                    assign collection_title = block_st.collection.title
-                    assign collection_title = block_st.collection_title | default: collection_title
-                  %}
-                  {% if forloop.first == true %}
-                    <div class="select__selected select__selected_title inline-flex align-center gap-10 pointer">
-                      {{ collection_title }}
-                      <svg class="icon-down transition active-rotated" width="10" height="6">
-                        <use href="#icon-arrow-down"></use>
-                      </svg>
-                    </div>
-                  {% endif %}
-                {% endfor %}
+          <div class="inline-flex flex-wrap gap-15 justify-center align-center{% if section_st.header_alignment == 'left' and section_st.tab_header_postion == "horizontal_header" %} flex-row-reverse{% endif %}">
+            <div class="mt-30 inline-flex flex-wrap justify-center align-center max-w-100{% if tab_header_style == 'horizontal' %} collection-tab__ta overflow-auto{% else %} collection-tab__select align-center gap-10{% endif %}{% if tab_header_style != 'horizontal' %} h4 my-0{% endif %}{% if tab_header_style == 'horizontal' and horizontal_tab_style == 'underline' %} border-bottom{% endif %}{% if tab_header_style == 'horizontal' and horizontal_tab_style != 'underline' %} gap-15{% endif %} collection-tab-style_{{ section_st.horizontal_tab_style }} collection-tab-postion_{{ section_st.tab_header_postion }}">
+              {% if tab_header_style != 'horizontal' %}
+                <span>{{ 'sections.collection_tab.tab_header_select' | t }} </span>
+                <div class="select-collection-tab relative select-custom">
+                  {% for block in section.blocks %}
+                    {% liquid
+                      assign block_st = block.settings
+                      assign collection_title = block_st.collection.title
+                      assign collection_title = block_st.collection_title | default: collection_title
+                    %}
+                    {% if forloop.first == true %}
+                      <div class="select__selected select__selected_title inline-flex align-center gap-10 pointer">
+                        {{ collection_title }}
+                        <svg class="icon-down transition active-rotated" width="10" height="6">
+                          <use href="#icon-arrow-down"></use>
+                        </svg>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
 
-                <div class="select-custom__content invisible transition-short top-100 absolute shadow list-none z-2 py-20 px-25 color-default{% if enable_rtl %} right-0{% else %} left-0{% endif %}">
-                  <ul class="list-none p-0 my-0">
-            {% endif %}
-            {% for block in section.blocks %}
-              {% liquid
-                assign block_st = block.settings
-                assign collection_title = block_st.collection.title
-                assign collection_title = block_st.collection_title | default: collection_title
-              %}
-
-              {% if tab_header_style == 'horizontal' -%}
-                <div
-                  data-block-id="{{ block.id }}"
-                  class="collection-tab__tab-item whitespace-nowrap pointer px-20 pb-8 transition text-center heading-style{% if horizontal_tab_style == 'underline' %} fs-16 border-animation{% else %} grey-bg btn-hover btn-rounded px-20 py-10 btn-active{% endif %}{% if forloop.first %} active{% endif %}"
-                  {{ block.shopify_attributes }}
-                  style="--height: 2px;"
-                >
-                  {% if collection_title != blank %}
-                    {{ collection_title }}
-                  {% else %}
-                    {{- 'onboarding.collection_title' | t -}}
-                  {% endif %}
-                </div>
-              {%- else %}
-                <li class="py-5 hover-heading-color pointer collection_title_input" data-id="{{ block.id }}">
-                  {{ collection_title }}
-                </li>
+                  <div class="select-custom__content invisible transition-short top-100 absolute shadow list-none z-2 py-20 px-25 color-default{% if enable_rtl %} right-0{% else %} left-0{% endif %}">
+                    <ul class="list-none p-0 my-0">
               {% endif %}
-            {% endfor %}
-            {% if tab_header_style != 'horizontal' %}
-              </ul>
-              </div>
-              </div>
+              {% for block in section.blocks %}
+                {% liquid
+                  assign block_st = block.settings
+                  assign collection = collections[block_st.collection]
+                  assign collection_title = block_st.collection_title | default: collection.title
+                  assign collection_url = collection.url | default: '#'
+                %}
+
+                {% if tab_header_style == 'horizontal' -%}
+                  <div
+                    data-block-id="{{ block.id }}"
+                    data-collection-url="{{ collection_url }}"
+                    class="collection-tab__tab-item whitespace-nowrap pointer px-20 pb-8 transition text-center heading-style{% if horizontal_tab_style == 'underline' %} fs-16 border-animation{% else %} grey-bg btn-hover btn-rounded px-20 py-10{% endif %}{% if forloop.first %} active{% if horizontal_tab_style != 'underline' %} btn-active{% endif %}{% endif %}"
+                    {{ block.shopify_attributes }}
+                    data-style="{{ horizontal_tab_style }}"
+                    style="--height: 2px;"
+                  >
+                    {% if collection_title != blank %}
+                      {{ collection_title }}
+                    {% else %}
+                      {{- 'onboarding.collection_title' | t -}}
+                    {% endif %}
+                  </div>
+                {%- else %}
+                  <li
+                    class="py-5 hover-heading-color pointer collection_title_input"
+                    data-id="{{ block.id }}"
+                    data-collection-url="{{ collection_url }}"
+                  >
+                    {{ collection_title }}
+                  </li>
+                {% endif %}
+              {% endfor %}
+              {% if tab_header_style != 'horizontal' %}
+                </ul>
+                </div>
+                </div>
+              {% endif %}
+            </div>
+            {% if show_view_all_button
+              and section_st.header_alignment != 'center'
+              and section_st.tab_header_postion == 'horizontal_header'
+            %}
+              <a
+                class="btn_view-all no-underline inline-flex btn-link align-center gap-5"
+                data-role="view-all"
+                href="#"
+              >
+                {{ 'general.view_all' | t }}
+                <svg width="12" height="10" fill="none">
+                  <use href="#icon-view-all"></use>
+                </svg>
+              </a>
             {% endif %}
           </div>
-        </motion-element>
-        <div class="relative tab-content">
+
+          {% if section_st.show_view_all_button
+            and section_st.tab_header_postion == 'default'
+            and section_st.header_alignment != 'center'
+          %}
+            </div>
+          {% endif %}
+          {% if show_view_all_button
+            and section_st.header_alignment != 'center'
+            and section_st.tab_header_postion == 'default'
+          %}
+            <a
+              class="btn_view-all h-content no-underline inline-flex btn-link"
+              data-role="view-all"
+              href="#"
+            >
+              {{ 'general.view_all' | t }}
+              <svg width="12" height="10" fill="none">
+                <use href="#icon-view-all"></use>
+              </svg>
+            </a>
+          {% endif %}
+        </div>
+        <div class="tab-content">
           {% if display_mode == 'grid' %}
             {% for block in section.blocks %}
               {% liquid
@@ -221,8 +268,9 @@
                 {% if show_load_more_button == true %}
                   {%- paginate collection.products by limit_products_paginate -%}
                     <div
-                      class="collection-tab__tab-content collection-tab-{{ block.id }} absolute invisible inset-0 transition pointer-none{% if forloop.first %} active{% endif %}"
+                      class="collection-tab__tab-content collection-tab-{{ block.id }} {% if forloop.first %} active{% else %} hidden{% endif %}"
                       data-block-id="{{ block.id }}"
+                      data-collection-url="{{ collection.url }}"
                     >
                       {% if section_st.items_per_row_mobile > 1
                         and section_st.items_per_row_mobile < 2
@@ -300,8 +348,9 @@
                   {% endpaginate %}
                 {% else %}
                   <div
-                    class="collection-tab__tab-content absolute invisible inset-0 transition pointer-none{% if forloop.first %} active{% endif %}"
+                    class="collection-tab__tab-content{% if forloop.first %} active{% else %} hidden{% endif %}"
                     data-block-id="{{ block.id }}"
+                    data-collection-url="{{ collection.url }}"
                   >
                     {% if section_st.items_per_row_mobile > 1
                       and section_st.items_per_row_mobile < 2
@@ -349,8 +398,9 @@
                 {% endif %}
               {% else -%}
                 <div
-                  class="collection-tab__tab-content absolute invisible inset-0 transition pointer-none{% if forloop.first %} active{% endif %}"
+                  class="collection-tab__tab-content{% if forloop.first %} active{% else %} hidden{% endif %}"
                   data-block-id="{{ block.id }}"
+                  data-collection-url="#"
                 >
                   {% if section_st.items_per_row_mobile > 1
                     and section_st.items_per_row_mobile < 2
@@ -407,8 +457,9 @@
               {% if block_st.collection.products.size > 0 %}
                 {%- paginate block_st.collection.products by all_product_visible -%}
                   <div
-                    class="collection-tab__tab-content absolute invisible inset-0 transition pointer-none{% if forloop.first %} active{% endif %}"
+                    class="collection-tab__tab-content{% if forloop.first %} active{% else %} hidden{% endif %}"
                     data-block-id="{{ block.id }}"
+                    data-collection-url="{{ block_st.collection.url }}"
                   >
                     {% if section_st.items_per_row_mobile > 1 and section_st.items_per_row_mobile < 2 %}
                       <div class="free-scroll">
@@ -457,16 +508,11 @@
                         or carousel_pagination == 'show_dots_on_mobile'
                         or carousel_pagination == 'show_progress_bar'
                       -%}
-                      <motion-element
-                        data-motion="fade-up-sm"
-                        {% if scroll_animation != 'slide_in' %}
-                          hold
-                        {% endif %}
-                        data-motion-delay="150"
-                        class="swiper-pagination  flex flex-wrap  {% if scroll_animation == 'slide_in' %} slide_in scroll-trigger {% endif %}   px-15 lh-1 bottom-30 {% if carousel_pagination == 'show_dots_on_mobile' %} hidden-md{% endif %} justify-content-center{% if section_st.content_below_image %} absolute-md-impo{% endif %}"
-                        style="--swiper-pagination-bottom: 3rem;--swiper-pagination-position: static;z-index: 2"
-                      >   
-                      </motion-element>
+                        <div
+                          class="swiper-pagination  flex flex-wrap px-15 lh-1 bottom-30 {% if carousel_pagination == 'show_dots_on_mobile' %} hidden-md{% endif %} justify-content-center{% if section_st.content_below_image %} absolute-md-impo{% endif %}"
+                          style="--swiper-pagination-bottom: 3rem;--swiper-pagination-position: static;z-index: 2"
+                        >
+                        </div>
                       {% endif %}
                     </slide-section>
                     {% if section_st.items_per_row_mobile > 1 and section_st.items_per_row_mobile < 2 %}
@@ -476,8 +522,9 @@
                 {% endpaginate %}
               {% else -%}
                 <div
-                  class="collection-tab__tab-content absolute invisible inset-0 transition pointer-none{% if forloop.first %} active{% endif %}"
+                  class="collection-tab__tab-content {% if forloop.first %} active{% else %} hidden{% endif %}"
                   data-block-id="{{ block.id }}"
+                  data-collection-url="#"
                 >
                   {% if section_st.items_per_row_mobile > 1
                     and section_st.items_per_row_mobile < 2
@@ -525,16 +572,11 @@
                       or carousel_pagination == 'show_dots_on_mobile'
                       or carousel_pagination == 'show_progress_bar'
                     -%}
-                    <motion-element
-                      data-motion="fade-up-sm"
-                      {% if scroll_animation != 'slide_in' %}
-                        hold
-                      {% endif %}
-                      data-motion-delay="150"
-                      class="swiper-pagination  flex flex-wrap  {% if scroll_animation == 'slide_in' %} slide_in scroll-trigger {% endif %}   px-15 lh-1 bottom-30 {% if carousel_pagination == 'show_dots_on_mobile' %} hidden-md{% endif %} justify-content-center{% if section_st.content_below_image %} absolute-md-impo{% endif %}"
-                      style="--swiper-pagination-bottom: 3rem;--swiper-pagination-position: static;z-index: 2"
-                    >   
-                    </motion-element>
+                      <div
+                        class="swiper-pagination  flex flex-wrap px-15 lh-1 bottom-30 {% if carousel_pagination == 'show_dots_on_mobile' %} hidden-md{% endif %} justify-content-center{% if section_st.content_below_image %} absolute-md-impo{% endif %}"
+                        style="--swiper-pagination-bottom: 3rem;--swiper-pagination-position: static;z-index: 2"
+                      >
+                      </div>
                     {% endif %}
                   </slide-section>
                   {% if section_st.items_per_row_mobile > 1
@@ -548,6 +590,17 @@
             {% endfor %}
           {% endif %}
         </div>
+        {% if show_view_all_button %}
+          <div class="text-center mt-30{% if section_st.header_alignment != 'center'%} hidden{% endif %}">
+            <a
+              class="btn_view-all no-underline inline-flex btn-primary"
+              data-role="view-all"
+              href="#"
+            >
+              {{ 'general.view_all' | t }}
+            </a>
+          </div>
+        {% endif %}
       </tab-items>
     {% endif %}
   </div>
@@ -604,6 +657,11 @@
       "type": "richtext",
       "id": "description",
       "label": "t:sections.all.section_header.description.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all_button",
+      "label": "t:sections.all.section_header.show_view_all_button.label"
     },
     {
       "type": "select",
@@ -680,6 +738,23 @@
         }
       ],
       "default": "fill"
+    },
+    {
+      "type": "select",
+      "id": "tab_header_postion",
+      "label": "t:sections.collection-tab.settings.collection.tab_header_postion.label",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:sections.collection-tab.settings.collection.tab_header_postion.default"
+        },
+        {
+          "value": "horizontal_header",
+          "label": "t:sections.collection-tab.settings.collection.tab_header_postion.horizontal_header"
+        }
+      ],
+      "default": "default",
+      "visible_if": "{{ section.settings.tab_header_style == 'horizontal' and section.settings.header_alignment != 'center' }}"
     },
     {
       "type": "select",
@@ -886,6 +961,7 @@
   "presets": [
     {
       "name": "t:sections.collection-tab.name",
+      "category": "t:categories.collection",
       "blocks": [
         {
           "type": "collection"

@@ -9,7 +9,7 @@
   assign colunm_mobile = colunm_mobile | default: 1
   assign padding = padding | default: 0
   assign class = class
-  if type == 'product'
+  if type == 'product' and lazy_product != false
     assign class = class | append: ' bls-loaded-image bls-loading-image'
   endif
   assign sizes = sizes
@@ -105,20 +105,17 @@
     , calc( ({{ section_width_mobile }} - {{ padding_mobile }} * {{ colunm_mobile | minus: 1 }} ) * {{ divide_colunm_mobile }})
   {%- endcapture -%}
 {% endif %}
-{% if no_animate == blank and secondary_image == false and scroll_animation == 'slide_in' and settings.zoom_image ==true %}
+{% if no_animate == blank and secondary_image == false and settings.zoom_image == true %}
   <motion-element
     data-motion="{{ custom_zoom | default: zoom_out }}"
     data-image
-    {% if hold == false or scroll_animation != 'slide_in' %}
+    {% if hold == false or scroll_animation == 'none' %}
       hold
     {% endif %}
     {% if delay != blank %}
       data-motion-delay="{{ delay}}"
     {% endif %}
     class="block {{ class | remove: 'drift-trigger' }} motion-image h-full w-full"
-    {% if first == true or section.index == 1 %}
-      style="transform: scale(1.2)"
-    {% endif %}
   >
 {% endif %}
 {% if image_mobile != blank %}
@@ -159,9 +156,10 @@
       alt: image_alt
   -}}
 {% endif %}
-{% if no_animate == blank and secondary_image == false and scroll_animation == 'slide_in' and settings.zoom_image ==true %}
+{% if no_animate == blank and secondary_image == false and settings.zoom_image == true %}
   </motion-element>
 {% endif %}
+
 
 {% if type == 'product' %}
   {% unless class contains 'secondary-image' %}

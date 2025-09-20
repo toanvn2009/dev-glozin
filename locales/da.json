@@ -8,7 +8,8 @@
     },
     "error": "Fejl",
     "close": "Tæt",
-    "complementary_products": "Supplerende produkter"
+    "complementary_products": "Supplerende produkter",
+    "promotion_banner": "Kampagnebanner"
   },
   "page_sale": {
     "use_code": "Brug kode:"
@@ -31,6 +32,12 @@
     }
   },
   "general": {
+    "content": {
+      "discount_code_error": "Rabatkoden kan ikke anvendes på din indkøbskurv",
+      "discount_code_remove": "Rabatkoden er blevet fjernet.",
+      "discount_code_applied": "Rabatkoden er blevet anvendt.",
+      "discount_code_already": "Rabatkoden er allerede anvendt"
+    },
     "outfit-idea": {
       "view_products": "Se produkter",
       "shop_the_look": "Shop looket"
@@ -43,7 +50,8 @@
       "login_form_error": "Forkert adgangskode!",
       "login_form_submit": "Indtast",
       "admin_link_html": "Er du butiksejer? <a href=\"/admin\" class=\"link underlined-link\">Log ind her</a>",
-      "powered_by_shopify_html": "Denne butik vil blive drevet af {{ shopify }}"
+      "powered_by_shopify_html": "Denne butik vil blive drevet af {{ shopify }}",
+      "coming_soon": "Kommer snart"
     },
     "contact": {
       "success": "Tak, fordi du henvendte dig! "
@@ -183,6 +191,7 @@
       "dot": "Prikker",
       "plus": "Plus"
     },
+    "image_alt_default": "Billede",
     "banner": "Banner",
     "view_all": "Se alle",
     "policies_html": "Jeg er enig i <a href=\"/policies/privacy-policy\" target=\"_blank\" title=\"Privacy Policy\"><strong>Privatlivspolitik</strong></a> af hjemmesiden."

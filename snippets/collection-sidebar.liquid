@@ -36,7 +36,7 @@
 %}
 <div
   id="CollectionSidebar"
-  class="collection-filter transition-popup {{ filter_layout }} w-full{% if enable_filtering and filter_layout == 'drawer' %} color-default bls__drawer fixed z-16 inset-y-0 h-full{% if enable_rtl %} left right-0{% else %} right left-0{% endif %}{% else %} fixed static-1025 z-3 visible-1025 inset-0{% endif %}{% if enable_filtering and filter_layout == 'vertical' %} col-1025-w-custom{% endif %}"
+  class="custom-scrollbar collection-filter transition-popup {{ filter_layout }} w-full{% if enable_filtering and filter_layout == 'drawer' %} color-default bls__drawer fixed z-16 inset-y-0 h-full{% if enable_rtl %} left right-0{% else %} right left-0{% endif %}{% else %} fixed static-1025 z-3 visible-1025 inset-0{% endif %}{% if enable_filtering and filter_layout == 'vertical' %} col-1025-w-custom{% endif %}"
   style="--drawer-width: 33rem"
 >
   <div class="collection-sidebar{% if enable_filtering and filter_layout == 'drawer' %} overflow-auto custom-scrollbar{% endif %}{% if enable_filtering and filter_layout == 'vertical' %} sticky-1025 top-30{% endif %}{% if enable_filtering and filter_layout == 'horizontal' %} horizontal-filter mb-1025-25 flex-1025 flex-wrap gap-10{% endif %} {{ sidebar_canvas }}">
@@ -276,12 +276,13 @@
                           class="filter-form"
                         >
                           {% liquid
-                            assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CZK,DKK,EUR,HRK,HUF,IDR,ISK,MZN,NOK,PLN,RON,RUB,SEK,TRY,UYU,VES,VND' | split: ','
+                            assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CZK,DKK,EUR,HRK,HUF,IDR,ISK,MZN,NOK,PLN,RON,RUB,SEK,UYU,VES,VND' | split: ','
                             assign uses_comma_decimals = false
                             if currencies_using_comma_decimals contains cart.currency.iso_code
                               assign uses_comma_decimals = true
                             endif
                           %}
+                          {{ cart.currency.iso_code }}
                           <div class="filter-price">
                             <price-range class="price-range flex gap-10 align-center">
                               <div class="field flex-1 relative">
@@ -496,7 +497,8 @@
                         template_enable_product_short_description: false,
                         template_enable_color_swatches: false,
                         type: 'list',
-                        sizes: '80px'
+                        sizes: '80px',
+                        lazy_product: false
                       %}
                     {%- endfor -%}
                   </div>

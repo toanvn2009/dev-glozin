@@ -77,273 +77,251 @@
             {%- liquid
               assign block_st = block.settings
             -%}
-              {%- case block.type -%}
-                {%- when 'newsletter' -%}
-                  <motion-element
-                    data-motion="fade-up-lg"
-                    {% if scroll_animation != 'slide_in' %}
-                      hold
-                    {% endif %}
-                    data-motion-delay="{{ forloop.index0 | times: 50 }}"
-                    class=" {% if scroll_animation == 'slide_in' %} opacity-0 {% endif %} footer-block w-full col-md-w-custom-50 col-md-w-custom{% if block.type == 'store_info' %} pb-30 border-bottom border-bottom-md-0{% else %} mb-0 mb-md-20 border-bottom border-bottom-md-0{% endif %} {{ block.type }}"
-                    style="--col-width: {{ block_st.content_width }}; --menu-list: {{ menu_item }}"
-                    {{ block.shopify_attributes }}
-                  >
-                    <collapsible-block tabindex="0" class="footer-block mb-30 newsletter mb-50 my-md-0">
-                      <div class="newsletter-inner{% if block_st.content_width == '100%' %} text-center mx-auto{% endif %}">
-                        {%- if block_st.heading != blank or block_st.description != blank -%}
-                          {%- if block_st.heading != blank -%}
-                            <h3
-                              class="footer__block-heading collapsible-heading relative heading-letter-spacing fs-custom my-0 py-20 mb-md-5"
-                              style="--font-size: {{ section_st.footer_heading_size }}"
-                            >
-                              {{- block_st.heading | escape -}}
-                              <span class="open-children-toggle hidden-md absolute inset-0 flex flex-end">
-                                <span class="icon_plus-animation"> </span>
-                              </span>
-                            </h3>
-                          {% endif %}
-                        {% endif %}
-                        <div class="collapsible-content mb-30">
-                          {%- if block_st.description != blank -%}
-                            <div class="footer__block-description mb-23">
-                              {{ block_st.description }}
-                            </div>
-                          {% endif %}
-                          {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
-                            <input type="hidden" name="contact[tags]" value="newsletter">
-                            <div class="newsletter-form__field-wrapper">
-                              <div class="flex field mb-0 flex-nowrap align-center gap-10">
-                                <div class="flex-1 relative form-floating">
-                                  <input
-                                    id="NewsletterForm--{{ section.id }}"
-                                    type="email"
-                                    name="contact[email]"
-                                    class="field__input show-placeholder m-0 w-full pl-0 bg-transparent form-control"
-                                    value="{{ form.email }}"
-                                    aria-required="true"
-                                    autocapitalize="off"
-                                    autocomplete="email"
-                                    {% if form.errors %}
-                                      aria-invalid="true"
-                                      aria-describedby="ContactFooter-error"
-                                    {% elsif form.posted_successfully? %}
-                                      aria-describedby="ContactFooter-success"
-                                    {% endif %}
-                                    placeholder="{%- if block_st.email_placeholder != blank -%}{{ block_st.email_placeholder }} {%- else -%} {{ 'newsletter.label' | t }} {% endif %}"
-                                    required
-                                    pattern=".+\.[a-zA-Z]{2,6}"
-                                  >
-                                  <label for="NewsletterForm--{{ section.id }}">
-                                    {%- if block_st.email_placeholder != blank -%}
-                                      {{ block_st.email_placeholder }}
-                                    {%- else -%}
-                                      {{ 'newsletter.label' | t }}
-                                    {% endif %}
-                                  </label>
-                                </div>
-                                <button
-                                  type="submit"
-                                  class="btn-primary newsletter-form__button word-break"
-                                  name="commit"
-                                  id="Subscribe-{{ section.id }}"
-                                  aria-label="{%- if block_st.button_label != blank -%}{{ block_st.button_label }} {%- else -%} {{ 'subscribe.button_label' | t }} {% endif %}"
-                                >
-                                  {%- if block_st.button_label != blank -%}
-                                    {{ block_st.button_label }}
-                                  {%- else -%}
-                                    {{ 'newsletter.button_label' | t }}
-                                  {% endif %}
-                                </button>
-                              </div>
-                              {%- if form.errors -%}
-                                <div
-                                  class="newsletter-form__message mt-10 inline-flex align-center error form__message"
-                                  id="ContactFooter-error"
-                                >
-                                  {%- render 'icon-error' -%}
-                                  {{- form.errors.translated_fields.email | capitalize }}
-                                  {{ form.errors.messages.email -}}
-                                </div>
-                              {% endif %}
-                            </div>
-                            {%- if form.posted_successfully? -%}
-                              <div
-                                class="mt-10 newsletter-form__message--success success form__message inline-flex align-center"
-                                id="ContactFooter-success"
-                                tabindex="-1"
-                              >
-                                {%- render 'icon-success' -%}
-                                <span class="newsletter-form__message ml-5">{{- 'newsletter.success' | t }}</span>
-                              </div>
-                            {% endif %}
-                          {%- endform -%}
-                          {%- if block_st.note != blank -%}
-                            <div class="newsletter-note mt-15">{{ block_st.note }}</div>
-                          {% endif %}
-                          {%- liquid
-                            assign not_has_store_info = true
-                            for block in section.blocks
-                              if block.type == 'store_info'
-                                assign not_has_store_info = false
-                              endif
-                            endfor
-                          -%}
-                          {% if not_has_store_info %}
-                            {%- if section_st.show_social -%}
-                              <social-icon class="block mt-15">
-                                {% render 'social-icons' %}
-                              </social-icon>
-                            {% endif %}
-                          {% endif %}
-                        </div>
-                      </div>
-                    </collapsible-block>
-                  </motion-element>
-                {%- when 'link_list' -%}
-                  {%- if block_st.menu != blank -%}
-                    <motion-element
-                      data-motion="fade-up-lg"
-                      {% if scroll_animation != 'slide_in' %}
-                        hold
-                      {% endif %}
-                      data-motion-delay="{{ forloop.index0 | times: 50 }}"
-                      class=" {% if scroll_animation == 'slide_in' %} opacity-0 {% endif %} footer-block w-full col-md-w-custom-50 col-md-w-custom{% if block.type == 'store_info' %} pb-30 border-bottom border-bottom-md-0{% else %} mb-0 mb-md-20 border-bottom border-bottom-md-0{% endif %} {{ block.type }}"
-                      style="--col-width: {{ block_st.content_width }}; --menu-list: {{ menu_item }}"
-                      {{ block.shopify_attributes }}
-                    >
-                      <collapsible-block tabindex="0">
-                        {%- if block_st.menu != blank or block_st.heading != blank -%}
+            {%- case block.type -%}
+              {%- when 'newsletter' -%}
+                <div
+                  class="ooter-block w-full col-md-w-custom-50 col-md-w-custom{% if block.type == 'store_info' %} pb-30 border-bottom border-bottom-md-0{% else %} mb-0 mb-md-20 border-bottom border-bottom-md-0{% endif %} {{ block.type }}"
+                  style="--col-width: {{ block_st.content_width }}; --menu-list: {{ menu_item }}"
+                  {{ block.shopify_attributes }}
+                >
+                  <collapsible-block tabindex="0" class="footer-block mb-30 newsletter mb-50 my-md-0">
+                    <div class="newsletter-inner{% if block_st.content_width == '100%' %} text-center mx-auto{% endif %}">
+                      {%- if block_st.heading != blank or block_st.description != blank -%}
+                        {%- if block_st.heading != blank -%}
                           <h3
-                            class="footer__block-heading collapsible-heading heading-letter-spacing relative fs-custom my-0 py-20 mb-md-5"
+                            class="footer__block-heading collapsible-heading relative heading-letter-spacing fs-custom my-0 py-20 mb-md-5"
                             style="--font-size: {{ section_st.footer_heading_size }}"
                           >
-                            <span>
-                              {{- block_st.heading | default: block_st.menu.title | escape -}}
+                            {{- block_st.heading | escape -}}
+                            <span class="open-children-toggle hidden-md absolute inset-0 flex flex-end">
+                              <span class="icon_plus-animation"> </span>
                             </span>
-                            {%- if block_st.menu != blank -%}
-                              <span class="open-children-toggle hidden-md absolute inset-0 flex flex-end">
-                                <span class="icon_plus-animation"> </span>
-                              </span>
-                            {% endif %}
                           </h3>
-                          {%- if block_st.menu != blank -%}
-                            <div class="footer-block collapsible-content mb-12 mb-md-0">
-                              <ul class="list-unstyled">
-                                {%- for link in block_st.menu.links -%}
-                                  <li class="pb-8">
-                                    <a
-                                      href="{{ link.url }}"
-                                      aria-label="{{ link.title }}"
-                                      class="no-underline word-break reversed-links relative"
-                                    >
-                                      {{ link.title }}
-                                    </a>
-                                  </li>
-                                {%- endfor -%}
-                              </ul>
+                        {% endif %}
+                      {% endif %}
+                      <div class="collapsible-content mb-30">
+                        {%- if block_st.description != blank -%}
+                          <div class="footer__block-description mb-23">
+                            {{ block_st.description }}
+                          </div>
+                        {% endif %}
+                        {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
+                          <input type="hidden" name="contact[tags]" value="newsletter">
+                          <div class="newsletter-form__field-wrapper">
+                            <div class="flex field mb-0 flex-nowrap align-center gap-10">
+                              <div class="flex-1 relative form-floating">
+                                <input
+                                  id="NewsletterForm--{{ section.id }}"
+                                  type="email"
+                                  name="contact[email]"
+                                  class="field__input show-placeholder m-0 w-full pl-0 bg-transparent form-control"
+                                  value="{{ form.email }}"
+                                  aria-required="true"
+                                  autocapitalize="off"
+                                  autocomplete="email"
+                                  {% if form.errors %}
+                                    aria-invalid="true"
+                                    aria-describedby="ContactFooter-error"
+                                  {% elsif form.posted_successfully? %}
+                                    aria-describedby="ContactFooter-success"
+                                  {% endif %}
+                                  placeholder="{%- if block_st.email_placeholder != blank -%}{{ block_st.email_placeholder }} {%- else -%} {{ 'newsletter.label' | t }} {% endif %}"
+                                  required
+                                  pattern=".+\.[a-zA-Z]{2,6}"
+                                >
+                                <label for="NewsletterForm--{{ section.id }}">
+                                  {%- if block_st.email_placeholder != blank -%}
+                                    {{ block_st.email_placeholder }}
+                                  {%- else -%}
+                                    {{ 'newsletter.label' | t }}
+                                  {% endif %}
+                                </label>
+                              </div>
+                              <button
+                                type="submit"
+                                class="btn-primary newsletter-form__button word-break"
+                                name="commit"
+                                id="Subscribe-{{ section.id }}"
+                                aria-label="{%- if block_st.button_label != blank -%}{{ block_st.button_label }} {%- else -%} {{ 'subscribe.button_label' | t }} {% endif %}"
+                              >
+                                {%- if block_st.button_label != blank -%}
+                                  {{ block_st.button_label }}
+                                {%- else -%}
+                                  {{ 'newsletter.button_label' | t }}
+                                {% endif %}
+                              </button>
                             </div>
+                            {%- if form.errors -%}
+                              <div
+                                class="newsletter-form__message mt-10 inline-flex align-center error form__message"
+                                id="ContactFooter-error"
+                              >
+                                {%- render 'icon-error' -%}
+                                {{- form.errors.translated_fields.email | capitalize }}
+                                {{ form.errors.messages.email -}}
+                              </div>
+                            {% endif %}
+                          </div>
+                          {%- if form.posted_successfully? -%}
+                            <div
+                              class="mt-10 newsletter-form__message--success success form__message inline-flex align-center"
+                              id="ContactFooter-success"
+                              tabindex="-1"
+                            >
+                              {%- render 'icon-success' -%}
+                              <span class="newsletter-form__message ml-5">{{- 'newsletter.success' | t }}</span>
+                            </div>
+                          {% endif %}
+                        {%- endform -%}
+                        {%- if block_st.note != blank -%}
+                          <div class="newsletter-note mt-15">{{ block_st.note }}</div>
+                        {% endif %}
+                        {%- liquid
+                          assign not_has_store_info = true
+                          for block in section.blocks
+                            if block.type == 'store_info'
+                              assign not_has_store_info = false
+                            endif
+                          endfor
+                        -%}
+                        {% if not_has_store_info %}
+                          {%- if section_st.show_social -%}
+                            <social-icon class="block mt-15">
+                              {% render 'social-icons' %}
+                            </social-icon>
                           {% endif %}
                         {% endif %}
-                      </collapsible-block>
-                    </motion-element>
-                  {% endif %}
-                {%- when 'store_info' -%}
-                  <motion-element
-                    data-motion="fade-up-lg"
-                    {% if scroll_animation != 'slide_in' %}
-                      hold
-                    {% endif %}
-                    data-motion-delay="{{ forloop.index0 | times: 50 }}"
-                    class=" {% if scroll_animation == 'slide_in' %} opacity-0 {% endif %} footer-block w-full col-md-w-custom-50 col-md-w-custom{% if block.type == 'store_info' %} pb-30 border-bottom border-bottom-md-0{% else %} mb-0 mb-md-20 border-bottom border-bottom-md-0{% endif %} {{ block.type }}"
-                    style="--col-width: {{ block_st.content_width }}; --menu-list: {{ menu_item }}"
-                    {{ block.shopify_attributes }}
-                  >
-                    {%- if block_st.store_heading != blank -%}
+                      </div>
+                    </div>
+                  </collapsible-block>
+                </div>
+              {%- when 'link_list' -%}
+                <div
+                  class="footer-block w-full col-md-w-custom-50 col-md-w-custom{% if block.type == 'store_info' %} pb-30 border-bottom border-bottom-md-0{% else %} mb-0 mb-md-20 border-bottom border-bottom-md-0{% endif %} {{ block.type }}"
+                  style="--col-width: {{ block_st.content_width }}; --menu-list: {{ menu_item }}"
+                  {{ block.shopify_attributes }}
+                >
+                  <collapsible-block tabindex="0">
+                    {%- if block_st.menu != blank or block_st.heading != blank -%}
                       <h3
-                        class="footer__block-heading fs-custom my-0 py-20 mb-md-5"
+                        class="footer__block-heading collapsible-heading heading-letter-spacing relative fs-custom my-0 py-20 mb-md-5"
                         style="--font-size: {{ section_st.footer_heading_size }}"
                       >
-                        {{ block_st.store_heading | escape }}
+                        <span>
+                          {{- block_st.heading | default: block_st.menu.title | escape -}}
+                        </span>
+                        {%- if block_st.menu != blank -%}
+                          <span class="open-children-toggle hidden-md absolute inset-0 flex flex-end">
+                            <span class="icon_plus-animation"> </span>
+                          </span>
+                        {% endif %}
                       </h3>
+                      {%- if block_st.menu != blank -%}
+                        <div class="footer-block collapsible-content mb-12 mb-md-0">
+                          <ul class="list-unstyled">
+                            {%- for link in block_st.menu.links -%}
+                              <li class="pb-8">
+                                <a
+                                  href="{{ link.url }}"
+                                  aria-label="{{ link.title }}"
+                                  class="no-underline word-break reversed-links relative"
+                                >
+                                  {{ link.title }}
+                                </a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        </div>
+                      {% endif %}
                     {% endif %}
-                    <div
-                      class="store-info-content"
+                  </collapsible-block>
+                </div>
+              {%- when 'store_info' -%}
+                <div
+                  class="footer-block w-full col-md-w-custom-50 col-md-w-custom{% if block.type == 'store_info' %} pb-30 border-bottom border-bottom-md-0{% else %} mb-0 mb-md-20 border-bottom border-bottom-md-0{% endif %} {{ block.type }}"
+                  style="--col-width: {{ block_st.content_width }}; --menu-list: {{ menu_item }}"
+                  {{ block.shopify_attributes }}
+                >
+                  {%- if block_st.store_heading != blank -%}
+                    <h3
+                      class="footer__block-heading fs-custom my-0 py-20 mb-md-5"
+                      style="--font-size: {{ section_st.footer_heading_size }}"
                     >
-                      {%- if block_st.image != blank -%}
-                        {%- assign sizes = block_st.image_width | append: 'px' -%}
-                        {%- assign image_alt = block_st.image.alt | default: 'Background-image' -%}
-
-                        {% render 'responsive-image',
-                          type: 'other',
-                          image: block_st.image,
-                          image_alt: image_alt,
-                          sizes: sizes,
-                          width: block_st.image_width,
-                          no_animate: true
-                        %}
-                      {% endif %}
-
-                      {%- if block_st.store_description != blank -%}
-                        <div class="footer__block-info rich__text-mt-0 mb-20">
-                          {{ block_st.store_description }}
-                        </div>
-                      {% endif %}
-                      {%- if block_st.store_address != blank or block_st.store_address or block_st.store_email %}
-                        <div class="footer_store-infor">
-                          {%- if block_st.store_address != blank -%}
-                            <div class="footer__block-info">
-                              {{ theme_st.store_address }}
-                            </div>
-                          {% endif %}
-                          {%- if block_st.store_phone != blank and theme_st.store_phone != blank -%}
-                            <div class="footer__store-info">
-                              <a href="tel:{{ settings.store_phone }}" class="heading-color no-underline">
-                                {{ theme_st.store_phone }}
-                              </a>
-                            </div>
-                          {% endif %}
-                          {%- if block_st.store_email != blank and theme_st.store_email != blank -%}
-                            <div class="footer__store-info">
-                              <a href="mailto:{{ settings.store_email }}" class="heading-color no-underline">
-                                {{ theme_st.store_email }}
-                              </a>
-                            </div>
-                          {% endif %}
-                        </div>
-                      {% endif %}
-
-                      {%- if shop.features.follow_on_shop? and section_st.enable_follow_on_shop -%}
-                        <div class="footer__follow-on-shop mt-15">
-                          {{ shop | login_button: action: 'follow' }}
-                        </div>
-                      {% endif %}
-
-                      {%- if section_st.show_social -%}
-                        <social-icon class="block mt-22">
-                          {% render 'social-icons' %}
-                        </social-icon>
-                      {% endif %}
-                    </div>
-                  </motion-element>
-                {%- when 'custom_liquid' -%}
-                  <motion-element
-                    data-motion="fade-up-lg"
-                    {% if scroll_animation != 'slide_in' %}
-                      hold
-                    {% endif %}
-                    data-motion-delay="{{ forloop.index0 | times: 50 }}"
-                    class=" {% if scroll_animation == 'slide_in' %} opacity-0 {% endif %} footer-block w-full col-md-w-custom-50 col-md-w-custom{% if block.type == 'store_info' %} pb-30 border-bottom border-bottom-md-0{% else %} mb-0 mb-md-20 border-bottom border-bottom-md-0{% endif %} {{ block.type }}"
-                    style="--col-width: {{ block_st.content_width }}; --menu-list: {{ menu_item }}"
-                    {{ block.shopify_attributes }}
+                      {{ block_st.store_heading | escape }}
+                    </h3>
+                  {% endif %}
+                  <div
+                    class="store-info-content"
                   >
-                    <div
-                      class="block {% if scroll_animation == 'slide_in' %}  opacity-0 {% endif %}"
-                    >
-                      {{ block_st.custom_liquid }}
-                    </div>
-                  </motion-element>
-              {%- endcase -%}
+                    {%- if block_st.image != blank -%}
+                      {%- assign sizes = block_st.image_width | append: 'px' -%}
+                      {%- assign image_alt = block_st.image.alt | default: 'Background-image' -%}
+
+                      {% render 'responsive-image',
+                        type: 'other',
+                        image: block_st.image,
+                        image_alt: image_alt,
+                        sizes: sizes,
+                        width: block_st.image_width,
+                        no_animate: true
+                      %}
+                    {% endif %}
+
+                    {%- if block_st.store_description != blank -%}
+                      <div class="footer__block-info rich__text-mt-0 mb-20">
+                        {{ block_st.store_description }}
+                      </div>
+                    {% endif %}
+                    {%- if block_st.store_address != blank or block_st.store_address or block_st.store_email %}
+                      <div class="footer_store-infor">
+                        {%- if block_st.store_address != blank -%}
+                          <div class="footer__block-info">
+                            {{ theme_st.store_address }}
+                          </div>
+                        {% endif %}
+                        {%- if block_st.store_phone != blank and theme_st.store_phone != blank -%}
+                          <div class="footer__store-info">
+                            <a href="tel:{{ settings.store_phone }}" class="heading-color no-underline">
+                              {{ theme_st.store_phone }}
+                            </a>
+                          </div>
+                        {% endif %}
+                        {%- if block_st.store_email != blank and theme_st.store_email != blank -%}
+                          <div class="footer__store-info">
+                            <a href="mailto:{{ settings.store_email }}" class="heading-color no-underline">
+                              {{ theme_st.store_email }}
+                            </a>
+                          </div>
+                        {% endif %}
+                      </div>
+                    {% endif %}
+
+                    {%- if shop.features.follow_on_shop? and section_st.enable_follow_on_shop -%}
+                      <div class="footer__follow-on-shop mt-15">
+                        {{ shop | login_button: action: 'follow' }}
+                      </div>
+                    {% endif %}
+
+                    {%- if section_st.show_social -%}
+                      <social-icon class="block mt-22">
+                        {% render 'social-icons' %}
+                      </social-icon>
+                    {% endif %}
+                  </div>
+                </div>
+              {%- when 'custom_liquid' -%}
+                <div
+                  class="footer-block w-full col-md-w-custom-50 col-md-w-custom{% if block.type == 'store_info' %} pb-30 border-bottom border-bottom-md-0{% else %} mb-0 mb-md-20 border-bottom border-bottom-md-0{% endif %} {{ block.type }}"
+                  style="--col-width: {{ block_st.content_width }}; --menu-list: {{ menu_item }}"
+                  {{ block.shopify_attributes }}
+                >
+                  <div
+                    class="block"
+                  >
+                    {{ block_st.custom_liquid }}
+                  </div>
+                </div>
+            {%- endcase -%}
           {%- endfor -%}
         </div>
       </div>
@@ -351,12 +329,12 @@
   {% endif %}
   <div class="footer__bottom">
     <div class="{{ container }}">
-      <div class="footer_bottom-inner justify-center justify-md-end flex flex-wrap flex-md-nowrap align-center border-top gap-20 gap-xl-30 py-30">
+      <div class="footer_bottom-inner justify-center justify-md-between flex flex-wrap flex-md-nowrap align-center border-top gap-20 gap-xl-30 py-30 pb-1025-50">
         {%- if section_st.enable_country_selector
           or section_st.enable_language_selector
           or section_st.copyright_text
         -%}
-          <div class="flex flex-wrap gap-10 gap-xl-30 justify-center justify-md-start">
+          <div class="flex flex-wrap gap-10 flex-md-column justify-center justify-md-start">
             {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
               <div class="footer__column footer__localization lang__currency-desktop flex flex-nowrap align-center gap-10">
                 {%- if section_st.enable_country_selector -%}
@@ -373,9 +351,9 @@
           </div>
         {% endif %}
         {%- if section_st.payment_enable -%}
-          <div class="footer__payment flex grow-1 justify-center flex-md-end align-center max-w-100">
+          <div class="footer__payment flex flex-md-column gap-10 flex-wrap justify-center flex-md-end max-w-100 align-end">
             {%- if section_st.payment_image != blank -%}
-              <div class="footer_payment_image fs-0 max-w-100" style="width: {{ section_st.payment_width }}px;">
+              <div class="footer_payment_image fs-0 mb-5 max-w-100" style="width: {{ section_st.payment_width }}px;">
                 {%- assign sizes = section_st.payment_width | append: 'px' -%}
                 {%- assign image_alt = section_st.payment_image.image.alt | default: 'Payment-image' -%}
 
@@ -398,6 +376,23 @@
                 </ul>
               {% endif %}
             {% endif %}
+            {%- if section.settings.menu_store_policies != blank -%}
+              <div class="menu__policies">
+                <ul class="menu__policies-list flex flex-wrap justify-center justify-end-1025 gap-10 gap-lg-20 list-unstyled">
+                  {%- for link in section.settings.menu_store_policies.links -%}
+                    <li>
+                      <a
+                        href="{{ link.url }}"
+                        aria-label="{{ link.title }}"
+                        class="no-underline word-break reversed-links relative {% if link.active %} list-menu__item--active{% endif %}"
+                      >
+                        {{ link.title }}
+                      </a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- endif -%}
           </div>
         {% endif %}
       </div>
@@ -506,6 +501,11 @@
       "id": "enable_follow_on_shop",
       "default": true,
       "label": "t:sections.footer.settings.enable_follow_on_shop.label"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_store_policies",
+      "label": "t:settings_schema.typography.settings.menu.label"
     },
     {
       "type": "header",

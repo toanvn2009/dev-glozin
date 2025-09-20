@@ -103,3 +103,7 @@ cart-remove-button .underline {
 body:has(cart-items.is-empty) .page-title {
   display: none;
 }
+.discount-price {
+  border-radius: 30px;
+  padding-block: 6.5px;
+}

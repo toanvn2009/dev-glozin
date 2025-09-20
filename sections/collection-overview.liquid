@@ -38,7 +38,7 @@
     assign header_size = 'h1-size'
   endif
   assign scroll_animation = settings.scroll_animation
-
+  assign animate_delay = 0
   assign ratio = ''
   if image_ratio != 'adapt'
     case image_ratio
@@ -88,6 +88,9 @@
 >
   <collection-overviews>
     <div class="{{ section_width }}">
+      {% if scroll_animation %}
+        <motion-items-effect data-motion="{{ scroll_animation }}">
+      {% endif %}
       {% if section.blocks.size > 0 %}
         <div
           class="section__block-inner w-full flex gradient flex-column-reverse-768 {% if position == 'right' %} flex-row-reverse{% endif %}"
@@ -107,7 +110,7 @@
               <div
                 class="banner__media banner__media-collection rounded absolute inset-0 active"
                 data-index="{{ forloop.index }}"
-                style="--aspect-ratio: {{ ratio }};"
+                style="--aspect-ratio: {{ ratio }};{% if forloop.first == false %}opacity: 0;{% endif %}"
               >
                 {% liquid
                   assign image = block_st.collection_image
@@ -144,68 +147,55 @@
               >
                 {%- if section_st.subheading != blank -%}
                   <motion-element
-                    data-motion="fade-up-lg"
-                    data-motion-delay="50"
-                    {% if scroll_animation != 'slide_in' %}
+                    data-motion="{{ scroll_animation }}"
+                    data-motion-delay="{{ animate_delay }}"
+                    {% if scroll_animation == 'none' %}
                       hold
                     {% endif %}
-                    class="block {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %}"
-                    style="
-                      {% if scroll_animation != 'none' %}
-                        --animation-order: 0;
-                      {% endif %}
-                    "
+                    class="block"
                   >
                     <div
                       class="sec__content-subheading heading-color heading fs-12 {% if description != blank %} mb-10{% else %} mb-0{% endif %}"
                     >
-                      {{ section_st.subheading | escape }}
+                      {{ section.settings.subheading | escape }}
                     </div>
                   </motion-element>
                 {% endif %}
                 {% if heading != blank %}
                   {% assign width_heading = section_st.width_heading %}
+                  {% assign animate_delay = animate_delay | plus: 50 %}
                   <motion-element
-                    data-motion="fade-up-lg"
-                    data-motion-delay="50"
-                    {% if scroll_animation != 'slide_in' %}
+                    data-motion="{{ scroll_animation }}"
+                    data-motion-delay="{{ animate_delay }}"
+                    {% if scroll_animation == 'none' %}
                       hold
                     {% endif %}
-                    class="block {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %}"
-                    style="
-                      {% if scroll_animation != 'none' %}
-                        --animation-order: 0;
-                      {% endif %}
-                    "
+                    class="block"
                   >
                     <div class="w-full flex justify-{{ section_st.header_alignment }} {% if section_st.subheading != blank or description != blank %} mb-10{% else %} mb-0{% endif %}">
                       <h2
                         class="section__header-heading fontsize-heading-1025 {{ header_size  }} w-full-768 heading-letter-spacing m-0"
                         style="width: {{ width_heading }}%;"
                       >
-                        {{ heading }}
+                        {{ section.settings.heading }}
                       </h2>
                     </div>
                   </motion-element>
                 {% endif %}
                 {% if description != blank %}
+                  {% assign animate_delay = animate_delay | plus: 50 %}
                   <motion-element
-                    data-motion="fade-up-lg"
-                    data-motion-delay="50"
-                    {% if scroll_animation != 'slide_in' %}
+                    data-motion="{{ scroll_animation }}"
+                    data-motion-delay="{{ animate_delay }}"
+                    {% if scroll_animation == 'none' %}
                       hold
                     {% endif %}
-                    class="block {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %}"
-                    style="
-                      {% if scroll_animation != 'none' %}
-                        --animation-order: 0;
-                      {% endif %}
-                    "
+                    class="block"
                   >
                     <div
                       class="section__header-des rich__text-m0 "
                     >
-                      {{ description }}
+                      {{ section.settings.description }}
                     </div>
                   </motion-element>
                 {% endif %}
@@ -219,18 +209,8 @@
                   class="sec__content-overview w-full justify-{{ section_st.header_alignment }} link_list"
                   data-index="{{ forloop.index }}"
                 >
-                  <motion-element
-                    data-motion="fade-up-lg"
-                    data-motion-delay="50"
-                    {% if scroll_animation != 'slide_in' %}
-                      hold
-                    {% endif %}
-                    class="block {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %}"
-                    style="
-                      {% if scroll_animation != 'none' %}
-                        --animation-order: 0;
-                      {% endif %}
-                    "
+                  <div
+                    class="block motion-item"
                   >
                     <div
                       tabindex="0"
@@ -244,7 +224,8 @@
                           {% liquid
                             assign image = block_st.collection_image
                           %}
-                          <div class="rounded custom-w m-auto"
+                          <div
+                            class="rounded custom-w m-auto"
                             style="--aspect-ratio: 1;--custom-width: {{ section_st.image_width_heading }}px; max-width: var(--custom-width);"
                           >
                             {% if block_st.image_link != blank %}
@@ -273,7 +254,7 @@
                         {% if block_st.heading != blank %}
                           <div class="collapsible-heading-overview">
                             <h2
-                              class="sec__content-heading flex justify-{{ section_st.header_alignment }} w-full btn-icon relative heading-letter-spacing mt-0{% if block_st.heading_spacing_bottom > 41 %} mb-big{% elsif block_st.heading_spacing_bottom > 30 %} mb-medium{% else %} mb-custom{% endif %}{% if block_st.heading_uppercase %} {% endif %}{% if block_st.heading_font_size > 41 %} fs-big{% elsif block_st.heading_font_size > 24 %} fs-medium{% else %} fs-custom{% endif %} {{ block_st.heading_font_weight }}"
+                              class="sec__content-heading flex justify-content-{{ section_st.header_alignment }} w-full btn-icon relative heading-letter-spacing mt-0{% if block_st.heading_spacing_bottom > 41 %} mb-big{% elsif block_st.heading_spacing_bottom > 30 %} mb-medium{% else %} mb-custom{% endif %}{% if block_st.heading_uppercase %} {% endif %}{% if block_st.heading_font_size > 41 %} fs-big{% elsif block_st.heading_font_size > 24 %} fs-medium{% else %} fs-custom{% endif %} {{ block_st.heading_font_weight }}"
                               style="--font-size: {{ block_st.heading_font_size }};padding-bottom: 10px;padding-top: 10px;"
                               {{ block.shopify_attributes }}
                             >
@@ -283,27 +264,22 @@
                         {% endif %}
                       </div>
                     </div>
-                  </motion-element>
+                  </div>
                 </div>
               {% endfor %}
             </div>
 
-            {% if section_st.first_button_label != blank  %}
-              
+            {% if section_st.first_button_label != blank %}
+              {% assign animate_delay = animate_delay | plus: 50 %}
               <div class="sec__content-btn align-center flex flex-wrap gap-15 justify-content-{{ section_st.header_alignment }}">
-                  <motion-element
-                    data-motion="fade-up-lg"
-                    data-motion-delay="50"
-                    {% if scroll_animation != 'slide_in' %}
-                      hold
-                    {% endif %}
-                    class="block {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %}"
-                    style="
-                      {% if scroll_animation != 'none' %}
-                        --animation-order: 0;
-                      {% endif %}
-                    "
-                  >
+                <motion-element
+                  data-motion="{{ scroll_animation }}"
+                  data-motion-delay="{{ animate_delay }}"
+                  {% if scroll_animation == 'none' %}
+                    hold
+                  {% endif %}
+                  class="block"
+                >
                   {% if section_st.first_button_label != blank %}
                     <a
                       {% if section_st.first_button_link == blank %}
@@ -319,29 +295,18 @@
                   {% endif %}
                 </motion-element>
               </div>
-             
             {% endif %}
           </div>
         </div>
+      {% endif %}
+      {% if scroll_animation %}
+        </motion-items-effect>
       {% endif %}
     </div>
   </collection-overviews>
 </div>
 
 {%- style -%}
-  .banner__media-collection {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.8s ease, transform 0.8s ease-in-out;
-    z-index: 0;
-  }
-
-  .banner__media-collection.active {
-    opacity: 1;
-    visibility: visible;
-    z-index: 1;
-  }
-
   .sec__collection-overview picture.image-picture {
     width: 100%;
   }
@@ -454,7 +419,7 @@
       "type": "select",
       "id": "header_alignment",
       "label": "t:sections.all.section_header.alignment.label",
-      "default": "left",
+      "default": "center",
       "options": [
         {
           "value": "left",
@@ -473,13 +438,13 @@
     {
       "type": "text",
       "id": "first_button_label",
-      "label": "t:sections.all.contents.button.first_button_label.label",
+      "label": "t:settings.button_label",
       "info": "t:sections.all.contents.button.first_button_label.info"
     },
     {
       "type": "url",
       "id": "first_button_link",
-      "label": "t:sections.all.contents.button.first_button_link.label"
+      "label": "t:settings.button_link"
     },
     {
       "type": "select",
@@ -734,6 +699,7 @@
   "presets": [
     {
       "name": "t:sections.collection_overview.name",
+      "category": "t:categories.collection",
       "blocks": [
         {
           "type": "content_item"

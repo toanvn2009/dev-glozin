@@ -22,9 +22,16 @@
 >
   <div class="{{ section_width }}">
     {% if iframe != null %}
-      <div class=" w-full map rounded mb-50" style="{{ style | strip | strip_newlines }}">
-        {{ iframe }}
-      </div>
+      <motion-element
+        data-motion="{{ scroll_animation }}"
+        {% if scroll_animation == 'none' %}
+          hold
+        {% endif %}
+      >
+        <div class=" w-full map rounded mb-50" style="{{ style | strip | strip_newlines }}">
+          {{ iframe }}
+        </div>
+      </motion-element>
     {% endif %}
     <div class="flex flex-wrap contact-container">
       {% for block in section.blocks %}
@@ -44,15 +51,11 @@
         {% case block.type %}
           {% when 'contact' %}
             <motion-element
-              data-motion="fade-up-sm"
-              {% if scroll_animation != 'slide_in' %}
+              data-motion="{{ scroll_animation }}"
+              {% if scroll_animation == 'none' %}
                 hold
               {% endif %}
-              data-motion-delay="150"
-              class="contact_form flex-1 {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %}"
-              {%- if scroll_animation != 'none' -%}
-                style="--animation-order: {{ forloop.index0 }};"
-              {% endif %}
+              class="contact_form flex-1"
             >
               <div class="contact_header">
                 {% if heading != blank %}
@@ -97,7 +100,7 @@
                       placeholder="{{ name }}"
                     >
                     <label class="field__label" for="customer_email">
-                      {{ name | default:  'Name' }}
+                      {{ name | default: 'Name' }}
                     </label>
                   </div>
                   <div class="email flex-1 form-floating">
@@ -110,7 +113,7 @@
                       required
                     >
                     <label class="field__label" for="customer_email">
-                      {{ email | default:  'Email' }}
+                      {{ email | default: 'Email' }}
                     </label>
                   </div>
                 </div>
@@ -122,9 +125,9 @@
                     id="message"
                   ></textarea>
                   <label class="form__label" for="message">
-                    {{ your_comment | default:  'Your_comment' }}
+                    {{ your_comment | default: 'Your_comment' }}
                   </label>
-               </div>
+                </div>
                 <terms-conditions class="form_action">
                   {% if show_privacy %}
                     <div class="flex">
@@ -155,15 +158,11 @@
             </motion-element>
           {% when 'text_block' %}
             <motion-element
-              data-motion="fade-up-sm"
-              {% if scroll_animation != 'slide_in' %}
+              data-motion="{{ scroll_animation }}"
+              {% if scroll_animation == 'none' %}
                 hold
               {% endif %}
-              data-motion-delay="150"
-              class="support_customer w-full {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %}"
-              {%- if scroll_animation != 'none' -%}
-                style="--animation-order: {{ forloop.index0 }};"
-              {% endif %}
+              class="support_customer w-full"
             >
               <div class="contact_header">
                 {% if heading_text_block != blank %}

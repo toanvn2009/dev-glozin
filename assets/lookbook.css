@@ -9,6 +9,9 @@ lookbook-item .product-item__inner {
   flex: 0 0 auto;
   width: 6rem;
 }
+.lookbook-item__hover{
+  min-width: 29rem;
+}
 .lookbook-item__popup {
   min-width: 29rem;
   top: calc(100% + 27px);
@@ -37,7 +40,8 @@ lookbook-item .product-item__inner {
 .rounded-style .lookbook-item__popup {
   --rounded-radius: 5px;
 }
-.lookbook-item__popup::after {
+.lookbook-item__popup::after,
+.lookbook-item__hover::after {
   content: "";
   height: 0;
   position: absolute;
@@ -90,7 +94,7 @@ lookbook-item.open .lookbook-item__popup.vertical-bottom {
 lookbook-item svg {
   transition: all 0.2s linear;
 }
-lookbook-item.open svg {
+lookbook-item.open svg:not(.placeholder-image) {
   transform: rotate(45deg);
 }
 .lookbook-animation:after {
@@ -136,4 +140,16 @@ lookbook-item.open svg {
      padding-bottom: calc(var(--section-pt-content)* 1px);
      padding-left: calc(var(--section-pb--content)* 1px);
      padding-right: calc(var(--section-pb--content)* 1px);
+}
+.product-tooltip {
+  min-width: 34rem;
+  position: absolute;
+}
+.lookbook-item__hover {
+  transform: translateY(15px);
+  transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.4, 1);
+  padding-top: 1rem;
+}
+.active.lookbook-item__hover {
+  transform: translateY(0);
 }

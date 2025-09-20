@@ -3,6 +3,7 @@
   assign cart_note = theme_st.enable_cart_note
   assign enable_gift_wrap = theme_st.enable_cart_note
   assign show_currency_code = theme_st.show_currency_code
+  assign enable_discount_code = theme_st.enable_discount_code
   assign gift_wrap_pr = all_products[theme_st.choose_gift_wrap_product]
   assign gift_pr_id = gift_wrap_pr.id
   assign gift_wrap = cart.items | where: 'product_id', gift_pr_id
@@ -14,6 +15,20 @@
   assign show_estimate_shipping_rates = theme_st.show_estimate_shipping_rates
   assign show_delivery_day = theme_st.show_delivery_day
 -%}
+{% liquid
+  assign discount_codes = cart.cart_level_discount_applications | where: 'type', 'discount_code' | map: 'title'
+  for item in cart.items
+    for allocation in item.line_level_discount_allocations
+      if allocation.discount_application.type == 'discount_code'
+        assign discount_codes = item.line_level_discount_allocations | slice: forloop.index0 | map: 'discount_application' | map: 'title' | concat: discount_codes
+      endif
+    endfor
+  endfor
+  assign discount_codes = discount_codes | uniq
+%}
+{% if enable_discount_code %}
+  <script src="{{ 'cart-discount.js' | asset_url }}" defer="defer"></script>
+{% endif %}
 <div class="cart-addons flex justify-center border-top">
   {%- if cart_note -%}
     <div data-id="not" class="mini_cart_note">
@@ -70,6 +85,26 @@
       </button>
     </div>
   {%- endif -%}
+  {% if enable_discount_code %}
+    <div data-id="coupon" class="mini_cart_coupon tooltip lh-1">
+      <button
+        aria-label="{{- 'general.cart.coupon.title' | t -}}"
+        type="button"
+        data-open="coupon"
+        class="btn-reset pointer mini_cart_addon_btn show-overlay inline-flex align-center gift tooltip relative"
+      >
+        <svg width="14" height="17" fill="none" class="mr-5">
+          <path d="M7.29346 16C7.00706 15.9883 6.72673 15.9091 6.47284 15.7681C6.21895 15.6272 5.99788 15.428 5.82572 15.1852L5.12679 14.1481C4.98766 13.9584 4.78953 13.8272 4.56765 13.7778C4.45827 13.772 4.34932 13.7962 4.25136 13.8481C4.1534 13.9 4.06975 13.9778 4.00851 14.0741C3.03002 15.1852 2.2612 15.1111 1.84184 14.963C1.42249 14.8148 0.793457 14.2963 0.793457 12.6667V4.2963C0.793457 1.03704 1.70206 0 4.63754 0H9.94937C11.487 0 12.3257 0.222222 12.9547 0.888889C13.5838 1.55556 13.7935 2.51852 13.7935 4.2963V12.6667C13.7935 14.2963 13.1644 14.8148 12.7451 14.963C12.3257 15.1111 11.6268 15.1852 10.5784 14.0741C10.5172 13.9778 10.4335 13.9 10.3356 13.8481C10.2376 13.7962 10.1286 13.772 10.0193 13.7778C9.9045 13.786 9.79343 13.8241 9.69589 13.8887C9.59836 13.9533 9.51737 14.0424 9.46012 14.1481L8.7612 15.1111C8.60326 15.3747 8.38702 15.5934 8.13124 15.7483C7.87547 15.9032 7.58788 15.9896 7.29346 16ZM4.56765 12.6667H4.63754C4.90409 12.6807 5.16362 12.762 5.39459 12.9037C5.62555 13.0454 5.82127 13.2435 5.9655 13.4815L6.66442 14.5185C6.72711 14.6257 6.81457 14.7142 6.91854 14.7755C7.0225 14.8369 7.13952 14.869 7.25851 14.869C7.3775 14.869 7.49452 14.8369 7.59848 14.7755C7.70245 14.7142 7.78992 14.6257 7.8526 14.5185L8.55152 13.5556C8.88599 13.1219 9.35808 12.8322 9.87948 12.7407C10.1438 12.7402 10.4052 12.7993 10.6462 12.9143C10.8873 13.0292 11.1024 13.1974 11.2773 13.4074C11.8365 14 12.1859 14.0741 12.2558 14C12.3257 13.9259 12.6053 13.4815 12.6053 12.7407V4.2963C12.6053 2.88889 12.4655 2.07407 12.0461 1.62963C11.6268 1.18519 10.9978 1.11111 9.80959 1.11111H4.63754C2.33109 1.11111 1.84184 1.62963 1.84184 4.2963V12.6667C1.84184 13.4074 2.05152 13.8519 2.19131 13.9259C2.33109 14 2.68055 13.9259 3.1698 13.3333C3.34923 13.1292 3.56528 12.9651 3.80531 12.8507C4.04534 12.7362 4.30452 12.6736 4.56765 12.6667Z" fill="#111111"/>
+          <path d="M5.19654 9.33342C5.06689 9.33089 4.9426 9.2782 4.84707 9.18527C4.7455 9.07701 4.68848 8.93054 4.68848 8.77786C4.68848 8.62518 4.7455 8.47871 4.84707 8.37045L9.04062 3.92601C9.08956 3.86574 9.14971 3.81682 9.2173 3.78232C9.2849 3.74782 9.35848 3.72848 9.43346 3.7255C9.50843 3.72253 9.58318 3.73599 9.65302 3.76504C9.72286 3.79409 9.78629 3.8381 9.83934 3.89432C9.89239 3.95055 9.93392 4.01777 9.96133 4.09179C9.98874 4.16581 10.0014 4.24503 9.99863 4.32449C9.99582 4.40395 9.97757 4.48193 9.94502 4.55357C9.91246 4.62521 9.86631 4.68896 9.80944 4.74082L5.61589 9.18527C5.48839 9.26743 5.34505 9.31807 5.19654 9.33342Z" fill="#111111"/>
+          <path d="M9.39033 9.48148C9.20496 9.48148 9.02719 9.40344 8.89612 9.26452C8.76504 9.12561 8.69141 8.9372 8.69141 8.74074C8.69141 8.54428 8.76504 8.35587 8.89612 8.21696C9.02719 8.07804 9.20496 8 9.39033 8C9.5757 8 9.75347 8.07804 9.88455 8.21696C10.0156 8.35587 10.0893 8.54428 10.0893 8.74074C10.0893 8.9372 10.0156 9.12561 9.88455 9.26452C9.75347 9.40344 9.5757 9.48148 9.39033 9.48148Z" fill="#111111"/>
+          <path d="M5.19645 5.40732C5.10307 5.41386 5.00944 5.39919 4.92185 5.36428C4.83425 5.32937 4.7547 5.27503 4.68852 5.20489C4.62235 5.13476 4.57107 5.05045 4.53813 4.95761C4.50519 4.86477 4.49135 4.76555 4.49753 4.66658C4.49135 4.56761 4.50519 4.46838 4.53813 4.37554C4.57107 4.2827 4.62235 4.19839 4.68852 4.12826C4.7547 4.05812 4.83425 4.00378 4.92185 3.96887C5.00944 3.93396 5.10307 3.91929 5.19645 3.92584C5.28983 3.91929 5.38346 3.93396 5.47106 3.96887C5.55866 4.00378 5.63821 4.05812 5.70438 4.12826C5.77056 4.19839 5.82183 4.2827 5.85477 4.37554C5.88771 4.46838 5.90155 4.56761 5.89538 4.66658C5.90155 4.76555 5.88771 4.86477 5.85477 4.95761C5.82183 5.05045 5.77056 5.13476 5.70438 5.20489C5.63821 5.27503 5.55866 5.32937 5.47106 5.36428C5.38346 5.39919 5.28983 5.41386 5.19645 5.40732Z" fill="#111111"/>
+        </svg>
+        <span class="tooltip-content invisible rounded-3 absolute pointer-none">
+          <span>{{ 'general.cart.coupon.title' | t }}</span>
+        </span>
+      </button>
+    </div>
+  {% endif %}
 </div>
 {%- if cart_note -%}
   <div
@@ -83,7 +118,7 @@
       </svg>
       <span class="heading-style">{{ 'general.cart.note.title' | t }}</span>
     </div>
-    <div class="form-floating textarea"> 
+    <div class="form-floating textarea">
       <textarea
         class="w-full bg-white mb-20 cart-note form-control"
         placeholder="{{ 'general.cart.note.placeholder' | t }}"
@@ -202,3 +237,75 @@
     ></div>
   </div>
 {%- endif -%}
+{% if enable_discount_code %}
+  <minicart-discount
+    class="cart-footeraddon grey-bg absolute transition w-full z-10 p-30 left-0 bottom-0 border-top shadow pointer-none cart__addon-content"
+    id="coupon"
+  >
+    <div class="addon-title flex align-center gap-10 mb-10 lh-normal">
+      <svg width="17" height="19" viewBox="0 0 17 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.7211 1.40741V0.820988C12.7211 0.351852 12.3741 0 11.9116 0C11.449 0 11.102 0.469136 11.102 0.820988V1.29012H5.89796V0.820988C5.89796 0.469136 5.55102 0 5.08844 0C4.62585 0 4.27891 0.469136 4.27891 0.820988V1.40741C1.5034 1.64198 0 3.51852 0 6.45062V13.8395C0 17.1235 1.85034 19 5.08844 19H11.9116C15.1497 19 17 17.1235 17 13.8395V6.45062C17 3.51852 15.4966 1.64198 12.7211 1.40741ZM5.08844 4.22222C5.43537 4.22222 5.89796 3.87037 5.89796 3.40123V2.9321H11.102V3.40123C11.102 3.87037 11.5646 4.22222 11.9116 4.22222C12.2585 4.22222 12.7211 3.87037 12.7211 3.40123V2.9321C14.5714 3.16667 15.381 4.33951 15.381 6.45062V13.8395C15.381 16.3025 14.2245 17.358 11.9116 17.358H5.08844C2.65986 17.358 1.61905 16.1852 1.61905 13.8395V6.33333C1.61905 4.22222 2.42857 3.04938 4.27891 2.81481V3.28395C4.27891 3.87037 4.62585 4.22222 5.08844 4.22222Z" fill="#111111"/>
+        <path d="M5.08833 9.50024H11.9115C12.2584 9.50024 12.721 9.14838 12.721 8.67925C12.721 8.21011 12.2584 7.85826 11.9115 7.85826H5.08833C4.62575 7.85826 4.27881 8.21011 4.27881 8.67925C4.27881 9.14838 4.74139 9.50024 5.08833 9.50024Z" fill="#111111"/>
+        <path d="M8.55772 12.1974H5.08833C4.62575 12.1974 4.27881 12.5493 4.27881 13.0184C4.27881 13.4875 4.74139 13.8394 5.08833 13.8394H8.55772C8.90466 13.8394 9.36724 13.4875 9.36724 13.0184C9.36724 12.5493 8.90466 12.1974 8.55772 12.1974Z" fill="#111111"/>
+      </svg>
+      <span class="bold">{{ 'general.cart.coupon.title' | t }}</span>
+    </div>
+    <form
+      on:submit="/applyDiscount"
+      onsubmit="return false;"
+    >
+      <div id="coupon-messages" class="mb-4">
+        <p className="my-4"></p>
+      </div>
+      <input
+        placeholder="{{ 'general.cart.coupon.enter_discount_code' | t }}"
+        type="text"
+        required
+        name="discount"
+        class="bls__discount_code discount_code w-full bg-white {% if discount_codes.size == 0 %}mb-20{% endif %} cart-coupon"
+      >
+      <ul class="cart-discount__codes list-unstyled flex gap-10 {% if discount_codes.size > 0 %}mt-10 mb-10{% endif %} fs-14 heading-color">
+        {% for discount_code in discount_codes %}
+          <li
+            class="cart-discount__item inline-flex align-center gap-5"
+            data-discount-code="{{ discount_code }}"
+          >
+            <p class="cart-discount-code m-0 inline-flex align-center gap-5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none">
+                <use href="#icon-discount"/>
+              </svg>
+              {{ discount_code }}
+            </p>
+            <button
+              type="button"
+              on:click="/removeDiscount"
+              class="cart-discount-remove btn p-0 inline-flex align-center relative"
+            >
+              <svg width="16" height="16" class="heading-color remove-icon hidden-on-load">
+                <use href="#icon-trash" />
+              </svg>
+              <div class="icon-rotator"></div>
+            </button>
+          </li>
+        {% endfor %}
+      </ul>
+      <button
+        type="submit"
+        class="btn-save w-full btn-primary mb-10 relative"
+        name="{{ 'collections.sidebar.apply' | t }}"
+      >
+        <span class="hidden-on-load">
+          {{ 'collections.sidebar.apply' | t }}
+        </span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="spin opacity-0 icon-load">
+          <use href="#icon-load"></use>
+        </svg>
+      </button>
+    </form>
+    <div class="addon-actions">
+      <button type="button" class="btn-cancel w-full btn-outline" name="{{ 'general.cart.cancel' | t }}">
+        {{ 'general.cart.cancel' | t }}
+      </button>
+    </div>
+  </minicart-discount>
+{% endif %}

@@ -2,7 +2,7 @@
   {
     "name": "theme_info",
     "theme_name": "Glozin",
-    "theme_version": "2.4.0",
+    "theme_version": "3.0.0",
     "theme_author": "Nextsky",
     "theme_documentation_url": "https://nextsky.gitbook.io/glozin-theme",
     "theme_support_url": "https://support.nextsky.co"
@@ -947,6 +947,26 @@
       },
       {
         "type": "select",
+        "id": "product_font_weight",
+        "label": "t:settings.product_font_weight",
+        "default": "500",
+        "options": [
+          {
+            "value": "400",
+            "label": "400"
+          },
+          {
+            "value": "500",
+            "label": "500"
+          },
+          {
+            "value": "600",
+            "label": "600"
+          }
+        ]
+      },
+      {
+        "type": "select",
         "id": "product_truncation_title",
         "label": "t:settings_schema.product_card.settings.truncate_product_title.label",
         "default": "none",
@@ -980,6 +1000,26 @@
         "unit": "px",
         "label": "t:settings_schema.product_card.settings.product_info.price_size.label",
         "default": 14
+      },
+      {
+        "type": "select",
+        "id": "price_font_weight",
+        "label": "t:settings.price_font_weight",
+        "default": "500",
+        "options": [
+          {
+            "value": "400",
+            "label": "400"
+          },
+          {
+            "value": "500",
+            "label": "500"
+          },
+          {
+            "value": "600",
+            "label": "600"
+          }
+        ]
       },
       {
         "type": "checkbox",
@@ -1323,6 +1363,12 @@
       },
       {
         "type": "checkbox",
+        "id": "enable_discount_code",
+        "label": "t:settings_schema.cart.settings.cart_addons.enable_discount_code.label",
+        "default": false
+      },
+      {
+        "type": "checkbox",
         "id": "enable_gift_wrap",
         "label": "t:settings_schema.cart.settings.cart_addons.enable_gift_wrap.label",
         "default": true
@@ -1525,22 +1571,22 @@
         "type": "select",
         "id": "scroll_animation",
         "label": "t:settings_schema.animation.settings.scroll_animation.label",
-        "default": "fade_in",
+        "default": "fade-in",
         "options": [
           {
             "value": "none",
             "label": "t:settings_schema.animation.settings.scroll_animation.none"
           },
           {
-            "value": "fade_in",
+            "value": "fade-in",
             "label": "t:settings_schema.animation.settings.scroll_animation.fade_in"
           },
           {
-            "value": "slide_in",
+            "value": "fade-up-lg",
             "label": "t:settings_schema.animation.settings.scroll_animation.slide_in"
           },
           {
-            "value": "zoom_in",
+            "value": "zoom-in",
             "label": "t:settings_schema.animation.settings.scroll_animation.zoom"
           }
         ]

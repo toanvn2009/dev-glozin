@@ -66,7 +66,7 @@ class GridMode extends HTMLElement {
     if (this.classList.contains('active')) return;
     const view_mode = this.getAttribute('data-grid-mode');
     if (view_mode == 1) return;
-  await motion.animate(
+  await Motion.animate(
       document.querySelectorAll(
         'motion-element.product-item__wrapper.slide_in'
       ),
@@ -77,7 +77,7 @@ class GridMode extends HTMLElement {
       },
       {
         duration: 0.3,
-        delay: motion.stagger(0.05),
+        delay: Motion.stagger(0.05),
         easing: [0, 0, 0.3, 1],
       }
     );
@@ -94,7 +94,7 @@ class GridMode extends HTMLElement {
     container_switch.classList.remove('grid-columns-' + data_view_mode);
     container_switch.setAttribute('data-view-mode', view_mode);
     container_switch.classList.add('grid-columns-' + view_mode);
-    motion.animate(
+    Motion.animate(
       document.querySelectorAll(
         'motion-element.product-item__wrapper.slide_in'
       ),
@@ -105,7 +105,7 @@ class GridMode extends HTMLElement {
       },
       {
         duration: 0.3,
-        delay: motion.stagger(0.1),
+        delay: Motion.stagger(0.1),
         easing: [0, 0, 0.3, 1],
       }
     );
@@ -396,8 +396,6 @@ var eventCollectionShopify = (function () {
 
     renderSectionFilter: function (url, searchParams) {
       this.toggleLoading(document.body, true);
-      const grid_list = document.querySelector('grid-list')
-      grid_list.hideGridItems();
       fetch(`${url}`)
         .then((response) => {
           if (!response.ok) {
@@ -452,13 +450,15 @@ var eventCollectionShopify = (function () {
             });
           }
           this.toggleLoading(document.body, false);
-          
         })
         .catch((error) => {
           throw error;
         })
         .finally(() => {
-          grid_list?.showGridItems();
+          const motionCollection = document.querySelector(".motion-collection");
+          if (motionCollection) {
+            motionCollection.reloadAnimationEffect();
+          }
           initLazyloadItem();
           BlsLazyloadImg.init();
           eventCollectionShopify.ionRangeSlider();

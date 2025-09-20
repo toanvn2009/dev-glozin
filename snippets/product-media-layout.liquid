@@ -9,6 +9,10 @@
     assign enable_video_looping = section_st.enable_video_looping
     assign enable_video_autoplay = section_st.enable_video_autoplay
   endif
+  assign lazy_product = true
+  if type == 'quickview'
+    assign lazy_product = false
+  endif
 %}
 {% for image in images %}
   {% if image.alt == 'image-360' and image.media_type == 'image' %}
@@ -46,7 +50,12 @@
     {% if image.alt == 'image-360' and image.media_type == 'image' %}
       <div class="{{ custom_class }}" style="--aspect-ratio: {{ ratio }}">
         {%- assign image_alt = image.alt | default: 'product' | escape -%}
-        {% render 'responsive-image', type: 'product', image: image.preview_image, image_alt: image_alt %}
+        {% render 'responsive-image',
+          type: 'product',
+          image: image.preview_image,
+          image_alt: image_alt,
+          lazy_product: lazy_product
+        %}
       </div>
       {% break %}
     {% endif %}
@@ -61,7 +70,7 @@
       class="cloudimage-360{{ custom_class }} rounded-5"
       data-fullscreen="true"
       {% comment %} product 360 will not work if use "" on data-image-list-x {% endcomment %}
-      data-image-list-x='[{{ image_list }}]'
+      data-image-list-x="[{{ image_list }}]"
       data-autoplay="true"
       data-play-once="true"
       data-speed="150"
@@ -115,7 +124,7 @@
             {% endif %}
         {%- endcapture -%}
       <div
-        class="media-gallery__external-video{{ custom_class }} rounded-5"
+        class="media-gallery__external-video {{ custom_class }} rounded-5"
         style="--aspect-ratio: {{ ratio }}"
       >
         {% if is_thumbnail == true %}
@@ -124,7 +133,8 @@
             type: 'product',
             image: featured_media.preview_image,
             image_alt: image_alt,
-            no_animate: true
+            no_animate: true,
+            lazy_product: lazy_product
           %}
         {% else %}
           {%- if featured_media.host == 'youtube' -%}
@@ -173,7 +183,8 @@
             image: featured_media.preview_image,
             image_alt: image_alt,
             class: 'rounded-5',
-            no_animate: true
+            no_animate: true,
+            lazy_product: lazy_product
           %}
           <svg
             width="22"
@@ -216,7 +227,8 @@
             image: featured_media.preview_image,
             image_alt: image_alt,
             class: 'rounded-5',
-            no_animate: true
+            no_animate: true,
+            lazy_product: lazy_product
           %}
           <svg width="22" height="22" fill="none" class="absolute product_media-model-icon rounded-3">
             <rect width="22" height="22" fill="#111" rx="2"/><path fill="#fff" d="M15.4 8.063 12.104 6.16a1.203 1.203 0 0 0-1.2 0L7.6 8.063A1.198 1.198 0 0 0 7 9.1v3.8a1.194 1.194 0 0 0 .6 1.037l3.304 1.903a1.203 1.203 0 0 0 1.2 0l3.296-1.903A1.198 1.198 0 0 0 16 12.9V9.1a1.193 1.193 0 0 0-.6-1.037Zm-4.096 7.087L8 13.247a.4.4 0 0 1-.2-.347V9.1a.398.398 0 0 1 .2-.347l3.304-1.903a.401.401 0 0 1 .2-.052c.07 0 .139.018.2.052L15 8.753c.064.036.115.09.148.155l-3.152 1.803a1.005 1.005 0 0 0-.492.873v3.626a.437.437 0 0 1-.2-.06Z"/>
@@ -236,7 +248,8 @@
                 {% render 'responsive-image',
                   type: 'product',
                   image: featured_media.preview_image,
-                  image_alt: image_alt
+                  image_alt: image_alt,
+                  lazy_product: lazy_product
                 %}
               </button>
               <template>
@@ -265,10 +278,9 @@
       {% if featured_media.alt != 'image-360' %}
         {% if zoom_type != 'no_zoom' %}
           <a
-           
-            {%  if zoom_type == 'no_zoom' or zoom_type == 'open_lightbox' %}
-               href="{{ featured_media.preview_image | image_url }}"
-            {%  endif %}   
+            {% if zoom_type == 'no_zoom' or zoom_type == 'open_lightbox' %}
+              href="{{ featured_media.preview_image | image_url }}"
+            {% endif %}
             class="media-gallery__image {{ custom_class }} rounded-5 pointer 1"
             {% if is_thumbnail == null or is_thumbnail == false %}
               data-position="{{ media_position }}"
@@ -294,7 +306,8 @@
             type: 'product',
             image: featured_media.preview_image,
             image_alt: image_alt,
-            class: 'drift-trigger'
+            class: 'drift-trigger',
+            lazy_product: lazy_product
           %}
           {% if zoom_type == 'open_lightbox' %}
             <button class="zoom_light_box">
@@ -309,17 +322,18 @@
               image: featured_media.preview_image,
               image_alt: image_alt,
               class: 'nn',
-              no_animate: true
+              no_animate: true,
+              lazy_product: lazy_product
             %}
           {% else %}
             {% render 'responsive-image',
               type: 'product',
               image: featured_media.preview_image,
               image_alt: image_alt,
-              class: 'nn quickview'
+              class: 'quickview',
+              lazy_product: lazy_product
             %}
           {% endif %}
-         
         {% endif %}
         {% if zoom_type != 'no_zoom' %}
           </a>
@@ -369,7 +383,7 @@
               {% endif %}
           {%- endcapture -%}
         <div
-          class="media-gallery__external-video{{ custom_class }} rounded-5"
+          class="media-gallery__external-video {{ custom_class }} rounded-5 pointer"
           style="--aspect-ratio: {{ ratio }}"
         >
           {% if is_thumbnail == true %}
@@ -378,8 +392,19 @@
               type: 'product',
               image: image.preview_image,
               image_alt: image_alt,
-              no_animate: true
+              no_animate: true,
+              lazy_product: lazy_product
             %}
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 22 22"
+              fill="none"
+              class="absolute product_media-model-icon rounded-3"
+            >
+              <rect width="22" height="22" rx="2" fill="#111111"></rect>
+              <path d="M14.7181 10.4268L9.07977 6.13623C8.87285 5.97921 8.59817 5.95557 8.37137 6.07759C8.14277 6.19866 8 6.44459 8 6.71039V15.2887C8 15.5573 8.14277 15.8023 8.37137 15.9234C8.46805 15.9745 8.57377 16 8.68039 16C8.81954 16 8.9605 15.9537 9.07977 15.8619L14.7181 11.5751C14.8961 11.438 15 11.2261 15 11.001C15.0009 10.7721 14.8943 10.5611 14.7181 10.4268Z" fill="white"></path>
+            </svg>
           {% else %}
             {%- if image.host == 'youtube' -%}
               <iframe
@@ -407,7 +432,7 @@
           {%- endif -%}
       {%- endcapture -%}
         <div
-          class="media-gallery__local-video {{ custom_class }} rounded-5 w-full"
+          class="media-gallery__local-video {{ custom_class }} rounded-5 w-full pointer"
           style="--aspect-ratio: {{ ratio }}"
         >
           {%- liquid
@@ -427,7 +452,8 @@
               image: image.preview_image,
               image_alt: image_alt,
               class: 'rounded-5',
-              no_animate: true
+              no_animate: true,
+              lazy_product: lazy_product
             %}
             <svg
               width="22"
@@ -458,7 +484,7 @@
       {%- when 'model' -%}
         {% comment %} Case product 3d {% endcomment %}
         <div
-          class="media-gallery__model {{ custom_class }} rounded-5 pointer"
+          class="media-gallery__model {{ custom_class }} rounded-5 pointer pointer"
           {% if is_thumbnail == true %}
             style="--aspect-ratio: {{ ratio }}"
           {% endif %}
@@ -470,7 +496,8 @@
               image: image.preview_image,
               image_alt: image_alt,
               class: 'rounded-5',
-              no_animate: true
+              no_animate: true,
+              lazy_product: lazy_product
             %}
             <svg width="22" height="22" fill="none" class="absolute product_media-model-icon rounded-3">
               <rect width="22" height="22" fill="#111" rx="2"/><path fill="#fff" d="M15.4 8.063 12.104 6.16a1.203 1.203 0 0 0-1.2 0L7.6 8.063A1.198 1.198 0 0 0 7 9.1v3.8a1.194 1.194 0 0 0 .6 1.037l3.304 1.903a1.203 1.203 0 0 0 1.2 0l3.296-1.903A1.198 1.198 0 0 0 16 12.9V9.1a1.193 1.193 0 0 0-.6-1.037Zm-4.096 7.087L8 13.247a.4.4 0 0 1-.2-.347V9.1a.398.398 0 0 1 .2-.347l3.304-1.903a.401.401 0 0 1 .2-.052c.07 0 .139.018.2.052L15 8.753c.064.036.115.09.148.155l-3.152 1.803a1.005 1.005 0 0 0-.492.873v3.626a.437.437 0 0 1-.2-.06Z"/>
@@ -487,7 +514,12 @@
                     {%- render 'icon-3d-model' -%}
                   </span>
                   {%- assign image_alt = image.alt | default: 'product' | escape -%}
-                  {% render 'responsive-image', type: 'product', image: image.preview_image, image_alt: image_alt %}
+                  {% render 'responsive-image',
+                    type: 'product',
+                    image: image.preview_image,
+                    image_alt: image_alt,
+                    lazy_product: lazy_product
+                  %}
                 </button>
                 <template>
                   {%- liquid
@@ -515,9 +547,9 @@
         {% if image.alt != 'image-360' %}
           {% if zoom_type != 'no_zoom' %}
             <a
-              {%  if zoom_type == 'no_zoom' or zoom_type == 'open_lightbox' %}
+              {% if zoom_type == 'no_zoom' or zoom_type == 'open_lightbox' %}
                 href="{{ image.preview_image | image_url }}"
-              {%  endif %}             
+              {% endif %}
               class="media-gallery__image {{ custom_class }} rounded-5 pointer"
               {% if is_thumbnail == null or is_thumbnail == false %}
                 data-position="{{ media_position }}"
@@ -543,7 +575,8 @@
               type: 'product',
               image: image.preview_image,
               image_alt: image_alt,
-              class: 'drift-trigger'
+              class: 'drift-trigger',
+              lazy_product: lazy_product
             %}
             {% if zoom_type == 'open_lightbox' %}
               {% liquid
@@ -565,10 +598,16 @@
                 type: 'product',
                 image: image.preview_image,
                 image_alt: image_alt,
-                no_animate: true
+                no_animate: true,
+                lazy_product: lazy_product
               %}
             {% else %}
-              {% render 'responsive-image', type: 'product', image: image.preview_image, image_alt: image_alt %}
+              {% render 'responsive-image',
+                type: 'product',
+                image: image.preview_image,
+                image_alt: image_alt,
+                lazy_product: lazy_product
+              %}
             {% endif %}
           {% endif %}
           {% if zoom_type != 'no_zoom' %}

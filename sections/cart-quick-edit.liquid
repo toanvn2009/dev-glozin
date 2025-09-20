@@ -8,6 +8,8 @@
   assign hidden_price = theme_st.hidden_price
   assign swatch_item_type = theme_st.swatch_item_type
   assign show_quantity = theme_st.show_quantity_input
+  assign product_image_ratio = theme_st.product_image_ratio
+  assign product_custom_ratio = theme_st.product_custom_ratio
 -%}
 <div id="product-form-quick-edit" data-template-quick-cart-edit>
   <product-form-quick-edit class="product-form">
@@ -39,8 +41,32 @@
           <div class="product__media w-custom flex-auto" style="--custom-width: 10.5rem;">
             {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
             {% if featured_media != blank %}
+              {% liquid
+                if product_image_ratio != 'adapt'
+                  case product_image_ratio
+                    when 'square'
+                      assign ratio = '1/1'
+                    when 'landscape'
+                      assign ratio = '4/3'
+                    when 'portrait'
+                      assign ratio = '3/4'
+                    else
+                      if product_custom_ratio != empty
+                        assign ratio = product_custom_ratio | replace: ':', '/'
+                      else
+                        assign ratio = '3/4'
+                      endif
+                  endcase
+                else
+                  if featured_media.media_type == 'model'
+                    assign ratio = '3/4'
+                  else
+                    assign ratio = featured_media.aspect_ratio
+                  endif
+                endif
+              %}
               {%- assign image_alt = featured_media.alt | default: 'product' -%}
-              <div class="product-pickup-img">
+              <div class="product-pickup-img" style="--aspect-ratio: {{ ratio }};">
                 {% render 'responsive-image',
                   type: 'product',
                   image: featured_media,
@@ -73,14 +99,14 @@
           </div>
           <div class="product__info flex-1 flex flex-column">
             <h3
-              class="product-item__name unset heading-style no-underline fs-custom block lh-normal my-0"
-              style="--font-size: {{ settings.product_size }}"
+              class="product-item__name unset heading-style no-underline fs-custom fw-custom block lh-normal my-0"
+              style="--font-size: {{ settings.product_size }};--font-weight: {{ settings.product_font_weight }};"
             >
               {{ product.title }}
             </h3>
             {% if hidden_price == false %}
               <div class="product__price price mb-15">
-                {%- render 'price' | scope: 'item' | product: product,  class: 'flex gap-5 mt-5' -%}
+                {%- render 'price' | scope: 'detail' | product: product,  class: 'flex gap-5 mt-5' -%}
               </div>
             {% endif %}
             <div
@@ -201,7 +227,9 @@
                       data-value="{% if is_color_option %}{{ value }}{% else %}{{ value | escape }}{% endif %}"
                       data-color="{{ value | downcase }}"
                       data-custom-value="custom__color-swatches--{{ value | downcase | replace: ' ', '-' | replace: '"', "'" }}"
-                      data-image="{{ img | image_url: width: 100, height: 100 }}"
+                      {% if img != blank %}
+                        data-image="{{ img | image_url: width: 100, height: 100 }}"
+                      {% endif %}
                       {% if is_color_option %}
                         data-swatch-type="{{ swatch_item_type }}"
                         style="background-color: {{ value | downcase }};"

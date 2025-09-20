@@ -47,3 +47,28 @@
     display: -webkit-box;
   }
 }
+.type-grid,
+.type-carousel{
+  gap: var(--col-gap);
+}
+@media (min-width: 1025px) {
+  .type-grid,
+  .type-carousel{
+    display: flex;
+    gap: var(--col-gap-desktop);
+    align-items:  center;
+  }
+  .type-grid .block_header,
+  .type-carousel .block_header{
+    flex: calc(2/12 * 100%);
+  }
+  .type-grid grid-custom,
+  .type-carousel slide-section{
+    flex: calc(10/12 * 100%);
+  }
+}
+@media (max-width: 1024.992px) {
+  .block_header{
+    margin-bottom: 3rem;
+  }
+}

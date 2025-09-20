@@ -38,17 +38,8 @@
   -%}
   --aspect-ratio: {{ ratio }};
 {%- endcapture -%}
-<motion-element
-  data-motion="fade-up-lg"
-  {% if scroll_animation != 'slide_in' or search_card == true %}
-    hold
-  {% endif %}
-  data-motion-delay="{{ indexFor | times:  75  }}"
-  class="blog-posts-item  {% if pagination == 'load_more_button' or pagination == 'infinit_scrolling' %} loadmore-item{% endif %}{% if layout == 'list' %} flex gap align-center flex-wrap flex-sm-nowrap {% else %} block {% endif %}{% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %}"
-  {% if indexFor and scroll_animation %}
-    data-cascade
-    style="--animation-order: {{ indexFor }};"
-  {% endif %}
+<div
+  class="blog-posts-item {{ class }} {% if pagination == 'load_more_button' or pagination == 'infinit_scrolling' %} loadmore-item{% endif %}{% if layout == 'list' %} flex gap align-center flex-wrap flex-sm-nowrap {% else %} block {% endif %}"
 >
   {% assign blog_name = article.handle | split: '/' | first %}
   <div class="blog-posts-image hover-effect{% if layout == 'list' %} w-full col-sm-w-custom{% endif %}">
@@ -136,4 +127,4 @@
       </a>
     {%- endif -%}
   </div>
-</motion-element>
+</div>

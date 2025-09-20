@@ -98,7 +98,11 @@
     quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`,
     money_format: {{ money_format | json }},
     quick_edit: `{{ 'sections.cart.quick_edit' | t }}`,
-    cart_symbol: '{{ cart.currency.symbol }}'
+    cart_symbol: '{{ cart.currency.symbol }}',
+    discount_removed: `{{ 'general.content.discount_code_remove' | t }}`,
+    discount_applied: `{{ 'general.content.discount_code_applied' | t }}`,
+    discount_already: `{{ 'general.content.discount_code_already' | t }}`,
+    discount_error: `{{ 'general.content.discount_code_error' | t }}`
   }
       
   window.themeGlobalVariables = {
@@ -122,6 +126,7 @@
     addGiftCard: `{{ 'products.product.addGiftCard' | t  }}`,
     removeCartItem: `{{ 'products.product.removeCartItem' | t }}`,
     unavailable_with_option: `{{ 'products.product.value_unavailable' | t: option_value: '[value]' }}`,
+    sale: `{{ 'products.product.label.sale_label' | t }}`
   };
 
   window.flashingBrowseTab = {

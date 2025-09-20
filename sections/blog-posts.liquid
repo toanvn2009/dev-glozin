@@ -36,6 +36,7 @@
     assign data_free_scroll = 'true'
   endif
   assign scroll_animation = settings.scroll_animation
+  assign animate_delay = 0
 -%}
 {%- capture style -%}
   --section-pt: {{ section_st.padding_top }}; --section-pb: {{ section_st.padding_bottom }};
@@ -82,40 +83,31 @@
           <div class="secion__header-inner">
             {%- if section_st.heading != blank -%}
               <motion-element
-                data-motion="fade-up-lg"
-                data-motion-delay="50"
-                {% if scroll_animation != 'slide_in' %}
+                data-motion="{{ scroll_animation }}"
+                data-motion-delay="{{ animate_delay }}"
+                {% if scroll_animation == 'none' %}
                   hold
                 {% endif %}
-                class="block  {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %}"
-                style="
-                  {%- if scroll_animation != 'none' -%}
-                    --animation-order: 0;
-                  {% endif %}
-                "
+                class="block"
               >
                 <h2
                   class="section__header-heading heading-letter-spacing  {{ header_size  }} mt-0{% if section_st.description != blank %} mb-10{% else %} mb-0{% endif %}"
                 >
-                  {{ section_st.heading }}
+                  {{ section.settings.heading }}
                 </h2>
               </motion-element>
             {% endif %}
             {%- if section_st.description != blank -%}
+              {% assign animate_delay = animate_delay | plus: 50 %}
               <motion-element
-                data-motion="fade-up-lg"
-                data-motion-delay="150"
-                {% if scroll_animation != 'slide_in' %}
+                data-motion="{{ scroll_animation }}"
+                data-motion-delay="{{ animate_delay }}"
+                {% if scroll_animation == 'none' %}
                   hold
                 {% endif %}
-                class="section__header-des block rich__text-m0 {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %}"
-                style="
-                  {%- if scroll_animation != 'none' -%}
-                    --animation-order: 1
-                  {% endif %}
-                "
+                class="section__header-des block rich__text-m0"
               >
-                {{ section_st.description }}
+                {{ section.settings.description }}
               </motion-element>
             {% endif %}
           </div>
@@ -132,6 +124,9 @@
       </div>
     {% endif %}
     <div class="blog-posts-main {{ design }}">
+      {% if scroll_animation %}
+        <motion-items-effect data-motion="{{ scroll_animation }}">
+      {% endif %}
       {% if section_st.items_per_row_mobile > 1 and section_st.items_per_row_mobile < 2 %}
         <div class="free-scroll">
       {% endif %}
@@ -184,7 +179,8 @@
                   column_gap: column_gap,
                   image_ratio: image_ratio,
                   custom_ratio: custom_ratio,
-                  indexFor: forloop.index
+                  indexFor: forloop.index,
+                  class: 'motion-item'
                 -%}
               </div>
             {%- endfor -%}
@@ -193,16 +189,10 @@
             or carousel_pagination == 'show_dots_on_mobile'
             or carousel_pagination == 'show_progress_bar'
           -%}
-          <motion-element
-            data-motion="fade-up-sm"
-            {% if scroll_animation != 'slide_in' %}
-              hold
-            {% endif %}
-            data-motion-delay="150"
-            class="swiper-pagination  flex flex-wrap  {% if scroll_animation == 'slide_in' %} slide_in scroll-trigger {% endif %}   px-15 lh-1 bottom-30 {% if carousel_pagination == 'show_dots_on_mobile' %} hidden-md{% endif %} justify-content-center{% if section_st.content_below_image %} absolute-md-impo{% endif %}"
-            style="--swiper-pagination-bottom: 3rem;--swiper-pagination-position: static;z-index: 2"
-          >   
-          </motion-element>
+            <div
+              class="swiper-pagination  flex flex-wrap px-15 lh-1 bottom-30 {% if carousel_pagination == 'show_dots_on_mobile' %} hidden-md{% endif %} justify-content-center{% if section_st.content_below_image %} absolute-md-impo{% endif %}"
+              style="--swiper-pagination-bottom: 3rem;--swiper-pagination-position: static;z-index: 2"
+            ></div>
           {% endif %}
         </slide-section>
       {%- else -%}
@@ -226,27 +216,10 @@
           <div class="swiper-wrapper">
             {% for i in (1..items_to_show) %}
               <div
-                class="swiper-slide "
+                class="swiper-slide"
               >
-                {% if items_per_row > items_to_show %}
-                  {% assign add_animation = true %}
-
-                {% else %}
-                  {% if forloop.index <= items_per_row %}
-                    {% assign add_animation = true %}
-                  {% endif %}
-                {% endif %}
-                <motion-element
-                  data-motion="fade-up-lg"
-                  {% if scroll_animation != 'slide_in' %}
-                    hold
-                  {% endif %}
-                  data-motion-delay="{{ forloop.index0 | times: 50 }}"
-                  class="blog-posts-item block {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %}"
-                  {% if scroll_animation and add_animation == true %}
-                    data-cascade
-                    style="--animation-order: {{ i }};"
-                  {% endif %}
+                <div
+                  class="blog-posts-item block motion-item"
                 >
                   <div class="blog-posts-image rounded hover-effect" style="{{ style_ratio | strip | strip_newlines }}">
                     {% render 'placeholder-render', class: 'rounded transition' %}
@@ -296,7 +269,7 @@
                       {% endif %}
                     </div>
                   </div>
-                </motion-element>
+                </div>
               </div>
             {% endfor %}
           </div>
@@ -304,21 +277,19 @@
             or carousel_pagination == 'show_dots_on_mobile'
             or carousel_pagination == 'show_progress_bar'
           -%}
-          <motion-element
-            data-motion="fade-up-sm"
-            {% if scroll_animation != 'slide_in' %}
-              hold
-            {% endif %}
-            data-motion-delay="150"
-            class="swiper-pagination  flex flex-wrap  {% if scroll_animation == 'slide_in' %} slide_in scroll-trigger {% endif %}   px-15 lh-1 bottom-30 {% if carousel_pagination == 'show_dots_on_mobile' %} hidden-md{% endif %} justify-content-center{% if section_st.content_below_image %} absolute-md-impo{% endif %}"
-            style="--swiper-pagination-bottom: 3rem;--swiper-pagination-position: static;z-index: 2"
-          >   
-          </motion-element>
+            <div
+              class="swiper-pagination  flex flex-wrap px-15 lh-1 bottom-30 {% if carousel_pagination == 'show_dots_on_mobile' %} hidden-md{% endif %} justify-content-center{% if section_st.content_below_image %} absolute-md-impo{% endif %}"
+              style="--swiper-pagination-bottom: 3rem;--swiper-pagination-position: static;z-index: 2"
+            >
+            </div>
           {% endif %}
         </slide-section>
       {% endif %}
       {% if section_st.items_per_row_mobile > 1 and section_st.items_per_row_mobile < 2 %}
         </div>
+      {% endif %}
+      {% if scroll_animation %}
+        </motion-items-effect>
       {% endif %}
       {% if section_st.show_view_all != blank and section_st.header_alignment == 'center' %}
         <div class="text-center mt-30">
@@ -677,7 +648,8 @@
   ],
   "presets": [
     {
-      "name": "t:sections.blog-post.presets.name"
+      "name": "t:sections.blog-post.presets.name",
+      "category": "t:categories.blog"
     }
   ]
 }

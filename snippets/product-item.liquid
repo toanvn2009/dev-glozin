@@ -73,21 +73,14 @@
       data-mobile-layout="{{ section_st.mobile_options }}"
       data-zoom="{{ section_st.image_zoom }}"
     {% endif %}
+    data-update-url="false"
   >
-    <motion-element
-      class="product-item__wrapper block {% if direction == 'horizontal' %} flex-column  {% endif %} {{settings.product_hover_effect }}{% if type == 'list' or type == 'sticky' %} flex gap-custom align-center{% else %} product-grid{% endif %} {% if scroll_animation != 'none' and scroll_animation != null %} scroll-trigger {{ scroll_animation }} {% endif %}"
-      {% if indexFor and scroll_animation %}
-        data-cascade
-      {% endif %}
-      data-motion="fade-up-lg"
-      {% if scroll_animation != 'slide_in' or collection_product == true %}
-        hold
-      {% endif %}
+    <div
+      class="product-item__wrapper block {% if direction == 'horizontal' %} flex-column  {% endif %} {{settings.product_hover_effect }}{% if type == 'list' or type == 'sticky' %} flex gap-custom align-center{% else %} product-grid{% endif %}"
       {% if collection_product == true %}
         data-margin="0px 0px 5 0px"
       {% endif %}
-      data-motion-delay="{{ indexFor | minus: 1 | times: 50 }}"
-      style="{% if indexFor and scroll_animation %}--animation-order: {{ indexFor }};  {% endif %}{% if type == 'list' %}--gap: 15{% endif %}"
+      style="{% if type == 'list' %}--gap: 15{% endif %}"
     >
       {% comment %} Product inner media {% endcomment %}
       <div class="product-item__inner hover-effect overflow-hidden relative{% if type == 'list' or type == 'sticky' %} col-w-custom{% endif %}">
@@ -189,18 +182,10 @@
                   colunm_mobile: colunm_mobile,
                   padding: padding,
                   custom_widths: custom_widths,
-                  sizes: sizes
+                  sizes: sizes,
+                  lazy_product: lazy_product
                 %}
               {% else %}
-                {% if scroll_animation == 'slide_in' and settings.zoom_image ==true  %}
-                  <motion-element
-                    data-motion="zoom-out-sm"
-                    data-image
-                    data-motion-delay="{{ indexFor | times:  75  }}"
-                    class="block absolute"
-                    style="--aspect-ratio: {{ ratio }};"
-                  >
-                {% endif %}
                 {% render 'responsive-image',
                   type: 'product',
                   class: 'product-image first-image',
@@ -211,23 +196,11 @@
                   colunm_mobile: colunm_mobile,
                   padding: padding,
                   custom_widths: custom_widths,
-                  sizes: sizes
+                  sizes: sizes,
+                  lazy_product: lazy_product
                 %}
-                {% if scroll_animation == 'slide_in' and settings.zoom_image ==true %}
-                  </motion-element>
-                {% endif %}
               {% endif %}
-
             {% else %}
-              {% if scroll_animation == 'slide_in' and settings.zoom_image ==true %}
-                <motion-element
-                  data-motion="zoom-out-sm"
-                  data-motion-delay="{{ indexFor | times:  75  }}"
-                  class="block absolute"
-                  data-image
-                  style="--aspect-ratio: {{ ratio }};"
-                >
-              {% endif %}
               {% render 'responsive-image',
                 type: 'product',
                 class: 'product-image first-image',
@@ -238,15 +211,13 @@
                 colunm_mobile: colunm_mobile,
                 padding: padding,
                 custom_widths: custom_widths,
-                sizes: sizes
+                sizes: sizes,
+                lazy_product: lazy_product
               %}
-              {% if scroll_animation == 'slide_in' and settings.zoom_image ==true %}
-                </motion-element>
-              {% endif %}
               {%- liquid
                 if card_product.media[1] != blank and show_secondary_image
                   assign alt_features = card_product.media[1].alt | default: card_product.title | escape
-                  render 'responsive-image', type: 'product', class: 'secondary-image opacity-0 product-image', image: card_product.media[1], image_alt: alt_features, container: container, colunm: colunm, colunm_mobile: colunm_mobile, padding: padding, custom_widths: custom_widths, sizes: sizes
+                  render 'responsive-image', type: 'product', class: 'secondary-image opacity-0 product-image', image: card_product.media[1], image_alt: alt_features, container: container, colunm: colunm, colunm_mobile: colunm_mobile, padding: padding, custom_widths: custom_widths, sizes: sizes, lazy_product: lazy_product
                 endif
               -%}
             {% endif %}
@@ -516,8 +487,9 @@
         {% if type != 'product-set' %}
           <a
             aria-label="{{ card_product.title }}"
-            class="{% if product_truncation_title != 'none' %}product-title__truncate {% endif %}product-item__name {{ settings.product_name_text_transform }} heading-style no-underline fs-custom block lh-normal"
-            style="--font-size: {{ settings.product_size }};{% if product_truncation_title != 'none' %} --line-clamp: {{ product_truncation_title }};{% endif %}"            {% if template_disable_product_url == true %}
+            class="{% if product_truncation_title != 'none' %}product-title__truncate {% endif %}product-item__name {{ settings.product_name_text_transform }} heading-style no-underline fs-custom fw-custom block lh-normal"
+            style="--font-weight: {{ settings.product_font_weight }};--font-size: {{ settings.product_size }};{% if product_truncation_title != 'none' %} --line-clamp: {{ product_truncation_title }};{% endif %}"
+            {% if template_disable_product_url == true %}
               role="link" aria-disabled="true"
             {% else %}
               href="{{ card_product.url }}"
@@ -547,8 +519,8 @@
         {% if template_enable_price == true %}
           {% if hidden_price != true %}
             <div
-              class="product-item__price{% if type == 'list' or type == 'sticky' %} text-start{% else %} justify-content-{{ settings.product_alignment }} fs-custom{% endif %} flex gap-custom lh-normal {{ priceclass }}"
-              style="--font-size: {{ settings.price_size }}; --gap: 3px;"
+              class="product-item__price{% if type == 'list' or type == 'sticky' %} text-start{% else %} justify-content-{{ settings.product_alignment }} fs-custom fw-custom{% endif %} flex gap-custom lh-normal {{ priceclass }}"
+              style="--font-size: {{ settings.price_size }}; --gap: 3px;--heading-weight: {{ settings.price_font_weight }}"
             >
               {%- render 'price', scope: 'item', product: card_product, show_badges: false, class: priceclass -%}
             </div>
@@ -843,7 +815,7 @@
           </script>
         {%- endunless -%}
       {% endif %}
-    </motion-element>
+    </div>
     {%- unless card_product.has_only_default_variant -%}
       <script type="application/json" class="productItemVariantsQty">
         [
@@ -865,21 +837,10 @@
   </div>
 {% else %}
   {% comment %} Case card product has no data, handle default data with shopify placeholder {% endcomment %}
-  <div class="product-item{{ class }} {{ product_style }}">
-    <motion-element
-      {% if indexFor and scroll_animation %}
-        data-cascade
-      {% endif %}
-      data-motion="fade-up-lg"
-      {% if scroll_animation != 'slide_in' or collection_product == true %}
-        hold
-      {% endif %}
-      {% if collection_product == true %}
-        data-margin="0px 0px 5 0px"
-      {% endif %}
-      data-motion-delay="{{ indexFor | minus: 1 | times: 50  }}"
-      style="{% if indexFor and scroll_animation %}--animation-order: {{ indexFor }};  {% endif %}{% if type == 'list' %}--gap: 15{% endif %}"
-      class="product-item__wrapper  {% if type == 'list' or type == 'sticky' %} flex gap-15{% else %} product-grid block{% endif %}{% if scroll_animation != 'none' and scroll_animation != null %} scroll-trigger {{ scroll_animation }}  {% endif %} {%if direction == 'horizontal' %} flex-column {% endif %}"
+  <div class="product-item {{ class }} {{ product_style }}">
+    <div
+      style="{% if type == 'list' %}--gap: 15{% endif %}"
+      class="product-item__wrapper  {% if type == 'list' or type == 'sticky' %} flex gap-15{% else %} product-grid block{% endif %} {% if direction == 'horizontal' %} flex-column {% endif %}"
     >
       <div class="product-item__inner relative{% if type == 'list' or type == 'sticky' %} col-w-custom{% endif %}">
         <div class="product-item__media">
@@ -919,7 +880,7 @@
           </a>
         </div>
       </div>
-      <div class="product-item__information word-break{% if type == 'list' or type == 'sticky' %} text-start align-self-center type-list{% else %} text-{{ settings.product_alignment }} mt-15{% endif %}">
+      <div class="product-item__information title-placholder word-break{% if type == 'list' or type == 'sticky' %} text-start align-self-center type-list{% else %} text-{{ settings.product_alignment }} mt-15{% endif %}">
         <a
           draggable="false"
           aria-disabled="true"
@@ -931,12 +892,12 @@
           {{ 'onboarding.product_title_example' | t }}
         </a>
         <div
-          class="product-item__price mt-5 justify-content-{{ settings.product_alignment }} fs-custom flex"
-          style="--font-size: {{ settings.price_size }}"
+          class="product-item__price mt-5 {% if type != 'list' %}justify-content-{{ settings.product_alignment }}{% endif %} fs-custom fw-custom flex"
+          style="--font-size: {{ settings.price_size }};--heading-weight: {{ settings.price_font_weight }}"
         >
           {%- render 'price' | scope: 'item', show_badges: false, class: priceclass -%}
         </div>
       </div>
-    </motion-element>
+    </div>
   </div>
 {% endif %}

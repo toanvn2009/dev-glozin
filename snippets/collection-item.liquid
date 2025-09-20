@@ -65,7 +65,7 @@
 {% comment %} Case card collection has data, handle data {% endcomment %}
 {% if card_collection and card_collection != empty %}
   <div
-    class="collection-item__wrapper relative"
+    class="collection-item__wrapper relative {{ class }}"
   >
     {% comment %} collection inner media {% endcomment %}
     <div
@@ -117,7 +117,7 @@
     <div
       class="collection-item__information{% if collection_information_position == 'below_image' %} mt-custom{% else %} absolute inset-x-15 bottom-15 inset-x-md-30 bottom-md-30 z-3 flex justify-content-{{ section_st.text_alignment }}{% endif %} text-{{ section_st.text_alignment }}{% if collection_information_position == 'overlay_image' and  design == 'morden' %} flex-column align-item-{{  section_st.text_alignment }} gap-5{% endif %}"
       {% if collection_information_position == 'below_image' %}
-        style="--space-top: {{ section_st.information_spacing }}px;"
+        style="--space-top: {{ section_st.information_spacing }};"
       {% endif %}
     >
       {% comment %} collection item title {% endcomment %}
@@ -224,7 +224,7 @@
 {% else %}
   {% comment %} Case card collection has no data, handle default data with shopify placeholder {% endcomment %}
   <div
-    class="collection-item__wrapper relative"
+    class="collection-item__wrapper relative {{ class }}"
   >
     <div
       class="collection-item__media relative{% if collection_information_position == 'overlay_image' %} {{ design }} {% endif %} rounded overflow-hidden{% if collection_information_position == 'below_image' and image_custom_width %} w-custom max-w-100{% if section_st.text_alignment == 'left' %} me-auto{% elsif section_st.text_alignment == 'right' %} ms-auto{% else %} mx-auto{% endif %}{% endif %}{% if collection_information_position == 'below_image' and rounded_image %} rounded-50 overflow-hidden{% endif %}"
@@ -255,7 +255,7 @@
     <div
       class="collection-item__information{% if collection_information_position == 'below_image' %} mt-custom{% else %} absolute inset-x-15 bottom-15 inset-x-md-30 bottom-md-30 z-3 flex justify-content-{{ section_st.text_alignment }} {% endif %} text-{{ section_st.text_alignment }}{% if collection_information_position == 'overlay_image' and  design == 'morden' %} flex-column align-item-{{  section_st.text_alignment }} gap-5{% endif %}"
       {% if collection_information_position == 'below_image' %}
-        style="--space-top: {{ section_st.information_spacing }}px;"
+        style="--space-top: {{ section_st.information_spacing }};"
       {% endif %}
     >
       {% if collection_information_position == 'overlay_image' and section_st.show_icon and design == 'morden' %}

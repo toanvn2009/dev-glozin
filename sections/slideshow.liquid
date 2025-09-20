@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="{{ 'slideshow.css' | asset_url }}" media="print" onload="this.media='all'">
 {% liquid
   assign section_st = section.settings
-  assign theme_st  = settings
   assign section_width = section_st.section_width
   assign slide_height = section_st.slide_height
   assign color_scheme = section_st.color_scheme
@@ -15,7 +14,10 @@
   if section_st.reset_spacing
     assign reset_spacing = ' remove_spacing'
   endif
-  assign enable_preload = theme_st.enable_preload
+  assign reveal_slideshow = section_st.reveal_slideshow
+  if reveal_slideshow
+    assign slide_effect = 'slide'
+  endif
 %}
 {%- capture video_attribute -%}
     muted autoplay
@@ -39,13 +41,14 @@
         data-section-id="{{ section.id }}"
         data-autoplay="{{ autoplay }}"
         data-autoplay-speed="{{ autorotate_speed }}"
-        data-effect="{{ slide_effect }}"
+        data-effect="{% if reveal_slideshow %}slide{% else %}{{ slide_effect }}{% endif %}"
         data-loop="true"
         data-speed="600"
-        data-slideshow="1"
+        data-slideshow="true"
         data-mobile="1"
         data-tablet="1"
-        data-desktop="1"
+        data-desktop="{% if reveal_slideshow %}1.5{% else %}1{% endif %}"
+        data-reveal-slideshow="{{ reveal_slideshow }}"
       >
         <div class="swiper-wrapper">
           {% for block in section.blocks %}
@@ -79,8 +82,10 @@
                 assign ratio_dk = '3/2'
                 assign ratio_mb = '2/3'
               endif
+              assign animate = ' animate-delay'
               if forloop.first
                 assign lazy_load = true
+                assign animate = ''
               endif
             %}
             <div {{ block.shopify_attributes }} class="swiper-slide">
@@ -89,7 +94,7 @@
                 style="--overlay-opacity: {{ block_st.overlay_opacity }}%;{% if slide_height == 'adapt' or  slide_height == 'full_screen' %}--aspect-ratio: {{ ratio_dk }};--aspect-ratio-mb: {{ ratio_mb }};{% endif %}"
               >
                 <div
-                  class="banner__media w-full overlay-bg{% if section_st.section_width != "full_width" %} rounded{% endif %}{% if section_st.content_below_image %} absolute-md mb-40 mb-md-0{% else %} absolute{% endif %} inset-0{% if slide_height == 'adapt' and image_mobile != blank %} ratio-mobile{% endif %}{% if slide_height == 'full_screen' %} h-{{ slide_height }}{% endif %}"
+                  class="banner__media w-full overlay-bg{% if section_st.section_width != "full_width" or reveal_slideshow %} rounded{% endif %}{% if section_st.content_below_image %} absolute-md mb-40 mb-md-0{% else %} absolute{% endif %} inset-0{% if slide_height == 'adapt' and image_mobile != blank %} ratio-mobile{% endif %}{% if slide_height == 'full_screen' %} h-{{ slide_height }}{% endif %}"
                   style="--aspect-ratio: {{ ratio_dk }};--aspect-ratio-mb: {{ ratio_mb }};--point:{{ image.presentation.focal_point }};"
                 >
                   {%- if image != blank or image_mobile != blank or local_video != blank -%}
@@ -121,15 +126,15 @@
                           assign image_alt = block.settings.image.alt
                         endif
                       -%}
-                        {% render 'responsive-image',
-                          type: 'banner',
-                          container: section_width,
-                          image: image,
-                          image_mobile: image_mobile,
-                          image_alt: image_alt,
-                          lazy_load: lazy_load,
-                          first: forloop.first
-                        %}
+                      {% render 'responsive-image',
+                        type: 'banner',
+                        container: section_width,
+                        image: image,
+                        image_mobile: image_mobile,
+                        image_alt: image_alt,
+                        lazy_load: lazy_load,
+                        first: forloop.first
+                      %}
                     {% endif %}
                   {%- else -%}
                     {%- render 'placeholder-render', class: 'absolute inset-0 w-full h-full object-fit-cover' -%}
@@ -141,6 +146,9 @@
                   or block_st.first_button_label != blank
                   or block_st.second_button_label != blank
                 %}
+                  {% liquid
+                    assign animate_delay = 0
+                  %}
                   <div
                     class="sec__content relative z-1 flex{% if block_st.content_width == 'full_width' %} w-full{% else %} w-1024-full{% endif %} {{ block_st.content_position }} {{ block_st.content_width }} text-{{block_st.content_alignment_mobile}} text-md-{{ block_st.content_alignment }}{% if block_st.show_content_background %} py-custom px-custom{% if block_st.content_padding_inline < 15 %} min-value{% endif %}{% endif %}"
                     style="--padding-inline: {{ block_st.content_padding_inline }};--padding-block: {{ block_st.content_padding_block }};"
@@ -151,22 +159,28 @@
                     >
                       {% if block_st.subheading != blank %}
                         <motion-element
-                          data-motion="fade-up-lg"                   
-                              hold                                     
-                          data-motion-delay="100"
-                          class="sec__content-subheading  {% if block_st.slider_effect == 'effect_fadeinup' %} opacity-0  {{ slider_effect }}  {% endif %}  block heading{% if section_st.subheading_spacing_bottom > 41 %} mb-big{% elsif section_st.subheading_spacing_bottom > 30 %} mb-medium {% else %} mb-custom{% endif %} fs-custom {{ section_st.subheading_font_weight }}"
+                          data-motion="fade-up"
+                          {% if block_st.slider_effect != 'effect_fadeinup' %}
+                            hold
+                          {% endif %}
+                          slideshow
+                          data-motion-delay="{{ animate_delay }}"
+                          class="{{ animate }} sec__content-subheading  {% if block_st.slider_effect == 'effect_fadeinup' %} {{ slider_effect }}  {% endif %}  block heading{% if section_st.subheading_spacing_bottom > 41 %} mb-big{% elsif section_st.subheading_spacing_bottom > 30 %} mb-medium {% else %} mb-custom{% endif %} fs-custom {{ section_st.subheading_font_weight }}"
                           style="--font-size: {{ section_st.subheading_font_size }};--space-bottom: {{ section_st.subheading_spacing_bottom }}"
                         >
-                          
                           {{ block_st.subheading | escape }}
                         </motion-element>
                       {% endif %}
                       {% if block_st.heading != blank %}
+                        {% assign animate_delay = animate_delay | plus: 50 %}
                         <motion-element
-                          data-motion="fade-up-lg"
+                          data-motion="fade-up"
+                          {% if block_st.slider_effect != 'effect_fadeinup' %}
                             hold
-                          data-motion-delay="200"
-                          class="block  {% if block_st.slider_effect == 'effect_fadeinup' %} opacity-0 {{ slider_effect }} {% endif %}"
+                          {% endif %}
+                          slideshow
+                          data-motion-delay="{{ animate_delay }}"
+                          class="block {{ animate }} {% if block_st.slider_effect == 'effect_fadeinup' %} {{ slider_effect }} {% endif %}"
                         >
                           <h2
                             class="sec__content-heading   heading-letter-spacing mt-0{% if section_st.heading_spacing_bottom > 41 %} mb-big{% elsif section_st.heading_spacing_bottom > 30 %} mb-medium {% else %} mb-custom{% endif %}{% if section_st.heading_uppercase %} uppercase{% endif %}{% if section_st.heading_font_size > 41 %} fs-big{% elsif section_st.heading_font_size > 24 %} fs-medium{% else %} fs-custom{% endif %} {{ section_st.heading_font_weight }}"
@@ -178,11 +192,15 @@
                         </motion-element>
                       {% endif %}
                       {% if block_st.description != blank %}
+                        {% assign animate_delay = animate_delay | plus: 50 %}
                         <motion-element
-                          data-motion="fade-up-lg"                     
-                            hold                 
-                          data-motion-delay="300"
-                          class="sec__content-des {% if block_st.slider_effect == 'effect_fadeinup' %} opacity-0  {{ slider_effect }}  {% endif %} block rich__text-m0 {% if section_st.des_spacing_bottom > 41 %} mb-big{% elsif section_st.des_spacing_bottom > 30 %} mb-medium {% else %} mb-custom{% endif %}{% if section_st.des_font_size > 24 %} fs-medium{% else %} fs-custom{% endif %} {{ section_st.des_font_weight }}"
+                          data-motion="fade-up"
+                          {% if block_st.slider_effect != 'effect_fadeinup' %}
+                            hold
+                          {% endif %}
+                          slideshow
+                          data-motion-delay="{{ animate_delay }}"
+                          class="sec__content-des {{ animate }} {% if block_st.slider_effect == 'effect_fadeinup' %} {{ slider_effect }}  {% endif %} block rich__text-m0 {% if section_st.des_spacing_bottom > 41 %} mb-big{% elsif section_st.des_spacing_bottom > 30 %} mb-medium {% else %} mb-custom{% endif %}{% if section_st.des_font_size > 24 %} fs-medium{% else %} fs-custom{% endif %} {{ section_st.des_font_weight }}"
                           style="--font-size: {{ section_st.des_font_size }};--space-bottom: {{ section_st.des_spacing_bottom }}"
                           {{ block.shopify_attributes }}
                         >
@@ -190,11 +208,15 @@
                         </motion-element>
                       {% endif %}
                       {% if block_st.first_button_label != blank or block_st.second_button_label != blank %}
+                        {% assign animate_delay = animate_delay | plus: 50 %}
                         <motion-element
-                          data-motion="fade-up-lg"                    
-                            hold                   
-                          data-motion-delay="400"
-                          class="sec__content-btn {% if block_st.slider_effect == 'effect_fadeinup' %} opacity-0  {{ slider_effect }}  {% endif %} align-center flex flex-wrap gap-15 justify-content-{{ block_st.content_alignment_mobile }} justify-content-md-{{ block_st.content_alignment }}"
+                          data-motion="fade-up"
+                          {% if block_st.slider_effect != 'effect_fadeinup' %}
+                            hold
+                          {% endif %}
+                          slideshow
+                          data-motion-delay="{{ animate_delay }}"
+                          class="sec__content-btn {{ animate }} {% if block_st.slider_effect == 'effect_fadeinup' %} {{ slider_effect }}  {% endif %} align-center flex flex-wrap gap-15 justify-content-{{ block_st.content_alignment_mobile }} justify-content-md-{{ block_st.content_alignment }}"
                         >
                           {% if block_st.first_button_label != blank %}
                             <a
@@ -235,10 +257,14 @@
           {%- render 'swiper-navigation', class: 'original-style' -%}
         {% endif %}
         {%- if carousel_pagination == 'show_dots' or carousel_pagination == 'show_dots_on_mobile' -%}
-          <div
+          <motion-element
+            data-motion="fade-up"
+            {% if settings.scroll_animation == 'none' %}
+              hold
+            {% endif %}
             class="swiper-pagination flex flex-wrap px-15 lh-1 bottom-30 {% if carousel_pagination == 'show_dots_on_mobile' %} hidden-md{% endif %} justify-content-{{ pagination_position }}{% if section_st.content_below_image %} absolute-md-impo{% endif %}"
-            style="--swiper-pagination-bottom: clamp(1.2rem, 2vw, 3rem);{% if section_st.content_below_image %}--swiper-pagination-position: static;{% else %}--swiper-pagination-position: absolute;{% endif %}"
-          ></div>
+            style="--swiper-pagination-bottom: clamp(1.2rem, 2vw, 3rem);{% if section_st.content_below_image %}--swiper-pagination-position: static;{% else %}--swiper-pagination-position: absolute;{% endif %}">
+          </motion-element>
         {% endif %}
       </slide-section>
     {% endif %}
@@ -328,6 +354,94 @@
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:sections.all.color_scheme.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.carousel_settings.label"
+    },
+    {
+      "type": "select",
+      "id": "slide_effect",
+      "label": "t:sections.all.carousel_settings.slide_effect.label",
+      "options": [
+        {
+          "value": "fade",
+          "label": "t:sections.all.carousel_settings.slide_effect.fadein"
+        },
+        {
+          "value": "slide",
+          "label": "t:sections.all.carousel_settings.slide_effect.slide"
+        }
+      ],
+      "visible_if": "{{ section.settings.reveal_slideshow == false }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "reveal_slideshow",
+      "label": "t:sections.all.carousel_settings.reveal.label",
+      "info": "t:sections.all.carousel_settings.reveal.info",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrow",
+      "label": "t:sections.all.carousel_settings.show-next-back.label",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "carousel_pagination",
+      "label": "t:sections.all.carousel_settings.pagination.label",
+      "options": [
+        {
+          "value": "disable",
+          "label": "t:sections.all.carousel_settings.pagination.disable.label"
+        },
+        {
+          "value": "show_dots",
+          "label": "t:sections.all.carousel_settings.pagination.show_dots.label"
+        },
+        {
+          "value": "show_dots_on_mobile",
+          "label": "t:sections.all.carousel_settings.pagination.show_dots_on_mobile.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "pagination_position",
+      "label": "t:sections.all.carousel_settings.pagination_position.label",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.all.carousel_settings.pagination_position.left.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.all.carousel_settings.pagination_position.center.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.all.carousel_settings.pagination_position.right.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "t:sections.all.carousel_settings.auto_change.label",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autorotate_speed",
+      "label": "t:sections.all.carousel_settings.change_slides_every.label",
+      "max": 6,
+      "min": 2,
+      "step": 1,
+      "unit": "s",
+      "default": 5
     },
     {
       "type": "header",
@@ -470,86 +584,6 @@
       "max": 60,
       "step": 1,
       "unit": "px"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.carousel_settings.label"
-    },
-    {
-      "type": "select",
-      "id": "slide_effect",
-      "label": "t:sections.all.carousel_settings.slide_effect.label",
-      "options": [
-        {
-          "value": "fade",
-          "label": "t:sections.all.carousel_settings.slide_effect.fadein"
-        },
-        {
-          "value": "slide",
-          "label": "t:sections.all.carousel_settings.slide_effect.slide"
-        }
-      ]
-    },
-    {
-      "type": "checkbox",
-      "id": "show_arrow",
-      "label": "t:sections.all.carousel_settings.show-next-back.label",
-      "default": false
-    },
-    {
-      "type": "select",
-      "id": "carousel_pagination",
-      "label": "t:sections.all.carousel_settings.pagination.label",
-      "options": [
-        {
-          "value": "disable",
-          "label": "t:sections.all.carousel_settings.pagination.disable.label"
-        },
-        {
-          "value": "show_dots",
-          "label": "t:sections.all.carousel_settings.pagination.show_dots.label"
-        },
-        {
-          "value": "show_dots_on_mobile",
-          "label": "t:sections.all.carousel_settings.pagination.show_dots_on_mobile.label"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "pagination_position",
-      "label": "t:sections.all.carousel_settings.pagination_position.label",
-      "default": "center",
-      "options": [
-        {
-          "value": "left",
-          "label": "t:sections.all.carousel_settings.pagination_position.left.label"
-        },
-        {
-          "value": "center",
-          "label": "t:sections.all.carousel_settings.pagination_position.center.label"
-        },
-        {
-          "value": "right",
-          "label": "t:sections.all.carousel_settings.pagination_position.right.label"
-        }
-      ]
-    },
-    {
-      "type": "checkbox",
-      "id": "autoplay",
-      "label": "t:sections.all.carousel_settings.auto_change.label",
-      "default": false
-    },
-    {
-      "type": "range",
-      "id": "autorotate_speed",
-      "label": "t:sections.all.carousel_settings.change_slides_every.label",
-      "max": 6,
-      "min": 2,
-      "step": 1,
-      "unit": "s",
-      "default": 5
     },
     {
       "type": "header",
@@ -886,6 +920,7 @@
   "presets": [
     {
       "name": "t:sections.slideshow.name",
+      "category": "t:categories.storytelling",
       "blocks": [
         {
           "type": "slider_item"

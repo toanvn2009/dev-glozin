@@ -21,13 +21,12 @@
   assign hidden_price = theme_st.hidden_price
 
   assign size_trigger = theme_st.size_trigger
-  if size_trigger != blank 
-    assign  option_name_size = size_trigger | replace: ' ', '' | split: ','
-   else
+  if size_trigger != blank
+    assign option_name_size = size_trigger | replace: ' ', '' | split: ','
+  else
     assign option_name_size = 'Size'
   endif
 
-  
   assign option_name_color = 'Color'
   if theme_st.color_swatch_trigger != blank
     assign option_name_color = theme_st.color_swatch_trigger | split: ','
@@ -149,7 +148,7 @@
                               <iframe
                                 src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&disablekb0&fs=0&autoplay=1&mute=1&loop=1&controls=0&rel=0&playlist={{ video_id }}&playsinline=1"
                                 class="js-youtube"
-                                frameborder="0" 
+                                frameborder="0"
                                 allowfullscreen
                               ></iframe>
                             {%- else -%}
@@ -211,8 +210,8 @@
               </div>
               <div class="product-item__information word-break text-{{ settings.product_alignment }} mt-15">
                 <a
-                  class="product-item__name {{ settings.product_name_text_transform }} heading-style no-underline fs-custom block lh-normal"
-                  style="--font-size: {{ settings.product_size }}"
+                  class="product-item__name {{ settings.product_name_text_transform }} heading-style no-underline fs-custom fw-custom block lh-normal"
+                  style="--font-size: {{ settings.product_size }};--font-weight: {{ settings.product_font_weight }};"
                   href="{{ product.url | within: collection }}"
                   aria-label=" {{ product.title }}"
                 >
@@ -221,8 +220,8 @@
 
                 {% if hidden_price != true %}
                   <div
-                    class="product-item__price justify-content-{{ settings.product_alignment }} flex gap-custom lh-normal fs-custom"
-                    style="--font-size: {{ settings.price_size }}; --gap: 3px;"
+                    class="product-item__price justify-content-{{ settings.product_alignment }} flex gap-custom lh-normal fs-custom fw-custom"
+                    style="--font-size: {{ settings.price_size }}; --gap: 3px;--heading-weight: {{ settings.price_font_weight }}"
                   >
                     {%- render 'price', scope: 'item', product: product, show_badges: false -%}
                   </div>
@@ -428,12 +427,12 @@
 
   <div class="{{ section_width }} section-full compare-page-main product-preload-js">
     <motion-element
-      data-motion="fade-up-lg"
-      data-motion-delay="500"
-      {% if scroll_animation != 'slide_in' %}
+      data-motion="{{ scroll_animation }}"
+      {% if scroll_animation == 'none' %}
         hold
       {% endif %}
-      class="block {% if scroll_animation != 'none' and scroll_animation == 'slide_in' -%} scroll-trigger opacity-0 {{ scroll_animation }}{% endif %} "
+      data-animate-delay="350"
+      class="block"
     >
       <div class="compare-table border rounded hidden">
         <div class="compare-row flex flex-nowrap compare-row-basic">
@@ -477,7 +476,6 @@
         </a>
       </div>
     </motion-element>
-
   </div>
 </section>
 

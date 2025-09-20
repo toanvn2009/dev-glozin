@@ -10,13 +10,13 @@
       text-decoration-line: none;
     }
     #topbar .swiper-slide {
-      transition: 0.2s;
+      display: flex;
     }
-    #topbar .swiper-slide:not(.swiper-slide-active) {
+    #topbar
+      .swiper:not([class*='initialized'])[data-direction='vertical']
+      .swiper-wrapper
+      .swiper-slide:not(:first-child) {
       opacity: 0;
-    }
-    #topbar .swiper-slide-active {
-      opacity: 1;
     }
     #topbar .text-slide {
       width: 90%;
@@ -36,6 +36,11 @@
         flex: 0 0 auto;
         max-width: 40rem;
         margin: unset;
+      }
+    }
+    @media (max-width: 1024px) {
+      #topbar .swiper-slide {
+        justify-content: center;
       }
     }
   {%- endstyle -%}
@@ -125,6 +130,8 @@
                   data-mobile="1"
                   data-tablet="1"
                   data-desktop="1"
+                  data-direction="vertical"
+                  data-spacing="0"
                   style="--color-dark: transparent;--swiper-navigation-color: currentColor; --col-gap: 0;--swiper-navigation-sides-offset: 1rem;"
                 >
                   <div class="swiper-action gradient show-arrow static absolute-lg align-center left-0 inset-y-0 z-3 flex gap-20 pe-1025-25 pe-0">
@@ -147,21 +154,21 @@
                   </div>
                   <div class="swiper-wrapper">
                     {%- if block_st.text1 != blank -%}
-                      <div class="swiper-slide text-center text-lg-start lh-normal">
+                      <div class="swiper-slide flex align-center text-center text-lg-start lh-normal">
                         <div class="px-15">
                           {{- block_st.text1 -}}
                         </div>
                       </div>
                     {% endif %}
                     {%- if block_st.text2 != blank -%}
-                      <div class="swiper-slide text-center text-lg-start lh-normal">
+                      <div class="swiper-slide flex align-center text-center text-lg-start lh-normal">
                         <div class="px-15">
                           {{- block_st.text2 -}}
                         </div>
                       </div>
                     {% endif %}
                     {%- if block_st.text3 != blank -%}
-                      <div class="swiper-slide text-center text-lg-start lh-normal">
+                      <div class="swiper-slide flex align-center text-center text-lg-start lh-normal">
                         <div class="px-15">
                           {{- block_st.text3 -}}
                         </div>
@@ -209,6 +216,11 @@
     </div>
   </div>
 {% endif %}
+{% javascript %}
+  let top_bar = document.querySelector('.section-top-bar')?.clientHeight || 0;
+  const body = document.querySelector('body');
+  body.style.setProperty('--height-topbar', `${top_bar}px`);
+{% endjavascript %}
 {% schema %}
 {
   "name": "t:sections.top-bar.name",
@@ -474,6 +486,7 @@
   "presets": [
     {
       "name": "t:sections.top-bar.name",
+      "category": "t:categories.layout",
       "blocks": [
         {
           "type": "text_slider"

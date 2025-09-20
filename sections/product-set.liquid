@@ -28,6 +28,7 @@
   assign reveal = section_st.reveal
   assign scroll_animation = settings.scroll_animation
   assign metafield_list = product.metafields.custom.product_set
+  assign animate_delay = 0
 -%}
 {%- capture style -%}
     --section-pt: {{ section_st.padding_top }}; --section-pb: {{ section_st.padding_bottom }};
@@ -51,32 +52,45 @@
           {%- if heading != blank or description != blank -%}
             <div class="secion__header-inner">
               {%- if section_st.heading != blank -%}
-                <div class="title-wrapper flex gap-10 justify-between align-center{% if section_st.header_alignment == 'right' %} flex-row-reverse{% endif %}">
-                  <h2
-                    class="section__header-heading heading-letter-spacing fs-20 {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %} {{ header_size  }} mt-0{% if section_st.description != blank %} mb-10{% else %} mb-0{% endif %}"
-                    {%- if scroll_animation != 'none' -%}
-                      style="--animation-order: 0"
-                    {% endif %}
-                  >
-                    {{ section_st.heading }}
-                  </h2>
-                  {%- if carousel_pagination == 'show_dots' or carousel_pagination == 'show_dots_on_mobile' -%}
-                    <div
-                      class="swiper-pagination swiper-pagination-product-set swiper-pagination-custom swiper-pagination-horizontal mt-0 border btn-rounded w-unset px-20 py-5 lh-normal subheading_weight heading-color"
-                      style="--swiper-pagination-mt: 0;--swiper-pagination-position: static;"
-                    ></div>
+                <motion-element
+                  data-motion="{{ scroll_animation }}"
+                  {% if scroll_animation == 'none' %}
+                    hold
                   {% endif %}
-                </div>
+                  data-motion-delay="{{ animate_delay }}"
+                  class="block"
+                >
+                  <div class="title-wrapper flex gap-10 justify-between align-center{% if section_st.header_alignment == 'right' %} flex-row-reverse{% endif %}">
+                    <h2
+                      class="section__header-heading heading-letter-spacing fs-20 {{ header_size  }} mt-0{% if section_st.description != blank %} mb-10{% else %} mb-0{% endif %}"
+                    >
+                      {{ section_st.heading }}
+                    </h2>
+                    {%- if carousel_pagination == 'show_dots' or carousel_pagination == 'show_dots_on_mobile' -%}
+                      <div
+                        class="swiper-pagination swiper-pagination-product-set swiper-pagination-custom swiper-pagination-horizontal mt-0 border btn-rounded w-unset px-20 py-5 lh-normal subheading_weight heading-color"
+                        style="--swiper-pagination-mt: 0;--swiper-pagination-position: static;"
+                      ></div>
+                    {% endif %}
+                  </div>
+                </motion-element>
               {% endif %}
               {%- if section_st.description != blank -%}
-                <div
-                  class="section__header-des {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %} rich__text-m0"
-                  {%- if scroll_animation != 'none' -%}
-                    style="--animation-order: 1"
+                {%- assign animate_delay = animate_delay | plus: 50 -%}
+                <motion-element
+                  data-motion="{{ scroll_animation }}"
+                  {% if scroll_animation == 'none' %}
+                    hold
                   {% endif %}
+                  data-motion-delay="{{ animate_delay }}"
+                  class="block"
                 >
-                  {{ section_st.description }}
-                </div>
+                  <div
+                    class="section__header-des rich__text-m0"
+                  >
+                    {{ section_st.description }}
+                  </div>
+                </motion-element>
               {% endif %}
             </div>
           {% endif %}

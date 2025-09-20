@@ -68,7 +68,7 @@
       </ul>
     </nav>
   {%- else -%}
-    <loadmore-button {% if settings.scroll_animation != 'slide_in' %}hold{% endif %} class="block pagination-loadmore mt-50 text-center">
+    <loadmore-button class="block pagination-loadmore mt-50 text-center">
       <div class="load-more-bar">
         {%- liquid
           assign paginate_size = paginate.pages | times: 1

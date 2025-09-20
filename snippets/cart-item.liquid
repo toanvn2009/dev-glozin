@@ -5,8 +5,30 @@
   assign show_message_when_remove = theme_st.show_message_when_remove
   assign show_currency_code = theme_st.show_currency_code
   assign show_quantity = theme_st.show_quantity_input
--%}
-{% liquid
+  assign product_image_ratio = theme_st.product_image_ratio
+  assign product_custom_ratio = theme_st.product_custom_ratio
+  if item.image != 'adapt'
+    case product_image_ratio
+      when 'square'
+        assign ratio = '1/1'
+      when 'landscape'
+        assign ratio = '4/3'
+      when 'portrait'
+        assign ratio = '3/4'
+      else
+        if product_custom_ratio != empty
+          assign ratio = product_custom_ratio | replace: ':', '/'
+        else
+          assign ratio = '3/4'
+        endif
+    endcase
+  else
+    if item.image.media_type == 'model'
+      assign ratio = '3/4'
+    else
+      assign ratio = item.image.aspect_ratio
+    endif
+  endif
   assign enable_rtl = settings.rtl
   assign iso_code = request.locale.iso_code
   assign lis_language_rtl = settings.language_rtl
@@ -17,14 +39,14 @@
       assign enable_rtl = false
     endif
   endif
-%}
+-%}
 <div
   id="minicart__product-{{ item.key }}"
   product-handle="{{ item.product.handle }}"
   class="cart-item flex mb-20 pb-20 gap-15 border-bottom-dashed"
 >
   <div class="minicart__product__image global-media-settings w-custom fs-0 relative" style="--custom-width: 9rem">
-    <a href="{{- item.url -}}" class="rounded-5 fs-0 " aria-label="{{ item.product.title | escape }}">
+    <a href="{{- item.url -}}" class="rounded-5 fs-0 " aria-label="{{ item.product.title | escape }}" style="--aspect-ratio: {{ ratio }};">
       {%- if item.image != blank -%}
         {%- assign image_alt = item.image.alt | default: item.product.title | escape -%}
         {% render 'responsive-image',
@@ -33,10 +55,11 @@
           image_alt: image_alt,
           class: 'rounded-5',
           custom_widths: '550, 480, 360, 160, 90',
-          no_animate: true
+          no_animate: true,
+          lazy_product: false
         %}
       {%- else -%}
-        {% render 'placeholder-render', class: 'rounded-5' %}
+        {% render 'placeholder-render', class: 'rounded-5 img-item' %}
       {%- endif -%}
     </a>
   </div>
@@ -81,8 +104,18 @@
       aria-label="{{ 'customer.order.discount' | t }}"
     >
       {%- for discount in item.line_level_discount_allocations -%}
-        <li class="discounts__discount fs-14 d-inline-flex align-center">
+        <li class="discounts__discount fs-14 inline-flex align-center gap-5">
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            class="icon icon-discount w-custom"
+            style="--custom-width: 12px;"
+            viewBox="0 0 12 12"
+          >
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7 0h3a2 2 0 012 2v3a1 1 0 01-.3.7l-6 6a1 1 0 01-1.4 0l-4-4a1 1 0 010-1.4l6-6A1 1 0 017 0zm2 2a1 1 0 102 0 1 1 0 00-2 0z" fill="currentColor">
+          </svg>
           {{ discount.discount_application.title }}
+          (-{{ discount.amount | money }})
         </li>
       {%- endfor -%}
     </ul>
@@ -216,14 +249,15 @@
             data-text-header="{{ 'general.cart.cart_edit' | t }}"
             data-custom-class="cart-item-edit"
             href="{{ item_url }}"
-            class="minicart__item-edit pointer"
+            class="minicart__item-edit pointer relative inline-flex align-center"
             data-id="{{ item.id }}"
             data-key="{{ item.key }}"
             data-quantity="{{ item.quantity }}"
           >
-            <svg width="14" height="14" fill="none" class="dark-grey hover-heading-color transition">
+            <svg width="14" height="14" fill="none" class="dark-grey edit-icon hover-heading-color transition">
               <use href="#icon-edit" />
             </svg>
+            <div class="icon-rotator"></div>
           </minicart-item-edit>
         {% endif %}
       {%- endunless -%}
@@ -238,11 +272,11 @@
           arial-label="{{- 'general.cart.remove' | t -}}"
           name="{{- 'general.cart.remove' | t -}}"
         >
-           <svg width="14" height="14" class="dark-grey remove-icon hover-heading-color transition">
-              <use href="#icon-trash" />
-            </svg> 
+          <svg width="14" height="14" class="dark-grey remove-icon hover-heading-color transition">
+            <use href="#icon-trash" />
+          </svg>
 
-            <div class="icon-rotator"></div>
+          <div class="icon-rotator"></div>
         </a>
       </mini-cart-remove-button>
     </div>
@@ -253,7 +287,7 @@
         {{ 'templates.wishlist.title_remove' | t }}
       </p>
       <minicart-wishlist-action
-         data-index="{{- item.key -}}"
+        data-index="{{- item.key -}}"
         class="mt-10 flex gap-10 relative align-center"
         style="--btn-padding-y: 8px;--btn-padding-x: 2.5rem;"
       >

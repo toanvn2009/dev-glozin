@@ -6,6 +6,15 @@
 .sec__inner .banner__media .image-picture {
   display: block;
 }
+.text-below{
+  --color-heading: #111;
+  --btn-primary-bg-graident-color: #111;
+  --btn-color: #fff;
+  --btn-primary-color: #fff;
+}
+.text-below[style*="--aspect-ratio"]:before {
+    display: none;
+  }
 @media screen and (max-width: 767.98px) {
   .text-below-mb[style*="--aspect-ratio"]:before {
     display: none;
@@ -13,6 +22,10 @@
   .text-below-mb .py-custom {
     padding-top: 0;
     padding-bottom: 0;
+    --color-heading: #111;
+    --btn-primary-bg-graident-color: #111;
+    --btn-color: #fff;
+    --btn-primary-color: #fff;
   }
   .text-below-mb.h-custom,
   .text-below-mb.h-full_screen,
@@ -179,22 +192,41 @@ video-section.h-full video {
 }
 @media (min-width: 1025px) {
   .banner-packery{
-    grid-template-columns: repeat(4, 1fr);
     margin-right: calc(-1* var(--col-gap) / 2);
     margin-left: calc(-1* var(--col-gap) / 2);
 
   }
-  .banner-packery .section__block-inner:nth-child(3){
+  .banner-packery.blocks-size-4 .section__block-inner:nth-child(3){
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
   }
-  .banner-packery .section__block-inner:nth-child(4){
+  .banner-packery.blocks-size-4 .section__block-inner:nth-child(4){
     grid-column-start: 3;
     grid-column-end: 8;
     grid-row-start: 1;
     grid-row-end: 4;
+  }
+  .banner-packery.blocks-size-2{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .banner-packery.blocks-size-3{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .banner-packery.blocks-size-4{
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .banner-packery.blocks-size-3 .section__block-inner:nth-child(1){
+    grid-row: span 2 / span 2;
+  }
+  .banner-packery.blocks-size-3 .section__block-inner:nth-child(3){
+    grid-column-start: 2;
+  }
+}
+@media (max-width:1024.993px) {
+  .banner-packery .section__block-inner{
+    --col-gap: 20px !important;
   }
 }
 @media screen and (min-width:576px) and (max-width:1024.993px) {
@@ -212,6 +244,23 @@ video-section.h-full video {
     grid-column-end: 3;
   }
 }
-.product-list__banner{
-  display: flex !important;
+.product-carousel-banner {
+  --color-heading: #111;
+  max-width: 340px;
+  width: 100%;
+  background-color: var(--color-white);
+  border-radius: var(--rounded-radius, 0);
+  overflow: hidden;
+}
+.product-carousel-banner .product-item__information{
+  margin: 0;
+  padding:0 2rem 2rem;
+}
+.sec__content:has(.product-banner){
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.product-carousel-banner .product-item__inner{
+  margin: 2rem;
 }

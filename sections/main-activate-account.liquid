@@ -1,7 +1,7 @@
 {{ 'my-account.css' | asset_url | stylesheet_tag }}
-<div class="customer-active">
-  <div class="container">
-    <div class="customer-form active-form col-md-6 col-sm-8 m-auto">
+<div class="customer-active pb-30 pt-30">
+  <div class="container" style="--page-width: 50rem;">
+    <div class="customer-form active-form m-auto text-center">
       {%- form 'activate_customer_password' -%}
         {%- if form.errors -%}
           <ul>
@@ -20,7 +20,7 @@
             {%- endfor -%}
           </ul>
         {% endif %}
-        <div class="form-field form-group  mb-15 d-flex flex-column">
+        <div class="form-field form-group mb-15 flex flex-column">
           <label class="pb-5 visually-hidden" for="password">
             {{- 'customer.activate_account.password' | t }}
             <span class="required">*</span></label
@@ -29,12 +29,12 @@
             type="password"
             name="customer[password]"
             aria-required="true"
-            placeholder=""
+            placeholder="{{ 'customer.login_page.placeholder_pass' | t }}"
             required
             id="password"
           >
         </div>
-        <div class="form-field form-group  mb-15 d-flex flex-column">
+        <div class="form-field form-group mb-15 flex flex-column">
           <label class="pb-5 visually-hidden" for="password_confirmation">
             {{- 'customer.activate_account.password_confirm' | t }}
             <span class="required">*</span></label
@@ -43,12 +43,12 @@
             type="password"
             name="customer[password_confirmation]"
             aria-required="true"
-            placeholder=""
+            placeholder="{{- 'customer.reset_password.password_confirm' | t -}}"
             required
             id="password_confirmation"
           >
         </div>
-        <div class="form-actions mt-30 d-flex justify-content-center flex-column text-center ">
+        <div class="form-actions mt-30 flex justify-content-center flex-column text-center">
           <button type="submit" class="btn-primary mb-5">
             {{ 'customer.activate_account.submit' | t }}
           </button>
@@ -56,7 +56,7 @@
           <button
             type="submit"
             name="decline"
-            class="btn-secondary mt-5"
+            class="btn-outline mt-5"
           >
             {{ 'customer.activate_account.cancel' | t }}
           </button>

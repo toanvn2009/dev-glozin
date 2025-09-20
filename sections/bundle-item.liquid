@@ -47,8 +47,8 @@
     <span class="text-muted">{{- selected_variant.title -}}</span>
   {% endif %}
   {% if hidden_price != true %}
-    <div class="product-item__price text-start flex gap-custom lh-normal fs-custom mt-0 mb-5"
-    style="--font-size: {{ settings.price_size }}; --gap: 3px;">
+    <div class="product-item__price text-start flex gap-custom lh-normal fs-custom fw-custom mt-0 mb-5"
+    style="--font-size: {{ settings.price_size }}; --gap: 3px;--heading-weight: {{ settings.price_font_weight }}">
     <div class="price__regular">
       <span class="price-item price-item--regular heading-style" data-price="{{ selected_variant.price }}">
         {{ selected_variant.price | money }}

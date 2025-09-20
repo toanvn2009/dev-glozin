@@ -35,7 +35,7 @@
             </svg>
           {% endif %}
         </div>
-        <div class="disclosure__list custom-scrollbar shadow transition invisible z-10 absolute left-0 right-0 color-default">
+        <div class="disclosure__list custom-scrollbar shadow transition invisible z-10 absolute left-0 right-0 color-default overflow-y-auto">
           <icon-close class="pointer-none border inline-flex hidden-1025 mx-auto rounded-50 overflow-hidden absolute top-0 inset-x-0 w-50 h-50 content-center heading-color bg-white">
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none" class="transition">
               <use href="#icon-close" />
@@ -43,10 +43,10 @@
           </icon-close>
           <ul class="h-full list-unstyled">
             {% for country in localization.available_countries %}
-              <li class="disclosure__item py-4" tabindex="-1">
+              <li class="disclosure__item py-1" tabindex="-1">
                 <a
                   href="#"
-                  class="no-underline reversed-links text-color hover-heading-color"
+                  class="no-underline text-color hover-heading-color"
                   {% if country.iso_code == localization.country.iso_code %}
                     aria-current="true"
                   {% endif %}

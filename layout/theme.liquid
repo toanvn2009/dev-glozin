@@ -34,10 +34,6 @@
     {% render 'meta-tags' %}
     {{ content_for_header }}
     {{ 'critical.css' | asset_url | stylesheet_tag }}
-    {{ 'base.css' | asset_url | stylesheet_tag }}
-    {% if settings.scroll_animation != 'none' %}
-      {{ 'animation.css' | asset_url | stylesheet_tag }}
-    {%- endif %}
     {% if enable_rtl %}{{ 'rtl.css' | asset_url | stylesheet_tag: preload: true }}{% endif %}
     {{ 'product-card.css' | asset_url | stylesheet_tag }}
     {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
@@ -189,7 +185,11 @@
     <noscript><link rel="stylesheet" href="{{ 'popup.css' | asset_url }}"></noscript>
     <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'motion.min.js' | asset_url }}" type="module" defer="defer"></script>
+    <script src="{{ 'utils.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    {% if settings.scroll_animation or settings.zoom_image %}
+      <script src="{{ 'motion-effect.js' | asset_url }}" defer="defer"></script>
+    {% endif %}
     <script>
       document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
       if (Shopify.designMode) {

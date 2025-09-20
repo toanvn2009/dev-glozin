@@ -1,4 +1,13 @@
-{
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+ {
   "sections": {
     "divider_zDJB6F": {
       "type": "divider",
@@ -15,8 +24,11 @@
         "image_VQTRFT": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/img_4.jpg"
-          }
+            "image_block": "shopify://shop_images/img_4.jpg",
+            "image_width": 450,
+            "spacing_bottom": 40
+          },
+          "blocks": {}
         },
         "heading_6nj4md": {
           "type": "heading",
@@ -26,7 +38,8 @@
             "font_weight": "heading_weight",
             "uppercase": false,
             "spacing_bottom": 20
-          }
+          },
+          "blocks": {}
         },
         "subheading_yFdKEQ": {
           "type": "subheading",
@@ -36,17 +49,22 @@
             "font_weight": "body_weight",
             "uppercase": false,
             "spacing_bottom": 40
-          }
+          },
+          "blocks": {}
         },
         "button_4yrfiE": {
           "type": "button",
           "settings": {
+            "show_full_width": false,
             "first_button_label": "Back to Homepage",
-            "first_button_link": "https:\/\/glozin-demo.myshopify.com\/",
-            "open_link": false,
+            "first_button_link": "/",
             "first_button_type": "primary",
+            "second_button_label": "",
+            "second_button_link": "",
+            "second_button_type": "primary",
             "spacing_bottom": 0
-          }
+          },
+          "blocks": {}
         }
       },
       "block_order": [
