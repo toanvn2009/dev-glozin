@@ -15,14 +15,14 @@
       "type": "before-you-leave",
       "settings": {
         "show_time": 82,
-        "banner": "shopify://shop_images/leave_popup.jpg",
+        "banner": "shopify://shop_images/sari_gram-3.jpg",
         "sub_heading": "",
         "content_heading": "Big Save <br>\n10% Coupon!",
         "description": "<p>Enter the code below at checkout to get <br/>10% off your first order.</p>",
         "code": "TOPSALE10STBL",
         "color_scheme": "default-color-scheme",
         "recommended_heading": "You may also like...",
-        "collection": "best-seller",
+        "collection": "collection14",
         "recommended_button_label": "Continue Shopping"
       }
     },

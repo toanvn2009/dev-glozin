@@ -104,7 +104,11 @@
               "blocks": {}
             }
           },
-          "block_order": ["subheading_B3xE8V", "text_ATbJhR", "button_xFaq88"]
+          "block_order": [
+            "subheading_B3xE8V",
+            "text_ATbJhR",
+            "button_xFaq88"
+          ]
         },
         "group_media_content_nAFtyH": {
           "type": "_group-media-content",
@@ -162,7 +166,11 @@
               "blocks": {}
             }
           },
-          "block_order": ["subheading_7aCyAJ", "text_Jwpayw", "button_hf7jzp"]
+          "block_order": [
+            "subheading_7aCyAJ",
+            "text_Jwpayw",
+            "button_hf7jzp"
+          ]
         },
         "group_media_content_id4P36": {
           "type": "_group-media-content",
@@ -220,7 +228,11 @@
               "blocks": {}
             }
           },
-          "block_order": ["subheading_TD9DrG", "text_8k3ecz", "button_hR4hFB"]
+          "block_order": [
+            "subheading_TD9DrG",
+            "text_8k3ecz",
+            "button_hR4hFB"
+          ]
         }
       },
       "block_order": [
@@ -236,7 +248,6 @@
         "header_size": "medium",
         "header_alignment": "center",
         "column_gap": 30,
-        "content_background_color": "",
         "equal_height_adjustment": false,
         "vertical_align": "center",
         "carousel_on_mobile": false,
@@ -305,7 +316,11 @@
               "blocks": {}
             }
           },
-          "block_order": ["subheading_7thzAt", "text_DnrteN", "button_trrNke"]
+          "block_order": [
+            "subheading_7thzAt",
+            "text_DnrteN",
+            "button_trrNke"
+          ]
         },
         "group_media_content_Cp9z4d": {
           "type": "_group-media-content",
@@ -363,7 +378,11 @@
               "blocks": {}
             }
           },
-          "block_order": ["subheading_xJcJmw", "text_Q8AKY4", "button_MWJmwm"]
+          "block_order": [
+            "subheading_xJcJmw",
+            "text_Q8AKY4",
+            "button_MWJmwm"
+          ]
         },
         "group_media_content_rMhyeU": {
           "type": "_group-media-content",
@@ -421,7 +440,11 @@
               "blocks": {}
             }
           },
-          "block_order": ["subheading_BitrYG", "text_iK8dKP", "button_e3KXNq"]
+          "block_order": [
+            "subheading_BitrYG",
+            "text_iK8dKP",
+            "button_e3KXNq"
+          ]
         }
       },
       "block_order": [
@@ -437,7 +460,6 @@
         "header_size": "medium",
         "header_alignment": "center",
         "column_gap": 30,
-        "content_background_color": "",
         "equal_height_adjustment": false,
         "vertical_align": "center",
         "carousel_on_mobile": false,
@@ -448,5 +470,9 @@
       }
     }
   },
-  "order": ["page-heading", "multi_content_DWfXFb", "multi_content_YxxEEf"]
+  "order": [
+    "page-heading",
+    "multi_content_DWfXFb",
+    "multi_content_YxxEEf"
+  ]
 }

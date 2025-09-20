@@ -7,7 +7,7 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
- {
+{
   "sections": {
     "slideshow_8KKtNU": {
       "type": "slideshow",
@@ -15,8 +15,7 @@
         "slider_item_YipJd4": {
           "type": "slider_item",
           "settings": {
-            "image": "shopify://shop_images/main-slider1.jpg",
-            "image_mobile": "shopify://shop_images/main-slider-mobi1.jpg",
+            "image": "shopify://shop_images/agile-lookbook2.jpg",
             "overlay_opacity": 0,
             "slider_effect": "effect_fadeinup",
             "subheading": "Sweater Collection",
@@ -43,8 +42,7 @@
         "slider_item_jiLA39": {
           "type": "slider_item",
           "settings": {
-            "image": "shopify://shop_images/main-slider2.jpg",
-            "image_mobile": "shopify://shop_images/main-slider-mobi2.jpg",
+            "image": "shopify://shop_images/sari_slide3.jpg",
             "overlay_opacity": 0,
             "slider_effect": "effect_fadeinup",
             "subheading": "Season Collection",
@@ -71,8 +69,7 @@
         "slider_item_iAiXpe": {
           "type": "slider_item",
           "settings": {
-            "image": "shopify://shop_images/main-slider3.jpg",
-            "image_mobile": "shopify://shop_images/main-slider-mobi3.jpg",
+            "image": "shopify://shop_images/sari_slide1.jpg",
             "overlay_opacity": 0,
             "slider_effect": "effect_fadeinup",
             "subheading": "Look Exclusive",
@@ -111,7 +108,7 @@
         "slide_height": "full_screen",
         "desktop_height": 800,
         "mobile_height": 300,
-        "color_scheme": "scheme-c4fa9b2e-e94e-477a-a1f0-ab1da4f2a676",
+        "color_scheme": "scheme-3d10de96-a479-49bd-819c-e044746b4f3e",
         "slide_effect": "fade",
         "reveal_slideshow": false,
         "show_arrow": true,
@@ -141,48 +138,42 @@
         "collection_r7aTxN": {
           "type": "collection",
           "settings": {
-            "collection": "crop-top",
-            "collection_image": "shopify://shop_images/collection_img_1.jpg",
+            "collection": "collection1",
             "collection_title": "Crop—Top"
           }
         },
         "collection_FUAzK4": {
           "type": "collection",
           "settings": {
-            "collection": "t-shirts",
-            "collection_image": "shopify://shop_images/collection_img_2.jpg",
+            "collection": "collection13",
             "collection_title": ""
           }
         },
         "collection_kUA3MH": {
           "type": "collection",
           "settings": {
-            "collection": "blazers",
-            "collection_image": "shopify://shop_images/blazer.jpg",
+            "collection": "collection15",
             "collection_title": ""
           }
         },
         "collection_ctTBpd": {
           "type": "collection",
           "settings": {
-            "collection": "coats",
-            "collection_image": "shopify://shop_images/img.jpg",
+            "collection": "collection16",
             "collection_title": ""
           }
         },
         "collection_fyfMEN": {
           "type": "collection",
           "settings": {
-            "collection": "sweaters",
-            "collection_image": "shopify://shop_images/collection_img_5.jpg",
+            "collection": "collection20",
             "collection_title": ""
           }
         },
         "collection_qdMHYe": {
           "type": "collection",
           "settings": {
-            "collection": "hoodies",
-            "collection_image": "shopify://shop_images/collection_img_6.jpg",
+            "collection": "collection3",
             "collection_title": ""
           }
         }
@@ -249,7 +240,7 @@
         "end_time": "09-22-2026",
         "timer_style": "default",
         "collections_type": "carousel",
-        "collection": "best-seller",
+        "collection": "collection1",
         "items_to_show": 8,
         "items_per_row": 4,
         "rows_on_desktop": 2,
@@ -279,9 +270,9 @@
         "idea_MGP8jb": {
           "type": "_idea",
           "settings": {
-            "image": "shopify://shop_images/main-images-outfit-1-min.jpg",
-            "product_1": "crossover-long-sleeve-crop-top-copy",
-            "product_2": "basic-sleeveless-tank-top-copy",
+            "image": "shopify://shop_images/sari_gram-2.jpg",
+            "product_1": "amazing-aluminum-bag-collection12",
+            "product_2": "amazing-aluminum-bag-collection17",
             "product_3": "",
             "product_4": "",
             "product_5": ""
@@ -293,7 +284,7 @@
           "name": "t:sections.image_with_text_overlay.name",
           "settings": {
             "color_scheme": "scheme-3d10de96-a479-49bd-819c-e044746b4f3e",
-            "image": "shopify://shop_images/banner-xmani.jpg",
+            "image": "shopify://shop_images/sari_gram-4.jpg",
             "image_link": "",
             "image_overlay_opacity": 0,
             "content_alignment": "center",
@@ -373,9 +364,9 @@
         "idea_aMAixR": {
           "type": "_idea",
           "settings": {
-            "image": "shopify://shop_images/main-images-outfit-4-min.jpg",
-            "product_1": "back-printed-t-shirt-copy",
-            "product_2": "leather-straps-sandals",
+            "image": "shopify://shop_images/sari_gram-1.jpg",
+            "product_1": "amazing-aluminum-bag-collection18",
+            "product_2": "amazing-aluminum-bag-collection15",
             "product_3": "",
             "product_4": "",
             "product_5": ""
@@ -421,21 +412,18 @@
         "scrolling_text_Bmp7bG": {
           "type": "scrolling_text",
           "settings": {
-            "image": "shopify://shop_images/scrolling-img-13.jpg",
             "content": "Express Your True Self"
           }
         },
         "scrolling_text_7defWk": {
           "type": "scrolling_text",
           "settings": {
-            "image": "shopify://shop_images/scrolling-img-1.jpg",
             "content": "Exclusive Seasonal Picks"
           }
         },
         "scrolling_text_PtA9FE": {
           "type": "scrolling_text",
           "settings": {
-            "image": "shopify://shop_images/scrolling-img-12.jpg",
             "content": "Exclusive Seasonal Picks"
           }
         }
@@ -487,7 +475,7 @@
         "end_time": "09-22-2026",
         "timer_style": "default",
         "collections_type": "carousel",
-        "collection": "trending",
+        "collection": "collection17",
         "items_to_show": 8,
         "items_per_row": 4,
         "rows_on_desktop": 2,
@@ -517,31 +505,30 @@
         "testimonials_items_FQz4eH": {
           "type": "testimonials_items",
           "settings": {
-            "author_image": "shopify://shop_images/tes_home2_1.jpg",
+            "author_image": "shopify://shop_images/sari_gram-2.jpg",
             "author_rating": 5,
             "author_text": "<p>These are sooo pretty and very comfy. Perfect color as well. I love wearing these with a neutral top and Chelsea boots. Wicked cute...😍</p>",
-            "select_product": "basic-bright-green-rib-extreme-crop",
+            "select_product": "amazing-aluminum-bag-collection20",
             "author_name": "Carie-Gosée H."
           }
         },
         "testimonials_items_taknUR": {
           "type": "testimonials_items",
           "settings": {
-            "author_image": "shopify://shop_images/tes_home2_2.jpg",
-            "local_video": "",
+            "author_image": "shopify://shop_images/sari_gram-1.jpg",
             "author_rating": 5,
             "author_text": "<p>A perfect product, it keeps you very warm without over heating. True to size, I couldn't be happier with the purchase... Thank you! 🤗</p>",
-            "select_product": "balloon-sleeve-blouse-square-neck",
+            "select_product": "amazing-aluminum-bag-collection20",
             "author_name": "Cameron Smith."
           }
         },
         "testimonials_items_RV8Jjg": {
           "type": "testimonials_items",
           "settings": {
-            "author_image": "shopify://shop_images/h1-test-3.jpg",
+            "author_image": "shopify://shop_images/sari_gram-4.jpg",
             "author_rating": 5,
             "author_text": "<p>A fantastic purchase! The product provides just the right amount of warmth without causing overheating. Highly recommend! 😊</p>",
-            "select_product": "slim-fit-basic-unpatterned-t-shirt",
+            "select_product": "amazing-aluminum-bag-collection4",
             "author_name": "Algistino Lionel."
           }
         }
@@ -629,7 +616,7 @@
         "instagram_manual_upload_WnPgR7": {
           "type": "instagram_manual_upload",
           "settings": {
-            "image": "shopify://shop_images/h1-in-1.jpg",
+            "image": "shopify://shop_images/sari_gram-3.jpg",
             "more_info": "<p>We're totally smitten over this look! will you be creating a red or pink makeup look for valentine's day?</p><p>#cotton #glozin #trending #sale</p>",
             "instagram_post_name": "glozin_store",
             "link": "https://www.instagram.com/p/C8MFsIuv8G6/?next=%2F&img_index=6",
@@ -653,7 +640,7 @@
         "instagram_manual_upload_HNfRyy": {
           "type": "instagram_manual_upload",
           "settings": {
-            "local_video": "",
+            "image": "shopify://shop_images/sari_gram-2.jpg",
             "more_info": "<p>We're totally smitten over this look! will you be creating a red or pink makeup look for valentine's day? </p><p>#cotton #glozin #trending #sale</p>",
             "instagram_post_name": "glozin_store",
             "link": "https://www.instagram.com/p/C8MFsIuv8G6/?next=%2F&img_index=2",
@@ -677,7 +664,7 @@
         "instagram_manual_upload_XHACUJ": {
           "type": "instagram_manual_upload",
           "settings": {
-            "image": "shopify://shop_images/h1-in-2.jpg",
+            "image": "shopify://shop_images/sari_gram-4.jpg",
             "more_info": "<p>We're totally smitten over this look! will you be creating a red or pink makeup look for valentine's day?</p><p>#cotton #glozin #trending #sale</p>",
             "instagram_post_name": "glozin_store",
             "link": "https://www.instagram.com/p/C8MFsIuv8G6/?next=%2F&img_index=5",
@@ -701,7 +688,6 @@
         "instagram_manual_upload_iHBcAC": {
           "type": "instagram_manual_upload",
           "settings": {
-            "image": "shopify://shop_images/h1-in-3.jpg",
             "more_info": "<p>We're totally smitten over this look! will you be creating a red or pink makeup look for valentine's day?</p><p>#cotton #glozin #trending #sale</p>",
             "instagram_post_name": "glozin_store",
             "link": "https://www.instagram.com/p/C8MFsIuv8G6/?next=%2F&img_index=4",
@@ -725,7 +711,7 @@
         "instagram_manual_upload_ficYJ9": {
           "type": "instagram_manual_upload",
           "settings": {
-            "local_video": "",
+            "image": "shopify://shop_images/sari_gram-2.jpg",
             "more_info": "<p>We're totally smitten over this look! will you be creating a red or pink makeup look for valentine's day?</p><p>#cotton #glozin #trending #sale</p>",
             "instagram_post_name": "glozin_store",
             "link": "https://www.instagram.com/p/C8MFsIuv8G6/?next=%2F&img_index=1",
@@ -749,7 +735,7 @@
         "instagram_manual_upload_iWGFPW": {
           "type": "instagram_manual_upload",
           "settings": {
-            "image": "shopify://shop_images/h1-in-4.jpg",
+            "image": "shopify://shop_images/sari_gram-2.jpg",
             "more_info": "<p>We're totally smitten over this look! will you be creating a red or pink makeup look for valentine's day?</p><p>#cotton #glozin #trending #sale</p>",
             "instagram_post_name": "glozin_store",
             "link": "https://www.instagram.com/p/C8MFsIuv8G6/?next=%2F&img_index=3",

@@ -30,7 +30,7 @@
           "type": "link_list",
           "settings": {
             "heading": "",
-            "menu": "our-company",
+            "menu": "footer",
             "content_width": "16%"
           }
         },
@@ -38,7 +38,7 @@
           "type": "link_list",
           "settings": {
             "heading": "",
-            "menu": "shop-categories",
+            "menu": "footer",
             "content_width": "16%"
           }
         },
@@ -71,7 +71,7 @@
         "menu_store_policies": "footer",
         "show_social": true,
         "payment_enable": true,
-        "payment_image": "shopify://shop_images/payment.png",
+        "payment_image": "shopify://shop_images/payment-2.png",
         "payment_width": 340,
         "copyright_text": "© 2025 Glozin store. All rights reserved.",
         "footer_heading_size": 16,

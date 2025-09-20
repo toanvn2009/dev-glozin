@@ -7,9 +7,10 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
- {
+{
   "current": {
-    "purchase_code": "",
+    "purchase_code": "d4765c8e-f9e7-4ae8-b76b-f63f809784ee",
+    "purchase_code_action": "active",
     "favicon": "shopify://shop_images/Favicon.png",
     "logo": "shopify://shop_images/logo.svg",
     "desktop_logo_width": 82,
@@ -100,35 +101,52 @@
         "blocks": {
           "badges_NhM4GM": {
             "type": "_product-badges",
-            "settings": {}
+            "settings": {},
+            "blocks": {}
           },
           "title_txJBrx": {
             "type": "_product-title",
             "settings": {
               "show_vendor": false
-            }
+            },
+            "blocks": {}
           },
           "rate_QwRHyp": {
             "type": "_review-quickview",
-            "settings": {}
+            "settings": {},
+            "blocks": {}
           },
           "price_NNg9B8": {
             "type": "_product-price",
-            "settings": {}
+            "settings": {},
+            "blocks": {}
           },
           "description_pKXRJa": {
             "type": "_product-short-description",
-            "settings": {}
+            "settings": {
+              "excerpt_length": 150
+            },
+            "blocks": {}
           },
           "variant_picker_MQYkTJ": {
             "type": "_product-variant-picker",
-            "settings": {}
+            "settings": {
+              "variant_type": "swatches",
+              "show_size_guide": false,
+              "size_guide_label": "Size guide",
+              "size_guide_page": ""
+            },
+            "blocks": {}
           },
           "buy_buttons_pDYNX9": {
             "type": "_product-buy-buttons",
             "settings": {
-              "show_dynamic_checkout": true
-            }
+              "show_dynamic_checkout": true,
+              "show_gift_card_recipient": true,
+              "show_wishlist": true,
+              "show_compare": true
+            },
+            "blocks": {}
           }
         },
         "block_order": [
@@ -169,18 +187,6 @@
       }
     },
     "content_for_index": [],
-    "blocks": {
-      "14060646107696862457": {
-        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-        "disabled": false,
-        "settings": {}
-      },
-      "16555213172727936593": {
-        "type": "shopify://apps/ns-discount-in-cart/blocks/discount_block/0cbbbcdd-bf54-49df-885c-9ca3fd52a671",
-        "disabled": true,
-        "settings": {}
-      }
-    },
     "color_schemes": {
       "default": {
         "settings": {

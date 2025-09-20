@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "breadcrumb": {
@@ -11,8 +20,14 @@
     "main": {
       "type": "main-product-layout-2",
       "blocks": {
-        "badges_RwfTMp": { "type": "_product-badges", "settings": {} },
-        "title_G6tU8U": { "type": "_product-title", "settings": {} },
+        "badges_RwfTMp": {
+          "type": "_product-badges",
+          "settings": {}
+        },
+        "title_G6tU8U": {
+          "type": "_product-title",
+          "settings": {}
+        },
         "review_and_sold_AAbJC9": {
           "type": "_product-review-sold",
           "settings": {
@@ -22,10 +37,15 @@
             "hours": "10,12,15,16,18,20,24"
           }
         },
-        "price_VJ4N8m": { "type": "_product-price", "settings": {} },
+        "price_VJ4N8m": {
+          "type": "_product-price",
+          "settings": {}
+        },
         "short_description_9BGxVm": {
           "type": "_product-short-description",
-          "settings": { "excerpt_length": 200 }
+          "settings": {
+            "excerpt_length": 200
+          }
         },
         "live_view_rzDP6G": {
           "type": "_product-live-view",
@@ -82,11 +102,16 @@
         },
         "product_grouped_6epkNf": {
           "type": "_product-grouped",
-          "settings": { "heading": "" }
+          "settings": {
+            "heading": ""
+          }
         },
         "more_colors_3zmxGq": {
           "type": "_product-more-colors",
-          "settings": { "heading": "", "image_width": 40 }
+          "settings": {
+            "heading": "",
+            "image_width": 40
+          }
         },
         "product_meta_kiKPhW": {
           "type": "_product-meta",
@@ -94,7 +119,6 @@
             "show_barcode": false,
             "show_sku": true,
             "show_available": true,
-            "show_vendor": true,
             "show_tags": false,
             "show_type": true,
             "show_collections": true
@@ -169,7 +193,9 @@
       "blocks": {
         "description_4CKHTP": {
           "type": "description",
-          "settings": { "title": "Description" }
+          "settings": {
+            "title": "Description"
+          }
         },
         "custom_tab_kHFeKa": {
           "type": "custom_tab",
@@ -188,29 +214,20 @@
             "content_rich": "<p>abd</p>",
             "page": ""
           }
-        },
-        "judge_me_reviews_review_widget_bKBYcL": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
         }
       },
       "block_order": [
         "description_4CKHTP",
         "custom_tab_kHFeKa",
-        "custom_tab_K7qCiw",
-        "judge_me_reviews_review_widget_bKBYcL"
+        "custom_tab_K7qCiw"
       ],
-      "settings": { "section_width": "fluid_container", "reset_spacing": false }
+      "settings": {
+        "section_width": "fluid_container",
+        "reset_spacing": false
+      }
     },
     "1716793714ce89e457": {
       "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_KFVR47": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
-        }
-      },
-      "block_order": ["judge_me_reviews_review_widget_KFVR47"],
       "settings": {}
     },
     "divider_TKLM6L": {
@@ -273,7 +290,10 @@
         "reset_spacing": false
       }
     },
-    "product-set": { "type": "product-set", "settings": {} }
+    "product-set": {
+      "type": "product-set",
+      "settings": {}
+    }
   },
   "order": [
     "breadcrumb",

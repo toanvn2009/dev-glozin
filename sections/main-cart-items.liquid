@@ -163,12 +163,18 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {%- for item in cart.items -%}
+                    {%- for item in cart.items -%} 
+{% liquid
+  assign collections = ''
+  for collection in item.product.collections
+      assign collections = collections | append: collection.id | append: ','
+  endfor
+%}
                       <tr
                         class="cart-item page__cart-item"
                         id="CartItem-{{ item.index | plus: 1 }}"
                         style="--custom-width: 10rem"
-                      >
+                       data-foxkit-product-id={{ item.product.id }} data-foxkit-collections="{{ collections }}">
                         <td
                           class="cart-item__media border-0 px-0 flex align-center gap-10 border-bottom py-30 w-custom"
                         >
