@@ -1,0 +1,73 @@
+@media (max-width: 1024.98px) {
+  .information-text__wrapper {
+    overflow: hidden;
+    margin-inline: calc(var(--bs-gutter-x) * -1);
+    padding-inline: var(--bs-gutter-x);
+    width: auto;
+    white-space: nowrap;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    gap: calc(var(--sp) * 4);
+  }
+}
+@media (min-width: 1025px) {
+  .featured__parallax-inner {
+    --max-width: 40rem;
+  }
+  .block__information_text:is(:nth-of-type(1), :nth-of-type(5))
+    .block__information_text-inner {
+    margin-inline-end: 1.7rem;
+  }
+  .block__information_text:is(:nth-of-type(3), :nth-of-type(7))
+    .block__information_text-inner {
+    margin-inline-end: 8rem;
+  }
+  .block__information_text:is(:nth-of-type(2), :nth-of-type(6))
+    .block__information_text-inner {
+    margin-inline-start: 1.7rem;
+  }
+  .block__information_text:is(:nth-of-type(4), :nth-of-type(8))
+    .block__information_text-inner {
+    margin-inline-start: 8rem;
+  }
+  .balloon-icon {
+    bottom: -4px;
+    inset-inline-end: -9px;
+  }
+  .block__information_text:nth-child(even) {
+    justify-content: flex-start;
+  }
+  .block__information_text:nth-child(odd) {
+    justify-content: flex-end;
+  }
+  .block__information_text:nth-child(even) .balloon-icon {
+    inset-inline-start: -9px;
+    inset-inline-end: auto;
+    transform: rotate(-260deg);
+    -webkit-transform: rotate(-260deg);
+  }
+  .information-text__wrapper {
+    --gap-desktop: calc(var(--max-width, 40rem));
+    --width: (calc(100% - var(--max-width, 40rem)) / 2);
+    --row-gap: 6.7rem;
+    padding-top: 5rem;
+  }
+  .block__information_text {
+    flex: 0 0 auto;
+    width: calc((100% - var(--gap-desktop)) / 2);
+  }
+}
+@media (min-width: 1025px) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .block__information_text-inner {
+    transition: transform 0.8s cubic-bezier(0.47, 1.64, 0.41, 0.8);
+  }
+  .block__information_text:nth-child(odd) .block__information_text-inner:hover {
+    transform: translateX(-25px);
+  }
+  .block__information_text:nth-child(even)
+    .block__information_text-inner:hover:hover {
+    transform: translateX(25px);
+  }
+}

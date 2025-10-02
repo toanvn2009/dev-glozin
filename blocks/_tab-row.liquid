@@ -1,0 +1,96 @@
+<div class="tab-heading cursor-pointer transition-all {{ block.settings.type_preset }}">
+  <div
+    class="transition pointer relative flex pe-20"
+  >
+    {{ block.settings.heading }}
+  </div>
+</div>
+<div
+  class="tab-row__content overflow-hidden transition-all duration-300"
+>
+  <div class="prose">
+    {% content_for 'blocks' %}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "t:sections.custom_section.blocks.tab.tab_row",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.custom_section.blocks.accordion.settings.settings.heading",
+      "default": "t:sections.custom_section.blocks.accordion.settings.default_accordion_row"
+    },
+    {
+      "type": "select",
+      "id": "type_preset",
+      "label": "t:sections.custom_section.blocks.accordion.settings.heading_preset",
+      "options": [
+        {
+          "value": "",
+          "label": "t:sections.custom_section.blocks.heading.default"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.custom_section.blocks.heading.h1"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.custom_section.blocks.heading.h2"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.custom_section.blocks.heading.h3"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.custom_section.blocks.heading.h4"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.custom_section.blocks.heading.h5"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.custom_section.blocks.heading.h6"
+        }
+      ],
+      "default": "h6",
+      "info": "t:sections.custom_section.blocks.heading.info.edit_presets_in_theme_settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "open",
+      "label": "t:sections.custom_section.blocks.accordion.settings.settings.open_default.label",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.custom_section.blocks.tab.tab_row",
+      "blocks": {
+        "text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location.</p>"
+          }
+        }
+      },
+      "block_order": ["text-1"],
+      "settings": {
+        "heading": "When will I get my order?"
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,210 @@
+{% liquid
+  assign block_st = block.settings
+  assign borders = block_st.borders
+  assign border_width = block_st.border_width
+  assign border_opacity = block_st.border_opacity
+  assign border_radius = block_st.border_radius
+%}
+{% style %}
+  {% if block.settings.show_divider %}
+        .accordion details:first-child{
+           border-block-start: 1px solid var(--color-border);
+       }
+       .accordion details:not(:first-child){
+           border-block-start: 1px solid var(--color-border);
+       }
+        .accordion details:last-child {
+           border-block-end: 1px solid var(--color-border);
+       }
+  {% endif %}
+{% endstyle %}
+{% capture style %}
+  --summary-font-family: var(--font-{{ block.settings.type_preset }}--font-family);
+  --summary-font-size: var(--font-{{ block.settings.type_preset }}--size);
+  --summary-font-line-height: var(--font-{{ block.settings.type_preset }}--line-height);
+  --summary-font-case: var(--font-{{ block.settings.type_preset }}--text-transform);
+  --space-bottom: {{ block.settings.padding_bottom }};--space-top: {{ block.settings.padding_top }};
+  --border-style: {{ borders }};
+  --border-width: {{ border_width }}px;
+  --border-color: rgba(from var(--color-border) r g b / {{ border_opacity | divided_by: 100.0 }});
+  --border-radius: {{ border_radius }}px;
+{% endcapture %}
+<div
+  class="{% if request.visual_preview_mode %}bg-white rounded-5 px-sp-5{% endif %} pb-custom pt-custom spacing-style accordion tab-{{ block.id }} {% if block.settings.inherit_color_scheme == false %}color-{{ block.settings.color_scheme }}{% endif %} gradient border-style"
+  {{ block.shopify_attributes }}
+  style="{{ style | strip | strip_newlines }}"
+>
+  <tab-row class="tab-row" is="tab-row">
+    {% content_for 'blocks' %}
+  </tab-row>
+</div>
+{% schema %}
+{
+  "name": "t:sections.custom_section.blocks.tab.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.custom_section.blocks.tab.how_to_use"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_divider",
+      "label": "t:sections.all.divider.show_divider",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "inherit_color_scheme",
+      "label": "t:sections.custom_section.blocks.page.inherit_color_scheme",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "info": "t:sections.all.colors.info",
+      "default": "default-color-scheme",
+      "visible_if": "{{ block.settings.inherit_color_scheme == false }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.custom_section.settings.appearance.settings.borders.label"
+    },
+    {
+      "type": "select",
+      "id": "borders",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.custom_section.settings.appearance.settings.borders.options__1.label"
+        },
+        {
+          "value": "solid",
+          "label": "t:sections.custom_section.settings.appearance.settings.borders.options__2.label"
+        }
+      ],
+      "default": "none",
+      "label": "t:sections.custom_section.settings.appearance.settings.borders.style"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 1,
+      "max": 10,
+      "step": 0.5,
+      "unit": "px",
+      "label": "t:sections.custom_section.settings.appearance.settings.border_thickness.label",
+      "default": 1,
+      "visible_if": "{{ block.settings.borders == 'solid' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "t:sections.custom_section.settings.appearance.settings.border_opacity.label",
+      "default": 100,
+      "visible_if": "{{ block.settings.borders == 'solid' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.custom_section.settings.appearance.settings.corner_radius.label",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:sections.custom_section.blocks.page.spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_tab-row"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.custom_section.blocks.tab.name",
+      "category": "t:sections.group.blocks.layout",
+      "blocks": {
+        "row-1": {
+          "type": "_tab-row",
+          "settings": {
+            "heading": "Tab #1"
+          },
+          "blocks": {
+            "text-1": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Our goal is for every customer to be totally satisfied with their purchase. If this isn't the case, let us know and we'll do our best to work with you to make it right.</p>",
+                "width": "100%"
+              }
+            }
+          },
+          "block_order": ["text-1"]
+        },
+        "row-2": {
+          "type": "_tab-row",
+          "settings": {
+            "heading": "Tab #2"
+          },
+          "blocks": {
+            "text-1": {
+              "type": "text",
+              "settings": {
+                "text": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location.</p>",
+                "width": "100%"
+              }
+            }
+          },
+          "block_order": ["text-1"]
+        },
+        "row-3": {
+          "type": "_tab-row",
+          "settings": {
+            "heading": "Tab #3"
+          },
+          "blocks": {
+            "text-1": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Our products are manufactured both locally and globally. We carefully select our manufacturing partners to ensure our products are high quality and a fair value.</p>",
+                "width": "100%"
+              }
+            }
+          },
+          "block_order": ["text-1"]
+        }
+      },
+      "block_order": ["row-1", "row-2", "row-3"]
+    }
+  ]
+}
+{% endschema %}

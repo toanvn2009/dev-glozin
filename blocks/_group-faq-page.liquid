@@ -1,0 +1,81 @@
+{% liquid
+  assign block_st = block.settings
+%}
+{% style %}
+  .group__faqs-content .shopify-block:first-of-type {
+    border-top: 1px solid var(--color-border);
+  }
+  .group__faqs-content .shopify-block:last-of-type details {
+    padding-bottom: 0;
+  }
+  .group__faqs-content .shopify-block:last-of-type .section__faq-items {
+    border-bottom: 0;
+  }
+{% endstyle %}
+<div
+  class="group__faqs-content w-full"
+>
+  <div class="w-full{% if block_st.framed %} rounded border p-sp-5 p-1025-40{% endif %}">
+    <h2
+      class="heading-letter-spacing mb-25"
+      {{ block.shopify_attributes }}
+    >
+      <span>{{ block.settings.heading }}</span>
+    </h2>
+    {% content_for 'blocks' %}
+  </div>
+</div>
+<script>
+  var faqContainer_item = document.querySelector('.group__faqs-content');
+  if (faqContainer_item) {
+    var firstDetails_item = faqContainer_item.querySelector('details');
+
+    if (firstDetails_item) {
+      firstDetails_item.classList.add('detail-open');
+      firstDetails_item.setAttribute('open', '');
+    }
+  }
+</script>
+{% schema %}
+{
+  "name": "t:sections.faq.name",
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "_item-faq"
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.all.content_setting.heading.label",
+      "default": "Questions heading"
+    },
+    {
+      "type": "checkbox",
+      "id": "framed",
+      "label": "t:sections.faq.settings.framed",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.faq.name",
+      "blocks": [
+        {
+          "type": "_item-faq"
+        },
+        {
+          "type": "_item-faq"
+        },
+        {
+          "type": "_item-faq"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

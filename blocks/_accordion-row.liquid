@@ -1,0 +1,73 @@
+<details
+  class="collapsible-row py-sp-1 {% if block.settings.open %}detail-open{% endif %}"
+  {{ block.shopify_attributes }}
+  is="collapsible-row"
+  {% if block.settings.open %}
+    open
+  {% endif %}
+>
+  <summary class="collapsible-row__summary not-highlight-tap">
+    <div class="collapsible-heading">
+      <div
+        class="transition pointer relative flex pe-20 h7"
+      >
+        {{ block.settings.heading }}
+      </div>
+      <span class="open-children-toggle transition">
+        <span class="icon_plus-animation heading-color"> </span>
+      </span>
+    </div>
+  </summary>
+  <div
+    class="collapsible-row__content overflow-hidden"
+  >
+    <div class="prose">
+      {% content_for 'blocks' %}
+    </div>
+  </div>
+</details>
+{% schema %}
+{
+  "name": "t:sections.custom_section.blocks.accordion.settings.accordion_row",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.custom_section.blocks.accordion.settings.settings.heading",
+      "default": "t:sections.custom_section.blocks.accordion.settings.default_accordion_row"
+    },
+    {
+      "type": "checkbox",
+      "id": "open",
+      "label": "t:sections.custom_section.blocks.accordion.settings.settings.open_default.label",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.custom_section.blocks.accordion.settings.accordion_row",
+      "blocks": {
+        "text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location.</p>",
+          }
+        }
+      },
+      "block_order": ["text-1"],
+      "settings": {
+        "heading": "When will I get my order?"
+      }
+    }
+  ]
+}
+{% endschema %}

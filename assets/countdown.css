@@ -1,0 +1,95 @@
+countdown-timer.section_block.default
+  :is(.hours_timer, .days_timer, .minutes_timer, .seconds_timer) {
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  margin-right: 2px;
+  font-weight: var(--subheading-weight);
+}
+countdown-timer.section_block.modern
+  :is(.hours_timer, .days_timer, .minutes_timer, .seconds_timer) {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+}
+countdown-timer.section_block.default .timer-announcementbar-text {
+  font-size: var(--body-font-size);
+  color: var(--color-text);
+  font-weight: var(--subheading-weight);
+  text-transform: lowercase;
+}
+countdown-timer.section_block.modern .timer-announcementbar-text {
+  font-size: calc(var(--body-font-size) - 2px);
+}
+countdown-timer.section_block.modern .countdown-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 10rem;
+  min-width: 8rem;
+  padding: 2rem;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(5px);
+  height: 100%;
+  min-width: 8.5rem;
+}
+countdown-timer.section_block.default .countdown-container {
+  display: block !important;
+  min-width: 9rem;
+}
+@media screen and (max-width: 767.98px) {
+  countdown-timer.section_block.modern {
+    --gap: 0;
+    justify-content: center;
+  }
+  countdown-timer.section_block.modern .countdown-container {
+    min-height: 7rem;
+    min-width: 7.5rem;
+    padding: 1.2rem;
+  }
+  countdown-timer.section_block.default .countdown-container {
+    min-width: 7.4rem;
+  }
+}
+
+.countdown-cart .countdown-inner {
+  display: inline-flex;
+  justify-content: center;
+  margin-left: 2px;
+  align-items: baseline;
+}
+.countdown-cart .countdown-container {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+}
+.countdown-cart :is(.days, .hours, .days_timer, .hours_timer) {
+  display: none;
+}
+.countdown-cart .minute.timer-announcementbar-text,
+.countdown-cart .second.timer-announcementbar-text {
+  display: inline-block !important;
+  font-size: var(--body-font-size);
+}
+.block-product__promotion-countdown .timer-announcementbar-text {
+  display: none;
+}
+.block-product__promotion-countdown .countdown-container,
+.countdown-cart .countdown-container {
+  color: #C03E35;
+  background-color: rgba(var(--color-white), var(--opacity, 1));
+}
+.block-product__promotion-countdown .countdown-container {
+  border-radius: 5px;
+}
+.block-product__promotion-countdown .countdown-container {
+  min-width: 30px;
+}
+@media (max-width: 425px) {
+  countdown-timer.section_block.modern .countdown-container {
+    width: 45%;
+    padding: 0rem;
+  }
+  .block-product__promotion-countdown .countdown-container {
+    min-width: 28px;
+  }
+}

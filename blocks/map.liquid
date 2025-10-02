@@ -1,0 +1,164 @@
+{% liquid
+  assign block_st = block.settings
+  assign location = block_st.location | url_encode
+  assign latitude = block_st.latitude
+  assign longitude = block_st.longitude
+  assign borders = block_st.borders
+  assign border_width = block_st.border_width
+  assign border_opacity = block_st.border_opacity
+  assign border_radius = block_st.border_radius
+%}
+{% capture style %}
+  --border-style: {{ borders }};
+  --border-height: {{ border_width }}px;
+  --color-border: rgba(from var(--color-border) r g b / {{ border_opacity | divided_by: 100.0 }});
+  --img-rounded: {{ border_radius }}px;
+{% endcapture %}
+
+<div
+  class="map-block flex w-full pb-custom pt-custom border-style{% if request.visual_preview_mode %} bg-white px-sp-5 rounded-5{% endif %}"
+  style="--space-bottom: {{ block.settings.padding_bottom }};--space-top: {{ block.settings.padding_top }};{{ style | strip | strip_newlines }}"
+  {{ block.shopify_attributes }}
+>
+  {% if latitude != blank and longitude != blank %}
+    <iframe
+      class="map-iframe rounded"
+      loading="lazy"
+      allowfullscreen
+      referrerpolicy="no-referrer-when-downgrade"
+      src="https://maps.google.com/maps?q={{ latitude }},{{ longitude }}&z=15&output=embed"
+    >
+    </iframe>
+  {% elsif location != blank %}
+    <iframe
+      class="map-iframe rounded"
+      loading="lazy"
+      allowfullscreen
+      referrerpolicy="no-referrer-when-downgrade"
+      src="https://maps.google.com/maps?q={{ location }}&z=15&output=embed"
+    >
+    </iframe>
+  {% else %}
+    <p>{{ 'google_map.no_iframe' | t }}</p>
+  {% endif %}
+</div>
+
+{% stylesheet %}
+  .map-iframe {
+    width: 100%;
+    height: 400px;
+    border: 0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:sections.custom_section.blocks.map.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.custom_section.blocks.map.how_to_use"
+    },
+    {
+      "type": "text",
+      "id": "location",
+      "label": "t:sections.custom_section.blocks.map.location",
+      "default": "New York"
+    },
+    {
+      "type": "text",
+      "id": "longitude",
+      "label": "t:sections.custom_section.blocks.map.longitude",
+      "default": "-74.005974"
+    },
+    {
+      "type": "text",
+      "id": "latitude",
+      "label": "t:sections.custom_section.blocks.map.latitude",
+      "default": "40.712776"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.custom_section.settings.appearance.settings.borders.label"
+    },
+    {
+      "type": "select",
+      "id": "borders",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.custom_section.settings.appearance.settings.borders.options__1.label"
+        },
+        {
+          "value": "solid",
+          "label": "t:sections.custom_section.settings.appearance.settings.borders.options__2.label"
+        }
+      ],
+      "default": "none",
+      "label": "t:sections.custom_section.settings.appearance.settings.borders.style"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 1,
+      "max": 10,
+      "step": 0.5,
+      "unit": "px",
+      "label": "t:sections.custom_section.settings.appearance.settings.border_thickness.label",
+      "default": 1,
+      "visible_if": "{{ block.settings.borders == 'solid' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "t:sections.custom_section.settings.appearance.settings.border_opacity.label",
+      "default": 100,
+      "visible_if": "{{ block.settings.borders == 'solid' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.custom_section.settings.appearance.settings.corner_radius.label",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:sections.custom_section.blocks.page.spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.custom_section.blocks.map.name",
+      "category": "t:sections.group.blocks.basic"
+    }
+  ]
+}
+{% endschema %}

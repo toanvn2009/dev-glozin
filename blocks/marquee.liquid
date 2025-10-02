@@ -1,0 +1,166 @@
+{{ 'section-scrolling-text.css' | asset_url | stylesheet_tag }}
+
+{%- capture style -%}
+  --speed: {{ block.settings.speed }}s;
+{%- endcapture -%}
+{%- capture col_style -%}
+  {% if block.settings.space_between < 40 %}--gap: {{ block.settings.space_between }}px;{% else %}--gap: clamp(4rem, calc({{ block.settings.space_between }} * var(--responsive-rate)), calc({{ block.settings.space_between }}*1px));{% endif %}
+{%- endcapture -%}
+
+<div
+  class="section__scrolling-text color-{{ block.settings.color_scheme }} gradient pb-custom pt-custom spacing-style"
+  style="{{ style | strip | strip_newlines }} --space-bottom: {{ block.settings.padding_bottom }};--space-top: {{ block.settings.padding_top }};"
+>
+  <div class="w-full">
+    <div
+      class="flex{% if block.settings.uppercase %} uppercase{% endif %} marquee overflow-hidden gap w-full justify-center"
+      style="{{ col_style | strip | strip_newlines }}"
+      {{ block.shopify_attributes }}
+    >
+      {%- for i in (0..6) -%}
+        <div
+          class="flex animation-marquee animation__marquee-{{ block.settings.direction }} whitespace-nowrap gap align-center"
+          style="{{ col_style | strip | strip_newlines }}"
+        >
+          {% content_for 'blocks' %}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.group.decorative.marquee",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.custom_section.blocks.page.how_to_use"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "info": "t:sections.all.colors.info",
+      "default": "default-color-scheme"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.announcement-bar.settings.marquee_settings.label"
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "t:sections.scrolling_text.settings.direction.label",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.scrolling_text.settings.direction.left.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.scrolling_text.settings.direction.right.label"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "t:sections.scrolling_text.settings.speed.label",
+      "default": 15,
+      "min": 5,
+      "max": 50,
+      "step": 1,
+      "unit": "s"
+    },
+    {
+      "type": "range",
+      "id": "space_between",
+      "label": "t:sections.all.space_between.label",
+      "min": 10,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "t:sections.custom_section.blocks.page.spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "icon"
+    },
+    {
+      "type": "heading"
+    },
+    {
+      "type": "description"
+    },
+    {
+      "type": "_group-merquee"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.group.decorative.marquee",
+      "category": "t:sections.group.decorative.name",
+      "blocks": [
+        {
+          "type": "icon"
+        },
+        {
+          "type": "description"
+        },
+        {
+          "type": "icon"
+        },
+        {
+          "type": "description"
+        },
+        {
+          "type": "icon"
+        },
+        {
+          "type": "description"
+        },
+        {
+          "type": "icon"
+        },
+        {
+          "type": "description"
+        },
+        {
+          "type": "icon"
+        },
+        {
+          "type": "description"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

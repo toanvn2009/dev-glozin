@@ -1,0 +1,9 @@
+{% if slide_count > 0 %}
+    <advanced-slideshow
+    style="--item-desktop: 1;--item-tablet: 1;--item-mb: 1;--gap: 0px; --gap-desktop: 0px;"
+    >
+        <slideshow-slides class="block {% if height == 'adapt' or height == 'full_screen' %}h-auto{% endif %}">
+            {{ slides }}
+        </slideshow-slides>
+    </advanced-slideshow>
+{% endif %}

@@ -1,0 +1,27 @@
+.image-comparison {
+  will-change: clip-path;
+}
+.slider {
+  cursor: grab;
+  left: 50%;
+  transform: translateX(-50%);
+  will-change: transform, background-color;
+}
+.handle {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: ew-resize;
+  touch-action: none;
+}
+.slider:focus-visible {
+  outline: none;
+}
+.slider:focus-visible .handle {
+  outline: 0.3rem solid rgba(var(--color-heading-rgb), 0.9);
+  outline-offset: -0.3rem;
+  transition: none;
+}
+.handle:active {
+  cursor: grabbing;
+}

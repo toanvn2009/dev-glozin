@@ -1,0 +1,45 @@
+{%- if closest.product != blank -%}
+  {%- if closest.product.metafields.custom.key_features.value -%}
+    <div class="py-sp-5 py-1025-sp-6 px-sp-5 px-1025-sp-6 border rounded">
+      {%- if block.settings.heading != blank -%}
+        <p class="h7 mb-sp-2">
+          {{ block.settings.heading }}
+        </p>
+      {%- endif -%}
+      <ul class="flex gap-5 list-unstyled column">
+        {%- for features in closest.product.metafields.custom.key_features.value -%}
+          {%- if features.title or features.description -%}
+            <li class="flex gap-sp-2 align-start">
+              <div class="flex content-center">
+                <span class="flex-auto heading-color w-custom" style="--width: 10px;">
+                  <svg width="6" height="6" viewBox="0 0 6 6" fill="none" class="mb-2" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="3" cy="3" r="3" fill="currentColor"/>
+                  </svg>
+                </span>
+              </div>
+              <div class="key__features-inner">
+                <span class="features-title-label heading-style">{{ features.title }}</span>
+                <span class="features-description-value">{{ features.description }}</span>
+              </div>
+            </li>
+          {% endif %}
+        {%- endfor -%}
+      </ul>
+    </div>
+  {% endif %}
+{% endif %}
+{% schema %}
+{
+  "name": "t:sections.all.product_setting.key_features.name",
+  "class": "block-product__key-features my-custom slideIn-animate",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "default": "Key Features",
+      "label": "t:sections.all.content_setting.heading.label"
+    }
+  ],
+  "presets": [{ "name": "t:sections.all.product_setting.key_features.name" }]
+}
+{% endschema %}

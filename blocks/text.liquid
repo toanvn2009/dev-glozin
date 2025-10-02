@@ -1,0 +1,176 @@
+{% liquid
+  assign theme_st = settings
+  assign section_st = section.settings
+  assign block_st = block.settings
+  assign scroll_animation = theme_st.scroll_animation
+  assign type_preset = block_st.type_preset
+  assign enable_background = block_st.enable_background
+  assign alignment = block_st.alignment
+  assign content_alignment = section_st.text_alignment
+  assign text_alignment_mobile = section_st.text_alignment_mobile
+%}
+{% capture style %}
+--space-bottom: {{ block.settings.padding_bottom }};--space-top: {{ block.settings.padding_top }};
+--bg-color-custom: {{ block_st.background_color | default: '#000000' }};
+--radius: {{ block_st.border_radius }}px;
+{% endcapture %}
+<div
+  class="text-{{ alignment }} block__text mt-custom mb-custom spacing-style {{ type_preset }}{% if request.visual_preview_mode %} fs-34 bg-white rounded-5 p-sp-5{% endif %} flex justify-content-{{ text_alignment_mobile }} flex-md-{{ content_alignment }}"
+  style="{{ style | strip | strip_newlines }}"
+  {{ block.shopify_attributes }}
+>
+  {%- if scroll_animation != 'disable' -%}
+    <motion-effect
+      data-animate="fade-up"
+      class="block"
+    >
+  {%- endif -%}
+  <div
+    class="rounded-custom w-{{ block_st.width }}{% if enable_background %} bg-custom px-sp-5 py-sp-2{% endif %}"
+    {{ block.shopify_attributes }}
+  >
+    {{ block.settings.text }}
+  </div>
+  {%- if scroll_animation != 'disable' -%}
+    </motion-effect>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.custom_section.blocks.text.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.custom_section.blocks.text.how_to_use"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "default": "t:sections.custom_section.blocks.text.default_text",
+      "label": "t:sections.custom_section.blocks.text.name"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.layout.name"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:sections.custom_section.blocks.settings.size.width.label",
+      "options": [
+        {
+          "label": "t:sections.custom_section.blocks.settings.size.options.options__1.label",
+          "value": "fit"
+        },
+        {
+          "label": "t:sections.custom_section.blocks.settings.size.options.options__2.label",
+          "value": "fill"
+        }
+      ],
+      "default": "fit"
+    },
+    {
+      "type": "text_alignment",
+      "id": "alignment",
+      "label": "t:sections.all.text_alignment.alignment",
+      "default": "left",
+      "visible_if": "{{ block.settings.width == 'fill' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.typography.name"
+    },
+    {
+      "type": "select",
+      "id": "type_preset",
+      "label": "t:sections.custom_section.blocks.heading.label",
+      "options": [
+        {
+          "value": "",
+          "label": "t:sections.custom_section.blocks.heading.default"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.custom_section.blocks.heading.h1"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.custom_section.blocks.heading.h2"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.custom_section.blocks.heading.h3"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.custom_section.blocks.heading.h4"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.custom_section.blocks.heading.h5"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.custom_section.blocks.heading.h6"
+        }
+      ],
+      "default": "",
+      "info": "t:sections.custom_section.blocks.heading.info.edit_presets_in_theme_settings"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.custom_section.settings.appearance.header"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_background",
+      "label": "t:sections.custom_section.blocks.settings.background.label",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:sections.custom_section.blocks.settings.background_color.label",
+      "default": "#000000",
+      "visible_if": "{{ block.settings.enable_background == true }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.custom_section.settings.appearance.settings.corner_radius.label",
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_background == true }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.custom_section.blocks.page.spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 16
+    }
+  ],
+  "presets": [{ "name": "t:sections.custom_section.blocks.text.name", "category": "t:sections.group.blocks.basic" }]
+}
+{% endschema %}

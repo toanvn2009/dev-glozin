@@ -1,0 +1,69 @@
+{% liquid
+  assign background_media = settings.background_media
+  assign image = settings.image
+  assign video_local = settings.video_local
+%}
+<div
+  class="banner-background__image"
+>
+  {% if background_media == 'image' %}
+    {%- liquid
+      assign alt_default = 'accessibility.promotion_banner' | t
+      assign alt = image.alt | default: alt_default | escape
+    -%}
+    {% if image != blank %}
+      {% render 'responsive-image',
+        type: 'banner',
+        container: section_st.section_width,
+        image: image,
+        image_alt: alt,
+        motion: false
+      -%}
+    {%- else %}
+      {%- render 'placeholder-render', type: 'lifestyle-2', class: 'img-placeholder h-full w-full' -%}
+    {% endif %}
+  {% elsif background_media == 'video' %}
+    {% if video_local != blank %}
+      <video-local
+        class="block overflow-hidden"
+      >
+        {%- liquid
+          assign image_alt_default = 'general.image.image_alt_default' | t
+          assign image_alt = video_local.alt | default: image_alt_default | escape
+        -%}
+        <div class="video-thumbnail z-3 banner__media overflow-hidden rounded w-full h-full">
+          {% render 'responsive-image',
+            type: 'product',
+            image: video_local.preview_image,
+            image_alt: image_alt,
+          %}
+        </div>
+        <div class="video-foreground video-has-bg">
+          <template>
+            {{
+              video_local
+              | video_tag: image_size: '1100x', autoplay: true, controls: false, muted: true, alt: image_alt, loop: true
+            }}
+          </template>
+        </div>
+      </video-local>
+    {% else %}
+      {%- render 'placeholder-render', type: 'lifestyle-2', class: 'img-placeholder h-full w-full' -%}
+    {% endif %}
+  {% endif %}
+</div>
+{% style %}
+  .banner-background__image,
+  .banner-background__image img,
+  .banner-background__image svg,
+  .banner-background__image video {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+{% endstyle %}

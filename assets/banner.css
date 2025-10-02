@@ -1,0 +1,188 @@
+.section__slideshow :is(.fluid_container, .container) canvas {
+  border-radius: var(--img-rounded);
+}
+
+video-local-slide picture {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+video-local-slide video.slideshow {
+  display: block;
+}
+.swiper-shutters img {
+  max-width: unset;
+}
+.slideshow .swiper-slide-active .sec__content {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.slideshow .mt-50 {
+  margin-top: clamp(2rem, 4.3vw, 5rem);
+}
+@media screen and (max-width: 767.98px) {
+  .swiper-pagination.swiper-pagination-bellow {
+    position: var(--swiper-pagination-position, absolute);
+    margin-top: var(--swiper-pagination-margin-top, 0px);
+  }
+  :where(.container, .fluid_container) .text-bellow-mb .sec__content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .text-bellow-mb .sec__content {
+    padding-top: 0;
+  }
+  .text-bellow-mb .overlay-bg:after {
+    opacity: 0;
+  }
+  .text-bellow-mb[style*="--aspect-ratio"]:before {
+    display: none;
+  }
+  .text-bellow-mb > .banner__media {
+    position: relative;
+  }
+  .text-bellow-mb > .media__content .banner__box {
+    padding-inline: 0;
+    padding-block: 0;
+  }
+  .padding-inline-gutter {
+    padding-inline: var(--bs-gutter-x) !important;
+  }
+}
+:is(.h-small, .h-medium, .h-large) {
+  min-height: var(--item-height-mb);
+}
+.h-small {
+  --item-height-mb: 390px;
+  --item-height: clamp(
+    40rem,
+    calc(40rem + (500 - 400) * var(--responsive-rate)),
+    50rem
+  );
+}
+.h-medium {
+  --item-height-mb: 450px;
+  --item-height: clamp(
+    60rem,
+    calc(45rem + (700 - 600) * var(--responsive-rate)),
+    70rem
+  );
+}
+.h-large {
+  --item-height-mb: 555px;
+  --item-height: clamp(
+    80rem,
+    calc(45rem + (900 - 800) * var(--responsive-rate)),
+    90rem
+  );
+}
+.slideshow-section .swiper-pagination {
+  --swiper-pagination-bottom: 2rem;
+}
+@media screen and (min-width: 768px) {
+  :is(.h-small, .h-medium, .h-large) {
+    min-height: var(--item-height);
+  }
+  .slideshow-section .swiper-pagination {
+    --swiper-pagination-bottom: 3rem;
+  }
+}
+.autoplay .swiper-pagination-bullet {
+  --swiper-pagination-color: rgba(var(--color-white), 0.3);
+  transition: all 0.3s;
+}
+.autoplay .swiper-pagination-bullet:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  opacity: 0;
+  width: 0;
+  height: var(--dot-height);
+  margin: auto;
+  background: var(--color-heading, #1d1d1f);
+  border-radius: 10px;
+  transition: all 0.3s;
+}
+.autoplay .swiper-pagination-bullet-active:after {
+  opacity: 1;
+  height: 6px;
+  transition: opacity 0.3s;
+  animation: process_loading var(--auto-speed, 0.3s) forwards ease;
+  -webkit-animation: process_loading var(--auto-speed, 0.3s) forwards ease;
+}
+@keyframes process_loading {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+.banner__media img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.video-foreground,
+.video-section video,
+.video-section iframe {
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border: none;
+}
+.video-section iframe.vimeo-video {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-dark);
+}
+.section__video-with-text-overlay .video-section iframe.vimeo-video {
+  box-sizing: border-box;
+  width: 177.77777778vh;
+  height: 56.25vw;
+  min-width: 100%;
+  min-height: 100%;
+  position: absolute;
+}
+:where(.px-custom:not(.x-min-value)) {
+  padding-inline: clamp(
+    20px,
+    calc(20px + (var(--padding-inline) - 20) * var(--responsive-rate)),
+    calc(var(--padding-inline) * 1px)
+  );
+}
+:where(.x-min-value) {
+  padding-inline: calc(var(--padding-inline) * 1px);
+}
+:where(.py-custom) {
+  padding-block: clamp(
+    calc((var(--padding-block) * 0.66667px)),
+    calc(
+      (var(--padding-block) * 0.66667px) +
+        (var(--padding-block) - (var(--padding-block) * 0.66667)) *
+        var(--responsive-rate)
+    ),
+    calc(var(--padding-block) * 1px)
+  );
+}
+.align-content-start {
+  align-content: start;
+}
+.align-content-center {
+  align-content: center;
+}
+.align-content-end {
+  align-content: end;
+}

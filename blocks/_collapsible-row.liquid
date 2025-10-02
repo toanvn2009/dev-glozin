@@ -1,0 +1,51 @@
+{%- liquid
+  assign collapsible_page = block.settings.page
+-%}
+<details class="collapsible-row border-bottom py-sp-4" is="collapsible-row">
+  <summary class="collapsible-row__summary not-highlight-tap">
+    <div class="collapsible-heading h6 fs-18 lh-global">
+      {{ block.settings.heading | default: pages[collapsible_page].title }}
+    </div>
+    <span class="open-children-toggle transition">
+      <span class="icon_plus-animation heading-color"> </span>
+    </span>
+  </summary>
+  <div class="collapsible-row__content overflow-hidden">
+    <div class="faq_content-inner mt-15">
+      {% if collapsible_page != null and pages[collapsible_page].content %}
+        {{ pages[collapsible_page].content }}
+      {% else %}
+        <div {{ block.shopify_attributes }}>
+          {{ block.settings.content }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</details>
+{% schema %}
+{
+  "name": "t:sections.all.product_setting.collapsible_row.name",
+  "class": "block-product__collapsible",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Collapsible row",
+      "label": "t:sections.all.content_setting.heading.label",
+      "info": "t:sections.all.product_setting.collapsible_row.settings.info"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "t:sections.all.product_setting.collapsible_row.settings.content",
+      "default": "<p>Collapsible content</p>"
+    },
+    {
+      "type": "page",
+      "id": "page",
+      "label": "t:sections.all.product_setting.collapsible_row.settings.content_page"
+    }
+  ],
+  "presets": [{ "name": "t:sections.all.product_setting.collapsible_row.name" }]
+}
+{% endschema %}
