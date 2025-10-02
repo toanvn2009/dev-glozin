@@ -1,0 +1,34 @@
+{%- liquid
+  assign section_st = section.settings
+  assign desktop_layout = section_st.desktop_layout
+-%}
+{%- if desktop_layout != blank -%}
+  <h1
+    class="title h2"
+    {{ block.shopify_attributes }}
+  >
+{%- else -%}
+  <h2
+    class="title"
+    {{ block.shopify_attributes }}
+  >
+    <a href="{{ closest.product.url }}">
+{%- endif -%}
+{%- if closest.product.title != blank -%}
+  {{ closest.product.title | escape }}
+{%- else -%}
+  {{ 'onboarding.product_title' | t }}
+{%- endif -%}
+{%- if desktop_layout != blank -%}
+  </h1>
+{%- else -%}
+  </a>
+  </h2>
+{%- endif -%}
+{% schema %}
+{
+  "name": "t:sections.all.product_setting.title.name",
+  "class": "block-product__title mb-sp-3 slideIn-animate",
+  "presets": [{ "name": "t:sections.all.product_setting.title.name" }]
+}
+{% endschema %}

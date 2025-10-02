@@ -1,0 +1,2851 @@
+{
+  "settings_schema": {
+    "layout": {
+      "name": "Layout",
+      "how_to_use": {
+        "label": "[Come usare questa impostazione](https://nextsky.gitbook.io/purity-theme/theme-settings/layout)"
+      },
+      "settings": {
+        "page_width": {
+          "label": "Larghezza pagina"
+        },
+        "site_style": {
+          "label": "Angoli arrotondati",
+          "image": {
+            "label": "Immagine"
+          },
+          "button": {
+            "label": "Raggio angolo del pulsante"
+          },
+          "input": {
+            "label": "Raggio angolo del campo"
+          }
+        },
+        "rtl": {
+          "label": "Abilita RTL",
+          "language_rtl": {
+            "label": "Lingue che supportano RTL",
+            "info": "Lascia vuoto se vuoi applicare a tutte le lingue. Se vuoi applicarlo a lingue specifiche separa i codici ISO, ad esempio ar; fa; ku; pa; sd"
+          }
+        }
+      }
+    },
+    "logo_favicon": {
+      "name": "Logo e favicon",
+      "how_to_use": {
+        "label": "[Come usare questa impostazione](https://nextsky.gitbook.io/purity-theme/theme-settings/logo-and-favicon)"
+      },
+      "settings": {
+        "favicon": {
+          "label": "Favicon"
+        },
+        "favicon_image": {
+          "label": "Immagine favicon",
+          "info": "32 x 32px .png consigliato"
+        },
+        "logo": {
+          "label": "Logo",
+          "logo_on_transparent": {
+            "label": "Logo su intestazione trasparente"
+          }
+        },
+        "logo_width": {
+          "label": "Larghezza logo",
+          "info": "La larghezza del logo è ottimizzata automaticamente per il mobile."
+        }
+      }
+    },
+    "colors": {
+      "name": "Colori",
+      "how_to_use": {
+        "label": "[Come usare questa impostazione](https://nextsky.gitbook.io/purity-theme/theme-settings/colors)"
+      },
+      "settings": {
+        "general_header": {
+          "label": "Generale"
+        },
+        "general_accent": {
+          "label": "Accent"
+        },
+        "general_text": {
+          "label": "Testo"
+        },
+        "general_heading": {
+          "label": "Intestazione"
+        },
+        "general_link": {
+          "label": "Collegamento"
+        },
+        "general_link_hover": {
+          "label": "Collegamento hover"
+        },
+        "general_border": {
+          "label": "Bordo",
+          "label_color": "Colore bordo"
+        },
+        "background_header": {
+          "label": "Sfondo"
+        },
+        "background": {
+          "label": "Sfondo"
+        },
+        "background_2": {
+          "label": "Sfondo 2"
+        },
+        "background_gradient": {
+          "label": "Sfondo gradiente",
+          "info": "Il gradiente di sfondo sostituisce lo sfondo dove possibile."
+        },
+        "fill_button_header": {
+          "label": "Pulsante riempito"
+        },
+        "fill_button_background": {
+          "label": "Sfondo"
+        },
+        "fill_button_text": {
+          "label": "Testo"
+        },
+        "fill_button_background_hover": {
+          "label": "Sfondo hover"
+        },
+        "fill_button_text_hover": {
+          "label": "Testo hover"
+        },
+        "outline_button_header": {
+          "label": "Pulsante contorno"
+        },
+        "outline_button_outline": {
+          "label": "Testo"
+        },
+        "outline_button_outline_border": {
+          "label": "Bordo"
+        },
+        "badges_header": {
+          "label": "Colore badge"
+        },
+        "badges_sale": {
+          "label": "Vendita"
+        },
+        "badges_out_stock": {
+          "label": "Esaurito"
+        },
+        "product_header": {
+          "label": "Colore prodotto"
+        },
+        "product_rate": {
+          "label": "Colore valutazione"
+        },
+        "product_sale_price": {
+          "label": "Prezzo in saldo"
+        }
+      }
+    },
+    "typography": {
+      "name": "Tipografia",
+      "how_to_use": {
+        "label": "[Come usare questa impostazione](https://nextsky.gitbook.io/purity-theme/theme-settings/typography)"
+      },
+      "settings": {
+        "font_weight": {
+          "label": "Peso del carattere",
+          "default": "Predefinito",
+          "regular": "Regolare",
+          "medium": "Medio",
+          "semi_bold": "Semi grassetto",
+          "bold": "Grassetto",
+          "extra_bold": "Extra grassetto"
+        },
+        "font_size": "Dimensione carattere",
+        "body": {
+          "label": "Corpo",
+          "font": {
+            "label": "Carattere",
+            "info": "Selezionare un carattere diverso può influire sulla velocità del tuo negozio. [Scopri di più sui caratteri di sistema.](https://help.shopify.com/en/manual/online-store/store-speed/improving-speed#fonts)"
+          },
+          "base_size": "Dimensione base"
+        },
+        "heading": {
+          "label": "Intestazione",
+          "font": {
+            "label": "Carattere",
+            "info": "Selezionare un carattere diverso può influire sulla velocità del tuo negozio. [Scopri di più sui caratteri di sistema.](https://help.shopify.com/en/manual/online-store/store-speed/improving-speed#fonts)"
+          },
+          "sub_heading": {
+            "sub_heading_weight": "Peso del carattere sottotitolo"
+          },
+          "font_size_scale": "Scala dimensione carattere",
+          "text_transform": {
+            "label": "Trasformazione del testo",
+            "unset": "Non impostato",
+            "capitalize": "Maiuscolo",
+            "uppercase": "Maiuscolo"
+          },
+          "heading_letter_spacing": {
+            "label": "Spaziatura lettere"
+          }
+        },
+        "menu": {
+          "label": "Menu",
+          "font": {
+            "label": "Carattere",
+            "body_font": "Corpo",
+            "heading_font": "Intestazione"
+          },
+          "uppercase": {
+            "label": "Maiuscolo primo livello"
+          }
+        },
+        "button": {
+          "label": "Pulsante",
+          "font": {
+            "label": "Carattere",
+            "body_font": "Corpo",
+            "heading_font": "Intestazione"
+          }
+        }
+      }
+    },
+    "animation": {
+      "name": "Animazione",
+      "how_to_use": {
+        "label": "[Come usare questa impostazione](https://nextsky.gitbook.io/purity-theme/theme-settings/animation)"
+      },
+      "settings": {
+        "scroll_animation": {
+          "label": "Abilita animazione scroll"
+        },
+        "image_lazy_loading": {
+          "label": "Abilita caricamento pigro delle immagini"
+        },
+        "hover_effect": {
+          "label": "Effetto hover",
+          "info": "Influisce sulle carte hover come: prodotto, banner, collezione, blog...",
+          "none": "Nessuno",
+          "fade_in": "Sfumatura",
+          "zoom": "Zoom"
+        }
+      }
+    },
+    "product": {
+      "name": "Schede prodotto",
+      "how_to_use": {
+        "label": "[Come usare questa impostazione](https://nextsky.gitbook.io/purity-theme/theme-settings/product-cards)"
+      },
+      "settings": {
+        "enable_quickview": "Abilita visualizzazione rapida",
+        "enable_color_swatches": "Abilita campioni di colore",
+        "show_vendor": "Mostra fornitore",
+        "show_tag": "Mostra tag",
+        "show_countdown": "Mostra conto alla rovescia",
+        "show_scrolling_text": "Mostra testo scorrevole",
+        "show_rate": {
+          "label": "Mostra valutazione",
+          "info": "Per visualizzare una valutazione, aggiungi un'app di recensioni prodotto. [Scopri di più](https://help.shopify.com/en/manual/products/product-reviews/installation)"
+        },
+        "alignment": {
+          "label": "Allineamento",
+          "left": "Sinistra",
+          "center": "Centro",
+          "right": "Destra"
+        },
+        "product_image": {
+          "label": "Immagine prodotto"
+        },
+        "show_image_hover": {
+          "label": "Mostra immagine secondaria"
+        },
+        "show_video_featured": {
+          "label": "Mostra video come immagine in evidenza",
+          "info": "Il video deve essere il primo nella lista dei media ed essere ospitato su Shopify."
+        },
+        "product_image_ratio": {
+          "label": "Rapporto immagine",
+          "adapt_to_image": "Adatta all'immagine",
+          "square": "Quadrato (1:1)",
+          "portrait": "Ritratto (3:4)",
+          "landscape": "Paesaggio (4:3)"
+        },
+        "mobile_options": {
+          "label": "Opzioni mobile"
+        },
+        "show_quick_add_mobile": {
+          "label": "Mostra pulsante aggiunta rapida su mobile"
+        }
+      }
+    },
+    "badges": {
+      "name": "Badge",
+      "how_to_use": {
+        "label": "[Come usare questa impostazione](https://nextsky.gitbook.io/purity-theme/theme-settings/badges)"
+      },
+      "settings": {
+        "badge_color": {
+          "label": "Colore testo"
+        },
+        "show_badge": {
+          "label": "Mostra badge"
+        },
+        "background_color": {
+          "label": "Colore di sfondo"
+        },
+        "sale": {
+          "label": "Saldi",
+          "format": {
+            "label": "Formato",
+            "text": "Testo",
+            "percentage": "Percentuale",
+            "fixed": "Importo fisso"
+          }
+        },
+        "new": {
+          "label": "Nuovo",
+          "new_badge_display_period": {
+            "label": "Periodo di visualizzazione badge nuovo",
+            "info": "Scegli quanto tempo i prodotti sono etichettati come 'Nuovi' dal giorno della loro creazione."
+          }
+        },
+        "pre_order": {
+          "label": "Pre-ordine"
+        },
+        "sold_out": {
+          "label": "Esaurito",
+          "show_sold_out": {
+            "label": "Mostra esaurito"
+          }
+        },
+        "custom_badge": {
+          "label": "Badge personalizzato",
+          "info": "Segui il documento per vedere [come impostare il badge personalizzato](https://nextsky.gitbook.io/purity-theme/theme-settings/badges#id-5.-custom-badge)"
+        }
+      }
+    },
+    "color_swatches": {
+      "name": "Campioni di colore",
+      "how_to_use": {
+        "label": "[Come usare questa impostazione](https://nextsky.gitbook.io/purity-theme/theme-settings/color-swatch)"
+      },
+      "settings": {
+        "hide_sold_out_variant": {
+          "label": "Nascondi varianti esaurite"
+        },
+        "color_limit": {
+          "label": "Limite massimo di campioni da mostrare"
+        },
+        "color_swatch_trigger": {
+          "label": "Attiva campioni di colore",
+          "info": "Definisci il nome dell'opzione colore. Separato da una virgola. Esempio: Colore,Colore"
+        },
+        "color_swatch_type": {
+          "label": "Tipo di campione",
+          "options__1": {
+            "label": "Immagine variante"
+          },
+          "options__2": {
+            "label": "Colore"
+          }
+        },
+        "color_swatch_shape": {
+          "label": "Forma del campione",
+          "options__1": {
+            "label": "Rotondo"
+          },
+          "options__2": {
+            "label": "Quadrato"
+          }
+        },
+        "color_swatch_custom": {
+          "label": "Colori personalizzati",
+          "info": "Formato valido: Muesli: #ddd5bc o Muesli: image.png separato da una virgola"
+        }
+      }
+    },
+    "cart": {
+      "name": "Carrello",
+      "how_to_use": {
+        "label": "[Come usare questa impostazione](https://nextsky.gitbook.io/purity-theme/theme-settings/cart)"
+      },
+      "settings": {
+        "cart_type": {
+          "label": "Azione dopo aggiunta al carrello",
+          "drawer": "Cassetto",
+          "page": "Pagina",
+          "added_message": "Notifica popup"
+        },
+        "cart_icon": {
+          "label": "Icona carrello",
+          "shopping_cart": "Carrello della spesa",
+          "shopping_bag": "Borsa della spesa"
+        },
+        "free_shipping": {
+          "label": "Messaggio spedizione gratuita",
+          "paragraph": "Assicurati di aver configurato correttamente le tue [tariffe di spedizione.](/admin/settings/shipping)",
+          "message": {
+            "label": "Messaggio",
+            "info": "Utilizza [importo] per monitorare il tuo avanzamento verso l'idoneità per la spedizione gratuita."
+          },
+          "minimum_amount": {
+            "label": "Importo minimo per spedizione gratuita",
+            "info": "Usa numeri arrotondati. Escludi simboli di valuta, simboli e lettere."
+          }
+        },
+        "product_recommendations": {
+          "label": "Raccomandazioni prodotto",
+          "heading": "Intestazione",
+          "enable_product_recommendations": "Abilita raccomandazioni prodotto",
+          "enable_product_recommendations_info": "Le raccomandazioni prodotto verranno mostrate nel mini carrello e nella pagina del carrello.",
+          "recommendation_product_type": {
+            "label": "Tipo di raccomandazioni prodotto",
+            "auto": "Auto",
+            "selected": "Selezionato"
+          },
+          "select_product_recommendation": "Prodotto"
+        },
+        "gift_wrap": {
+          "label": "Confezione regalo prodotto",
+          "select_product_gift_wrap": {
+            "label": "Prodotto",
+            "info": "Funziona solo con prodotti senza varianti."
+          }
+        },
+        "empty": {
+          "label": "Impostazioni carrello vuoto",
+          "heading": "Intestazione",
+          "description": "Descrizione",
+          "collection": {
+            "label": "Lista collezioni",
+            "info": "Le collezioni mostreranno la loro immagine in evidenza per impostazione predefinita. Usa metafield per cambiare l'immagine e il testo. Scopri di più"
+          },
+          "button_text": "Etichetta pulsante",
+          "button_link": {
+            "label": "Link pulsante",
+            "info": "Predefinito è la pagina di tutte le collezioni"
+          },
+          "free_shipping": {
+            "label": "Messaggio spedizione gratuita"
+          }
+        }
+      }
+    },
+    "search": {
+      "name": "Comportamento ricerca",
+      "how_to_use": {
+        "label": "[Come usare questa impostazione](https://nextsky.gitbook.io/purity-theme/theme-settings/search-behavior)"
+      },
+      "settings": {
+        "type": {
+          "label": "Tipo",
+          "info": "Il cassetto è il layout predefinito su mobile.",
+          "option_1": "Popup",
+          "option_2": "Cassetto"
+        },
+        "recommendations": {
+          "popular_keywords": {
+            "label": "Ricerca popolare",
+            "info": "Consiglia parole chiave ricercate frequentemente nel tuo negozio. Ad esempio: t-shirt, abito, nero."
+          },
+          "products_recommended": {
+            "label": "Raccomandazioni prodotto",
+            "info": "Seleziona un prodotto da consigliare ai clienti."
+          },
+          "search_suggestions": {
+            "label": "Abilita suggerimenti di ricerca"
+          }
+        },
+        "results": {
+          "label": "Risultati ricerca"
+        },
+        "predictive_search": {
+          "label": "Abilita ricerca predittiva",
+          "info": "Risultati di ricerca in tempo reale. Non disponibile in tutte le lingue. [Scopri di più](https://shopify.dev/themes/navigation-search/search/predictive-search#general-requirements-and-limitations)"
+        },
+        "show_vendor": {
+          "label": "Mostra fornitore prodotto"
+        },
+        "show_price": {
+          "label": "Mostra prezzo prodotto"
+        }
+      }
+    },
+    "social_media": {
+      "name": "Social media",
+      "how_to_use": {
+        "label": "[Come usare questa impostazione](https://nextsky.gitbook.io/purity-theme/theme-settings/social-media)"
+      },
+      "settings": {
+        "social_account": {
+          "label": "Account social",
+          "facebook": {
+            "label": "Facebook",
+            "info": "https://facebook.com/shopify"
+          },
+          "instagram": {
+            "label": "Instagram",
+            "info": "http://instagram.com/shopify"
+          },
+          "twitter": {
+            "label": "Twitter",
+            "info": "https://twitter.com/shopify"
+          },
+          "tiktok": {
+            "label": "Tiktok",
+            "info": "https://tiktok.com/shopify"
+          },
+          "pinterest": {
+            "label": "Pinterest",
+            "info": "https://pinterest.com/shopify"
+          },
+          "youtube": {
+            "label": "Youtube",
+            "info": "https://www.youtube.com/shopify"
+          },
+          "vimeo": {
+            "label": "Vimeo",
+            "info": "https://vimeo.com/shopify"
+          },
+          "linkedin": {
+            "label": "Linkedin",
+            "info": "https://linkedin.com/company/shopify"
+          },
+          "whatsapp": {
+            "label": "Whatsapp",
+            "info": "https://www.whatsapp.com/shopify"
+          },
+          "snapchat": {
+            "label": "Snapchat",
+            "info": "https://www.snapchat.com/add/shopify"
+          }
+        },
+        "sharing_options": {
+          "label": "Opzioni di condivisione",
+          "facebook": {
+            "label": "Condividi su Facebook"
+          },
+          "pinterest": {
+            "label": "Condividi su Pinterest"
+          },
+          "twitter": {
+            "label": "Condividi su Twitter"
+          },
+          "whatsapp": {
+            "label": "Condividi su WhatsApp"
+          },
+          "email": {
+            "label": "Condividi su Email"
+          }
+        }
+      }
+    },
+    "currency": {
+      "name": "Formato valuta",
+      "settings": {
+        "code": {
+          "label": "Codici valuta",
+          "show_code": {
+            "label": "Mostra i codici valuta",
+            "info": "I prezzi del carrello e del checkout mostrano sempre i codici valuta. Esempio: $1.00 USD."
+          }
+        }
+      }
+    }
+  },
+  "sections": {
+    "all": {
+      "general": "Generale",
+      "how_to_use": "[Come usare](https://help.shopify.com/en/manual/online-store/store-speed/improving-speed#fonts)",
+      "layout": {
+        "label": "Larghezza della sezione",
+        "fix_width": "Larghezza fissa",
+        "stretch_width": "Larghezza estesa",
+        "full_width": "Larghezza completa"
+      },
+      "colors": {
+        "label": "Schema colori",
+        "info": "Per modificare tutti i colori del tema, vai nelle impostazioni del tema colori."
+      },
+      "desktop_content_position": {
+        "label": "Posizione contenuto desktop",
+        "info": "La posizione è automaticamente ottimizzata per mobile.",
+        "info_2": "Content first è il layout predefinito per mobile.",
+        "group": {
+          "label": "Gruppo",
+          "info": "Raggruppa i contenuti da mostrare nella stessa posizione.",
+          "top": {
+            "label": "Alto"
+          },
+          "middle": {
+            "label": "Centro"
+          },
+          "bottom": {
+            "label": "Basso"
+          },
+          "none": {
+            "label": "Nessuno"
+          }
+        },
+        "options__1": {
+          "label": "In alto a sinistra"
+        },
+        "options__2": {
+          "label": "In alto al centro"
+        },
+        "options__3": {
+          "label": "In alto a destra"
+        },
+        "options__4": {
+          "label": "A sinistra al centro"
+        },
+        "options__5": {
+          "label": "Al centro"
+        },
+        "options__6": {
+          "label": "A destra al centro"
+        },
+        "options__7": {
+          "label": "In basso a sinistra"
+        },
+        "options__8": {
+          "label": "In basso al centro"
+        },
+        "options__9": {
+          "label": "In basso a destra"
+        }
+      },
+      "padding": {
+        "section_padding_heading": "Padding sezione",
+        "padding_inline": {
+          "label": "Padding inline",
+          "info": "Il padding inline è automaticamente ottimizzato per mobile."
+        },
+        "padding_block": {
+          "label": "Padding block",
+          "info": "Il padding block è automaticamente ottimizzato per mobile."
+        },
+        "padding_top": "Alto",
+        "padding_bottom": "Basso",
+        "spacing_bottom": "Spaziatura inferiore",
+        "spacing": "Spaziatura",
+        "column_gap": {
+          "label": "Spazio tra colonne",
+          "no_gap": "Nessuno spazio",
+          "small": "Piccolo",
+          "medium": "Medio",
+          "large": "Grande",
+          "x_large": "X-Grande"
+        }
+      },
+      "space_between": {
+        "label": "Spazio tra gli elementi",
+        "option__1": {
+          "label": "Piccolo"
+        },
+        "option__2": {
+          "label": "Medio"
+        },
+        "option__3": {
+          "label": "Grande"
+        }
+      },
+      "width": {
+        "label": "Larghezza"
+      },
+      "columns": {
+        "label": "Numero di colonne"
+      },
+      "items_to_show": {
+        "label": "Massimo numero di elementi da mostrare"
+      },
+      "text_alignment": {
+        "label": "Allineamento del contenuto",
+        "alignment": "Allineamento",
+        "options__1": {
+          "label": "Sinistra"
+        },
+        "options__2": {
+          "label": "Centro"
+        },
+        "options__3": {
+          "label": "Destra"
+        }
+      },
+      "content": {
+        "label": "Contenuto"
+      },
+      "text": {
+        "label": "Testo"
+      },
+      "content_position": {
+        "label": "Posizione del contenuto",
+        "options__1": {
+          "label": "Sovrapporre immagine",
+          "top": "In alto",
+          "middle": "Al centro",
+          "bottom": "In basso"
+        },
+        "options__2": {
+          "label": "Sotto immagine"
+        }
+      },
+      "section_setting": {
+        "page_heading": {
+          "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/page-heading)",
+          "label": "Intestazione della pagina",
+          "description": {
+            "label": "Descrizione della pagina",
+            "info": "Lascia vuota la descrizione per usare la descrizione predefinita della pagina"
+          },
+          "heading": {
+            "label": "Intestazione della pagina"
+          },
+          "breadcrumb": {
+            "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/breadcrumb)",
+            "label": "Breadcrumb"
+          }
+        },
+        "enable_rounded_style": {
+          "label": "Abilita stile arrotondato",
+          "info": "Funziona solo quando la barra di annuncio è presente nel gruppo dell'intestazione, sopra l'intestazione."
+        }
+      },
+      "content_setting": {
+        "label": "Impostazioni contenuto",
+        "image": {
+          "label": "Immagine"
+        },
+        "subheading": {
+          "label": "Sottotitolo"
+        },
+        "highlight_text": {
+          "label": "Testo in evidenza",
+          "settings": {
+            "icons": {
+              "label": "Seleziona icona",
+              "options__1": {
+                "label": "Nessuna"
+              },
+              "options__2": {
+                "label": "Stella"
+              },
+              "options__3": {
+                "label": "Punto"
+              },
+              "options__4": {
+                "label": "Sconto"
+              }
+            }
+          }
+        },
+        "heading": {
+          "label": "Intestazione"
+        },
+        "description": {
+          "label": "Descrizione"
+        },
+        "content": "Contenuto",
+        "button_label": {
+          "label": "Etichetta pulsante",
+          "info": "Lascia vuota l'etichetta per nascondere il pulsante."
+        },
+        "button_label-block": {
+          "name": "Etichetta",
+          "label": "Pulsante"
+        },
+        "link": {
+          "label": "Link"
+        },
+        "first_button_label": {
+          "name": "Primo pulsante",
+          "label": "Etichetta pulsante",
+          "link": "Link pulsante"
+        },
+        "second_button_label": {
+          "name": "Secondo pulsante",
+          "label": "Etichetta pulsante",
+          "link": "Link pulsante"
+        },
+        "button_type": {
+          "label": "Tipo",
+          "primary": {
+            "label": "Primario"
+          },
+          "outline": {
+            "label": "Contorno"
+          },
+          "link": {
+            "label": "Link"
+          }
+        },
+        "show_view_all_button": {
+          "label": "Mostra il pulsante Visualizza tutto",
+          "label_text": "Visualizza l'etichetta di tutti i pulsanti",
+          "default_text": "Visualizza tutto"
+        }
+      },
+      "content_header": {
+        "label": "Intestazione sezione",
+        "heading_size": {
+          "label": "Dimensione intestazione",
+          "size": "Dimensione",
+          "xs_small": {
+            "label": "XS-Piccolo"
+          },
+          "x_small": {
+            "label": "X-Piccolo"
+          },
+          "options__1": {
+            "label": "Piccolo"
+          },
+          "options__2": {
+            "label": "Medio"
+          },
+          "options__3": {
+            "label": "Grande"
+          },
+          "x_large": {
+            "label": "X-Grande"
+          }
+        }
+      },
+      "blog_setting": {
+        "show_category": "Mostra categoria",
+        "show_tags": "Mostra tag",
+        "show_date": "Mostra data",
+        "show_author": "Mostra autore",
+        "show_excerpt": "Mostra estratti"
+      },
+      "media": {
+        "label": "Tipo"
+      },
+      "image": {
+        "label": "Immagine",
+        "image_setting": "Impostazioni immagine",
+        "width": "Larghezza immagine",
+        "info_width": "L'immagine è automaticamente ottimizzata per mobile.",
+        "mobile_image": "Immagine mobile",
+        "mobile_image_width": "Larghezza immagine mobile",
+        "aspect_ratio": {
+          "label": "Rapporto immagine",
+          "label_video": "Rapporto video",
+          "options__1": "Quadrato (1:1)",
+          "options__2": "Ritratto (3:4)",
+          "options__3": "Paesaggio (4:3)",
+          "adapt": "Adatta all'immagine"
+        },
+        "desktop_position": {
+          "label": "Posizione immagine desktop",
+          "top": "In alto",
+          "right": "A destra",
+          "bottom": "In basso",
+          "left": "A sinistra",
+          "info": "L'immagine sarà sempre in alto nel layout mobile."
+        },
+        "desktop_image_width": {
+          "label": "Larghezza immagine desktop",
+          "info": "La larghezza dell'immagine è automaticamente ottimizzata per mobile."
+        }
+      },
+      "video": {
+        "label": "Video",
+        "info": "Sostituisce l'impostazione dell'immagine"
+      },
+      "svg": {
+        "label": "Icona Svg",
+        "custom_svg": {
+          "label": "Svg personalizzato",
+          "info": "Sostituisce l'impostazione immagine."
+        }
+      },
+      "icon": {
+        "label": "Icona svg",
+        "none": {
+          "label": "Nessuna"
+        },
+        "cruelty": {
+          "label": "Cruelty"
+        },
+        "paraben": {
+          "label": "Parabeni"
+        },
+        "privacy-protection": {
+          "label": "Protezione della privacy"
+        },
+        "secure-shopping": {
+          "label": "Acquisti sicuri"
+        },
+        "guarantee": {
+          "label": "Garanzia"
+        },
+        "account": {
+          "label": "Account"
+        },
+        "leaf": {
+          "label": "Foglia"
+        },
+        "moon": {
+          "label": "Luna"
+        },
+        "hive": {
+          "label": "Alveare"
+        },
+        "comb": {
+          "label": "Pettine"
+        },
+        "free_shipping": {
+          "label": "Spedizione gratuita"
+        },
+        "check_badge": {
+          "label": "Verifica badge"
+        },
+        "message_communications": {
+          "label": "Comunicazioni messaggi"
+        },
+        "circular-text": {
+          "label": "Testo circolare"
+        },
+        "beauty": {
+          "label": "Viso"
+        },
+        "line": {
+          "label": "Linea"
+        },
+        "droplet": {
+          "label": "Goccia"
+        },
+        "balloon": {
+          "label": "Pallone"
+        },
+        "brightening": {
+          "label": "Schiarente"
+        },
+        "hydration": {
+          "label": "Idratazione"
+        },
+        "coptic_cross": {
+          "label": "Croce copta"
+        },
+        "coil": {
+          "label": "Molla"
+        },
+        "verified": {
+          "label": "Verificato"
+        },
+        "security": {
+          "label": "Sicurezza"
+        },
+        "package": {
+          "label": "Pacchetto"
+        }
+      },
+      "carousel": {
+        "header": "Impostazioni carosello",
+        "enable_carousel": {
+          "label": "Abilita carosello",
+          "description": "Il carosello viene mostrato solo quando il totale delle collezioni è maggiore degli elementi per riga su desktop.",
+          "description_media": "Il carosello viene mostrato solo quando il totale dei media è maggiore degli elementi per riga su desktop."
+        },
+        "pagination": {
+          "label": "Paginazione"
+        },
+        "show_navigation": {
+          "label": "Mostra navigazione"
+        },
+        "show_pagination": {
+          "label": "Mostra paginazione",
+          "info": "La paginazione verrà visualizzata automaticamente sul cellulare se si visualizza più di 1,5 articoli per riga.",
+          "info_single": "La paginazione verrà visualizzata automaticamente sul cellulare."
+        },
+        "show_pagination_mobile": {
+          "label": "Mostra paginazione su mobile"
+        },
+        "hidden_pagination": {
+          "label": "Nascondi paginazione"
+        },
+        "reveal_slide": {
+          "label": "Mostra la diapositiva successiva",
+          "info": "Mostra una parte della diapositiva successiva."
+        },
+        "enable_carousel_mobile": {
+          "label": "Abilita carosello su mobile"
+        },
+        "change_slide_every": "Cambia diapositiva ogni",
+        "slide_auto_change": "Cambia diapositiva automaticamente"
+      },
+      "mobile_options": {
+        "label": "Opzioni mobile",
+        "mobile_layout": {
+          "label": "Layout mobile",
+          "show_text_bellow": {
+            "label": "Mostra testo sotto su mobile",
+            "info": "Il testo sarà mostrato sotto l'immagine su mobile."
+          }
+        }
+      },
+      "items": {
+        "items_per_row": "Elementi per riga",
+        "items_per_row_mobile": "Elementi per riga su mobile"
+      },
+      "columns_desktop": {
+        "label": "Elementi per riga su desktop"
+      },
+      "newsletter_setting": {
+        "email_placeholder": "Segnaposto email"
+      },
+      "pagination_type": {
+        "label": "Tipo di paginazione",
+        "options__1": {
+          "label": "Numero pagina"
+        },
+        "options__2": {
+          "label": "Carica altro"
+        },
+        "options__3": {
+          "label": "Scorrimento infinito"
+        }
+      },
+      "product_setting": {
+        "badges": {
+          "name": "Badge"
+        },
+        "product_meta": {
+          "name": "Meta prodotto",
+          "settings": {
+            "show_sku": {
+              "label": "Mostra SKU"
+            },
+            "show_collections": {
+              "label": "Mostra collezioni"
+            },
+            "show_tags": {
+              "label": "Mostra tag"
+            },
+            "show_type": {
+              "label": "Mostra tipo"
+            }
+          }
+        },
+        "collapsible_row": {
+          "name": "Riga collassabile",
+          "settings": {
+            "info": "Includi un'intestazione che spiega il contenuto.",
+            "content": "Contenuto della riga",
+            "content_page": "Contenuto della riga da pagina"
+          }
+        },
+        "title": {
+          "name": "Titolo prodotto"
+        },
+        "price": {
+          "name": "Prezzo"
+        },
+        "rating": {
+          "name": "Valutazione prodotto",
+          "settings": {
+            "paragraph": {
+              "content": "Per visualizzare una valutazione, aggiungi un'app di recensioni prodotto. [Scopri di più](https://help.shopify.com/manual/online-store/themes/theme-structure/page-types#product-rating-block)"
+            }
+          }
+        },
+        "variant_picker": {
+          "name": "Selettore variante",
+          "settings": {
+            "picker_type": {
+              "label": "Tipo",
+              "options__1": {
+                "label": "A tendina"
+              },
+              "options__2": {
+                "label": "Pillole"
+              }
+            },
+            "size_guide": {
+              "heading": "Tabella taglie",
+              "info": "Ottieni le informazioni sulla tabella delle taglie dalla pagina selezionata.",
+              "settings": {
+                "size_trigger": {
+                  "label": "Attivatore taglia",
+                  "info": "Definisci il nome dell'opzione taglia. Separato da una virgola. Es. Taglia,Misura"
+                },
+                "show_size_guide": "Mostra tabella delle taglie",
+                "size_guide_label": "Etichetta tabella delle taglie",
+                "size_guide_page": "Pagina tabella delle taglie",
+                "footer_content": "Contenuto piè di pagina",
+                "custom_size_guide": {
+                  "label": "Tabella delle taglie personalizzata",
+                  "info__1": "Utilizza tabelle delle taglie specifiche per ogni collezione o prodotto.",
+                  "info__2": "Per usare una tabella delle taglie personalizzata per prodotto o collezione, crea un metafield con namespace e chiave: \"custom.size_chart\".[Scopri di più](https://nextsky-doc.gitbook.io/angle/theme-installation/create-required-metafields#id-3.-size-chart)"
+                }
+              }
+            }
+          }
+        },
+        "buy_buttons": {
+          "name": "Pulsanti di acquisto",
+          "settings": {
+            "show_dynamic_checkout": {
+              "label": "Mostra pulsanti di checkout dinamico",
+              "info": "Utilizzando i metodi di pagamento disponibili nel tuo negozio, i clienti vedranno la loro opzione preferita, come PayPal o Apple Pay. [Scopri di più](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)"
+            },
+            "show_gift_card_recipient": {
+              "label": "Mostra modulo informazioni destinatario per le carte regalo",
+              "info": "Permette agli acquirenti di inviare carte regalo in una data programmata con un messaggio personale. [Scopri di più](https://help.shopify.com/manual/online-store/themes/customizing-themes/add-gift-card-recipient-fields)"
+            }
+          }
+        },
+        "share": {
+          "name": "Condividi"
+        },
+        "complementary_products": {
+          "name": "Prodotti complementari",
+          "settings": {
+            "paragraph": {
+              "content": "Per selezionare prodotti complementari, aggiungi l'app Search & Discovery. [Scopri di più](https://help.shopify.com/manual/online-store/search-and-discovery/product-recommendations)"
+            },
+            "product_list_limit": {
+              "label": "Numero massimo di prodotti da mostrare"
+            },
+            "products_per_row": {
+              "label": "Numero di prodotti per riga"
+            }
+          }
+        },
+        "pickup_avaiability": {
+          "name": "Disponibilità per il ritiro"
+        },
+        "media_lightbox": {
+          "name": "Lightbox media"
+        },
+        "highlights": {
+          "name": "Evidenziazioni"
+        },
+        "key_features": {
+          "name": "Caratteristiche principali"
+        },
+        "ask_question": {
+          "name": "Fai una domanda"
+        },
+        "promotion_countdown": {
+          "name": "Conto alla rovescia per la promozione"
+        },
+        "promotion_alert": {
+          "name": "Avviso promozione",
+          "heading": {
+            "label": "Intestazione"
+          },
+          "description": {
+            "label": "Descrizione"
+          },
+          "text_color": {
+            "label": "Colore del testo"
+          }
+        },
+        "icon_with_text": {
+          "name": "Icona con testo",
+          "heading": {
+            "label_1": "Icona con testo 1",
+            "label_2": "Icona con testo 2",
+            "label_3": "Icona con testo 3",
+            "label_4": "Icona con testo 4",
+            "label_5": "Icona con testo 5"
+          },
+          "info": "Questo contenuto verrà automaticamente nascosto sui dispositivi mobili.",
+          "svg": {
+            "label": "Icona Svg"
+          },
+          "content": {
+            "label": "Contenuto"
+          },
+          "icon": {
+            "label": "Icona",
+            "none": {
+              "label": "Nessuna"
+            },
+            "free_shipping": {
+              "label": "Spedizione gratuita"
+            },
+            "check_badge": {
+              "label": "Verifica badge"
+            },
+            "message_communications": {
+              "label": "Comunicazioni messaggi"
+            },
+            "boat": {
+              "label": "Barca"
+            },
+            "truck": {
+              "label": "Camion"
+            },
+            "question": {
+              "label": "Domanda"
+            },
+            "secure": {
+              "label": "Sicuro"
+            },
+            "protection": {
+              "label": "Protezione"
+            },
+            "location": {
+              "label": "Posizione"
+            },
+            "leaf": {
+              "label": "Foglia"
+            },
+            "blossom": {
+              "label": "Fiore"
+            },
+            "payment": {
+              "label": "Pagamento"
+            },
+            "discount": {
+              "label": "Sconto"
+            },
+            "order": {
+              "label": "Ordine"
+            },
+            "return": {
+              "label": "Ritorno"
+            }
+          }
+        },
+        "inventory_status": {
+          "name": "Stato inventario",
+          "settings": {
+            "inventory_threshold": {
+              "label": "Soglia inventario basso",
+              "info": "Imposta questo valore per avvisare i clienti quando un prodotto è in esaurimento."
+            },
+            "inventory_base": {
+              "label": "Quantità base inventario",
+              "info": "Imposta la quantità iniziale dell'inventario del prodotto per la barra di progresso."
+            },
+            "show_bar": {
+              "label": "Mostra barra di progresso"
+            },
+            "show_transfer_notice": {
+              "label": "Mostra avviso trasferimento inventario",
+              "info": "Scopri come creare trasferimenti di inventario [qui](https://help.shopify.com/manual/products/inventory/transfers/create-transfer)"
+            }
+          }
+        }
+      },
+      "divider": {
+        "section_divider_heading": "Divisore sezione",
+        "show_divider": "Mostra divisore"
+      }
+    },
+    "overlay_group": {
+      "name": "Gruppo sovrapposto"
+    },
+    "search": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/overlay-group/search)",
+      "name": "Ricerca"
+    },
+    "footer": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/footer-group/footer)",
+      "name": "Piè di pagina",
+      "settings": {
+        "enable_back_top": {
+          "label": "Abilita il ritorno in cima"
+        },
+        "show_policy": {
+          "label": "Link alle politiche",
+          "info": "[Gestisci le politiche](/admin/settings/legal)"
+        },
+        "social_icon": {
+          "content": "Icone social media",
+          "info": "Per visualizzare i tuoi account social media, collegali nelle impostazioni del tema."
+        },
+        "country_language": {
+          "content": "Selettore paese/lingua",
+          "info": "Per aggiungere un paese/area, vai nelle [impostazioni del mercato.](/admin/settings/markets). Per aggiungere una lingua, vai nelle [impostazioni della lingua.](/admin/settings/languages)"
+        },
+        "enable_country_selector": {
+          "label": "Abilita selettore paese/area"
+        },
+        "width": {
+          "options__1": "16%",
+          "options__2": "20%",
+          "options__3": "25%",
+          "options__4": "33%",
+          "options__5": "50%",
+          "options__6": "66%",
+          "options__7": "75%",
+          "options__8": "86%",
+          "options__9": "100%"
+        },
+        "enable_language_selector": {
+          "label": "Abilita selettore lingua"
+        },
+        "payment": {
+          "content": "Metodi di pagamento"
+        },
+        "payment_enable": {
+          "label": "Mostra le icone dei pagamenti"
+        },
+        "menu_policies": {
+          "label": "Piè di pagina inferiore"
+        },
+        "header_follow": {
+          "content": "Segui su Shop",
+          "info": "Per permettere ai clienti di seguire il tuo negozio sull'app Shop dalla tua vetrina, Shop Pay deve essere abilitato. [Scopri di più](https://help.shopify.com/manual/online-store/themes/customizing-themes/follow-on-shop)"
+        },
+        "enable_follow_on_shop": {
+          "label": "Abilita Segui su Shop"
+        }
+      },
+      "blocks": {
+        "menu_block": {
+          "label": "Menu"
+        },
+        "newsletter_block": {
+          "name": "Newsletter",
+          "info": "Gli iscritti vengono automaticamente aggiunti alla tua lista clienti \"marketing accettato\". [Scopri di più](https://help.shopify.com/manual/customers/manage-customers)",
+          "settings": {
+            "note": {
+              "label": "Nota"
+            },
+            "show_bg_social": {
+              "label": "Mostra lo sfondo delle icone social."
+            }
+          }
+        },
+        "contact_bar_block": {
+          "name": "Barra di contatto",
+          "settings": {
+            "store_address": "Indirizzo",
+            "store_phone": "Telefono",
+            "store_email": "Email",
+            "show_social": {
+              "label": "Mostra le icone social media",
+              "info": "Per visualizzare i tuoi account social media, collegali nelle impostazioni del tema."
+            }
+          }
+        }
+      }
+    },
+    "header": {
+      "name": "Intestazione",
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/global-sections/header-group/header)",
+      "settings": {
+        "logo_position": {
+          "label": "Posizione logo desktop",
+          "info": "La posizione del logo è automaticamente ottimizzata per mobile.",
+          "options__1": {
+            "label": "Logo a sinistra, menu al centro"
+          },
+          "options__2": {
+            "label": "Logo al centro, menu a sinistra"
+          }
+        },
+        "sticky_header_type": {
+          "label": "Intestazione fissa",
+          "options__1": {
+            "label": "Nessuna"
+          },
+          "options__2": {
+            "label": "Quando si scorre verso l'alto"
+          },
+          "options__3": {
+            "label": "Sempre"
+          }
+        },
+        "menu": {
+          "label": "Menu",
+          "menu_trigger": {
+            "label": "Attivazione menu a tendina desktop",
+            "options__1": {
+              "label": "Clic"
+            },
+            "options__2": {
+              "label": "Hover"
+            }
+          },
+          "dropdowns_animation": {
+            "label": "Animazione menu a tendina",
+            "options__1": {
+              "label": "Sfumatura"
+            },
+            "options__2": {
+              "label": "Sfumatura verso il basso"
+            },
+            "options__3": {
+              "label": "Da basso a alto"
+            }
+          }
+        },
+        "menu_mobile": {
+          "label": "Impostazioni menu mobile",
+          "banner_image": {
+            "label": "Immagine banner"
+          },
+          "link": {
+            "label": "Link banner"
+          },
+          "collections": {
+            "label": "Collezioni"
+          },
+          "menu_icon": {
+            "label": "Posizione dell'icona dell'hamburger",
+            "info": "Scegli dove visualizzare il menu hamburger sui dispositivi mobili."
+          }
+        },
+        "addons": {
+          "label": "Addons",
+          "show_account": {
+            "label": "Mostra icona account"
+          },
+          "show_search": {
+            "label": "Mostra icona ricerca"
+          },
+          "show_cart": {
+            "label": "Mostra carrello"
+          },
+          "show_language": {
+            "label": "Mostra lingua"
+          },
+          "show_currency": {
+            "label": "Mostra valuta"
+          }
+        },
+        "transparent": {
+          "content": "Intestazione trasparente",
+          "info": "Assicurati che la prima sezione della tua homepage sia configurata come una delle seguenti: una presentazione, un video con sovrapposizione di testo o un'immagine con sovrapposizione di testo.",
+          "transparent": {
+            "label": "Abilita intestazione trasparente"
+          },
+          "text_icon_transparent": {
+            "label": "Colore testo e icona"
+          }
+        },
+        "blocks": {
+          "mega_menu": {
+            "name": "Banner (Mega menu)",
+            "banners": {
+              "label": "Impostazioni banner"
+            },
+            "promotion_1": {
+              "label": "Banner #1"
+            },
+            "promotion_2": {
+              "label": "Banner #2"
+            },
+            "promotion_3": {
+              "label": "Banner #3"
+            },
+            "promotion_4": {
+              "label": "Banner #4"
+            },
+            "promotion_5": {
+              "label": "Banner #5"
+            }
+          },
+          "menu_item": {
+            "label": "Elemento menu",
+            "info": "Inserisci l'elemento del menu per applicare un menu a tendina mega. Assicurati di distinguere tra lettere maiuscole e minuscole. [Scopri di più.]()"
+          },
+          "menu_column": {
+            "label": "Colonne del menu desktop"
+          },
+          "product": {
+            "name": "Prodotti (Mega menu)",
+            "header": "Prodotti"
+          },
+          "collection": {
+            "name": "Collezioni (Mega menu)",
+            "header": "Collezioni"
+          }
+        }
+      }
+    },
+    "custom_liquid": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/custom-liquid)",
+      "name": "Liquid personalizzato",
+      "info": "Aggiungi frammenti di app o altri codici Liquid per creare personalizzazioni avanzate."
+    },
+    "blog-posts": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/blog-posts)",
+      "name": "Post del blog",
+      "settings": {
+        "blog-post": {
+          "label": "Post del blog"
+        },
+        "blog": {
+          "label": "Blog"
+        }
+      }
+    },
+    "multi_content": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/multi-content)",
+      "name": "Contenuto multiplo",
+      "blocks": {
+        "label": "Impostazioni del blocco",
+        "bellow_image": "Impostazioni del badge",
+        "info_bellow": "Solo la funzione è definita quando la posizione del contenuto è configurata sotto l'immagine.",
+        "badge": "Badge",
+        "equal_height_adjustment": {
+          "label": "Regolazione altezza uguale"
+        },
+        "social_icon": "Icone social",
+        "grid_info": "Info griglia",
+        "grid_info_1": "Info griglia 1",
+        "grid_info_2": "Info griglia 2",
+        "grid_info_3": "Info griglia 3",
+        "grid_info_4": "Info griglia 4",
+        "info": "Per visualizzare l'icona social, collegala nelle impostazioni del tema."
+      }
+    },
+    "scrolling_text": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/scrolling-text)",
+      "name": "Testo scorrevole",
+      "settings": {
+        "scrolling": {
+          "label": "Scorrimento"
+        },
+        "direction": {
+          "label": "Direzione",
+          "left": {
+            "label": "Da destra a sinistra"
+          },
+          "right": {
+            "label": "Da sinistra a destra"
+          }
+        },
+        "speed": {
+          "label": "Velocità"
+        },
+        "space_between": {
+          "label": "Spaziatura tra gli elementi"
+        },
+        "text_size": {
+          "label": "Dimensione"
+        },
+        "blocks": {
+          "image": {
+            "rounded_image": {
+              "label": "Raggio angolo immagine"
+            },
+            "image_height": {
+              "label": "Altezza immagine"
+            },
+            "image_width": {
+              "label": "Larghezza"
+            }
+          }
+        }
+      }
+    },
+    "collection-list": {
+      "name": "Elenco collezioni",
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/collection-list)",
+      "settings": {
+        "header": {
+          "collection": "Collezione"
+        },
+        "show_product_count": {
+          "label": "Mostra numero di prodotti"
+        },
+        "overlay_image_settings": "Impostazioni sovrapposizione immagine",
+        "overlay_image_color": "Colore testo",
+        "collection_overlay_image_color": "Colore testo collezioni"
+      },
+      "blocks": {
+        "featured_collection": {
+          "name": "Collezione",
+          "settings": {
+            "collection": {
+              "label": "Collezione"
+            },
+            "image": {
+              "label": "Immagine",
+              "info": "Lascia vuoto per usare l'immagine della collezione"
+            },
+            "title": {
+              "label": "Titolo",
+              "info": "Lascia vuoto per usare il titolo della collezione"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Elenco collezioni"
+      }
+    },
+    "quickview": {
+      "name": "Visualizzazione rapida",
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/overlay-group/quickview)",
+      "settings": {
+        "paragraph": "Questa sezione ti permette di personalizzare il popup di visualizzazione rapida."
+      }
+    },
+    "featured-collection": {
+      "name": "Collezione in evidenza",
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/featured-collection)"
+    },
+    "featured-product": {
+      "name": "Prodotto in evidenza",
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/featured-product)",
+      "settings": {
+        "product": "Prodotto"
+      }
+    },
+    "slideshow": {
+      "name": "Presentazione",
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/slideshow)",
+      "settings": {
+        "slide_height": {
+          "label": "Altezza slide",
+          "full_screen": "Schermo intero",
+          "adapt_to_first_image": "Adatta alla prima immagine",
+          "small": "Piccolo",
+          "medium": "Medio",
+          "large": "Grande"
+        },
+        "show_text_bellow_image": {
+          "label": "Mostra testo sotto l'immagine"
+        },
+        "blocks": {
+          "image": {
+            "label": "Slide immagine",
+            "image_overlay_opacity": {
+              "label": "Opacità sovrapposizione immagine",
+              "overlay_opacity": "Opacità sovrapposizione"
+            }
+          },
+          "circular_text": {
+            "label": "Testo circolare"
+          },
+          "video": {
+            "label": "Slide video",
+            "video_setting": "Impostazioni video",
+            "video_overlay_opacity": {
+              "label": "Opacità sovrapposizione video"
+            }
+          }
+        }
+      }
+    },
+    "related-products": {
+      "name": "Prodotti correlati"
+    },
+    "newsletter": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/newsletter)",
+      "name": "Newsletter",
+      "settings": {
+        "header": {
+          "heading_setting": "Impostazioni newsletter"
+        }
+      }
+    },
+    "rich-text": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/rich-text)",
+      "name": "Testo ricco",
+      "settings": {
+        "max_width": {
+          "label": "Larghezza massima",
+          "info": "La larghezza massima è automaticamente ottimizzata per mobile."
+        },
+        "rotating_text": "Testo circolare"
+      }
+    },
+    "recently-viewed-products": {
+      "name": "Prodotti visti di recente"
+    },
+    "info-gallery-products": {
+      "name": "Prodotti galleria informazioni"
+    },
+    "compare-products": {
+      "name": "Confronta prodotti",
+      "settings": {
+        "header": {
+          "label": "Impostazioni di confronto"
+        },
+        "show_price": "Prezzo",
+        "show_ratings": "Valutazioni",
+        "show_vendor": "Fornitore",
+        "show_color": "Colore",
+        "show_size": "Taglia",
+        "show_highlights": "Caratteristiche principali",
+        "show_availability": "Disponibilità"
+      }
+    },
+    "bought-together-products": {
+      "name": "Prodotti acquistati insieme"
+    },
+    "media-with-text": {
+      "name": "Media con testo"
+    },
+    "image-with-text": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/image-with-text)",
+      "name": "Immagine con testo",
+      "settings": {
+        "desktop_vertical_alignment": {
+          "label": "Allineamento verticale desktop",
+          "top": "In alto",
+          "middle": "Al centro",
+          "bottom": "In basso"
+        },
+        "vertical_alignment": "Allineamento verticale",
+        "background_color": "Colore di sfondo",
+        "text_color": "Colore del testo"
+      }
+    },
+    "discount_popup": {
+      "info": "Questa sezione viene utilizzata per visualizzare un popup dopo l'abbonamento.",
+      "name": "Popup sconto",
+      "settings": {
+        "discount_code": {
+          "label": "Link di promozione",
+          "info": "Come ottenere link promoto? [Learn more](https://help.shopify.com/en/manual/discounts/managing-discount-codes#promote-a-discount-using-a-shareable-link)"
+        },
+        "discount_button": {
+          "label": "Etichetta del pulsante Promoto",
+          "default": "👉 Negozio con 10% di sconto"
+        },
+        "heading": {
+          "default": "🎉 Grazie! Il 10% di sconto è pronto."
+        },
+        "sub_heading": {
+          "default": "Urrà! Sei iscritto"
+        }
+      }
+    },
+    "image-with-text-overlay": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/image-with-text-overlay)",
+      "name": "Immagine con sovrapposizione di testo",
+      "countdown": "Timer conto alla rovescia",
+      "end_time": {
+        "label": "Ora di fine",
+        "info": "es. mm-gg-aaaa"
+      },
+      "message": {
+        "label": "Messaggio scaduto",
+        "info": "Questo messaggio verrà visualizzato quando il tempo sarà scaduto."
+      }
+    },
+    "media-hero": {
+      "name": "Media eroico",
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/media-hero)",
+      "media": "Media",
+      "info": "Sostituisce l'impostazione immagine."
+    },
+    "video": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/video)",
+      "name": "Video",
+      "settings": {
+        "video_local": {
+          "label": "Video locale",
+          "info": "Se carichi sia l'URL del video che un video locale, verrà utilizzato il video locale.",
+          "info_2": "Sostituisce l'impostazione URL video."
+        },
+        "video_link": {
+          "label": "URL video",
+          "info": "Accetta URL di YouTube o Vimeo"
+        },
+        "video_poster": {
+          "label": "Poster video"
+        },
+        "scrolling_effect": {
+          "label": "Abilita effetto di scorrimento"
+        },
+        "alt_description": {
+          "label": "Testo alternativo video",
+          "info": "Descrivi il video per i clienti che usano lettori di schermo. [Scopri di più](https://help.shopify.com/manual/online-store/themes/theme-structure/theme-features#video-block)"
+        },
+        "autoplay": {
+          "label": "Autoplay video",
+          "info": "I video vengono automaticamente messi in pausa per consentire l'autoplay"
+        },
+        "looping": {
+          "label": "Looping video"
+        },
+        "aspect_ratio": {
+          "label": "Rapporto di aspetto",
+          "option__1": "16:9",
+          "option__2": "21:9",
+          "option__3": "Adatta al video"
+        },
+        "show_text_bellow": {
+          "label": "Mostra testo sotto il video su mobile",
+          "info": "Il testo verrà mostrato sotto il video su mobile."
+        }
+      }
+    },
+    "main-password-content": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/other-pages/password-page)",
+      "name": "Pagina principale password",
+      "settings": {
+        "header__1": {
+          "content": "Logo",
+          "info": "Modifica il tuo logo nelle impostazioni del tema"
+        },
+        "enable_banner": {
+          "label": "Mostra banner"
+        },
+        "banner_width": {
+          "label": "Larghezza banner"
+        },
+        "header__2": {
+          "content": "Impostazioni contenuto"
+        },
+        "content_width": {
+          "label": "Larghezza massima contenuto"
+        }
+      },
+      "blocks": {
+        "countdown_bn": {
+          "name": "Conto alla rovescia",
+          "settings": {
+            "countdown_design": {
+              "label": "Design",
+              "options__1": {
+                "label": "Predefinito"
+              },
+              "options__2": {
+                "label": "Moderno"
+              }
+            }
+          }
+        },
+        "form_subscribe": {
+          "name": "Modulo di iscrizione",
+          "settings": {
+            "email_placeholder": {
+              "label": "Testo segnaposto email"
+            },
+            "btn_label": {
+              "label": "Etichetta pulsante"
+            }
+          }
+        },
+        "text": {
+          "name": "Testo"
+        }
+      }
+    },
+    "divider": {
+      "name": "Divisore",
+      "settings": {
+        "height": {
+          "label": "Altezza"
+        },
+        "color": {
+          "label": "Colore"
+        }
+      }
+    },
+    "faq": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/blog-posts)",
+      "name": "FAQ",
+      "main-faq": "Pagina principale FAQ",
+      "heading": {
+        "content": "Messaggio FAQ"
+      },
+      "settings": {
+        "show_faqs_message": "Mostra messaggio FAQ",
+        "show_image": "Mostra immagine",
+        "open_all_question": "Apri tutte le domande",
+        "framed": "Incorniciato"
+      },
+      "blocks": {
+        "name": "Elementi FAQ",
+        "settings": {
+          "question": {
+            "question": "Domanda",
+            "answer": "Risposta"
+          }
+        }
+      }
+    },
+    "page-faq": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/other-pages/faq-page)"
+    },
+    "video-with-text-overlay": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/video-with-text-overlay)",
+      "name": "Video con sovrapposizione di testo",
+      "settings": {
+        "video_local": {
+          "label": "Video locale",
+          "info": "Sostituisce l'impostazione URL video."
+        },
+        "video_link": {
+          "label": "Link video"
+        },
+        "overlay_opacity": "Opacità sovrapposizione",
+        "video_height": {
+          "label": "Altezza video",
+          "info": "Il video è automaticamente ottimizzato per mobile.",
+          "options__1": {
+            "label": "Adatta al video"
+          },
+          "options__2": {
+            "label": "Piccolo"
+          },
+          "options__3": {
+            "label": "Medio"
+          },
+          "options__4": {
+            "label": "Grande"
+          }
+        }
+      }
+    },
+    "main-collection-product-grid": {
+      "name": "Griglia prodotto",
+      "settings": {
+        "items_per_page": {
+          "label": "Elementi da mostrare per pagina"
+        },
+        "columns_desktop": {
+          "label": "Colonne per riga su desktop"
+        },
+        "enable_filtering": {
+          "label": "Abilita filtri",
+          "info": "Personalizza i filtri con l'app Search & Discovery. [Scopri di più](https://help.shopify.com/manual/online-store/search-and-discovery/filters)"
+        },
+        "filter_type": {
+          "label": "Layout filtro desktop",
+          "options__1": {
+            "label": "Orizzontale"
+          },
+          "options__2": {
+            "label": "Verticale"
+          },
+          "options__3": {
+            "label": "Cassetto"
+          }
+        },
+        "pagination_type": {
+          "label": "Tipo di paginazione",
+          "options__1": {
+            "label": "Numero di pagina"
+          },
+          "options__2": {
+            "label": "Carica più pulsante"
+          },
+          "options__3": {
+            "label": "Scorrimento infinito"
+          }
+        },
+        "enable_sorting": {
+          "label": "Abilita ordinamento"
+        },
+        "show_product_counts": {
+          "label": "Mostra conteggio prodotti"
+        },
+        "header__1": {
+          "content": "Filtraggio e ordinamento"
+        },
+        "enable_tags": {
+          "label": "Abilita filtri",
+          "info": "Personalizza i filtri con l'app Search & Discovery. [Scopri di più](https://help.shopify.com/manual/online-store/search-and-discovery/filters)"
+        }
+      },
+      "blocks": {
+        "name": "Promozione"
+      }
+    },
+    "main-collection": {
+      "name": "Griglia prodotto",
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/collection-and-product-page/collection-page)",
+      "settings": {
+        "items_per_page": {
+          "label": "Elementi da mostrare per pagina"
+        },
+        "columns_desktop": {
+          "label": "Colonne per riga su desktop"
+        },
+        "enable_filtering": {
+          "label": "Abilita filtri",
+          "info": "Personalizza i filtri con l'app Search & Discovery. [Scopri di più](https://help.shopify.com/manual/online-store/search-and-discovery/filters)"
+        },
+        "filter_type": {
+          "label": "Layout filtro desktop",
+          "options__1": {
+            "label": "Orizzontale"
+          },
+          "options__2": {
+            "label": "Verticale"
+          },
+          "options__3": {
+            "label": "Cassetto"
+          }
+        },
+        "pagination_type": {
+          "label": "Tipo di paginazione",
+          "options__1": {
+            "label": "Numero di pagina"
+          },
+          "options__2": {
+            "label": "Carica più pulsante"
+          },
+          "options__3": {
+            "label": "Scorrimento infinito"
+          }
+        },
+        "enable_sorting": {
+          "label": "Abilita ordinamento"
+        },
+        "show_product_counts": {
+          "label": "Mostra conteggio prodotti"
+        },
+        "header__1": {
+          "content": "Filtraggio e ordinamento"
+        },
+        "enable_tags": {
+          "label": "Abilita filtri",
+          "info": "Personalizza i filtri con l'app Search & Discovery. [Scopri di più](https://help.shopify.com/manual/online-store/search-and-discovery/filters)"
+        }
+      },
+      "blocks": {
+        "promotion": {
+          "name": "Promozione",
+          "promotion_position": {
+            "label": "Posizione promozione"
+          }
+        },
+        "steps": {
+          "name": "Acquista per passaggio"
+        }
+      }
+    },
+    "main-search": {
+      "name": "Tabella dei prodotti",
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/other-pages/search-page)"
+    },
+    "main-article": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/other-pages/blog-post-page)",
+      "name": "Post del blog",
+      "settings": {
+        "show_date": "Mostra data di pubblicazione",
+        "show_comment": "Mostra commento",
+        "show_author": "Mostra autore del post",
+        "show_excerpt": "Mostra estratto del post",
+        "show_share": "Mostra pulsante di condivisione",
+        "blocks": {
+          "featured_image": "Immagine in evidenza",
+          "content_article": "Contenuto",
+          "addons": "Addon",
+          "prev_next_articles": "Articoli precedenti e successivi"
+        }
+      },
+      "related": {
+        "heading": "Articoli correlati"
+      },
+      "blocks": {
+        "featured_image": {
+          "settings": {
+            "image_height": {
+              "label": "Altezza immagine",
+              "options__1": {
+                "label": "Adatta all'immagine"
+              },
+              "options__2": {
+                "label": "Piccolo"
+              },
+              "options__3": {
+                "label": "Medio"
+              },
+              "options__4": {
+                "label": "Grande"
+              }
+            }
+          }
+        }
+      }
+    },
+    "cart-drawer": {
+      "name": "Cassetto carrello",
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/overlay-group/cart-drawer)",
+      "settings": {
+        "info": "Per visualizzare il cassetto carrello, vai nelle impostazioni del tema e seleziona Drawer come tipo di carrello nelle impostazioni del carrello.",
+        "show_free_shipping_message": {
+          "label": "Mostra messaggio di spedizione gratuita",
+          "info": "Imposta l'importo minimo per la spedizione gratuita nelle impostazioni del tema."
+        },
+        "show_cart_note": "Mostra nota del carrello",
+        "show_estimate_shipping": "Mostra spedizione stimata",
+        "show_gift_wrap": {
+          "label": "Mostra confezione regalo",
+          "info": "Seleziona i prodotti per confezione regalo nelle impostazioni del tema."
+        }
+      }
+    },
+    "main-list-collections": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/collection-and-product-page/collection-list-page)",
+      "name": "Pagina elenco collezioni",
+      "blocks": {
+        "name": "Collezione",
+        "settings": {
+          "collection_image": "Immagine collezione"
+        }
+      },
+      "settings": {
+        "information_position": {
+          "label": "Posizione informazioni",
+          "options__1": {
+            "label": "Sovrapporre immagine"
+          },
+          "options__2": {
+            "label": "Sotto immagine"
+          }
+        },
+        "collection_to_show": {
+          "label": "Collezioni da mostrare",
+          "options__1": {
+            "label": "Tutte"
+          },
+          "options__2": {
+            "label": "Selezionate"
+          }
+        },
+        "sort": {
+          "label": "Ordina collezioni per",
+          "options__1": {
+            "label": "Alfabeticamente, A-Z"
+          },
+          "options__2": {
+            "label": "Alfabeticamente, Z-A"
+          },
+          "options__3": {
+            "label": "Data, da nuovo a vecchio"
+          },
+          "options__4": {
+            "label": "Data, da vecchio a nuovo"
+          },
+          "options__5": {
+            "label": "Conteggi prodotto, da alto a basso"
+          },
+          "options__6": {
+            "label": "Conteggi prodotto, da basso ad alto"
+          }
+        },
+        "image_ratio": {
+          "label": "Rapporto immagine",
+          "options__1": {
+            "label": "Adatta all'immagine"
+          },
+          "options__2": {
+            "label": "Quadrato (1:1)"
+          },
+          "options__3": {
+            "label": "Ritratto (3:4)"
+          },
+          "options__4": {
+            "label": "Paesaggio (4:3)"
+          }
+        },
+        "columns_desktop": {
+          "label": "Colonne per riga su desktop"
+        },
+        "limit_collections": {
+          "label": "Collezioni per pagina"
+        }
+      }
+    },
+    "main-blog": {
+      "name": "Post del blog",
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/other-pages/blog-page)",
+      "settings": {
+        "header": {
+          "content": "Impostazioni generali",
+          "content_post": "Impostazioni post"
+        },
+        "maximum_posts_to_show": {
+          "label": "Numero massimo di post da mostrare"
+        },
+        "post_per_row_desktop": {
+          "label": "Post per riga su desktop"
+        },
+        "show_all_tags": {
+          "label": "Mostra lista tag"
+        },
+        "show_share": {
+          "label": "Mostra condivisione"
+        }
+      },
+      "blocks": {
+        "name": "Modulo di iscrizione",
+        "settings": {
+          "show_email_icon": "Mostra icona email",
+          "form_position": "Posizione modulo",
+          "content_link": "Testo link"
+        }
+      }
+    },
+    "main-product": {
+      "name": "Informazioni prodotto",
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/collection-and-product-page/product-page)",
+      "settings": {
+        "header": {
+          "content": "Media",
+          "sticky_add_cart": "Aggiungi al carrello fisso",
+          "info": "Scopri di più sui [tipi di media.](https://help.shopify.com/manual/products/product-media)"
+        },
+        "enable_sticky_desktop": {
+          "label": "Abilita aggiungi al carrello fisso su desktop"
+        },
+        "desktop_layout": {
+          "label": "Layout desktop",
+          "one_columns": {
+            "label": "1 colonna"
+          },
+          "options__1": {
+            "label": "2 colonne"
+          },
+          "options__2": {
+            "label": "Carosello miniature orizzontale"
+          },
+          "options__3": {
+            "label": "Impilato"
+          },
+          "options__4": {
+            "label": "Carosello miniature verticale"
+          }
+        },
+        "media": {
+          "desktop_main_img_position": {
+            "label": "Posizione immagine principale desktop"
+          },
+          "desktop_thumbnails_position": {
+            "label": "Posizione miniature desktop",
+            "left": "Sinistra",
+            "bottom": "Basso",
+            "hide": "Nascondi"
+          }
+        },
+        "thumbnail_carousel_setting": {
+          "label": "Impostazioni carosello miniature",
+          "info": "Questa impostazione funziona solo quando scegli il carosello miniature per il layout desktop."
+        },
+        "media_position": {
+          "label": "Posizione media desktop",
+          "info": "La posizione è automaticamente ottimizzata per mobile."
+        },
+        "media_width": {
+          "label": "Larghezza media desktop",
+          "options__1": {
+            "label": "Piccolo"
+          },
+          "options__2": {
+            "label": "Medio"
+          },
+          "options__3": {
+            "label": "Grande"
+          },
+          "info": "I media sono automaticamente ottimizzati per mobile."
+        },
+        "mobile_thumbnails": {
+          "info": "La miniatura mobile viene mostrata solo quando il layout desktop è carosello miniature.",
+          "options__1": {
+            "label": "Mostra miniature"
+          },
+          "options__2": {
+            "label": "Nascondi miniature"
+          }
+        },
+        "variant_image_group": {
+          "label": "Abilita gruppo immagini varianti",
+          "info": "Questa opzione funziona solo con varianti di colore."
+        },
+        "enable_video_looping": {
+          "label": "Abilita loop video"
+        },
+        "enable_image_lightbox": {
+          "label": "Abilita zoom immagine"
+        },
+        "enable_video_autoplay": {
+          "label": "Abilita autoplay video",
+          "info": "I video sono automaticamente silenziati per permettere l'autoplay. Non funziona per YouTube/Vimeo."
+        }
+      }
+    },
+    "main-cart-items": {
+      "name": "Carrello principale",
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/other-pages/cart-page)",
+      "settings": {
+        "enable_cart_note": "Abilita nota del carrello"
+      },
+      "block": {
+        "icon_with_text": "Icona con testo",
+        "trust_badges": "Badge di fiducia"
+      }
+    },
+    "main-collection-banner": {
+      "name": "Banner collezione",
+      "settings": {
+        "heading": {
+          "label": "Impostazioni"
+        },
+        "use_collection_image": {
+          "label": "Usa immagine collezione",
+          "info": "Sostituisci l'impostazione immagine di sfondo"
+        },
+        "image_height": {
+          "label": "Altezza immagine",
+          "option__1": "Adatta all'immagine",
+          "option__2": "In base al contenuto"
+        },
+        "image_position": {
+          "label": "Posizione immagine",
+          "option__1": "Sinistra",
+          "option__2": "Destra",
+          "option__3": "In alto",
+          "option__4": "In basso"
+        },
+        "image_opacity": {
+          "label": "Opacità immagine"
+        }
+      }
+    },
+    "contact-form": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/contact-form)",
+      "name": "Modulo di contatto",
+      "settings": {
+        "name": "Nome",
+        "email_placeholder": "Email",
+        "message": "Messaggio",
+        "option": "Opzione"
+      },
+      "block": {
+        "text_block": {
+          "label": "Blocco di testo",
+          "settings": {
+            "content": {
+              "label": "Contenuto"
+            }
+          }
+        }
+      }
+    },
+    "main-404": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/other-pages/404-page)",
+      "name": "Pagina 404 principale"
+    },
+    "main-password-header": {
+      "name": "Intestazione password",
+      "settings": {
+        "logo_help": {
+          "content": "Modifica il tuo logo nelle [impostazioni del tema](/editor?context=theme&category=logo)"
+        }
+      }
+    },
+    "main-activate-account": {
+      "name": "Attivazione account"
+    },
+    "main-password-footer": {
+      "name": "Piè di pagina password"
+    },
+    "main-account": {
+      "name": "Account"
+    },
+    "main-register": {
+      "name": "Registrazione"
+    },
+    "main-login": {
+      "name": "Accesso"
+    },
+    "main-reset-password": {
+      "name": "Ripristino password"
+    },
+    "main-order": {
+      "name": "Ordine"
+    },
+    "main-addresses": {
+      "name": "Indirizzi"
+    },
+    "announcement-bar": {
+      "how_to_use": {
+        "label": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/global-sections/header-group/announcement-bar)"
+      },
+      "name": "Barra di annuncio",
+      "settings": {
+        "type": {
+          "name": "Tipo",
+          "options": {
+            "slide": {
+              "label": "Carosello"
+            },
+            "marquee": {
+              "label": "Marquee"
+            }
+          }
+        },
+        "show_only_homepage": {
+          "label": "Mostra solo sulla homepage"
+        },
+        "show_close_button": {
+          "label": "Mostra pulsante di chiusura"
+        },
+        "enable_on_mobile": {
+          "label": "Abilita su mobile"
+        },
+        "marquee_settings": {
+          "label": "Impostazioni marquee",
+          "speed": {
+            "label": "Velocità"
+          },
+          "show_icon": {
+            "label": "Mostra icona"
+          }
+        }
+      },
+      "blocks": {
+        "name": "Annuncio",
+        "setting": {
+          "label": "Testo"
+        }
+      }
+    },
+    "multimedia_with_text": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/media-with-text)",
+      "name": "Media con testo",
+      "blocks": {
+        "name": "Media",
+        "settings": {
+          "header": "Impostazioni media",
+          "media_style": {
+            "label": "Stile media",
+            "options__1": {
+              "label": "Arrotondato"
+            },
+            "options__2": {
+              "label": "Ovale"
+            },
+            "options__3": {
+              "label": "Predefinito"
+            }
+          }
+        }
+      }
+    },
+    "product-tabs": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/vertical-product-tabs)",
+      "name": "Schede prodotto verticali",
+      "blocks": {
+        "name": "Scheda",
+        "header": "Impostazioni blocco",
+        "settings": {
+          "hidden_des_mobile": {
+            "label": "Nascondi descrizione scheda su mobile"
+          },
+          "collection": {
+            "title": "Titolo",
+            "label": "Collezione",
+            "description": "Descrizione"
+          }
+        }
+      }
+    },
+    "collection-highlights": {
+      "name": "Evidenziazioni collezione",
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/collection-highlights)",
+      "settings": {
+        "highlight_collection_width": {
+          "label": "Larghezza evidenziazione collezione"
+        }
+      },
+      "blocks": {
+        "header": "Impostazioni blocco",
+        "type": {
+          "type_highlight": {
+            "header": "Impostazioni evidenziazione collezione",
+            "name": "Evidenziazione collezione"
+          }
+        }
+      }
+    },
+    "suitable_products_finder": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/suitable-products-finder)",
+      "name": "Trova prodotti adatti",
+      "settings": {
+        "image_collection_width": {
+          "label": "Larghezza immagine"
+        },
+        "range_slider": {
+          "header": "Slider di intervallo",
+          "settings": {
+            "show_range_slider": {
+              "label": "Mostra slider intervallo"
+            }
+          }
+        }
+      }
+    },
+    "icon-box": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/icon-box)",
+      "name": "Icona con box",
+      "settings": {
+        "icon_settings": {
+          "header": "Impostazioni icona",
+          "icon_position": {
+            "label": "Posizione"
+          },
+          "icon_size": {
+            "label": "Dimensione"
+          }
+        }
+      }
+    },
+    "email-signup-banner": {
+      "name": "Banner iscrizione email",
+      "email_form": {
+        "name": "Modulo email"
+      }
+    },
+    "compact_product_bundle": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/compact-product-bundle)",
+      "name": "Pacchetto prodotto compatto",
+      "settings": {
+        "header": {
+          "setting": "Impostazioni"
+        },
+        "image": {
+          "label": "Immagine"
+        },
+        "enable_quick_add_for_items": {
+          "label": "Abilita aggiunta rapida per gli articoli"
+        }
+      },
+      "presets": {
+        "name": "Pacchetto prodotto compatto"
+      },
+      "blocks": {
+        "settings": {
+          "name": "Prodotto",
+          "select_product": "Prodotto",
+          "position_top": "Posizione verticale",
+          "position_left": "Posizione orizzontale"
+        }
+      }
+    },
+    "mobile-navigation-bar": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/overlay-group/mobile-navigation-bar)",
+      "name": "Barra di navigazione mobile",
+      "info": "Questa sezione viene mostrata solo su mobile. Passa alla vista mobile.",
+      "settings": {
+        "show_section": "Abilita barra di navigazione mobile",
+        "show_shop": "Mostra negozio",
+        "show_account": "Mostra account",
+        "show_cart": "Mostra carrello",
+        "show_homepage": "Mostra homepage"
+      }
+    },
+    "map": {
+      "name": "Mappa Google",
+      "settings": {
+        "header": {
+          "heading_map": "Mappa",
+          "heading_content": "Impostazioni contenuto",
+          "heading_address": "Impostazioni indirizzo mappa"
+        },
+        "settings_map": {
+          "map_height": "Altezza mappa",
+          "iframe_key": "Codice iframe mappa",
+          "info_iframe": "Puoi ottenere il codice iframe della mappa Google [qui](https://support.google.com/maps/answer/144361?hl=en&co=GENIE.Platform%3DDesktop)",
+          "banner": "Immagine banner"
+        }
+      }
+    },
+    "shopable_video": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/shopable-video)",
+      "name": "Video acquistabile",
+      "settings": {
+        "video_settings": {
+          "header": "Impostazioni video"
+        },
+        "enable_sticky": {
+          "label": "Abilita video fisso",
+          "option_1": {
+            "label": "Disabilitato"
+          },
+          "option_2": {
+            "label": "Solo desktop"
+          },
+          "option_3": {
+            "label": "Tutti i dispositivi"
+          }
+        },
+        "ratio": {
+          "adapt": {
+            "label": "Adatta al primo video"
+          }
+        },
+        "video": {
+          "auto_play": {
+            "info": "Il video si avvierà automaticamente quando questo blocco è attivo o visibile sullo schermo"
+          }
+        }
+      },
+      "blocks": {
+        "name": "Video",
+        "settings": {
+          "poster_image": {
+            "label": "Immagine poster"
+          },
+          "local_video": {
+            "label": "Video locale"
+          },
+          "select_product": {
+            "label": "Prodotto"
+          }
+        }
+      }
+    },
+    "image_card": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/image-cards)",
+      "name": "Schede immagine",
+      "blocks": {
+        "header": "Impostazioni scheda",
+        "group_name": "Scheda",
+        "setting": {
+          "hide_description_on_mobile": {
+            "label": "Nascondi descrizione su mobile"
+          }
+        }
+      }
+    },
+    "testimonials": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/testimonials)",
+      "name": "Testimonianze",
+      "settings": {
+        "header": "Impostazioni testimonianze",
+        "show_icon_quote": {
+          "label": "Mostra icona citazione"
+        },
+        "item_on_desktop": {
+          "label": "Numero di colonne su desktop",
+          "options__1": {
+            "label": "1"
+          },
+          "options__2": {
+            "label": "2"
+          }
+        }
+      },
+      "blocks": {
+        "name": "Elemento testimonianza",
+        "settings": {
+          "quote": {
+            "label": "Citazione"
+          }
+        }
+      }
+    },
+    "gallery_image": {
+      "name": "Immagine galleria",
+      "settings": {
+        "header": {
+          "label": "Impostazioni media"
+        }
+      },
+      "blocks": {
+        "name": "Media"
+      }
+    },
+    "scrolling_image": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/scrolling-image)",
+      "name": "Immagine della galleria",
+      "settings": {
+        "show_background_blur": {
+          "label": "Mostra sfondo sfocato"
+        }
+      }
+    },
+    "featured_product_banner": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/featured-product-banner)",
+      "name": "Banner prodotto in evidenza",
+      "blocks": {
+        "name": "Icona con testo",
+        "image_effect": {
+          "label": "Immagine Parallax",
+          "info": "Questa immagine sarà nascosta automaticamente su mobile.",
+          "position_top": "Posizione verticale",
+          "position_left": "Posizione orizzontale"
+        }
+      }
+    },
+    "product_testimonials": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/product-testimonials)",
+      "name": "Testimonianze prodotto",
+      "settings": {
+        "width": {
+          "label": "Larghezza media",
+          "info": "Funziona solo quando è selezionato Left nelle impostazioni posizione immagine desktop"
+        },
+        "rating_color": {
+          "label": "Colore valutazione"
+        },
+        "show_verified_buyer": {
+          "label": "Mostra acquirente verificato"
+        }
+      },
+      "blocks": {
+        "type": {
+          "media": {
+            "label": "Media testimonianza"
+          },
+          "image_comparison": {
+            "label": "Confronto immagine testimonianza"
+          }
+        },
+        "settings": {
+          "media": {
+            "label": "Impostazioni media",
+            "before_after_image": {
+              "label": "Immagini prima e dopo"
+            },
+            "before_image": {
+              "label": "Prima"
+            },
+            "after_image": {
+              "label": "Dopo"
+            }
+          },
+          "information": {
+            "label": "Impostazioni informazioni",
+            "rating_star": {
+              "label": "Stella valutazione"
+            },
+            "select_product": {
+              "label": "Prodotto"
+            },
+            "author_name": {
+              "label": "Nome autore"
+            },
+            "review_sumary": {
+              "label": "Riepilogo della revisione"
+            }
+          }
+        }
+      }
+    },
+    "routine-builder": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/routine-builder)",
+      "name": "Costruttore routine",
+      "blocks": {
+        "name": "Passo",
+        "settings": {
+          "text_step": {
+            "label": "Titolo passo"
+          },
+          "product_in_step": {
+            "label": "Prodotto nel passo"
+          }
+        }
+      }
+    },
+    "newsletter_popup": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/overlay-group/newsletter-popup)",
+      "name": "Popup newsletter",
+      "header": {
+        "heading": "Impostazioni generali"
+      },
+      "settings": {
+        "show_newsletter": "Abilita popup newsletter",
+        "show_on_homepage": "Mostra solo sulla homepage",
+        "heading": "Intestazione",
+        "short_description": "Descrizione",
+        "email_placeholder": "Segnaposto email",
+        "button_label": "Etichetta pulsante",
+        "banner_image": "Immagine banner",
+        "enable_social_icon": "Abilita icona social"
+      }
+    },
+    "featured-blog": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/featured-blog)",
+      "name": "Blog in evidenza"
+    },
+    "recommended_collection": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/recommended-collection)",
+      "name": "Collezione consigliata",
+      "settings": {},
+      "blocks": {
+        "button": {
+          "info": "[title] e [collection] sono i nomi delle variabili che verranno sostituiti automaticamente. Non modificarli, ma puoi cambiare la loro posizione nel testo."
+        }
+      }
+    },
+    "offers-popup": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/overlay-group/offers-popup)",
+      "name": "Popup offerte",
+      "popup": {
+        "label": "Impostazioni badge fisso"
+      }
+    },
+    "product-bundle": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/product-bundle)",
+      "name": "Pacchetto prodotto",
+      "settings": {
+        "discount": {
+          "name": "Sconto",
+          "info": "Scopri come creare sconti [qui](https://help.shopify.com/manual/discounts)",
+          "minimum": "Numero minimo di articoli richiesti",
+          "maximum": "Numero massimo di articoli",
+          "edit_quantity": "Consenti modifica quantità per ogni prodotto"
+        },
+        "your_bundle": {
+          "name": "Sconto",
+          "settings": {
+            "show_progress_bar": {
+              "label": "Mostra barra di progresso"
+            }
+          }
+        }
+      },
+      "blocks": {
+        "settings": {
+          "product_discount": {
+            "name": "Pacchetto prodotto",
+            "info": "Sostituisce la collezione quando selezionata."
+          }
+        }
+      }
+    },
+    "shopable-image": {
+      "how_to_use": "[Impara a usare questa sezione](https://nextsky.gitbook.io/purity-theme/sections/shopable-image)",
+      "name": "Immagine acquistabile",
+      "blocks": {
+        "tags": {
+          "name": "Tag",
+          "info": "Definisci il nome dei tag. Separati da una virgola. Es. Tag 1,Tag 2",
+          "settings": {
+            "show_verify_icon": {
+              "label": "Mostra icona di verifica"
+            }
+          }
+        },
+        "lookbook": {
+          "name": "Lookbook",
+          "settings": {
+            "products": {
+              "label": "Prodotti",
+              "position_top": "Posizione verticale",
+              "position_left": "Posizione orizzontale",
+              "products": {
+                "otpion__1": {
+                  "label": "Prodotto 1"
+                },
+                "otpion__2": {
+                  "label": "Prodotto 2"
+                },
+                "otpion__3": {
+                  "label": "Prodotto 3"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "parallax-image": {
+      "name": "Immagine parallax",
+      "blocks": {
+        "icon": {
+          "name": "Icona",
+          "info": "Sostituisce l'impostazione dell'icona svg"
+        }
+      }
+    },
+    "main-page": {
+      "name": "Pagina"
+    },
+  }
+}

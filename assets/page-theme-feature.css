@@ -1,0 +1,23 @@
+div#shopify-block-ALzIzMTdXQWc5QU5ON__description_gnT3gP,
+div#shopify-block-AQ1pLZ0psMDR0TVAxU__description_8eBJTt {
+    display: flex;
+    justify-content: center;
+}
+
+div#shopify-block-ALzIzMTdXQWc5QU5ON__description_gnT3gP {
+    display: flex;
+    justify-content: center;
+}
+#shopify-section-template--24531979665655__flexible_section_zcWdVH .progress-ring{
+    border-radius: 50%;
+    box-shadow: 5px 5px 50px 0px #0EE95E33;
+    background-color: #3B3554;
+}
+#shopify-section-template--24545274626295__flexible_section_zcWdVH svg text{
+    fill: #0EE95E;
+}
+@media screen and (max-width: 767.98px) {
+    #shopify-section-template--24531979665655__flexible_section_zcWdVH .counter-text {
+        font-size: 30px;
+    }
+}

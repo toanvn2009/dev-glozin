@@ -1,0 +1,69 @@
+{% if request.visual_preview_mode %}
+  <div
+    class="block_text h2 uppercase inline-block bg-white p-sp-5 rounded-5"
+    {{ block.shopify_attributes }}
+  >
+    {{ block.settings.text }}
+  </div>
+{% endif %}
+
+<div
+  class="pb-custom pt-custom"
+  style="--space-bottom: {{ block.settings.padding_bottom }};--space-top: {{ block.settings.padding_top }};"
+>
+  {% render 'jumbo-text' %}
+</div>
+{% schema %}
+{
+  "name": "t:sections.custom_section.blocks.jumbo_text.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.custom_section.blocks.jumbo_text.how_to_use"
+    },
+    {
+      "id": "text",
+      "type": "text",
+      "label": "t:settings_schema.colors.settings.fill_button_text.label",
+      "default": "bebold."
+    },
+    {
+      "type": "checkbox",
+      "id": "uppercase",
+      "default": false,
+      "label": "t:settings_schema.typography.settings.heading.text_transform.uppercase"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.custom_section.blocks.page.spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.custom_section.blocks.jumbo_text.name",
+      "category": "t:sections.group.decorative.name"
+    }
+  ]
+}
+{% endschema %}

@@ -1,233 +1,173 @@
-{{ 'countdown.css' | asset_url | stylesheet_tag }}
-{%- if section.settings.announcement_actions == 'marquee' -%}
-  {{ 'marquee.css' | asset_url | stylesheet_tag }}
-{% endif %}
 {%- liquid
   assign section_st = section.settings
-  assign section_width = section_st.section_width
   assign color_scheme = section_st.color_scheme
-  assign homepage_only = section_st.homepage_only
-  assign show_close = section_st.show_close
-  assign announcement_actions = section_st.announcement_actions
+  if section_st.section_width == 'fix_width'
+    assign section_width = 'container'
+  elsif section_st.section_width == 'full_width'
+    assign section_width = 'full-width'
+  else
+    assign section_width = 'fluid_container'
+  endif
+  assign scrolling_size = section_st.scrolling_size
   assign is_shown = false
-  if homepage_only
+  if section_st.homepage_only
     if request.page_type == 'index'
       assign is_shown = true
     endif
   else
     assign is_shown = true
   endif
+  assign announcement_actions = section_st.announcement_actions
+  assign show_close = section_st.show_close
+  assign show_mobile = section_st.show_mobile
 -%}
-{% liquid
-  assign enable_rtl = settings.rtl
-  assign iso_code = request.locale.iso_code
-  assign lis_language_rtl = settings.language_rtl
-  if lis_language_rtl != blank
-    if lis_language_rtl contains iso_code
-      assign enable_rtl = true
-    else
-      assign enable_rtl = false
-    endif
-  endif
-%}
-{%- capture style -%}
-    --section-pt: {{ section_st.padding_top }}; --section-pb: {{ section_st.padding_bottom }}; --font-size: {{ section_st.font_size }};--countdown-text-size: {{ section_st.font_size }}px;--swiper-navigation-color: var(--color-text); 
-  {%- endcapture -%}
-{%- if section.blocks.size > 0 and is_shown -%}
-  {%- style -%}
-    announcement-bar .announcement-slide {
-      width: 80%;
-      max-width: 55rem;
+
+{%- capture style -%}--section-pt: {{ section_st.padding_top }};--section-pb: {{ section_st.padding_bottom }};--speed: {{ section_st.marquee_speed }}s;--swiper-navigation-color:rgba(var(--color-text-rgb), 0.5);--swiper-navigation-size: 3rem;--swiper-navigation-sides-offset: 0rem;{%- endcapture -%}
+{%- capture col_style -%}
+  {% if section_st.space_between_text < 15 %}--gap: {{ section_st.space_between_text}}px;{% else %}--gap: clamp(4rem, calc({{ section_st.space_between_text}} * var(--responsive-rate)), calc({{ section_st.space_between_text}}*1px));{% endif %}
+{%- endcapture -%}
+{%- if section.blocks.size > 0 and is_shown and section_st.announcement_actions == 'slide' -%}
+  {% style %}
+    @media (min-width: 576px) {
+      announcement-bar slide-section {
+        width: 70%;
+        max-width: 44rem;
+      }
     }
-    .announcement-bar-close svg {
-      opacity: 0.6;
+    announcement-bar .swiper-arrow:hover {
+      --swiper-navigation-color: var(--color-text);
     }
-    .announcement-bar-close:hover svg {
-      opacity: 1;
+    .announcement-bar__content {
+      max-width: 80%;
+      line-height: calc(23 / 14);
     }
-    announcement-bar .swiper-wrapper {
+    .swiper:not([class*='initialized'])[data-direction='vertical'] .swiper-wrapper {
       align-items: center;
     }
-    announcement-bar :where(.swiper-arrow:hover) {
-      background-color: transparent;
+    .swiper:not([class*='initialized'])[data-direction='vertical'] .swiper-wrapper .swiper-slide {
+      max-width: unset;
     }
-    announcement-bar countdown-timer{
-      {% if section_st.font_weight == 'subheading_weight' %}--countdown-text-weight: var(--subheading-weight, 600);--heading-weight: var(--subheading-weight, 600);{% elsif section_st.font_weight == 'heading_weight' %}--countdown-text-weight: var(--heading-weight, 600);--heading-weight: var(--heading-weight, 600);{% else %}--countdown-text-weight: var(--body-weight, 600);--heading-weight: var(--body-weight, 600){% endif %}
+    .swiper:not([class*='initialized'])[data-direction='vertical'] .swiper-wrapper .swiper-slide:not(:first-child) {
+      opacity: 0;
     }
-  {%- endstyle -%}
+    {% if scrolling_size == 'small' %}
+      .announcement-bar__content-inner {
+        line-height: 2.3rem;
+      }
+    {% endif %}
+  {% endstyle %}
+{%- endif -%}
+{%- if section.blocks.size > 0 and is_shown -%}
+  {%- if announcement_actions == 'marquee' -%}
+    {{ 'section-scrolling-text.css' | asset_url | stylesheet_tag }}
+  {%- endif -%}
   <announcement-bar
-    class="section section{% if section_st.padding_top < 30 %} pt-min{% endif %}{% if section_st.padding_bottom < 30 %} pb-min{% endif %} remove_spacing color-{{ color_scheme }} gradient text-center relative{% if section_st.uppercase %} uppercase{% endif %} fs-custom {{ section_st.font_weight }}{% if section_st.show_mobile == blank %} hidden block-xl{% else %} block{% endif %}{% if section_st.show_separator_line %} border-bottom{% endif %}"
-    aria-label="{{ 'sections.header.announcement' | t }}"
+    class="p-min section__announcement-bar {% if show_mobile %}block{% else %}d-none block-md{% endif %} color-{{ color_scheme }} gradient relative{% if section_st.homepage_only %} only_homepage{% endif %} z-15"
     style="{{ style | strip | strip_newlines }}"
   >
     <div class="{{ section_width }}">
-      {% if section.blocks.size > 1 %}
-        {%- if announcement_actions == 'slide' -%}
-          {% # theme-check-disable UnclosedHTMLElement %}
-          <div class="announcement-slide relative mx-auto btn-control-small no-js-hidden">
-            <slide-section
-              class="swiper lazy-loading-swiper-before"
-              data-section-id="{{ section.id }}"
-              data-autoplay="true"
-              data-autoplaySpeed="{{ section_st.change_every }}"
-              data-loop="true"
-              data-mobile="1"
-              data-tablet="1"
-              data-desktop="1"
-            >
-              <div class="swiper-wrapper">
-                {% # theme-check-disable UnclosedHTMLElement %}
-        {%- else -%}
-          <div
-            class="marquee flex overflow-hidden w-full justify-content-center"
-            style="--speed: {{ section_st.speed }}s;--col-gap: {{ section_st.space_between }}px;"
-          >
-        {% endif %}
-        {%- if announcement_actions == 'marquee' -%}
+      {%- if announcement_actions == 'marquee' -%}
+        <div
+          class="flex gap {% if section_st.uppercase %} uppercase{% endif %} fs-{{ scrolling_size }} marquee overflow-hidden w-full justify-center"
+          style="{{ col_style | strip | strip_newlines }}"
+        >
           {%- for i in (0..5) -%}
-            <div class="flex animation-marquee">
+            <div class="flex animation-marquee whitespace-nowrap gap align-center lh-normal">
               {%- for block in section.blocks -%}
-                {%- liquid
-                  assign block_st = block.settings
-                -%}
-                {%- if block_st.text != blank -%}
-                  <div
-                    class="announcement__bar-message mx-auto flex-nowrap flex{% if section_st.icon_between_item != 'none' %} gap{% endif %} content-center whitespace-nowrap"
-                  >
-                    <span class="grow">{{ block_st.text }}</span>
-                    {% if block_st.countdown_deadline != blank %}
-                      <div
-                        class="countdown-announcementBar ms-5 gap-5 flex align-center"
-                        data-block-id="{{ block.id }}"
-                      >
-                        <countdown-timer
-                          class="hidden flex flex-nowrap justify-center"
-                          data-endtime="{{ block_st.countdown_deadline }}"
-                          data-format="dd:hh:mm:ss"
-                          data-days="{{ 'products.product.countdown.days' | t }}"
-                          data-hours="{{ 'products.product.countdown.hours' | t }}"
-                          data-mins="{{ 'products.product.countdown.mins' | t }}"
-                          data-secs="{{ 'products.product.countdown.secs' | t }}"
-                        >
-                        </countdown-timer>
-                      </div>
-                    {% endif %}
-                    {% if section_st.icon_between_item == 'hight_light' %}
-                      {% render 'icon-highlight' %}
-                    {% elsif section_st.icon_between_item == 'dot' %}
-                      {% render 'icon-dot' %}
-                    {% elsif section_st.icon_between_item == 'star' %}
-                      {% render 'icon-star' %}
-                    {% else %}
-                      <span class="spacing"></span>
-                    {% endif %}
-                  </div>
-                {% endif %}
+                <div class="announcement-bar__content" {{ block.shopify_attributes }}>
+                  {{ block.settings.text }}
+                </div>
               {%- endfor -%}
             </div>
           {%- endfor -%}
-        {%- else -%}
-          {%- for block in section.blocks -%}
-            {%- liquid
-              assign block_st = block.settings
-            -%}
-            {%- if block_st.text != blank -%}
-              <div class="swiper-slide">
-                <div class="announcement__bar-message mx-auto flex-wrap px-20 flex justify-content-center">
-                  <span class="grow">{{ block_st.text }}</span>
-                  {% if block_st.countdown_deadline != blank %}
-                    <div
-                      class="countdown-announcementBar ms-5 gap-5 flex align-center"
-                      data-block-id="{{ block.id }}"
-                    >
-                      <countdown-timer
-                        class="hidden flex flex-wrap justify-center"
-                        data-endtime="{{ block_st.countdown_deadline }}"
-                        data-format="dd:hh:mm:ss"
-                        data-days="{{ 'products.product.countdown.days' | t }}"
-                        data-hours="{{ 'products.product.countdown.hours' | t }}"
-                        data-mins="{{ 'products.product.countdown.mins' | t }}"
-                        data-secs="{{ 'products.product.countdown.secs' | t }}"
-                      >
-                      </countdown-timer>
-                    </div>
-                  {% endif %}
-                </div>
-              </div>
-            {% endif %}
-          {%- endfor -%}
-        {% endif %}
+        </div>
       {%- else -%}
-        {%- for block in section.blocks -%}
-          {%- liquid
-            assign block_st = block.settings
-          -%}
-          {%- if block_st.text != blank -%}
-            <div class="announcement__bar-message mx-auto flex-wrap flex justify-content-center">
-              <span class="grow">{{ block_st.text }}</span>
-              {% if block_st.countdown_deadline != blank %}
-                <div
-                  class="countdown-announcementBar ms-5 gap-5 flex align-center"
-                  data-block-id="{{ block.id }}"
-                >
-                  <countdown-timer
-                    class="hidden flex flex-wrap justify-center"
-                    data-endtime="{{ block_st.countdown_deadline }}"
-                    data-format="dd:hh:mm:ss"
-                    data-days="{{ 'products.product.countdown.days' | t }}"
-                    data-hours="{{ 'products.product.countdown.hours' | t }}"
-                    data-mins="{{ 'products.product.countdown.mins' | t }}"
-                    data-secs="{{ 'products.product.countdown.secs' | t }}"
-                  >
-                  </countdown-timer>
-                </div>
-              {% endif %}
+        <slide-section
+          id="swiper-{{ section.id }}"
+          class="mx-auto swiper lazy-loading-swiper-before"
+          data-section-id="{{ section.id }}"
+          data-loop="true"
+          data-speed="300"
+          data-mobile="1"
+          data-tablet="1"
+          data-desktop="1"
+          data-direction="vertical"
+          data-height-auto="true"
+          data-spacing="0"
+          data-auto-play-speed="{{ section_st.change_slide_every | times: 1000 }}"
+          data-autoplay="{{ section_st.slide_auto_change }}"
+          style="--item-desktop: 1;--item-tablet: 1;--item-mb: 1;--gap: 0px; --gap-desktop: 0px;"
+        >
+          <div class="swiper-wrapper {% if section_st.uppercase %}uppercase {% endif %}fs-{{ scrolling_size }}">
+            {%- for block in section.blocks -%}
+              <div
+                class="swiper-slide announcement-bar__content flex wrap content-center mx-auto text-center"
+                {{ block.shopify_attributes }}
+              >
+                <div class="announcement-bar__content-inner">{{ block.settings.text }}</div>
+              </div>
+            {%- endfor -%}
+          </div>
+          {% if section_st.show_navigation %}
+            <div class="swiper-actions" style="--swiper-navigation-sides-offset: -1rem;">
+              <div
+                class="inline-flex content-center overflow-hidden transition swiper-arrow swiper-button-prev"
+                style="--transform-x: 2rem;"
+              >
+                <svg width="6" height="11" fill="none">
+                  <use href="#icon-back" />
+                </svg>
+              </div>
+              <div
+                class="inline-flex content-center overflow-hidden transition swiper-arrow swiper-button-next"
+                style="--transform-x: -2rem;"
+              >
+                <svg width="6" height="11" fill="none">
+                  <use href="#icon-next" />
+                </svg>
+              </div>
             </div>
           {% endif %}
-        {%- endfor -%}
-      {% endif %}
-      {% if section.blocks.size > 1 %}
-        </div>
-        {%- if announcement_actions == 'slide' -%}
-          <div
-            class="swiper-arrow original-style swiper-button-prev visible absolute left-10"
-            style="--swiper-navigation-sides-offset: -1rem;--swiper-width: 3rem;--swiper-size: 10px"
-          >
-            <svg width="6" height="11" fill="none">
-              <use href="#icon-back" />
-            </svg>
-          </div>
-          <div
-            class="swiper-arrow original-style swiper-button-next visible absolute right-10"
-            style="--swiper-navigation-sides-offset: -1rem;--swiper-width: 3rem;--swiper-size: 10px"
-          >
-            <svg width="6" height="11" fill="none">
-              <use href="#icon-next" />
-            </svg>
-          </div>
-          </slide-section>
-          </div>
-        {% endif %}
+        </slide-section>
       {% endif %}
     </div>
     {%- if show_close -%}
       <div
-        class="announcement-bar-close color-{{ color_scheme }} gradient absolute{% if enable_rtl %} left-0{% else %} right-0{% endif %} top-0 w-30 h-full transition inline-flex content-center hover-svg-zoom pointer lh-normal"
+        class="announcement-bar__close absolute {% if settings.rtl %}left-10{% else %}right-10{% endif %} top-0 w-30 h-full transition inline-flex content-center hover-svg-zoom pointer lh-normal"
         tabindex="0"
       >
-        <svg width="10" height="11" viewBox="0 0 10 11" fill="none" class="transition">
+        <svg width="9" height="10" viewBox="0 0 9 10" fill="none">
           <use href="#icon-close" />
         </svg>
       </div>
     {% endif %}
   </announcement-bar>
   <script>
-    if (sessionStorage.getItem('announcement_bar') == 'false') {
-      document.getElementById('shopify-section-{{ section.id }}').classList.add('hidden');
-    }
+    (() => {
+      const getCookieValue = () => {
+        const match = document.cookie.match('(^|;)\\s*announcement_closed\\s*=\\s*([^;]+)');
+        return match ? match[2] : null;
+      };
+      if (getCookieValue() === 'true') {
+        const parentSection = document.querySelector('.section-announcement-bar');
+        if (parentSection) {
+          const styles = {
+            transition: 'none',
+            height: '0px',
+            opacity: '0',
+            overflow: 'hidden',
+          };
+          Object.assign(parentSection.style, styles);
+          document.querySelector('announcement-bar').classList.add('d-none');
+          parentSection.classList.add('announcement-closed');
+          requestAnimationFrame(() => {
+            parentSection.style.removeProperty('transition');
+          });
+        }
+      }
+    })();
   </script>
-{% endif %}
-
+{%- endif -%}
 {% schema %}
 {
   "name": "t:sections.announcement-bar.name",
@@ -238,34 +178,57 @@
   },
   "settings": [
     {
+      "type": "paragraph",
+      "content": "t:sections.announcement-bar.how_to_use.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.general"
+    },
+    {
       "type": "select",
       "id": "section_width",
       "options": [
         {
-          "value": "container",
-          "label": "t:sections.all.section_width.container.label"
-        },
-        {
-          "value": "fluid_container",
-          "label": "t:sections.all.section_width.fluid_container.label"
+          "value": "fix_width",
+          "label": "t:sections.all.layout.fix_width"
         },
         {
           "value": "stretch_width",
-          "label": "t:sections.all.section_width.stretch_width.label"
+          "label": "t:sections.all.layout.stretch_width"
         },
         {
           "value": "full_width",
-          "label": "t:sections.all.section_width.full_width.label"
+          "label": "t:sections.all.layout.full_width"
         }
       ],
-      "default": "stretch_width",
-      "label": "t:sections.all.section_width.label"
+      "default": "fix_width",
+      "label": "t:sections.all.layout.label"
     },
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "t:sections.all.color_scheme.label",
+      "label": "t:sections.all.colors.label",
+      "info": "t:sections.all.colors.info",
       "default": "default-color-scheme"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_close",
+      "default": false,
+      "label": "t:sections.announcement-bar.settings.show_close_button.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "homepage_only",
+      "default": true,
+      "label": "t:sections.announcement-bar.settings.show_only_homepage.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile",
+      "default": true,
+      "label": "t:sections.announcement-bar.settings.enable_on_mobile.label"
     },
     {
       "type": "select",
@@ -273,39 +236,72 @@
       "options": [
         {
           "value": "slide",
-          "label": "t:sections.announcement-bar.settings.announcement_actions.slide.label"
+          "label": "t:sections.announcement-bar.settings.type.options.slide.label"
         },
         {
           "value": "marquee",
-          "label": "t:sections.announcement-bar.settings.announcement_actions.marquee.label"
+          "label": "t:sections.announcement-bar.settings.type.options.marquee.label"
         }
       ],
       "default": "slide",
-      "label": "t:sections.announcement-bar.settings.announcement_actions.label"
+      "label": "t:sections.announcement-bar.settings.type.name"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.carousel.header",
+      "visible_if": "{{ section.settings.announcement_actions == 'slide' }}"
     },
     {
       "type": "checkbox",
-      "id": "show_close",
+      "id": "show_navigation",
       "default": true,
-      "label": "t:sections.announcement-bar.settings.show_close.label"
+      "label": "t:sections.all.carousel.show_navigation.label",
+      "visible_if": "{{ section.settings.announcement_actions == 'slide' }}"
     },
     {
       "type": "checkbox",
-      "id": "homepage_only",
-      "default": true,
-      "label": "t:sections.announcement-bar.settings.homepage_only.label"
+      "id": "slide_auto_change",
+      "default": false,
+      "label": "t:sections.all.carousel.slide_auto_change",
+      "visible_if": "{{ section.settings.announcement_actions == 'slide' }}"
     },
     {
-      "type": "checkbox",
-      "id": "show_mobile",
-      "default": true,
-      "label": "t:sections.announcement-bar.settings.show_mobile.label"
+      "type": "range",
+      "id": "change_slide_every",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "t:sections.all.carousel.change_slide_every",
+      "default": 5,
+      "visible_if": "{{ section.settings.announcement_actions == 'slide' }}"
     },
     {
-      "type": "checkbox",
-      "id": "show_separator_line",
-      "default": true,
-      "label": "t:sections.announcement-bar.settings.show_separator_line.label"
+      "type": "header",
+      "content": "t:sections.announcement-bar.settings.marquee_settings.label",
+      "visible_if": "{{ section.settings.announcement_actions == 'marquee' }}"
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "default": 7,
+      "label": "t:sections.announcement-bar.settings.marquee_settings.speed.label",
+      "min": 1,
+      "max": 50,
+      "step": 1,
+      "unit": "s",
+      "visible_if": "{{ section.settings.announcement_actions == 'marquee' }}"
+    },
+    {
+      "type": "range",
+      "id": "space_between_text",
+      "label": "t:sections.all.space_between.label",
+      "min": 10,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 50,
+      "visible_if": "{{ section.settings.announcement_actions == 'marquee' }}"
     },
     {
       "type": "header",
@@ -314,140 +310,65 @@
     {
       "type": "checkbox",
       "id": "uppercase",
-      "label": "t:sections.all.content_setting.uppercase.label"
-    },
-    {
-      "type": "range",
-      "id": "font_size",
-      "min": 12,
-      "max": 20,
-      "step": 1,
-      "label": "t:sections.all.content_setting.font_size.label",
-      "unit": "px",
-      "default": 12
+      "default": false,
+      "label": "t:settings_schema.typography.settings.heading.text_transform.uppercase"
     },
     {
       "type": "select",
-      "id": "font_weight",
+      "id": "scrolling_size",
       "options": [
         {
-          "value": "body_weight",
-          "label": "t:sections.all.content_setting.font_weight.body_weight.label"
+          "value": "small",
+          "label": "t:sections.all.content_header.heading_size.x_small.label"
         },
         {
-          "value": "heading_weight",
-          "label": "t:sections.all.content_setting.font_weight.heading_weight.label"
+          "value": "",
+          "label": "t:sections.all.content_header.heading_size.base.label"
         },
         {
-          "value": "subheading_weight",
-          "label": "t:sections.all.content_setting.font_weight.subheading_weight.label"
+          "value": "big-2",
+          "label": "t:sections.all.content_header.heading_size.large.label"
         }
       ],
-      "default": "subheading_weight",
-      "label": "t:sections.all.content_setting.font_weight.label"
+      "default": "small",
+      "label": "t:sections.all.content_header.heading_size.size"
     },
     {
       "type": "header",
-      "content": "t:sections.announcement-bar.settings.marquee.label",
-      "info": "t:sections.announcement-bar.settings.marquee.info"
-    },
-    {
-      "type": "range",
-      "id": "speed",
-      "label": "t:sections.scrolling_text.settings.speed.label",
-      "default": 15,
-      "min": 3,
-      "max": 30,
-      "step": 1,
-      "unit": "s"
-    },
-    {
-      "type": "range",
-      "id": "space_between",
-      "min": 10,
-      "max": 100,
-      "step": 1,
-      "label": "t:sections.announcement-bar.settings.marquee.space_between.label",
-      "unit": "px",
-      "default": 50
-    },
-    {
-      "type": "select",
-      "id": "icon_between_item",
-      "options": [
-        {
-          "value": "none",
-          "label": "t:sections.announcement-bar.settings.marquee.icon_between.none"
-        },
-        {
-          "value": "dot",
-          "label": "t:sections.announcement-bar.settings.marquee.icon_between.dot"
-        },
-        {
-          "value": "star",
-          "label": "t:sections.announcement-bar.settings.marquee.icon_between.star"
-        }
-      ],
-      "default": "none",
-      "label": "t:sections.announcement-bar.settings.marquee.icon_between.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.announcement-bar.settings.slide.label",
-      "info": "t:sections.announcement-bar.settings.slide.info"
-    },
-    {
-      "type": "range",
-      "id": "change_every",
-      "min": 3,
-      "max": 6,
-      "step": 1,
-      "label": "t:sections.announcement-bar.settings.slide.change_every.label",
-      "unit": "s",
-      "default": 3
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.section_padding.label"
+      "content": "t:sections.all.padding.section_padding_heading"
     },
     {
       "type": "range",
       "id": "padding_top",
-      "label": "t:sections.all.section_padding.top.label",
-      "default": 12,
       "min": 0,
       "max": 20,
       "step": 1,
-      "unit": "px"
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 10
     },
     {
       "type": "range",
       "id": "padding_bottom",
-      "label": "t:sections.all.section_padding.bottom.label",
-      "default": 12,
       "min": 0,
       "max": 20,
       "step": 1,
-      "unit": "px"
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 10
     }
   ],
-  "max_blocks": 5,
+  "max_blocks": 4,
   "blocks": [
     {
       "type": "announcement",
-      "name": "t:sections.announcement-bar.blocks.announcement.name",
+      "name": "t:sections.announcement-bar.blocks.name",
       "settings": [
         {
-          "type": "inline_richtext",
+          "type": "richtext",
           "id": "text",
-          "default": "Welcome to our store",
-          "label": "t:sections.announcement-bar.blocks.announcement.settings.text.label"
-        },
-        {
-          "type": "text",
-          "id": "countdown_deadline",
-          "label": "t:sections.announcement-bar.blocks.announcement.settings.countdown_deadline.label",
-          "info": "t:sections.announcement-bar.blocks.announcement.settings.countdown_deadline.info"
+          "default": "<p>Welcome to our store</p>",
+          "label": "t:sections.announcement-bar.blocks.setting.label"
         }
       ]
     }
@@ -457,10 +378,10 @@
       "name": "t:sections.announcement-bar.name",
       "blocks": [
         {
-          "type": "announcement",
-          "settings": {
-            "text": "Welcome to our store"
-          }
+          "type": "announcement"
+        },
+        {
+          "type": "announcement"
         }
       ]
     }

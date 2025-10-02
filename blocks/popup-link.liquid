@@ -1,0 +1,109 @@
+<script type="module" src="{{ 'block-popup-link.js' | asset_url }}" defer="defer"></script>
+
+<div
+  class="page-block pb-custom pt-custom spacing-style{% if request.visual_preview_mode %} bg-white px-sp-5 rounded-5{% endif %}"
+  style="--space-bottom: {{ block.settings.padding_bottom }};--space-top: {{ block.settings.padding_top }};"
+>
+  <popup-link
+    data-section-id="{{ section.id }}"
+    class="popup-link border-animation pointer{% if request.visual_preview_mode %} active{% endif %}"
+    tabindex="0"
+  >
+    {{ block.settings.text }}
+  </popup-link>
+  <link-popup
+    data-section-id="{{ section.id }}"
+    drawer
+    class="modal modal_type_popup active-modal-js modal-newsletter-popup fixed inset-0 z-31 flex align-center invisible transition content-hidden"
+  >
+    <modal-overlay class="modal-overlay invisible transition-drawer cursor-crosshair"></modal-overlay>
+    <div
+      class="modal-popup-inner invisible modal-focus modal-body modal-draggable transition rounded max-w-custom m-auto w-full bg-white z-15"
+      style="--max-width: 78rem; --img-rounded: 2rem;"
+      tabindex="-1"
+    >
+      <button
+        is="button-close-model"
+        class="modal__close modal-button-close rounded-50 pointer btn-reset wh-58 flex-1025 content-center absolute z-3 top-12 right-12"
+        aria-label="Close"
+      >
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 14 14"
+          fill="none"
+          class="transition-short will-change icon-zoom"
+        >
+          <use href="#icon-close"></use>
+        </svg>
+      </button>
+      <div class="drawer__body drawer__body-item h-full overflow-y-auto custom-scrollbar drawer-spacing">
+        {% content_for 'blocks' %}
+      </div>
+    </div>
+  </link-popup>
+</div>
+{% schema %}
+{
+  "name": "t:sections.group.links.popup_link",
+  "class": "w-full",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.group.links.how_to_use_popup_link"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "default": "Learn more",
+      "label": "t:settings_schema.colors.settings.general_text.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.custom_section.blocks.page.spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "@theme"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.group.links.popup_link",
+      "category": "t:sections.group.links.name",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "description"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

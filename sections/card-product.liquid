@@ -1,0 +1,66 @@
+{% liquid
+  assign theme_st = settings
+  assign color_swatch_trigger = theme_st.color_swatch_trigger
+  if color_swatch_trigger != blank
+    assign option_name = color_swatch_trigger | split: ','
+  else
+    assign option_name = 'Color'
+  endif
+%}
+{% if product and product != empty %}
+  {% liquid
+    assign option_position = 1
+    for option in product.options_with_values
+      assign has_color = false
+      for name in option_name
+        if option.name == name
+          assign has_color = true
+        endif
+      endfor
+      if has_color
+        assign option_position = 'option' | append: option.position
+        assign value_color = product.selected_or_first_available_variant[option_position]
+      endif
+    endfor
+  %}
+  <div class="product-item product__item-js">
+    <div class="product-item__inner">
+      <div class="product__inner">
+        <a
+          class="product-image"
+          draggable="false"
+          href="{{ product.url }}"
+          aria-label="{{ product.title }}"
+        >
+          {%- liquid
+            assign p_media = product.selected_or_first_available_variant.featured_media
+            assign alt_features = p_media.alt | default: product.title | escape
+          -%}
+          {%- if p_media -%}
+            <div class="product__media">
+              {% render 'responsive-image',
+                type: 'product',
+                class: 'product__img featured-image',
+                image: p_media,
+                image_alt: alt_features,
+                disable_lazy_loading: true
+              %}
+            </div>
+          {%- endif -%}
+          {% render 'product-badges',
+            scope: 'item',
+            first_available_variant: true,
+            card_product: product,
+            option_position: option_position,
+            value_color: value_color
+          %}
+        </a>
+      </div>
+      <div class="product__information">
+        <div class="product__price heading-color mt-sp-1">
+          {%- render 'price', scope: 'item', first_available_variant: true, product: product -%}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

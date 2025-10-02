@@ -5,6 +5,7 @@
   --pswp-placeholder-bg: #fff;
 
   --pswp-root-z-index: 100000;
+
   --pswp-preloader-color: rgba(79, 79, 79, 0.4);
   --pswp-preloader-color-secondary: rgba(255, 255, 255, 0.9);
 
@@ -205,19 +206,19 @@ and show (for example fade in) when PhotoSwipe is opened
   opacity: 0.85;
   -webkit-appearance: none;
   -webkit-touch-callout: none;
+  transition: 0.3s;
 }
 
 .pswp__button:hover,
 .pswp__button:active,
 .pswp__button:focus {
-  transition: none;
-  padding: 0;
-  background: none;
-  border: 0;
-  box-shadow: none;
-  opacity: 1;
+  background: var(--btn-primary-bg-color);
+  color: var(--btn-primary-color);
+  border-color: var(--btn-primary-bg-color);
 }
-
+.pswp__button:hover svg {
+  color: var(--btn-primary-color);
+}
 .pswp__button:disabled {
   opacity: 0.3;
   cursor: auto;
@@ -404,7 +405,7 @@ div.pswp__img--placeholder,
   height: 30px;
   margin-top: 15px;
   margin-inline-start: 20px;
-  font-size: var(--body-font-size, 14px);
+  font-size: 14px;
   line-height: 30px;
   color: var(--pswp-icon-color);
   text-shadow: 1px 1px 3px var(--pswp-icon-color-secondary);
@@ -413,4 +414,71 @@ div.pswp__img--placeholder,
 
 .pswp--one-slide .pswp__counter {
   display: none;
+}
+
+.pswp__button--close-zoom {
+  position: absolute;
+  right: clamp(2rem, 5vw, 3rem);
+  top: clamp(2rem, 5vw, 3rem);
+  height: 50px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+.pswp__button--prev,
+.pswp__button--next {
+  --opacity: 0.6;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background-color: rgba(var(--color-white), var(--opacity, 1));
+  border: 1px solid var(--color-border);
+  color: var(--color-heading);
+  clip-path: unset;
+  backdrop-filter: blur(var(--blur, 3px));
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+.pswp__button--prev {
+  left: clamp(2rem, 20vw, 30%);
+}
+.pswp__button--next {
+  right: clamp(2rem, 20vw, 30%);
+}
+.pswp__counter {
+  position: absolute;
+  background-color: rgba(var(--color-white), var(--opacity, 1));
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  line-height: normal;
+  font-size: calc(var(--body-font-size) - 2px);
+  filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.05));
+  backdrop-filter: blur(3px);
+  color: var(--color-heading);
+  clip-path: unset;
+  backdrop-filter: blur(var(--blur, 3px));
+  --opacity: 0.6;
+  text-shadow: none;
+  --pswp-icon-color: var(--color-black);
+  border-radius: var(--img-rounded);
+  padding: var(--padding, 6px 18.5px);
+  box-shadow: 5px 0px 30px 0px rgba(0, 0, 0, 0.05);
+}
+.pswp__top-bar {
+  bottom: 0;
+  height: auto;
+}
+@media (max-width: 767.98px) {
+  .pswp__button--prev,
+  .pswp__button--next {
+    display: none;
+  }
 }

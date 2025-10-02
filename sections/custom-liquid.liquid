@@ -1,17 +1,19 @@
 {%- liquid
   assign section_st = section.settings
-  assign section_width = section_st.section_width
-  assign color_scheme = section_st.color_scheme
-  if section_st.reset_spacing
-    assign reset_spacing = ' remove_spacing'
+  if section_st.section_width == 'fix_width'
+    assign section_width = 'container'
+  elsif section_st.section_width == 'full_width'
+    assign section_width = 'full-width'
+  else
+    assign section_width = 'full-width-gap'
   endif
 -%}
 {%- capture style -%}
-      --section-pt: {{ section_st.padding_top }}; --section-pb: {{ section_st.padding_bottom }}; --gap: {{ section_st.space_between_text }}px;
-    {%- endcapture -%}
+  --section-pt: {{ section_st.padding_top }}; --section-pb: {{ section_st.padding_bottom }};
+{%- endcapture -%}
 {%- unless section_st.custom_liquid == blank -%}
   <div
-    class="section{% if section_st.padding_top < 30 %} pt-min{% endif %}{% if section_st.padding_bottom < 30 %} pb-min{% endif %} sec__custom-liquid color-{{ color_scheme }} gradient{{ reset_spacing }}"
+    class="section color-{{ section_st.color_scheme }} section gradient section__custom-liquid"
     style="{{ style | strip | strip_newlines }}"
   >
     <div class="{{ section_width }}">
@@ -30,70 +32,69 @@
   },
   "settings": [
     {
+      "type": "paragraph",
+      "content": "t:sections.custom_liquid.how_to_use"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.general"
+    },
+    {
       "type": "select",
       "id": "section_width",
-      "label": "t:sections.all.section_width.label",
-      "default": "container",
       "options": [
         {
-          "value": "container",
-          "label": "t:sections.all.section_width.container.label"
-        },
-        {
-          "value": "fluid_container",
-          "label": "t:sections.all.section_width.fluid_container.label"
+          "value": "fix_width",
+          "label": "t:sections.all.layout.fix_width"
         },
         {
           "value": "stretch_width",
-          "label": "t:sections.all.section_width.stretch_width.label"
+          "label": "t:sections.all.layout.stretch_width"
         },
         {
           "value": "full_width",
-          "label": "t:sections.all.section_width.full_width.label"
+          "label": "t:sections.all.layout.full_width"
         }
-      ]
+      ],
+      "default": "fix_width",
+      "label": "t:sections.all.layout.label"
     },
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "t:sections.all.color_scheme.label",
-      "default": "scheme-1"
+      "label": "t:sections.all.colors.label",
+      "info": "t:sections.all.colors.info",
+      "default": "default-color-scheme"
     },
     {
       "type": "liquid",
       "id": "custom_liquid",
-      "label": "t:sections.custom_liquid.label",
+      "label": "t:sections.custom_liquid.name",
       "info": "t:sections.custom_liquid.info"
     },
     {
       "type": "header",
-      "content": "t:sections.all.section_padding.label"
+      "content": "t:sections.all.padding.section_padding_heading"
     },
     {
       "type": "range",
       "id": "padding_top",
-      "label": "t:sections.all.section_padding.top.label",
-      "default": 0,
       "min": 0,
       "max": 100,
       "step": 1,
-      "unit": "px"
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 48
     },
     {
       "type": "range",
       "id": "padding_bottom",
-      "label": "t:sections.all.section_padding.bottom.label",
-      "default": 0,
       "min": 0,
       "max": 100,
       "step": 1,
-      "unit": "px"
-    },
-    {
-      "type": "checkbox",
-      "id": "reset_spacing",
-      "label": "t:sections.all.section_padding.reset_spacing.label",
-      "default": false
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 48
     }
   ],
   "presets": [

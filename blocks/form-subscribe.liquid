@@ -1,0 +1,131 @@
+{% liquid
+  assign theme_st = settings
+  assign section_st = section.settings
+  assign block_st = block.settings
+  assign scroll_animation = theme_st.scroll_animation
+%}
+{% if request.visual_preview_mode %}
+  <div
+    class="block__form_subscribe bg-white p-sp-5 rounded-5"
+  >
+    <input
+      type="hidden"
+      name="contact[tags]"
+      value="newsletter"
+    >
+    <div
+      class="field relative flex wrap gap-10"
+    >
+      <input
+        id="email_contact--{{ block.id }}"
+        type="email"
+        required
+        name="contact[email]"
+        placeholder="{{ block.settings.email_placeholder }}"
+        class="field__input password__subcribe-input btn-radius min-w-custom js-custom-input"
+        style="--min-width: 30rem;"
+      >
+      <label for="email_contact--{{ block.id }}" class="field__label"> {{ block.settings.email_placeholder }} * </label>
+      <button
+        type="submit"
+        class="btn pointer btn-primary relative word-wrap relative"
+        style="--width: 20rem;"
+      >
+        <span> {{ block.settings.btn_label }}</span>
+      </button>
+    </div>
+  </div>
+{% else %}
+  <div
+    class="block__form_subscribe mb-custom flex justify-content-{{ section_st.text_align }}{% if block_st.spacing_bottom > 10 %} mb_auto-rsp{% endif %}"
+    style="--space-bottom: {{ block_st.spacing_bottom }};"
+    {{ block.shopify_attributes }}
+  >
+    {%- if scroll_animation != 'disable' -%}
+      <motion-effect
+        data-animate="fade-up"
+        class="block"
+      >
+    {%- endif -%}
+    {%- form 'customer', class: 'form-validation form-password-page' -%}
+      <input
+        type="hidden"
+        name="contact[tags]"
+        value="newsletter"
+      >
+      <div
+        class="field relative flex wrap gap-10"
+        style="--max-width: 51rem;"
+      >
+        <input
+          id="email_contact--{{ block.id }}"
+          type="email"
+          required
+          name="contact[email]"
+          value="{% if customer %}{{ customer.email }}{% endif %}"
+          placeholder="{{ block.settings.email_placeholder }}"
+          class="field__input password__subcribe-input btn-radius min-w-custom js-custom-input"
+          style="--min-width: 30rem;"
+          {% if form.errors %}
+            aria-invalid="true"
+            aria-describedby="Password-error--{{ section.id }}"
+          {% elsif form.posted_successfully? %}
+            aria-describedby="Password-success--{{ section.id }}"
+          {% endif %}
+        >
+        <label for="email_contact--{{ block.id }}" class="field__label">
+          {{ block.settings.email_placeholder }} *
+        </label>
+        <button
+          type="submit"
+          class="btn pointer btn-primary relative word-wrap relative"
+          style="--width: 20rem;"
+        >
+          <span class="hidden-on-load"> {{ block.settings.btn_label }}</span>
+          {%- render 'loader' -%}
+        </button>
+      </div>
+    {%- endform -%}
+    {%- if scroll_animation != 'disable' -%}
+      </motion-effect>
+    {%- endif -%}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:sections.custom_section.blocks.email_subscription.name",
+  "class": "w-full",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.custom_section.blocks.email_subscription.how_to_use"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "t:sections.main-password-content.blocks.form_subscribe.settings.email_placeholder.label",
+      "default": "Enter your email..."
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "t:sections.main-password-content.blocks.form_subscribe.settings.btn_label.label",
+      "default": "Subscribe"
+    },
+    {
+      "type": "range",
+      "id": "spacing_bottom",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.padding.spacing_bottom",
+      "default": 15
+    }
+  ],
+  "presets": [
+    { "name": "t:sections.custom_section.blocks.email_subscription.name", "category": "t:sections.group.blocks.forms" }
+  ]
+}
+{% endschema %}

@@ -1,229 +1,317 @@
 /*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "page-heading": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {
+        "section_width": "fix_width",
+        "text_alignment": "start",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "heading": {
       "type": "page-heading",
       "blocks": {
-        "breadcrumb_kg6gTP": {
-          "type": "breadcrumb",
-          "settings": {
-          }
-        },
-        "heading_fmyy8C": {
+        "heading_cVehNH": {
           "type": "heading",
           "settings": {
-            "page_title": "Help Center",
-            "header_size": "default"
+            "heading": "{{ page.title }}"
           }
         },
-        "description_TfxHmk": {
+        "description_PdnN6k": {
           "type": "description",
-          "settings": {
-            "description": "<p>Please use the below form. You can also call customer service on +1 (973) 435-3638.<\/p>"
-          }
+          "settings": {}
         }
       },
       "block_order": [
-        "breadcrumb_kg6gTP",
-        "heading_fmyy8C",
-        "description_TfxHmk"
+        "heading_cVehNH",
+        "description_PdnN6k"
       ],
       "settings": {
-        "section_width": "stretch_width",
+        "section_width": "fix_width",
         "color_scheme": "",
-        "alignment": "center",
-        "overlay_opacity": 0,
-        "height": "adapt",
+        "text_alignment": "center",
         "padding_top": 40,
-        "padding_bottom": 0
+        "padding_bottom": 40
       }
     },
     "main": {
       "type": "page-faqs",
       "blocks": {
-        "title_fipewL": {
-          "type": "title",
+        "group_faq_page_tTkxAz": {
+          "type": "_group-faq-page",
           "settings": {
-            "title": "Shopping Information"
+            "heading": "Shipping & Delivery",
+            "framed": true
+          },
+          "blocks": {
+            "item_faq_m9Akwn": {
+              "type": "_item-faq",
+              "settings": {
+                "question": "How long does shipping take?",
+                "answer": "<p>Our orders typically arrive within 3–7 business days, depending on your location and chosen shipping method. Please note that holidays, weather conditions and peak shopping seasons can affect delivery times.</p>"
+              },
+              "blocks": {}
+            },
+            "item_faq_KThENY": {
+              "type": "_item-faq",
+              "settings": {
+                "question": "Can I change my shipping address?",
+                "answer": "<p>Yes! You can update your shipping address <strong>before your order is shipped</strong> by contacting our customer support team as soon as possible. Once the order is fulfilled, we’re unable to make changes.</p>"
+              },
+              "blocks": {}
+            },
+            "item_faq_Epgq3G": {
+              "type": "_item-faq",
+              "settings": {
+                "question": "How can I track my order?",
+                "answer": "<p>Once your order is shipped, you’ll receive a confirmation email with a tracking link. Simply click the link to view real-time updates on your delivery status.</p>"
+              },
+              "blocks": {}
+            },
+            "item_faq_8VKYkW": {
+              "type": "_item-faq",
+              "settings": {
+                "question": "Do you offer international shipping?",
+                "answer": "<p>Yes, we offer international shipping to most countries. Shipping fees and delivery times will vary based on your location and will be calculated at checkout.</p>"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "item_faq_m9Akwn",
+            "item_faq_KThENY",
+            "item_faq_Epgq3G",
+            "item_faq_8VKYkW"
+          ]
+        },
+        "group_faq_page_pRFiCj": {
+          "type": "_group-faq-page",
+          "settings": {
+            "heading": "Purchase Protection",
+            "framed": true
+          },
+          "blocks": {
+            "item_faq_DCN98g": {
+              "type": "_item-faq",
+              "settings": {
+                "question": "How can I request a refund?",
+                "answer": "<p>To request a refund, please contact our customer support within 14 days of receiving your order. Make sure to include your order number and reason for the request — we’ll guide you through the next steps.</p>"
+              },
+              "blocks": {}
+            },
+            "item_faq_wwLgzw": {
+              "type": "_item-faq",
+              "settings": {
+                "question": "Is my order fully protected?",
+                "answer": "<p>Yes, your order is fully protected. We guarantee safe delivery or your money back — including support for lost, damaged, or incorrect items.</p>"
+              },
+              "blocks": {}
+            },
+            "item_faq_NxK3MR": {
+              "type": "_item-faq",
+              "settings": {
+                "question": "Who are your authorized retailers?",
+                "answer": "<p>Our official products are available exclusively on our website and through select authorized retail partners. For a full list, please contact our customer support team.</p>"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "item_faq_DCN98g",
+            "item_faq_wwLgzw",
+            "item_faq_NxK3MR"
+          ]
+        },
+        "group_faq_page_gqnFxq": {
+          "type": "_group-faq-page",
+          "settings": {
+            "heading": "Package Insurance",
+            "framed": true
+          },
+          "blocks": {
+            "item_faq_kfT8Xe": {
+              "type": "_item-faq",
+              "settings": {
+                "question": "What is package insurance for?",
+                "answer": "<p>Package insurance protects your order against loss, damage, or theft during transit. It ensures you receive a replacement or refund if anything goes wrong with the delivery.</p>"
+              },
+              "blocks": {}
+            },
+            "item_faq_XAwWmA": {
+              "type": "_item-faq",
+              "settings": {
+                "question": "Does it cover item damage?",
+                "answer": "<p>Yes, package insurance covers item damage during shipping. If your product arrives damaged, simply contact us with photos and your order number — we’ll take care of the rest.</p>"
+              },
+              "blocks": {}
+            },
+            "item_faq_XwYCYQ": {
+              "type": "_item-faq",
+              "settings": {
+                "question": "How to file an insurance claim?",
+                "answer": "<p>To file an insurance claim, contact our support team within 7 days of delivery. Include your order number, photos of the damaged or missing item, and a brief description — we’ll handle the process for you.</p>"
+              },
+              "blocks": {}
+            },
+            "item_faq_a3p8JV": {
+              "type": "_item-faq",
+              "settings": {
+                "question": "Should I get insurance added?",
+                "answer": "<p>Yes, we recommend adding insurance for extra peace of mind. It protects your order against loss, damage, or theft during transit — especially for high-value or international shipments.</p>"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "item_faq_kfT8Xe",
+            "item_faq_XAwWmA",
+            "item_faq_XwYCYQ",
+            "item_faq_a3p8JV"
+          ]
+        },
+        "group_faq_page_JgyTxx": {
+          "type": "_group-faq-page",
+          "settings": {
+            "heading": "Shop Safely Online",
+            "framed": true
+          },
+          "blocks": {
+            "item_faq_TdwKbP": {
+              "type": "_item-faq",
+              "settings": {
+                "question": "Is payment on site secure?",
+                "answer": "<p>Yes, all payments on our site are 100% secure. We use encrypted checkout and PCI-compliant payment gateways to protect your information at every step.</p>"
+              },
+              "blocks": {}
+            },
+            "item_faq_aiUa3T": {
+              "type": "_item-faq",
+              "settings": {
+                "question": "How to avoid online scams?",
+                "answer": "<p>To avoid online scams, always shop from official websites, check for HTTPS in the URL, avoid deals that seem too good to be true, and never share personal or payment info through email or unverified links.</p>"
+              },
+              "blocks": {}
+            },
+            "item_faq_e7e3QY": {
+              "type": "_item-faq",
+              "settings": {
+                "question": "Is my personal data safe?",
+                "answer": "<p>Yes, your personal data is safe with us. We follow strict privacy policies and use secure encryption to protect your information at all times.</p>"
+              },
+              "blocks": {}
+            },
+            "item_faq_Bdf374": {
+              "type": "_item-faq",
+              "settings": {
+                "question": "How secure is checkout process?",
+                "answer": "<p>Our checkout process is highly secure. All transactions are encrypted using SSL technology, and we use trusted, PCI-compliant payment gateways to ensure your information stays protected.</p>"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "item_faq_TdwKbP",
+            "item_faq_aiUa3T",
+            "item_faq_e7e3QY",
+            "item_faq_Bdf374"
+          ]
+        }
+      },
+      "block_order": [
+        "group_faq_page_tTkxAz",
+        "group_faq_page_pRFiCj",
+        "group_faq_page_gqnFxq",
+        "group_faq_page_JgyTxx"
+      ],
+      "settings": {
+        "section_width": "fix_width",
+        "color_scheme": "",
+        "open_all_question": false,
+        "show_faqs_message": true,
+        "desktop_content_position": "right",
+        "highlight_text": "Contact Us",
+        "heading": "Still Looking?",
+        "description": "<p>Have a question? Email us—we'll help fast.</p>",
+        "text_alignment": "center",
+        "name": "Name",
+        "email_placeholder": "Email",
+        "message": "How can we help you?",
+        "button_label": "Submit",
+        "padding_top": 20,
+        "padding_bottom": 50
+      }
+    },
+    "icon_box_MQUhaL": {
+      "type": "icon-box",
+      "blocks": {
+        "icon_box_JiwwHd": {
+          "type": "icon_box",
+          "settings": {
+            "icon_svg": "free_shipping",
+            "heading": "Free Shipping",
+            "description": "<p>Enjoy free worldwide shipping and returns, with customs and duties taxes included.</p>"
           }
         },
-        "faq_ThHtgk": {
-          "type": "faq",
+        "icon_box_K6C8YA": {
+          "type": "icon_box",
           "settings": {
-            "question": "Pellentesque habitant morbi tristique senectus et netus?",
-            "answer": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.<\/p>"
+            "icon_svg": "check_badge",
+            "heading": "100—Day money Back",
+            "description": "<p>Free returns within 100 days, please ensure the product is not damaged.</p>"
           }
         },
-        "faq_Gicg7X": {
-          "type": "faq",
+        "icon_box_iU6TUA": {
+          "type": "icon_box",
           "settings": {
-            "question": "How much is shipping and how long will it take?",
-            "answer": "<p>The perfect way to enjoy brewing tea on low hanging fruit to identify. Duis autem vel eum iriure dolor in hendrerit vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis. For me, the most important part of improving at photography has been sharing it. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<\/p>"
-          }
-        },
-        "faq_836jPJ": {
-          "type": "faq",
-          "settings": {
-            "question": "How long will it take to get my package?",
-            "answer": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.<\/p>"
-          }
-        },
-        "faq_ia7ibM": {
-          "type": "faq",
-          "settings": {
-            "question": "Branding is simply a more efficient way to sell things?",
-            "answer": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.<\/p>"
-          }
-        },
-        "title_gbHw88": {
-          "type": "title",
-          "settings": {
-            "title": "Payment Information"
-          }
-        },
-        "faq_fFdf33": {
-          "type": "faq",
-          "settings": {
-            "question": "Pellentesque habitant morbi tristique senectus et netus?",
-            "answer": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.<\/p>"
-          }
-        },
-        "faq_7zgeNX": {
-          "type": "faq",
-          "settings": {
-            "question": "How much is shipping and how long will it take?",
-            "answer": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.<\/p>"
-          }
-        },
-        "faq_9x46hk": {
-          "type": "faq",
-          "settings": {
-            "question": "How long will it take to get my package?",
-            "answer": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.<\/p>"
-          }
-        },
-        "faq_3CHFF7": {
-          "type": "faq",
-          "settings": {
-            "question": "Branding is simply a more efficient way to sell things?",
-            "answer": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.<\/p>"
-          }
-        },
-        "title_bqPdEf": {
-          "type": "title",
-          "settings": {
-            "title": "Order & Returns"
-          }
-        },
-        "faq_Yk6NFT": {
-          "type": "faq",
-          "settings": {
-            "question": "Pellentesque habitant morbi tristique senectus et netus?",
-            "answer": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.<\/p>"
-          }
-        },
-        "faq_4M7pba": {
-          "type": "faq",
-          "settings": {
-            "question": "How much is shipping and how long will it take?",
-            "answer": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.<\/p>"
-          }
-        },
-        "faq_kAVH4d": {
-          "type": "faq",
-          "settings": {
-            "question": "How long will it take to get my package?",
-            "answer": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.<\/p>"
-          }
-        },
-        "faq_YnHLzc": {
-          "type": "faq",
-          "settings": {
-            "question": "Branding is simply a more efficient way to sell things?",
-            "answer": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.<\/p>"
-          }
-        },
-        "title_WyfxtT": {
-          "type": "title",
-          "settings": {
-            "title": "Ordering from Umino"
-          }
-        },
-        "faq_ihTetD": {
-          "type": "faq",
-          "settings": {
-            "question": "Pellentesque habitant morbi tristique senectus et netus?",
-            "answer": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.<\/p>"
-          }
-        },
-        "faq_efgqCe": {
-          "type": "faq",
-          "settings": {
-            "question": "How much is shipping and how long will it take?",
-            "answer": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.<\/p>"
-          }
-        },
-        "faq_L3TytR": {
-          "type": "faq",
-          "settings": {
-            "question": "How long will it take to get my package?",
-            "answer": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.<\/p>"
-          }
-        },
-        "faq_YHU93w": {
-          "type": "faq",
-          "settings": {
-            "question": "Branding is simply a more efficient way to sell things?",
-            "answer": "<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.<\/p>"
+            "icon_svg": "message_communications",
+            "heading": "Support Online",
+            "description": "<p>We support customers 24/7, send questions we will solve for you immediately.</p>"
           }
         }
       },
       "block_order": [
-        "title_fipewL",
-        "faq_ThHtgk",
-        "faq_Gicg7X",
-        "faq_836jPJ",
-        "faq_ia7ibM",
-        "title_gbHw88",
-        "faq_fFdf33",
-        "faq_7zgeNX",
-        "faq_9x46hk",
-        "faq_3CHFF7",
-        "title_bqPdEf",
-        "faq_Yk6NFT",
-        "faq_4M7pba",
-        "faq_kAVH4d",
-        "faq_YnHLzc",
-        "title_WyfxtT",
-        "faq_ihTetD",
-        "faq_efgqCe",
-        "faq_L3TytR",
-        "faq_YHU93w"
+        "icon_box_JiwwHd",
+        "icon_box_K6C8YA",
+        "icon_box_iU6TUA"
       ],
       "settings": {
-        "heading": "Contact Us",
-        "description": "<p>If you have an issue or question that requires immediate assistance, you can click the button below to chat live with a Customer Service representative.<\/p><p>Please allow 3 - 5 business days from the time your package arrives back to us for a refund to be issued. <\/p>",
-        "first_button_label": "Contact Us",
-        "first_button_link": "shopify:\/\/pages\/contact",
-        "first_button_type": "outline",
-        "second_button_label": "About us",
-        "second_button_link": "shopify:\/\/pages\/about",
-        "second_button_type": "primary",
-        "padding_top": 0,
-        "padding_bottom": 0
+        "section_width": "fix_width",
+        "color_scheme": "",
+        "subheading": "",
+        "title": "",
+        "drawn_underline": true,
+        "drawn_underline_type": "squiggle_underline",
+        "drawn_underline_color": "#ffb005",
+        "description": "",
+        "heading_size": "medium",
+        "alignment": "start",
+        "column_gap": "medium",
+        "icon_size": 40,
+        "icon_position": "top",
+        "content_icon_alignment": "center",
+        "content_icon_size": "large",
+        "enable_carousel_mobile": true,
+        "items_per_row": "1",
+        "padding_top": 50,
+        "padding_bottom": 100,
+        "show_divider": false
       }
     }
   },
   "order": [
-    "page-heading",
-    "main"
+    "breadcrumb",
+    "heading",
+    "main",
+    "icon_box_MQUhaL"
   ]
 }

@@ -1,0 +1,42 @@
+<button
+  type="submit"
+  class="pointer btn-{{ block.settings.button_type }} btn w-1025-custom w-full max-w-100 relative"
+  style="--width: 25rem;"
+  aria-label="{{ block.settings.button_label }}"
+  {{ block.shopify_attributes }}
+>
+  <span class="hidden-on-load transition-short">{{ block.settings.button_label }}</span>
+  {%- render 'loader' -%}
+</button>
+
+{% schema %}
+{
+  "name": "t:sections.custom_section.blocks.contact_form.settings.submit_button",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "t:sections.custom_section.blocks.contact_form.settings.default_submit_button",
+      "label": "t:sections.all.content_setting.first_button_label.label"
+    },
+    {
+      "type": "select",
+      "id": "button_type",
+      "label": "t:sections.all.content_setting.button_type.label",
+      "default": "primary",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:sections.all.content_setting.button_type.primary.label"
+        },
+        {
+          "value": "outline",
+          "label": "t:sections.all.content_setting.button_type.outline.label"
+        }
+      ]
+    }
+  ],
+  "presets": [{ "name": "t:sections.custom_section.blocks.contact_form.settings.submit_button" }]
+}
+{% endschema %}

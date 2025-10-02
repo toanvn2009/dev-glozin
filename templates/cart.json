@@ -1,86 +1,93 @@
 /*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "heading": {
-      "type": "page-heading",
+    "cart-items": {
+      "type": "main-cart-items",
       "blocks": {
-        "breadcrumb_fkLpBa": {
-          "type": "breadcrumb",
+        "trust_badges_BG6KhG": {
+          "type": "trust-badges",
           "settings": {
+            "icon_type": "svg",
+            "icon_svg": "privacy-protection",
+            "icon_size": 30,
+            "heading": "Privacy Protection",
+            "description": "<p>Your privacy is always our top priority, and we take every step to protect it.</p>"
           }
         },
-        "heading_f6yAbL": {
-          "type": "heading",
+        "trust_badges_NrjAGd": {
+          "type": "trust-badges",
           "settings": {
-            "page_title": "",
-            "header_size": "default"
+            "icon_type": "svg",
+            "icon_svg": "secure-shopping",
+            "icon_size": 30,
+            "heading": "Secure Shopping",
+            "description": "<p>All transactions are securely protected with SSL technology.</p>"
           }
         },
-        "description_Uyfq9Y": {
-          "type": "description",
+        "trust_badges_HwFp4D": {
+          "type": "trust-badges",
           "settings": {
-            "description": "<p>Review your selected items before purchase. Enjoy a seamless shopping experience!<\/p>"
+            "icon_type": "svg",
+            "icon_svg": "guarantee",
+            "icon_size": 30,
+            "heading": "Up to 30—Day Guarantee",
+            "description": "<p>Unlucky with your product? Contact us within 30 days of receiving your order and we will replace it for free!</p>"
           }
         }
       },
       "block_order": [
-        "breadcrumb_fkLpBa",
-        "heading_f6yAbL",
-        "description_Uyfq9Y"
+        "trust_badges_BG6KhG",
+        "trust_badges_NrjAGd",
+        "trust_badges_HwFp4D"
       ],
       "settings": {
-        "section_width": "stretch_width",
+        "section_width": "fix_width",
         "color_scheme": "",
-        "alignment": "center",
-        "overlay_opacity": 0,
-        "height": "adapt",
-        "padding_top": 80,
-        "padding_bottom": 0
-      }
-    },
-    "cart-items": {
-      "type": "main-cart-items",
-      "settings": {
-        "section_width": "fluid_container",
-        "enable_cart_note": true,
+        "show_free_shipping_message": true,
+        "show_gift_wrap": true,
         "show_estimate_shipping": true,
-        "icon_svg_1": "question",
-        "heading_1": "Have Questions?",
-        "description_1": "<p>Our experts are here to help! Call us free.<\/p>",
-        "icon_svg_2": "secure",
-        "heading_2": "Secure Shopping",
-        "description_2": "<p>All transactions are protected by SSL technology.<\/p>",
-        "icon_svg_3": "protection",
-        "heading_3": "Privacy Protection",
-        "description_3": "<p>Your privacy is always our top priority.<\/p>",
-        "heading_delivery": "Delivery Information",
-        "description_delivery": "<p>Free returns within 15 days, please make sure the items are in undamaged condition.<\/p>",
-        "heading_guarantee": "Up to 30-Day Guarantee",
-        "description_guarantee": "<p>Bad luck with your tights? Simply contact us within 30 days of receiving your order and we will replace them for free!<\/p>",
-        "heading_payment": "Payment Support",
-        "payment_image": "shopify:\/\/shop_images\/trust_payment.jpg",
-        "payment_width": 340,
-        "padding_top": 0,
-        "padding_bottom": 0
+        "show_discount": true,
+        "show_cart_note": true,
+        "hide_icon_with_text_on_mobile": false,
+        "hide_check_badge_on_mobile": false,
+        "padding_top": 20,
+        "padding_bottom": 100
       }
     },
-    "alireviews-section-dee47fb0-de47-4321-b713-a7ba7412ef32": {
-      "type": "apps",
+    "recently_viewed_products_zDNfbV": {
+      "type": "recently-viewed-products",
+      "name": "t:sections.recently-viewed-products.name",
       "settings": {
+        "section_width": "fix_width",
+        "color_scheme": "",
+        "title": "<p>Recently Viewed</p>",
+        "description": "<p>Take another look at items you've recently explored. Easily return to your favorites.</p>",
+        "heading_size": "medium",
+        "text_alignment": "center",
+        "items_to_show": 4,
+        "items_per_row": 4,
+        "column_gap": "medium",
+        "enable_carousel": false,
+        "show_navigation": true,
+        "show_pagination": false,
+        "reveal_slide": false,
+        "items_per_row_mobile": 2,
+        "padding_top": 100,
+        "padding_bottom": 100,
+        "show_divider": true
       }
     }
   },
   "order": [
-    "heading",
     "cart-items",
-    "alireviews-section-dee47fb0-de47-4321-b713-a7ba7412ef32"
+    "recently_viewed_products_zDNfbV"
   ]
 }
