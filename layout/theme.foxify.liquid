@@ -336,14 +336,14 @@
         class="z-20 fixed inset-0 overflow-hidden pointer-none no-js-hidden flex content-center"
       ></progress-bar-load>
     {% endif %}
-    {% sections 'header-group' %}
+    
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
-      {{ content_for_layout }}
+      <div class="foxify-container">{{ content_for_layout }}</div>
     </main>
     {%- liquid
       sections 'overlay-group'
     -%}
-    {% sections 'footer-group' %}
+    
     {% section 'mobile-navigation-bar' %}
     {%- render 'sprite-svg' -%}
     <ul hidden>
